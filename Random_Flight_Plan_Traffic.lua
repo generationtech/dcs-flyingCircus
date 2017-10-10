@@ -54,27 +54,12 @@ nameCallname = {}													-- List of radio callnames possible for that parti
 unitSkill = {Average, Good, High, Excellent, Random}				-- List of possible skill levels for AI units
 generateID = 0														-- Function ID of scheduled function to create new AI units
 spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh)	-- Initial random spawn repeat interval
+AB = {}																-- Coalition AirBase table
 
 --env.setErrorMessageBoxEnabled(false)
 
--- Determine the bases based on a coalition parameter
-function getAFBases (coalitionIndex)
-	local AFids = {}
-	local AF = {}
-	AFids = coalition.getAirbases(coalitionIndex)
-	for i = 1, #AFids do
-		AF[i] =
-			{
-			name = AFids[i]:getName(),
-			id_ = AFids[i].id_,
-			id = AFids[i]:getID()
-			}
-	end
-return AF
-end
-
--- Create a new aircraft based on coalition, airbase, parking type, and name prefix
-function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
+-- Create a new aircraft based on coalition, airbase, and name prefix
+function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
 
@@ -8172,6 +8157,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 	end
 
+	if (flgRandomParkingType) then
+		local i = math.random(1, #parkingSpotType / 2)
+		_parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
+	else
+		_parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
+	end
+
 	_spawnairdromeId = spawnIndex.id
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
 	_spawnairplanepos = {}
@@ -8179,8 +8171,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_spawnairplanepos.z = _spawnairbaseloc.z
 	_spawnairplaneparking = math.random(1,40)
 
-	_waypointtype = parkingT[1]
-	_waypointaction = parkingT[2]
+	_waypointtype = _parkingType[1]
+	_waypointaction = _parkingType[2]
 	if (_waypointtype == "Turning Point") then
 		_spawnSpeed = spawnSpeedTurningPoint
 		Pos3 = Object.getPosition({id_=spawnIndex.id_})
@@ -8493,81 +8485,113 @@ function checkStatus()
 	end
 end
 
+-- Determine the bases based on a coalition parameter
+function getAFBases (coalitionIndex)
+	local AFids = {}
+	local AF = {}
+	AFids = coalition.getAirbases(coalitionIndex)
+	for i = 1, #AFids do
+		AF[i] =
+			{
+			name = AFids[i]:getName(),
+			id_ = AFids[i].id_,
+			id = AFids[i]:getID()
+			}
+	end
+return AF
+end
+
+-- Choose a random airbase
 function chooseAirbase(AF)
 	airbaseChoice = math.random(1, #AF)
 return AF[airbaseChoice]
 end
 
+-- Check if possible to spawn a new group for the coalition
+function checkMax(cs)
+	if (numCoalition[cs] < maxCoalition[cs]) then  -- Is ok to spawn a new unit?
+		numCoalition[cs] = numCoalition[cs] + 1
+		nameCoalition[cs] = nameCoalition[cs] + 1
+		return true
+	else
+		return false
+	end
+end
+
+-- Determine spawn and land airbases
+function makeAirBase(cs)
+	local ab = {}
+	ab[1] = chooseAirbase(AF[cs])
+	ab[2] = chooseAirbase(AF[cs])
+	if ((flgNoSpawnLandingAirbase) and (#AF[cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
+		while (ab[1] == ab[2]) do
+			ab[2] = chooseAirbase(AF[cs])
+		end
+	end
+return ab
+end
+
+-- Main scheduled function to create new coalition groups as needed
 function generateGroup()
-	local lowVal
-	local highVal
-	local coalitionSide
-	local airbaseSpawn
-	local airbaseLand
-	local parkingType
+	local lowVal						-- lowest available coalition side
+	local highVal						-- highest available coalition side
+	local airbase = {}					-- table of available coalition airbases
+	local flgSpawn = {false, false}		-- flags to determine which coalitions get new groups
+
+	-- Names of red bases
+	AF[1] = getAFBases(1)
+	if (#AF[1] < 1) then
+		env.warning("There are no red bases in this mission.", false)
+	end
+
+	-- Names of blue bases
+	AF[2] = getAFBases(2)
+	if (#AF[2] < 1) then
+		env.warning("There are no blue bases in this mission.", false)
+	end
 
 	-- Choose which coalition side to possibly spawn new aircraft
-	if (#redAF > 0) then
+	if (#AF[1] > 0) then
 		lowVal = 1
 	else
 		lowVal = 2
 	end
 
-	if (#blueAF > 0) then
+	if (#AF[2] > 0) then
 		highVal = 2
 	else
 		highVal = 1
 	end
 
 	if (lowVal > highVal) then  -- No coalition bases defined at all!
+		env.warning("There are no coalition bases defined!!! exiting dynamic spawn function.", false)
 		return
 	end
 
-	if (randomCoalitionSpawn == 1) then
-		coalitionSide = math.random(lowVal, highVal)  -- Choose which side to spawn unit this time
+	if (randomCoalitionSpawn == 1) then	-- Spawn random coalition
+		flgSpawn[math.random(lowVal, highVal)] = true
 	else
-		if (numCoalition[1] != numCoalition[2]) then
-
-		end
-
-	end
-
-	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- Is ok to spawn a new unit?
-
-		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
-		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
-
-		if (coalitionSide == 1) then
-			airbaseSpawn = chooseAirbase(redAF)
-			airbaseLand = chooseAirbase(redAF)
-			if ((flgNoSpawnLandingAirbase) and (#redAF > 1)) then -- If flag is set and more than 1 airbase, don't let Red spawn and land airbase be the same
-				while (airbaseSpawn == airbaseLand) do
-					airbaseSpawn = chooseAirbase(redAF)
-					airbaseLand = chooseAirbase(redAF)
-				end
+		if (randomCoalitionSpawn == 3) and (numCoalition[1] != numCoalition[2])) then -- Unfair situation
+			if (numCoalition[1] < numCoalition[2]) then	-- spawn Red group
+				flgSpawn = {true, false}
+			else
+				flgSpawn = {false, true}
 			end
 		else
-			airbaseSpawn = chooseAirbase(blueAF)
-			airbaseLand = chooseAirbase(blueAF)
-			if ((flgNoSpawnLandingAirbase) and (#blueAF > 1)) then -- If flag is set and more than 1 airbase, don't let Blue spawn and land airbase be the same
-				while (airbaseSpawn == airbaseLand) do
-					airbaseSpawn = chooseAirbase(blueAF)
-					airbaseLand = chooseAirbase(blueAF)
-				end
-			end
+			flgSpawn = {true, true}
 		end
-
-		if (flgRandomParkingType) then
-			local i = math.random(1, #parkingSpotType / 2)
-			parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
-		else
-			parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
-		end
-
-		-- Create new aircraft
-		generateAirplane(coalitionSide, airbaseSpawn, airbaseLand, parkingType, NamePrefix[coalitionSide])
-
 	end
+
+	-- If needed, spawn new group for each coalition
+	for i = 1, 2 do
+		if (flgSpawn[i] == true) then
+			if checkMax(i) then
+				airbase = makeAirBase(i)
+				generateAirplane(i, airbase[i], airbase[i], NamePrefix[i])
+			else
+		end
+	end
+
 	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
 	return timer.getTime() + spawnInterval
 end
@@ -8575,18 +8599,6 @@ end
 --
 -- MAIN PROGRAM
 --
-
--- Names of red bases
-redAF = getAFBases(1)
-if (#redAF < 1) then
-	env.warning("There are no red bases in this mission.", false)
-end
-
--- Names of blue bases
-blueAF = getAFBases(2)
-if (#blueAF < 1) then
-	env.warning("There are no blue bases in this mission.", false)
-end
 
 timer.scheduleFunction(generateGroup, nil, timer.getTime() + spawnInterval)
 Checktimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, checkInterval)
