@@ -6281,8 +6281,9 @@ function f_checkStatus()
 
 		while ((l_index <= l_RATtableLimit) and (l_RATtableLimit > 0))
 		do
-			local currentaircraftgroup = Group.getByName(g_RATtable[l_index].groupname)
-			if (currentaircraftgroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
+			local l_currentAircraftGroup = Group.getByName(g_RATtable[l_index].groupname)
+
+			if (l_currentAircraftGroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
 				if (g_RATtable[l_index].groupCheckTime > 0) then		-- Have we checked this group yet? (should have spawned by now)
 					f_removeGroup(l_index, "  removed by sim, not script", false, nil)
 					l_RATtableLimit = l_RATtableLimit - 1	-- Array shrinks
@@ -6291,11 +6292,12 @@ function f_checkStatus()
 					l_index = l_index + 1
 				end
 			else -- Valid group, make unit checks
-				local unitNamesLimit = #g_RATtable[l_index].unitNames
-				local j = 1
-				while ((j <= unitNamesLimit) and (unitNamesLimit > 0))
+				local l_unitNamesLimit = #g_RATtable[l_index].unitNames
+				local l_jndex = 1
+
+				while ((l_jndex <= l_unitNamesLimit) and (l_unitNamesLimit > 0))
 				do
-					local currentunitname = g_RATtable[l_index].unitNames[j]
+					local currentunitname = g_RATtable[l_index].unitNames[l_jndex]
 					if (Unit.getByName(currentunitname) ~= nil) then -- Valid, active unit
 						local actualunit = Unit.getByName(currentunitname)
 						local actualunitvel = actualunit:getVelocity()
@@ -6303,9 +6305,9 @@ function f_checkStatus()
 
 					-- Check for unit movement
 						if absactualunitvel > 2 then
-							g_RATtable[l_index].unitCheckTime[j] = 0 -- If it's moving, reset checktime
+							g_RATtable[l_index].unitCheckTime[l_jndex] = 0 -- If it's moving, reset checktime
 						else
-							g_RATtable[l_index].unitCheckTime[j] = g_RATtable[l_index].unitCheckTime[j] + 1
+							g_RATtable[l_index].unitCheckTime[l_jndex] = g_RATtable[l_index].unitCheckTime[l_jndex] + 1
 						end
 
 						local actualunitpos = actualunit:getPosition().p
@@ -6313,61 +6315,61 @@ function f_checkStatus()
 						local lowerstatuslimit = g_minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
 					-- Check for wandering
 						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-							if f_removeUnit(l_index, j, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(l_index, l_jndex, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 								l_RATtableLimit = l_RATtableLimit - 1
 								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
-								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+								l_jndex = l_unitNamesLimit	-- No need to iterate through anymore units in this group
 							else
-							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
-							unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
+							l_jndex = l_jndex - 1	-- -1 then +1, stay on current l_jndex because table has shrunk
+							l_unitNamesLimit = l_unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- Check for below ground level
 						elseif (actualunitheight < 0) then
-							if f_removeUnit(l_index, j, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(l_index, l_jndex, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 								l_RATtableLimit = l_RATtableLimit - 1
 								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
-								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+								l_jndex = l_unitNamesLimit	-- No need to iterate through anymore units in this group
 							else
-								j = j - 1	-- -1 then +1, stay on current j because table has shrunk
-								unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
+								l_jndex = l_jndex - 1	-- -1 then +1, stay on current l_jndex because table has shrunk
+								l_unitNamesLimit = l_unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- check for damaged unit
 						elseif ((actualunitheight < g_minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
-							if f_removeUnit(l_index, j, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(l_index, l_jndex, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 								l_RATtableLimit = l_RATtableLimit - 1
 								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
-								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+								l_jndex = l_unitNamesLimit	-- No need to iterate through anymore units in this group
 							else
-								j = j - 1	-- -1 then +1, stay on current j because table has shrunk
-								unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
+								l_jndex = l_jndex - 1	-- -1 then +1, stay on current l_jndex because table has shrunk
+								l_unitNamesLimit = l_unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- Check for stuck
-						elseif (g_RATtable[l_index].unitCheckTime[j] > g_waitTime) then
-							if f_removeUnit(l_index, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+						elseif (g_RATtable[l_index].unitCheckTime[l_jndex] > g_waitTime) then
+							if f_removeUnit(l_index, l_jndex, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 							end
 							-- Lets exit the function for this cycle because an aircraft was removed.
 							--  Possible for another blocked aircraft to now move.
 							--  (instead that aircraft would be deleted during next run of the current loop)
 							l_RATtableLimit = 0
-							unitNamesLimit = 0
+							l_unitNamesLimit = 0
 						end
 					else
 					-- Unit removed by sim
-						if f_removeUnit(l_index, j, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
-							f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+						if f_removeUnit(l_index, l_jndex, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
+							f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 							l_RATtableLimit = l_RATtableLimit - 1
 							l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
-							j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							l_jndex = l_unitNamesLimit	-- No need to iterate through anymore units in this group
 						else
-							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
-							unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
+							l_jndex = l_jndex - 1	-- -1 then +1, stay on current l_jndex because table has shrunk
+							l_unitNamesLimit = l_unitNamesLimit - 1 -- total unit table size has shrunk
 						end
 					end
-					j = j + 1
+					l_jndex = l_jndex + 1
 				end
 				l_index = l_index + 1
 			end
