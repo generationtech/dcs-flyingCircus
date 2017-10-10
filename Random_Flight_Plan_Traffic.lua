@@ -541,7 +541,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	elseif ((AircraftType >= 4) or (AircraftType <= 5)) then
 		if (coalitionIndex == 1) then
-			randomBomber = math.random(11,18) -- random for airplane type; Red AC 11-18
+			randomBomber = math.random(11,15) -- random for airplane type; Red AC 11-15
 		else
 			randomBomber = math.random(1,10) -- random for airplane type; Blue AC 1-10
 		end
@@ -996,17 +996,131 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		elseif (randomBomber == 11) then
-
-
-
+			_aircrafttype = "Su-24M"
+			_country = country.id.RUSSIA
+			_skin = "af standard"
+			callsign = "RUSSIA - Su-24M"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{16602053-4A12-40A2-B214-AB60D481B20E}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+					},
+				},
+				["fuel"] = "11700",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			}
 		elseif (randomBomber == 12) then
+			_aircrafttype = "Tu-142"
+			_skin = "af standard"
+			_country = country.id.RUSSIA
+			callsign = "RUSSIA - Tu-142"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{C42EE4C3-355C-4B83-8B22-B39430B8F4AE}",
+					},
+				},
+				["fuel"] = "87000",
+				["flare"] = 48,
+				["chaff"] = 48,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 13) then
+			_aircrafttype = "Tu-160"
+			_country = country.id.RUSSIA
+			_skin = "af standard"
+			callsign = "RUSSIA - Tu-160"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
+					},
+				},
+				["fuel"] = "157000",
+				["flare"] = 72,
+				["chaff"] = 72,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 14) then
+			_aircrafttype = "Tu-22M3"
+			_country = country.id.RUSSIA
+			_skin = "af standard"
+			callsign = "RUSSIA - Tu-22M3"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
+					},
+				},
+				["fuel"] = "50000",
+				["flare"] = 48,
+				["chaff"] = 48,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 15) then
+			_aircrafttype = "Tu-95MS"
+			_skin = "af standard"
+			_country = country.id.RUSSIA
+			callsign = "RUSSIA - Tu-95MS"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
+					},
+				},
+				["fuel"] = "87000",
+				["flare"] = 48,
+				["chaff"] = 48,
+				["gun"] = 100,
+			}
+		end
 
-
-
-
-
-
-	elseif ((AircraftType == 5) or (AircraftType == 6)) then
+	elseif ((AircraftType == 6) or (AircraftType == 6)) then
 		if (coalitionIndex == 1) then
 			randomHeli = math.random(13,18) -- random for airplane type; Red AC 13-18
 		else
@@ -2038,23 +2152,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "FAF24"
 
 		elseif (randomFighter == 18) then
-			_aircrafttype = "Tu-142"
-			_skin = "af standard"
-			_payload =  {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{C42EE4C3-355C-4B83-8B22-B39430B8F4AE}",
-			}, -- end of [1]
-			}, -- end of ["pylons"]
-			["fuel"] = "87000",
-			["flare"] = 48,
-			["chaff"] = 48,
-			["gun"] = 100,
-			}
-			_country = country.id.RUSSIA
-			callsign = "RFF"
 
 		elseif (randomFighter == 18) then
 
@@ -2719,27 +2816,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF22"
 
 		elseif (randomFighter == 35) then
-			_aircrafttype = "Tu-160"
-			_country = country.id.RUSSIA
-			_skin = "af standard"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
-			}, -- end of [2]
-			}, -- end of ["pylons"]
-			["fuel"] = "157000",
-			["flare"] = 72,
-			["chaff"] = 72,
-			["gun"] = 100,
-			}
-			callsign = "RFF666"
 
 		elseif (randomFighter == 36) then
 
