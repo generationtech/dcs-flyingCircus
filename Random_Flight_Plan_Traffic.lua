@@ -48,8 +48,8 @@ minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDa
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.10							-- If randomizing fuel, the low end percent		--check
-highFuelPercent = 0.15							-- If randomizing fuel, the high end percent		--check
+lowFuelPercent = 0.20							-- If randomizing fuel, the low end percent		--check
+highFuelPercent = 0.60							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 		"TakeOffParking", "From Parking Area",
@@ -120,6 +120,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 	{	-- Countries
 	[0] =													--RUSSIA
 		{ -- Aircraft types
+		["name"] = "RUSSIA",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {14, 1, 2},				-- A-50
@@ -180,6 +181,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[1] = 													--UKRAINE
 		{ -- Aircraft types
+		["name"] = "UKRAINE",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {1, 2},					-- An-26B
@@ -228,6 +230,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[2] = 													--USA
 		{ -- Aircraft types
+		["name"] = "USA",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 1},					-- C-130
@@ -282,6 +285,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[3] = 													--TURKEY
 		{ -- Aircraft types
+		["name"] = "TURKEY",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 11},					-- C-130
@@ -315,6 +319,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[4] = 													--UK
 		{ -- Aircraft types
+		["name"] = "UK",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 10},					-- C-130
@@ -348,6 +353,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[5] = 													--FRANCE
 		{ -- Aircraft types
+		["name"] = "FRANCE",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 5},					-- C-130
@@ -378,6 +384,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[6] = 													--GERMANY
 		{ -- Aircraft types
+		["name"] = "GERMANY",
 		[1] = -- Utility
 			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
 			},
@@ -410,6 +417,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[8] = 													--CANADA
 		{ -- Aircraft types
+		["name"] = "CANADA",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 3},					-- C-130
@@ -440,6 +448,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[9] = 													--SPAIN
 		{ -- Aircraft types
+		["name"] = "SPAIN",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 8},					-- C-130
@@ -471,6 +480,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[10] = 													--THE_NETHERLANDS
 		{ -- Aircraft types
+		["name"] = "THE_NETHERLANDS",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 9},					-- C-130
@@ -504,6 +514,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[11] = 													--BELGIUM
 		{ -- Aircraft types
+		["name"] = "BELGIUM",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 2},					-- C-130
@@ -534,6 +545,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[12] = 													--NORWAY
 		{ -- Aircraft types
+		["name"] = "NORWAY",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 7},					-- C-130
@@ -564,6 +576,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[13] = 													--DENMARK
 		{ -- Aircraft types
+		["name"] = "DENMARK",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 4},					-- C-130
@@ -594,6 +607,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[15] = 													--ISRAEL
 		{ -- Aircraft types
+		["name"] = "ISRAEL",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {3, 6},					-- C-130
@@ -630,6 +644,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[16] = 													--GEORGIA
 		{ -- Aircraft types
+		["name"] = "GEORGIA",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {1, 1},					-- An-26B
@@ -663,9 +678,11 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[17] = 													--INSURGENTS			-- HANDLE INSURGENTS NO AIRCRAFT CONDITION --
 		{ -- No aircraft
+		["name"] = "INSURGENTS",
 		},
 	[18] = 													--ABKHAZIA
 		{ -- Aircraft types
+		["name"] = "ABKHAZIA",
 		[1] = -- Utility
 			{	-- Aircraft, skins
 				[1] = {1, 5},					-- An-26B
@@ -696,6 +713,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[19] = 													--SOUTH_OSETIA
 		{ -- Aircraft types
+		["name"] = "SOUTH_OSETIA",
 		[1] = -- Utility
 			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
 			},
@@ -720,6 +738,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[20] = 													--ITALY
 		{ -- Aircraft types
+		["name"] = "ITALY",
 		[1] = -- Utility
 			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
 			},
@@ -749,6 +768,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		},
 	[21] = 													--AUSTRALIA
 		{ -- Aircraft types
+		["name"] = "AUSTRALIA",
 		[1] = -- Utility
 			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
 			},
@@ -1161,7 +1181,7 @@ aircraftTable =
 	[12] =								-- TF-51D
 		{
 			_aircrafttype = "TF-51D",
-			_singleInFlight = true,
+			_singleInFlight = false,
 
 			_payload =
 			{
@@ -3746,6 +3766,8 @@ aircraftTable =
 
 			_payload =
 			{
+				["pylons"] =
+				{
 					[1] =
 					{
 						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
@@ -3781,6 +3803,8 @@ aircraftTable =
 				["gun"] = 100,
 			},
 
+
+
 			_skins =
 			{
 				"af standard-1",
@@ -3792,7 +3816,7 @@ aircraftTable =
 				"`swifts` team #44 kubinka ab",
 				"demo paint scheme #999 mapo",
 			},
-		}
+		},
 	[53] = 								-- MiG-29G
 		{
 			_aircrafttype = "MiG-29G",
@@ -4006,6 +4030,8 @@ aircraftTable =
 
 			_payload =
 			{
+				["pylons"] =
+				{
 					[1] =
 					{
 						["CLSID"] = "{HVAR}",
@@ -4032,8 +4058,8 @@ aircraftTable =
 					},
 				},
 				["fuel"] = "732",
-				["flare"] = 0,
-				["chaff"] = 0,
+				["flare"] = 30,
+				["chaff"] = 30,
 				["gun"] = 100,
 			},
 
@@ -4458,7 +4484,7 @@ aircraftTable =
 		},
 	[62] =								-- Su-33
 		{
-			_aircrafttype = "Su-33,
+			_aircrafttype = "Su-33",
 
 			_task = "CAP",
 			_tasks =
@@ -5350,7 +5376,7 @@ aircraftTable =
 				"XW-PFJ Air America",
 				"[Civilian] Medical",		--9
 				"[Civilian] NASA",
-				"[Civilian] Standard"
+				"[Civilian] Standard",
 				"[Civilian] VIP",
 				"Australia RAAF 171 Sqn",	--13
 				"Australia RAAF 1968",
@@ -5458,80 +5484,124 @@ aircraftTable =
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
+
+env.info("generate airplane loop start", false)
+
 	_category = "AIRPLANE" -- Default to airplane type
 
-	-- Pick a country from the given coalition
-	if (coalitionIndex == 1)
-		_acCountry = math.random(1, #env.mission.coalitions.red)
-		_country = env.mission.coalitions.red[_acCountry]
-	else
-		_acCountry = math.random(1, #env.mission.coalitions.blue)
-		_country = env.mission.coalitions.blue[_acCountry]
-	end
+	_acExist = nil
+	while (_acExist == nil) do
+		-- Pick a country from the given coalition
+		if (coalitionIndex == 1) then
+			_acCountry = math.random(1, #env.mission.coalitions.red)
+			_country = env.mission.coalitions.red[_acCountry]
+		else
+			_acCountry = math.random(1, #env.mission.coalitions.blue)
+			_country = env.mission.coalitions.blue[_acCountry]
+		end
 
-	-- Pick an aircraft type from the given country
-	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
-	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
-		_acTypeIndex = 1
-	elseif ((AircraftType >= aircraftDistribution[1]) and (AircraftType <= aircraftDistribution[2])) then  -- BOMBERS
-		_acTypeIndex = 2
-	elseif ((AircraftType >= aircraftDistribution[2]) and (AircraftType <= aircraftDistribution[3])) then  -- ATTACK AIRCRAFT
-		_acTypeIndex = 3
-	elseif ((AircraftType >= aircraftDistribution[3]) and (AircraftType <= aircraftDistribution[4])) then  -- FIGHTERS
-		_acTypeIndex = 4
-	elseif ((AircraftType >= aircraftDistribution[4]) or (AircraftType <= aircraftDistribution[5])) then -- HELICOPTERS
-		_acTypeIndex = 5
-	end
+env.info("generate airplane loop: _acCountry: " .. _acCountry .. " _country: " .. _country, false)
 
-	-- Pick an aircraft skin set from the given aircraft type
-	_acIndex = math.random(1, #coalitionTable[_country][_acTypeIndex])
+		-- Pick an aircraft type from the given country
+		AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
+		if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
+			_acTypeIndex = 1
+		elseif ((AircraftType >= aircraftDistribution[1]) and (AircraftType <= aircraftDistribution[2])) then  -- BOMBERS
+			_acTypeIndex = 2
+		elseif ((AircraftType >= aircraftDistribution[2]) and (AircraftType <= aircraftDistribution[3])) then  -- ATTACK AIRCRAFT
+			_acTypeIndex = 3
+		elseif ((AircraftType >= aircraftDistribution[3]) and (AircraftType <= aircraftDistribution[4])) then  -- FIGHTERS
+			_acTypeIndex = 4
+		elseif ((AircraftType >= aircraftDistribution[4]) or (AircraftType <= aircraftDistribution[5])) then -- HELICOPTERS
+			_acTypeIndex = 5
+		end
+
+env.info("generate airplane loop: _acTypeIndex: " .. _acTypeIndex, false)
+
+
+		-- Pick an aircraft and skin set from the given aircraft type
+		_acIndex = math.random(1, #coalitionTable[_country][_acTypeIndex])
+
+
+env.info("generate airplane loop: _acIndex: " .. _acIndex, false)
+
+		_acExist = coalitionTable[_country][_acTypeIndex][_acIndex]
+	end
 
 	-- Pick an aircraft from the given country and type
 	_ac = coalitionTable[_country][_acTypeIndex][_acIndex][1]
 
+env.info("generate airplane loop: _ac: " .. _ac, false)
+
 	-- Pick a skin from the given aircraft
 	_acSkin = math.random(2, #coalitionTable[_country][_acTypeIndex][_acIndex])
+
+
+env.info("generate airplane loop: _acSkin: " .. _acSkin, false)
 
 	-- The specific aircraft
 	_aircrafttype = aircraftTable[_ac]._aircrafttype
 
+
+env.info("generate airplane loop: _aircrafttype: " .. _aircrafttype, false)
+
+--env.info("generate airplane loop: aircraftTable[_ac]._singleInFlight: " .. aircraftTable[_ac]["_singleInFlight"], false)
+
 	-- Formation flying or not
-	if (aircraftTable[_ac]._singleInFlight) then
+	if (aircraftTable[_ac]["_singleInFlight"] ~= nil) then
 		_singleInFlight = true
+env.info("generate airplane loop: _singleInFlight: true", false)
 	else
-		_singleInFlight = true
+		_singleInFlight = false
+env.info("generate airplane loop: _singleInFlight: false", false)
 	end
 
 	-- Set callsign name
-	if (aircraftTable[_ac].nameCallname) then
+	if (aircraftTable[_ac].nameCallname ~= nil) then
 		nameCallname = aircraftTable[_ac].nameCallname
 	else
 		nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	end
 
+--env.info("generate airplane loop: nameCallname: " .. nameCallname, false)
+
 	-- Set tasking
-	if (aircraftTable[_ac]._task) then
+	if (aircraftTable[_ac]._task ~= nil) then
 		_task = aircraftTable[_ac]._task
+--env.info("generate airplane loop: _task: " .. _task, false)
 	else
 		_task = ""
+--env.info("generate airplane loop: _task: no task", false)
 	end
 
 	-- Set tasks
-	if (aircraftTable[_ac]._tasks) then
+	if (aircraftTable[_ac]._tasks ~= nil) then
 		_tasks = aircraftTable[_ac]._tasks
+--env.info("generate airplane loop: _tasks: " .. mist.utils.tableShow(_tasks), false)
 	else
 		_tasks = ""
+--env.info("generate airplane loop: _tasks: no tasks", false)
 	end
+
 
 	-- Set payload
 	_payload = aircraftTable[_ac]._payload
 
+
+env.info("generate airplane loop: _payload: " .. mist.utils.tableShow(_payload), false)
+
 	-- Set skin
-	_skin = aircraftTable[_ac]._skins[_acSkin]
+	_skin = aircraftTable[_ac]._skins[coalitionTable[_country][_acTypeIndex][_acIndex][_acSkin]]
+
+
+env.info("generate airplane loop: _skin: " .. _skin, false)
 
 	-- Set full name used for messages
-	_fullname = country.id[_country] .. _aircrafttype .. " - " .. _skin
+	_fullname = coalitionTable[_country].name .. _aircrafttype .. " - " .. _skin
 
+env.info("generate airplane loop: _fullname: " .. _fullname, false)
+
+env.info("generate airplane loop plane selected", false)
 
 	-- Randomize the fuel load
 	if (flgRandomFuel) then
@@ -5775,9 +5845,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		_formationSize = math.random(minGroupSize, maxGroupSize)
---env.info('formation size: ' .. _formationSize, false)
+env.info('formation size: ' .. _formationSize, false)
 		for i=2, _formationSize do
---env.info('start formation loop: ' .. i, false)
+env.info('start formation loop: ' .. i, false)
 			_airplanedata.units[i] =
 			{
 				["alt"] = 0,
@@ -5923,6 +5993,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			["speed_locked"] = true,
 		}
 	end
+
+env.info("generate airplane loop spawn", false)
+
 
 	if (_category == "HELICOPTER") then
 		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
