@@ -3561,9 +3561,22 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 				callsign = "GEORGIA P-51D - " .. _skin
 
-				elseif (subtype == 8) then
+			elseif (subtype == 8) then
 				_country = country.id.GERMANY
+
+				subtype1 = math.random(1,4)
+				if (subtype1 == 1) then
+					_skin = "Bare Metal"
+				elseif (subtype1 == 2) then
+					_skin = "Dogfight Blue"
+				elseif (subtype1 == 3) then
+					_skin = "Dogfight Red"
+				else
+					_skin = "Germany Training Staffel"
+				end
+
 				callsign = "GERMANY P-51D - " .. _skin
+
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
 				callsign = "ISRAEL P-51D - " .. _skin
