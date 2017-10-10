@@ -22,6 +22,7 @@ debugScreen = 1	-- write messages to screen
 --RANGES
 intervall = math.random(30,30)				--Random spawn repeat interval
 aircraftDistribution = {10, 10, 20, 40, 20} -- % aircraft of type Utility, Bomber, Attack, Fighter, Helicopter
+aircraftCallSign = {2, 3, 4, 5, 6}			-- mapping of callsign to aircraft of type Utility, Bomber, Attack, Fighter, Helicopter
 maxGroupSize = 4							-- Maximum number of groups for those units supporting formations
 maxCoalition = {25, 25}						-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}				-- Prefix to use for naming groups
@@ -32,6 +33,8 @@ waypointRange = {3000, 3000}				-- Maximum x,y of where to place intermediate wa
 -- Should be no need to edit these below
 RATtable = {}
 nameCoalition = {0, 0} -- highest coalition name used
+nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"}
+
 --env.setErrorMessageBoxEnabled(false)
 
 -- determine the bases based on a coalition parameter
@@ -74,11 +77,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.GEORGIA
 				_skin = "Georgian AF"
-				callsign = "GEORGIA An-26B - " .. _skin
+				_fullname = "GEORGIA An-26B - " .. _skin
 			else
 				_country = country.id.UKRAINE
 				_skin = "Ukraine AF"
-				callsign = "UKRAINE An-26B - " .. _skin
+				_fullname = "UKRAINE An-26B - " .. _skin
 			end
 
 			_payload =
@@ -95,7 +98,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "An-30M"
 			_country = country.id.UKRAINE
 			_skin = "15th Transport AB"
-			callsign = "UKRAINE An-30M - " .. _skin
+			_fullname = "UKRAINE An-30M - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -113,43 +116,43 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.USA
 				_skin = "US Air Force"
-				callsign = "USA C-130 - " .. _skin
+				_fullname = "USA C-130 - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.BELGIUM
 				_skin = "Belgian Air Force"
-				callsign = "BELGIUM C-130 - " .. _skin
+				_fullname = "BELGIUM C-130 - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.CANADA
 				_skin = "Canada's Air Force"
-				callsign = "CANADA C-130 - " .. _skin
+				_fullname = "CANADA C-130 - " .. _skin
 			elseif (subtype == 4) then
 				_country = country.id.DENMARK
 				_skin = "Royal Danish Air Force"
-				callsign = "DENMARK C-130 - " .. _skin
+				_fullname = "DENMARK C-130 - " .. _skin
 			elseif (subtype == 5) then
 				_country = country.id.FRANCE
 				_skin = "French Air Force"
-				callsign = "FRANCE C-130 - " .. _skin
+				_fullname = "FRANCE C-130 - " .. _skin
 			elseif (subtype == 6) then
 				_country = country.id.ISRAEL
 				_skin = "Israel Defence Force"
-				callsign = "ISRAEL C-130 - " .. _skin
+				_fullname = "ISRAEL C-130 - " .. _skin
 			elseif (subtype == 7) then
 				_country = country.id.NORWAY
 				_skin = "Royal Norwegian Air Force"
-				callsign = "NORWAY C-130 - " .. _skin
+				_fullname = "NORWAY C-130 - " .. _skin
 			elseif (subtype == 8) then
 				_country = country.id.SPAIN
 				_skin = "Spanish Air Force"
-				callsign = "SPAIN C-130 - " .. _skin
+				_fullname = "SPAIN C-130 - " .. _skin
 			elseif (subtype == 9) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "Royal Netherlands Air Force"
-				callsign = "THE_NETHERLANDS C-130 - " .. _skin
+				_fullname = "THE_NETHERLANDS C-130 - " .. _skin
 			elseif (subtype == 10) then
 				_country = country.id.UK
 				_skin = "Royal Air Force"
-				callsign = "UK C-130 - " .. _skin
+				_fullname = "UK C-130 - " .. _skin
 			end
 
 			_payload =
@@ -166,7 +169,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "C-17A"
 			_country = country.id.USA
 			_skin = "usaf standard"
-			callsign = "USA C-17A - " .. _skin
+			_fullname = "USA C-17A - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -202,7 +205,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "VAW-125 Tigertails"
 			end
 
-			callsign = "USA E-2C - " .. _skin
+			_fullname = "USA E-2C - " .. _skin
 
 			_payload =
 			{
@@ -239,7 +242,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "usaf standard"
 			end
 
-			callsign = "USA E-3A - " .. _skin
+			_fullname = "USA E-3A - " .. _skin
 
 			_payload =
 			{
@@ -262,7 +265,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "Ukrainian AF aeroflot"
 			end
 
-			callsign = "UKRAINE IL-76MD - " .. _skin
+			_fullname = "UKRAINE IL-76MD - " .. _skin
 
 			_payload =
 			{
@@ -317,7 +320,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 
 			_skin = "Standard USAF"
-			callsign = "USA KC-135 - " .. _skin
+			_fullname = "USA KC-135 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -332,7 +335,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-25RBT"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE MiG-25RBT - " .. _skin
+			_fullname = "UKRAINE MiG-25RBT - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -370,7 +373,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 
 			_skin = "usaf standard"
-			callsign = "USA S-3B Tanker - " .. _skin
+			_fullname = "USA S-3B Tanker - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -385,7 +388,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-24MR"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE Su-24MR - " .. _skin
+			_fullname = "UKRAINE Su-24MR - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -435,35 +438,35 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "TF-51 Miss Velma"
 				end
 
-				callsign = "USA TF-51D - " .. _skin
+				_fullname = "USA TF-51D - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.BELGIUM
-				callsign = "BELGIUM TF-51D"
+				_fullname = "BELGIUM TF-51D"
 			elseif (subtype == 3) then
 				_country = country.id.CANADA
-				callsign = "CANADA TF-51D"
+				_fullname = "CANADA TF-51D"
 			elseif (subtype == 4) then
 				_country = country.id.DENMARK
-				callsign = "DENMARK TF-51D"
+				_fullname = "DENMARK TF-51D"
 			elseif (subtype == 5) then
 				_country = country.id.FRANCE
-				callsign = "FRANCE TF-51D"
+				_fullname = "FRANCE TF-51D"
 			elseif (subtype == 6) then
 				_country = country.id.ISRAEL
-				callsign = "ISRAEL TF-51D"
+				_fullname = "ISRAEL TF-51D"
 			elseif (subtype == 7) then
 				_country = country.id.NORWAY
-				callsign = "NORWAY TF-51D"
+				_fullname = "NORWAY TF-51D"
 			elseif (subtype == 8) then
 				_country = country.id.SPAIN
-				callsign = "SPAIN TF-51D"
+				_fullname = "SPAIN TF-51D"
 			elseif (subtype == 9) then
 				_country = country.id.THE_NETHERLANDS
-				callsign = "THE_NETHERLANDS TF-51D"
+				_fullname = "THE_NETHERLANDS TF-51D"
 			else
 				_country = country.id.UK
-				callsign = "UK TF-51D"
+				_fullname = "UK TF-51D"
 			end
 
 			_payload =
@@ -483,11 +486,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.GEORGIA
 				_skin = "Georgian Airlines"
-				callsign = "GEORGIA Yak-40 - " .. _skin
+				_fullname = "GEORGIA Yak-40 - " .. _skin
 			else
 				_country = country.id.UKRAINE
 				_skin = "Ukrainian"
-				callsign = "UKRAINE Yak-40 - " .. _skin
+				_fullname = "UKRAINE Yak-40 - " .. _skin
 			end
 
 			_payload =
@@ -511,7 +514,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "RF Air Force new"
 			end
 
-			callsign = "RUSSIA A-50 - " .. _skin
+			_fullname = "RUSSIA A-50 - " .. _skin
 
 			_payload =
 			{
@@ -537,12 +540,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Aeroflot"
 				end
 
-				callsign = "RUSSIA An-26B - " .. _skin
+				_fullname = "RUSSIA An-26B - " .. _skin
 
 			else
 				_country = country.id.ABKHAZIA
 				_skin = "Abkhazian AF"
-				callsign = "ABKHAZIA An-26B - " .. _skin
+				_fullname = "ABKHAZIA An-26B - " .. _skin
 			end
 
 			_payload =
@@ -559,7 +562,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "An-30M"
 			_country = country.id.RUSSIA
 			_skin = "RF Air Force"
-			callsign = "RUSSIA An-30M - " .. _skin
+			_fullname = "RUSSIA An-30M - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -574,7 +577,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "C-130"
 			_country = country.id.TURKEY
 			_skin = "Turkish Air Force"
-			callsign = "TURKEY C-130 - " .. _skin
+			_fullname = "TURKEY C-130 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -598,7 +601,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "RF Air Force"
 			end
 
-			callsign = "RUSSIA IL-76MD - " .. _skin
+			_fullname = "RUSSIA IL-76MD - " .. _skin
 
 			_payload =
 			{
@@ -623,7 +626,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "RF Air Force new"
 			end
 
-			callsign = "RUSSIA IL-78M - " .. _skin
+			_fullname = "RUSSIA IL-78M - " .. _skin
 
 			_payload =
 			{
@@ -639,7 +642,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-25RBT"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA MiG-25RBT - " .. _skin
+			_fullname = "RUSSIA MiG-25RBT - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -670,7 +673,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-24MR"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA Su-24MR - " .. _skin
+			_fullname = "RUSSIA Su-24MR - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -708,13 +711,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
-				callsign = "RUSSIA TF-51D"
+				_fullname = "RUSSIA TF-51D"
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
-				callsign = "ABKHAZIA TF-51D"
+				_fullname = "ABKHAZIA TF-51D"
 			else
 				_country = country.id.TURKEY
-				callsign = "TURKEY TF-51D"
+				_fullname = "TURKEY TF-51D"
 			end
 
 			_payload =
@@ -731,7 +734,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Yak-40"
 			_country = country.id.RUSSIA
 			_skin = "Aeroflot"
-			callsign = "RUSSIA Yak-40 - " .. _skin
+			_fullname = "RUSSIA Yak-40 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -784,7 +787,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 
 			_skin = "usaf standard"
-			callsign = "USA B-1B - " .. _skin
+			_fullname = "USA B-1B - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -811,7 +814,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "B-52H"
 			_country = country.id.USA
 			_skin = "usaf standard"
-			callsign = "USA B-52H - " .. _skin
+			_fullname = "USA B-52H - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -838,7 +841,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-117A"
 			_country = country.id.USA
 			_skin = "usaf standard"
-			callsign = "USA F-117A - " .. _skin
+			_fullname = "USA F-117A - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -871,12 +874,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "492d Fighter SQN (LN)"
 				end
 
-				callsign = "USA F-15E - " .. _skin
+				_fullname = "USA F-15E - " .. _skin
 
 			else
 				_country = country.id.ISRAEL
 				_skin = "IDF No 69 Hammers Squadron"
-				callsign = "ISRAEL F-15E - " .. _skin
+				_fullname = "ISRAEL F-15E - " .. _skin
 			end
 
 			_payload =
@@ -990,7 +993,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 
 			_skin = "NAVY Standard"
-			callsign = "USA S-3B - " .. _skin
+			_fullname = "USA S-3B - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1029,7 +1032,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-24M"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE Su-24M - " .. _skin
+			_fullname = "UKRAINE Su-24M - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1079,7 +1082,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "o of ii (ac) squadron raf marham"
 			end
 
-			callsign = "UK Tornado GR4 - " .. _skin
+			_fullname = "UK Tornado GR4 - " .. _skin
 
 			_payload =
 			{
@@ -1143,7 +1146,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "marinefliegergeschwader 2 eggebek ab marineflieger"
 				end
 
-				callsign = "GERMANY Tornado IDS - " .. _skin
+				_fullname = "GERMANY Tornado IDS - " .. _skin
 
 			else
 				_country = country.id.ITALY
@@ -1159,7 +1162,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "ITA Tornado MM55004"
 				end
 
-				callsign = "ITALY Tornado IDS - " .. _skin
+				_fullname = "ITALY Tornado IDS - " .. _skin
 			end
 
 			_payload =
@@ -1208,7 +1211,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-22M3"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE Tu-22M3 - " .. _skin
+			_fullname = "UKRAINE Tu-22M3 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1235,7 +1238,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-95MS"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE Tu-95MS - " .. _skin
+			_fullname = "UKRAINE Tu-95MS - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1254,7 +1257,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-24M"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA Su-24M - " .. _skin
+			_fullname = "RUSSIA Su-24M - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1289,7 +1292,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-142"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA Tu-142 - " .. _skin
+			_fullname = "RUSSIA Tu-142 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1308,7 +1311,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-160"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA Tu-160 - " .. _skin
+			_fullname = "RUSSIA Tu-160 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1331,7 +1334,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-22M3"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA Tu-22M3 - " .. _skin
+			_fullname = "RUSSIA Tu-22M3 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1358,7 +1361,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-95MS"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA Tu-95MS - " .. _skin
+			_fullname = "RUSSIA Tu-95MS - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1448,7 +1451,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "81st FS Spangdahlem AB, Germany (SP) 2"
 			end
 
-			callsign = "USA A-10A - " .. _skin
+			_fullname = "USA A-10A - " .. _skin
 
 			_payload =
 			{
@@ -1588,16 +1591,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "81st FS Spangdahlem AB, Germany (SP) 2"
 				end
 
-				callsign = "USA A-10C - " .. _skin
+				_fullname = "USA A-10C - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				_skin = "Australia Notional RAAF"
-				callsign = "AUSTRALIA A-10C - " .. _skin
+				_fullname = "AUSTRALIA A-10C - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
 				_skin = "A-10 Grey"
-				callsign = "BELGIUM A-10C - " .. _skin
+				_fullname = "BELGIUM A-10C - " .. _skin
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
 
@@ -1610,16 +1613,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Canada RCAF 442 Snow Scheme"
 				end
 
-				callsign = "CANADA A-10C - " .. _skin
+				_fullname = "CANADA A-10C - " .. _skin
 
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
 				_skin = "A-10 Grey"
-				callsign = "DENMARK A-10C - " .. _skin
+				_fullname = "DENMARK A-10C - " .. _skin
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
 				_skin = "Fictional France Escadron de Chasse 03.003 ARDENNES"
-				callsign = "FRANCE A-10C - " .. _skin
+				_fullname = "FRANCE A-10C - " .. _skin
 			elseif (subtype == 7) then
 				_country = country.id.GEORGIA
 
@@ -1630,7 +1633,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Fictional Georgian Olive"
 				end
 
-				callsign = "GEORGIA A-10C - " .. _skin
+				_fullname = "GEORGIA A-10C - " .. _skin
 
 			elseif (subtype == 8) then
 				_country = country.id.GERMANY
@@ -1642,20 +1645,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Fictional German 3323"
 				end
 
-				callsign = "GERMANY A-10C - " .. _skin
+				_fullname = "GERMANY A-10C - " .. _skin
 
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
 				_skin = "Fictional Israel 115 Sqn Flying Dragon"
-				callsign = "ISRAEL A-10C - " .. _skin
+				_fullname = "ISRAEL A-10C - " .. _skin
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
 				_skin = "Fictional Italian AM (23Gruppo)"
-				callsign = "ITALY A-10C - " .. _skin
+				_fullname = "ITALY A-10C - " .. _skin
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
 				_skin = "Fictional Royal Norwegian Air Force"
-				callsign = "NORWAY A-10C - " .. _skin
+				_fullname = "NORWAY A-10C - " .. _skin
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
 
@@ -1668,20 +1671,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Fictional Spanish Tritonal"
 				end
 
-				callsign = "SPAIN A-10C - " .. _skin
+				_fullname = "SPAIN A-10C - " .. _skin
 
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "A-10 Grey"
-				callsign = "THE_NETHERLANDS A-10C - " .. _skin
+				_fullname = "THE_NETHERLANDS A-10C - " .. _skin
 			elseif (subtype == 14) then
 				_country = country.id.UK
 				_skin = "A-10 Grey"
-				callsign = "UK A-10C - " .. _skin
+				_fullname = "UK A-10C - " .. _skin
 			else
 				_country = country.id.UKRAINE
 				_skin = "Fictional Ukraine Air Force 1"
-				callsign = "UKRAINE A-10C - " .. _skin
+				_fullname = "UKRAINE A-10C - " .. _skin
 			end
 
 			_payload =
@@ -1759,56 +1762,56 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "NAS Meridian, Mississippi Seven (VT-7)"
 				end
 
-				callsign = "USA Hawk - " .. _skin
+				_fullname = "USA Hawk - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				_skin = ""
-				callsign = "AUSTRALIA Hawk"
+				_fullname = "AUSTRALIA Hawk"
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
 				_skin = "100sqn XX189"
-				callsign = "BELGIUM Hawk - " .. _skin
+				_fullname = "BELGIUM Hawk - " .. _skin
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
 				_skin = "100sqn XX189"
-				callsign = "CANADA Hawk - " .. _skin
+				_fullname = "CANADA Hawk - " .. _skin
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
 				_skin = "100sqn XX189"
-				callsign = "DENMARK Hawk - " .. _skin
+				_fullname = "DENMARK Hawk - " .. _skin
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
 				_skin = "100sqn XX189"
-				callsign = "FRANCE Hawk - " .. _skin
+				_fullname = "FRANCE Hawk - " .. _skin
 			elseif (subtype == 7) then
 				_country = country.id.GEORGIA
 				_skin = "100sqn XX189"
-				callsign = "GEORGIA Hawk - " .. _skin
+				_fullname = "GEORGIA Hawk - " .. _skin
 			elseif (subtype == 8) then
 				_country = country.id.GERMANY
 				_skin = "100sqn XX189"
-				callsign = "GERMANY Hawk - " .. _skin
+				_fullname = "GERMANY Hawk - " .. _skin
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
 				_skin = "100sqn XX189"
-				callsign = "ISRAEL Hawk - " .. _skin
+				_fullname = "ISRAEL Hawk - " .. _skin
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
 				_skin = "100sqn XX189"
-				callsign = "ITALY Hawk - " .. _skin
+				_fullname = "ITALY Hawk - " .. _skin
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
 				_skin = "100sqn XX189"
-				callsign = "NORWAY Hawk - " .. _skin
+				_fullname = "NORWAY Hawk - " .. _skin
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
 				_skin = "100sqn XX189"
-				callsign = "SPAIN Hawk - " .. _skin
+				_fullname = "SPAIN Hawk - " .. _skin
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "100sqn XX189"
-				callsign = "THE_NETHERLANDS Hawk - " .. _skin
+				_fullname = "THE_NETHERLANDS Hawk - " .. _skin
 			elseif (subtype == 14) then
 				_country = country.id.UK
 
@@ -1835,12 +1838,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "XX228 - VEAO"
 				end
 
-				callsign = "UK Hawk - " .. _skin
+				_fullname = "UK Hawk - " .. _skin
 
 			else
 				_country = country.id.UKRAINE
 				_skin = "100sqn XX189"
-				callsign = "UKRAINE Hawk - " .. _skin
+				_fullname = "UKRAINE Hawk - " .. _skin
 			end
 
 			_payload =
@@ -1880,11 +1883,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.GEORGIA
 				_skin = "Georgian Air Force"
-				callsign = "GEORGIA - " .. _skin
+				_fullname = "GEORGIA - " .. _skin
 			else
 				_country = country.id.UKRAINE
 				_skin = "Ukraine Air Force 1"
-				callsign = "UKRAINE - " .. _skin
+				_fullname = "UKRAINE - " .. _skin
 			end
 
 			_payload =
@@ -1917,7 +1920,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-27K"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE MiG-27K - " .. _skin
+			_fullname = "UKRAINE MiG-27K - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -1969,7 +1972,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "shap limanskoye ab"
 			end
 
-			callsign = "UKRAINE Su-17M4 - " .. _skin
+			_fullname = "UKRAINE Su-17M4 - " .. _skin
 
 			_payload =
 			{
@@ -2027,7 +2030,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "field camo scheme #1 (native)"
 				end
 
-				callsign = "GEORGIA Su-25 - " .. _skin
+				_fullname = "GEORGIA Su-25 - " .. _skin
 
 			else
 				_country = country.id.UKRAINE
@@ -2043,7 +2046,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "petal camo scheme #2 (native). 299th brigade"
 				end
 
-				callsign = "UKRAINE Su-25 - " .. _skin
+				_fullname = "UKRAINE Su-25 - " .. _skin
 
 			end
 
@@ -2108,7 +2111,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard 1"
 			end
 
-			callsign = "GEORGIA Su-25T - " .. _skin
+			_fullname = "GEORGIA Su-25T - " .. _skin
 
 			_payload =
 			{
@@ -2215,12 +2218,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Fictional Russian Air Force 2"
 				end
 
-				callsign = "RUSSIA A-10C - " .. _skin
+				_fullname = "RUSSIA A-10C - " .. _skin
 
 			else
 				_country = country.id.TURKEY
 				_skin = "A-10 Grey"
-				callsign = "TURKEY A-10C - " .. _skin
+				_fullname = "TURKEY A-10C - " .. _skin
 			end
 
 			_payload =
@@ -2281,19 +2284,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
 				_skin = "100sqn XX189"
-				callsign = "RUSSIA Hawk - " .. _skin
+				_fullname = "RUSSIA Hawk - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
 				_skin = "100sqn XX189"
-				callsign = "ABKHAZIA Hawk - " .. _skin
+				_fullname = "ABKHAZIA Hawk - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.SOUTH_OSETIA
 				_skin = "100sqn XX189"
-				callsign = "SOUTH_OSETIA Hawk - " .. _skin
+				_fullname = "SOUTH_OSETIA Hawk - " .. _skin
 			else
 				_country = country.id.TURKEY
 				_skin = "100sqn XX189"
-				callsign = "TURKEY Hawk - " .. _skin
+				_fullname = "TURKEY Hawk - " .. _skin
 			end
 
 
@@ -2343,12 +2346,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Russian Air Force Old"
 				end
 
-				callsign = "RUSSIA - " .. _skin
+				_fullname = "RUSSIA - " .. _skin
 
 			else
 				_country = country.id.ABKHAZIA
 				_skin = "Abkhazian Air Force"
-				callsign = "ABKHAZIA - " .. _skin
+				_fullname = "ABKHAZIA - " .. _skin
 			end
 
 			_payload =
@@ -2381,7 +2384,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-27K"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA MiG-27K - " .. _skin
+			_fullname = "RUSSIA MiG-27K - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -2431,7 +2434,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard (worn-out)"
 			end
 
-			callsign = "RUSSIA Su-17M4 - " .. _skin
+			_fullname = "RUSSIA Su-17M4 - " .. _skin
 
 			_payload =
 			{
@@ -2493,12 +2496,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "forest camo scheme #1 (native)"
 				end
 
-				callsign = "RUSSIA Su-25 - " .. _skin
+				_fullname = "RUSSIA Su-25 - " .. _skin
 
 			else
 				_country = country.id.ABKHAZIA
 				_skin = "Abkhazian Air Force"
-				callsign = "ABKHAZIA Su-25 - " .. _skin
+				_fullname = "ABKHAZIA Su-25 - " .. _skin
 			end
 
 			_payload =
@@ -2564,7 +2567,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "su-25t test scheme"
 			end
 
-			callsign = "RUSSIA Su-25T - " .. _skin
+			_fullname = "RUSSIA Su-25T - " .. _skin
 
 			_payload =
 			{
@@ -2620,7 +2623,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-25TM"
 			_country = country.id.RUSSIA
 			_skin = "Flight Research Institute  VVS"
-			callsign = "RUSSIA Su-25TM - " .. _skin
+			_fullname = "RUSSIA Su-25TM - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -2726,7 +2729,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "Bf-109 K4 Jagdgeschwader 53"
 			end
 
-			callsign = "GERMANY Bf-109K-4 - " .. _skin
+			_fullname = "GERMANY Bf-109K-4 - " .. _skin
 
 			_payload =
 			{
@@ -2769,7 +2772,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "vf-xxx `aardvarks`"
 			end
 
-			callsign = "USA F-14A - " .. _skin
+			_fullname = "USA F-14A - " .. _skin
 
 			_payload =
 			{
@@ -2839,12 +2842,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Ferris Scheme"
 				end
 
-				callsign = "USA F-15C - " .. _skin
+				_fullname = "USA F-15C - " .. _skin
 
 			else
 				_country = country.id.ISRAEL
 				skin = "106th SQN (8th Airbase)"
-				callsign = "ISRAEL F-15C - " .. _skin
+				_fullname = "ISRAEL F-15C - " .. _skin
 			end
 
 			_payload =
@@ -2905,7 +2908,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-16A"
 			_country = country.id.USA
 			_skin = "usaf f16 standard-1"
-			callsign = "USA F-16A - " .. _skin
+			_fullname = "USA F-16A - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -2978,12 +2981,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "usafe 555th fs (av) aviano afb"
 				end
 
-				callsign = "USA F-16C bl.52d - " .. _skin
+				_fullname = "USA F-16C bl.52d - " .. _skin
 
 			else
 				_country = country.id.ISRAEL
 				_skin = "idf_af f16c standard"
-				callsign = "ISRAEL F-16C bl.52d - " .. _skin
+				_fullname = "ISRAEL F-16C bl.52d - " .. _skin
 			end
 
 			_payload =
@@ -3039,7 +3042,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 --					_skin = "CMD extended skins"
 --				end
 
-				callsign = "BELGIUM F-16A MLU - " .. _skin
+				_fullname = "BELGIUM F-16A MLU - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.DENMARK
@@ -3052,7 +3055,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 --					_skin = "CMD extended skins"
 --				end
 
-				callsign = "DENMARK F-16A MLU - " .. _skin
+				_fullname = "DENMARK F-16A MLU - " .. _skin
 
 			elseif (subtype == 3) then
 				_country = country.id.ITALY
@@ -3065,7 +3068,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 --					_skin = "CMD extended skins"
 --				end
 
-				callsign = "ITALY F-16A MLU - " .. _skin
+				_fullname = "ITALY F-16A MLU - " .. _skin
 
 			elseif (subtype == 4) then
 				_country = country.id.NORWAY
@@ -3086,7 +3089,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "norway skv338"
 				end
 
-				callsign = "NORWAY F-16A MLU - " .. _skin
+				_fullname = "NORWAY F-16A MLU - " .. _skin
 
 			else
 				_country = country.id.THE_NETHERLANDS
@@ -3107,7 +3110,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "the netherlands 313th `tigers` squadron"
 				end
 
-				callsign = "THE_NETHERLANDS F-16A MLU - " .. _skin
+				_fullname = "THE_NETHERLANDS F-16A MLU - " .. _skin
 
 			end
 
@@ -3169,10 +3172,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.GERMANY
 				_skin = "af standard"
-				callsign = "GERMANY F-4E - " .. _skin
+				_fullname = "GERMANY F-4E - " .. _skin
 			else
 				_country = country.id.ISRAEL
-				callsign = "ISRAEL F-4E"
+				_fullname = "ISRAEL F-4E"
 			end
 
 			_payload =
@@ -3242,7 +3245,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "aggressor `snake` scheme"
 			end
 
-			callsign = "USA F-5E - " .. _skin
+			_fullname = "USA F-5E - " .. _skin
 
 			_payload =
 			{
@@ -3289,49 +3292,49 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,15)
 			if (subtype == 1) then
 				_country = country.id.USA
-				callsign = "USA F-86F Sabre"
+				_fullname = "USA F-86F Sabre"
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
-				callsign = "AUSTRALIA F-86F Sabre"
+				_fullname = "AUSTRALIA F-86F Sabre"
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
-				callsign = "BELGIUM F-86F Sabre"
+				_fullname = "BELGIUM F-86F Sabre"
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
-				callsign = "CANADA F-86F Sabre"
+				_fullname = "CANADA F-86F Sabre"
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
-				callsign = "DENMARK F-86F Sabre"
+				_fullname = "DENMARK F-86F Sabre"
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
-				callsign = "FRANCE F-86F Sabre"
+				_fullname = "FRANCE F-86F Sabre"
 			elseif (subtype == 7) then
 				_country = country.id.GEORGIA
-				callsign = "GEORGIA F-86F Sabre"
+				_fullname = "GEORGIA F-86F Sabre"
 			elseif (subtype == 8) then
 				_country = country.id.GERMANY
-				callsign = "GERMANY F-86F Sabre"
+				_fullname = "GERMANY F-86F Sabre"
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
-				callsign = "ISRAEL F-86F Sabre"
+				_fullname = "ISRAEL F-86F Sabre"
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
-				callsign = "ITALY F-86F Sabre"
+				_fullname = "ITALY F-86F Sabre"
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
-				callsign = "NORWAY F-86F Sabre"
+				_fullname = "NORWAY F-86F Sabre"
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
-				callsign = "SPAIN F-86F Sabre"
+				_fullname = "SPAIN F-86F Sabre"
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
-				callsign = "THE_NETHERLANDS F-86F Sabre"
+				_fullname = "THE_NETHERLANDS F-86F Sabre"
 			elseif (subtype == 14) then
 				_country = country.id.UK
-				callsign = "UK F-86F Sabre"
+				_fullname = "UK F-86F Sabre"
 			else
 				_country = country.id.UKRAINE
-				callsign = "UKRAINE F-86F Sabre"
+				_fullname = "UKRAINE F-86F Sabre"
 			end
 
 			_payload =
@@ -3403,18 +3406,18 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "VFC-12"
 				end
 
-				callsign = "USA F/A-18C - " .. _skin
+				_fullname = "USA F/A-18C - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				_skin = "Australia 75 Sqn RAAF"
-				callsign = "AUSTRALIA F/A-18C - " .. _skin
+				_fullname = "AUSTRALIA F/A-18C - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.CANADA
-				callsign = "CANADA F/A-18C"
+				_fullname = "CANADA F/A-18C"
 			else
 				_country = country.id.SPAIN
-				callsign = "SPAIN F/A-18C"
+				_fullname = "SPAIN F/A-18C"
 			end
 
 			_payload =
@@ -3470,7 +3473,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.USA
 				_skin = "FW-190D9_USA"
-				callsign = "USA FW-190D9 - " .. _skin
+				_fullname = "USA FW-190D9 - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.GERMANY
 
@@ -3489,12 +3492,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "FW-190D9_Red"
 				end
 
-				callsign = "GERMANY FW-190D9 - " .. _skin
+				_fullname = "GERMANY FW-190D9 - " .. _skin
 
 			else
 				_country = country.id.UK
 				_skin = "FW-190D9_GB"
-				callsign = "UK FW-190D9 - " .. _skin
+				_fullname = "UK FW-190D9 - " .. _skin
 			end
 
 			_payload =
@@ -3518,49 +3521,49 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,15)
 			if (subtype == 1) then
 				_country = country.id.USA
-				callsign = "USA MiG-15bis"
+				_fullname = "USA MiG-15bis"
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
-				callsign = "AUSTRALIA MiG-15bis"
+				_fullname = "AUSTRALIA MiG-15bis"
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
-				callsign = "BELGIUM MiG-15bis"
+				_fullname = "BELGIUM MiG-15bis"
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
-				callsign = "CANADA MiG-15bis"
+				_fullname = "CANADA MiG-15bis"
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
-				callsign = "DENMARK MiG-15bis"
+				_fullname = "DENMARK MiG-15bis"
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
-				callsign = "FRANCE MiG-15bis"
+				_fullname = "FRANCE MiG-15bis"
 			elseif (subtype == 7) then
 				_country = country.id.GERMANY
-				callsign = "GERMANY MiG-15bis"
+				_fullname = "GERMANY MiG-15bis"
 			elseif (subtype == 8) then
 				_country = country.id.GEORGIA
-				callsign = "GEORGIA MiG-15bis"
+				_fullname = "GEORGIA MiG-15bis"
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
-				callsign = "ISRAEL MiG-15bis"
+				_fullname = "ISRAEL MiG-15bis"
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
-				callsign = "ITALY MiG-15bis"
+				_fullname = "ITALY MiG-15bis"
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
-				callsign = "NORWAY MiG-15bis"
+				_fullname = "NORWAY MiG-15bis"
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
-				callsign = "SPAIN MiG-15bis"
+				_fullname = "SPAIN MiG-15bis"
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
-				callsign = "THE_NETHERLANDS MiG-15bis"
+				_fullname = "THE_NETHERLANDS MiG-15bis"
 			elseif (subtype == 14) then
 				_country = country.id.UK
-				callsign = "UK MiG-15bis"
+				_fullname = "UK MiG-15bis"
 			else
 				_country = country.id.UKRAINE
-				callsign = "UKRAINE MiG-15bis"
+				_fullname = "UKRAINE MiG-15bis"
 			end
 
 			_payload =
@@ -3603,49 +3606,49 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,15)
 			if (subtype == 1) then
 				_country = country.id.USA
-				callsign = "USA MiG-21BiS - " .. _skin
+				_fullname = "USA MiG-21BiS - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
-				callsign = "AUSTRALIA MiG-21BiS - " .. _skin
+				_fullname = "AUSTRALIA MiG-21BiS - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
-				callsign = "BELGIUM MiG-21BiS - " .. _skin
+				_fullname = "BELGIUM MiG-21BiS - " .. _skin
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
-				callsign = "CANADA MiG-21BiS - " .. _skin
+				_fullname = "CANADA MiG-21BiS - " .. _skin
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
-				callsign = "DENMARK MiG-21BiS - " .. _skin
+				_fullname = "DENMARK MiG-21BiS - " .. _skin
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
-				callsign = "FRANCE MiG-21BiS - " .. _skin
+				_fullname = "FRANCE MiG-21BiS - " .. _skin
 			elseif (subtype == 7) then
 				_country = country.id.GERMANY
-				callsign = "GERMANY MiG-21BiS - " .. _skin
+				_fullname = "GERMANY MiG-21BiS - " .. _skin
 			elseif (subtype == 8) then
 				_country = country.id.GEORGIA
-				callsign = "GEORGIA MiG-21BiS - " .. _skin
+				_fullname = "GEORGIA MiG-21BiS - " .. _skin
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
-				callsign = "ISRAEL MiG-21BiS - " .. _skin
+				_fullname = "ISRAEL MiG-21BiS - " .. _skin
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
-				callsign = "ITALY MiG-21BiS - " .. _skin
+				_fullname = "ITALY MiG-21BiS - " .. _skin
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
-				callsign = "NORWAY MiG-21BiS - " .. _skin
+				_fullname = "NORWAY MiG-21BiS - " .. _skin
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
-				callsign = "SPAIN MiG-21BiS - " .. _skin
+				_fullname = "SPAIN MiG-21BiS - " .. _skin
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
-				callsign = "THE_NETHERLANDS MiG-21BiS - " .. _skin
+				_fullname = "THE_NETHERLANDS MiG-21BiS - " .. _skin
 			elseif (subtype == 14) then
 				_country = country.id.UK
-				callsign = "UK MiG-21BiS - " .. _skin
+				_fullname = "UK MiG-21BiS - " .. _skin
 			else
 				_country = country.id.UKRAINE
-				callsign = "UKRAINE MiG-21BiS - " .. _skin
+				_fullname = "UKRAINE MiG-21BiS - " .. _skin
 			end
 
 			_payload =
@@ -3690,7 +3693,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-23MLD"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE MiG-23MLD - " .. _skin
+			_fullname = "UKRAINE MiG-23MLD - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -3725,7 +3728,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-25PD"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE MiG-25PD - " .. _skin
+			_fullname = "UKRAINE MiG-25PD - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -3765,7 +3768,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard-2"
 			end
 
-			callsign = "UKRAINE MiG-29A - " .. _skin
+			_fullname = "UKRAINE MiG-29A - " .. _skin
 
 			_payload =
 			{
@@ -3824,7 +3827,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "luftwaffe gray-4"
 			end
 
-			callsign = "GERMANY MiG-29G - " .. _skin
+			_fullname = "GERMANY MiG-29G - " .. _skin
 
 			_payload =
 			{
@@ -3877,7 +3880,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "`ukrainian falcons` paint scheme"
 			end
 
-			callsign = "UKRAINE MiG-29S - " .. _skin
+			_fullname = "UKRAINE MiG-29S - " .. _skin
 
 			_payload =
 			{
@@ -3936,7 +3939,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "ec2_2 spa94 `lamort qui fauche`"
 			end
 
-			callsign = "FRANCE Mirage 2000-5 - " .. _skin
+			_fullname = "FRANCE Mirage 2000-5 - " .. _skin
 
 			_payload =
 			{
@@ -4055,7 +4058,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "USAF Voodoo AirRace"
 				end
 
-				callsign = "USA P-51D - " .. _skin
+				_fullname = "USA P-51D - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
@@ -4069,7 +4072,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "AUSTRALIA P-51D - " .. _skin
+				_fullname = "AUSTRALIA P-51D - " .. _skin
 
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
@@ -4083,7 +4086,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "BELGIUM P-51D - " .. _skin
+				_fullname = "BELGIUM P-51D - " .. _skin
 
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
@@ -4099,7 +4102,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "CANADA P-51D - " .. _skin
+				_fullname = "CANADA P-51D - " .. _skin
 
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
@@ -4113,7 +4116,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "DENMARK P-51D - " .. _skin
+				_fullname = "DENMARK P-51D - " .. _skin
 
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
@@ -4127,7 +4130,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "FRANCE P-51D - " .. _skin
+				_fullname = "FRANCE P-51D - " .. _skin
 
 			elseif (subtype == 7) then
 				_country = country.id.GEORGIA
@@ -4141,7 +4144,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "GEORGIA P-51D - " .. _skin
+				_fullname = "GEORGIA P-51D - " .. _skin
 
 			elseif (subtype == 8) then
 				_country = country.id.GERMANY
@@ -4157,7 +4160,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Germany Training Staffel"
 				end
 
-				callsign = "GERMANY P-51D - " .. _skin
+				_fullname = "GERMANY P-51D - " .. _skin
 
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
@@ -4173,7 +4176,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Israeli Air Force"
 				end
 
-				callsign = "ISRAEL P-51D - " .. _skin
+				_fullname = "ISRAEL P-51D - " .. _skin
 
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
@@ -4189,7 +4192,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Italia Air Force"
 				end
 
-				callsign = "ITALY P-51D - " .. _skin
+				_fullname = "ITALY P-51D - " .. _skin
 
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
@@ -4203,7 +4206,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "NORWAY P-51D - " .. _skin
+				_fullname = "NORWAY P-51D - " .. _skin
 
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
@@ -4219,7 +4222,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "SPAIN Roberto"
 				end
 
-				callsign = "SPAIN P-51D - " .. _skin
+				_fullname = "SPAIN P-51D - " .. _skin
 
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
@@ -4233,7 +4236,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "THE_NETHERLANDS P-51D - " .. _skin
+				_fullname = "THE_NETHERLANDS P-51D - " .. _skin
 
 			elseif (subtype == 14) then
 				_country = country.id.UK
@@ -4249,7 +4252,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "UK P-51D - " .. _skin
+				_fullname = "UK P-51D - " .. _skin
 
 			else
 				_country = country.id.UKRAINE
@@ -4267,7 +4270,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Ukraine Old"
 				end
 
-				callsign = "UKRAINE P-51D - " .. _skin
+				_fullname = "UKRAINE P-51D - " .. _skin
 
 			end
 
@@ -4338,7 +4341,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "Ozerne AFB (9th brigade)"
 			end
 
-			callsign = "UKRAINE Su-27 - "	 .. _skin
+			_fullname = "UKRAINE Su-27 - "	 .. _skin
 
 			_payload =
 			{
@@ -4394,7 +4397,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-16C bl.50"
 			_country = country.id.TURKEY
 			_skin = "af f16 standard"
-			callsign = "TURKEY F-16C bl.50 - " .. _skin
+			_fullname = "TURKEY F-16C bl.50 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -4437,7 +4440,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-4E"
 			_skin = ""
 			_country = country.id.TURKEY
-			callsign = "TURKEY F-4E - " .. _skin
+			_fullname = "TURKEY F-4E - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -4484,7 +4487,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-5E"
 			_country = country.id.TURKEY
 			_skin = "`af standard"
-			callsign = "TURKEY F-5E - " .. _skin
+			_fullname = "TURKEY F-5E - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -4530,16 +4533,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,4)
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
-				callsign = "RUSSIA F-86F Sabre"
+				_fullname = "RUSSIA F-86F Sabre"
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
-				callsign = "ABKHAZIA F-86F Sabre"
+				_fullname = "ABKHAZIA F-86F Sabre"
 			elseif (subtype == 3) then
 				_country = country.id.SOUTH_OSETIA
-				callsign = "SOUTH_OSETIA F-86F Sabre"
+				_fullname = "SOUTH_OSETIA F-86F Sabre"
 			else
 				_country = country.id.TURKEY
-				callsign = "TURKEY F-86F Sabre"
+				_fullname = "TURKEY F-86F Sabre"
 			end
 
 			_payload =
@@ -4596,7 +4599,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "FW-190D9"
 			_country = country.id.RUSSIA
 			_skin = "FW-190D9_USSR"
-			callsign = "RUSSIA FW-190D9 - " .. _skin
+			_fullname = "RUSSIA FW-190D9 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -4626,7 +4629,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard-3 (worn-out)"
 			end
 
-			callsign = "RUSSIA MiG-23MLD - " .. _skin
+			_fullname = "RUSSIA MiG-23MLD - " .. _skin
 
 			_payload =
 			{
@@ -4662,7 +4665,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-25PD"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA MiG-25PD - " .. _skin
+			_fullname = "RUSSIA MiG-25PD - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -4706,7 +4709,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "demo paint scheme #999 mapo"
 			end
 
-			callsign = "RUSSIA MiG-29A - " .. _skin
+			_fullname = "RUSSIA MiG-29A - " .. _skin
 
 			_payload =
 			{
@@ -4767,7 +4770,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "73th guards regiment, merzeburg ab (gdr)"
 			end
 
-			callsign = "RUSSIA MiG-29S - " .. _skin
+			_fullname = "RUSSIA MiG-29S - " .. _skin
 
 			_payload =
 			{
@@ -4820,7 +4823,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard"
 			end
 
-			callsign = "RUSSIA MiG-31 - " .. _skin
+			_fullname = "RUSSIA MiG-31 - " .. _skin
 
 			_payload =
 			{
@@ -4887,7 +4890,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "USSR Old"
 				end
 
-				callsign = "RUSSIA P-51D - " .. _skin
+				_fullname = "RUSSIA P-51D - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
@@ -4901,7 +4904,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "ABKHAZIA P-51D - " .. _skin
+				_fullname = "ABKHAZIA P-51D - " .. _skin
 
 			else
 				_country = country.id.TURKEY
@@ -4915,7 +4918,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Dogfight Red"
 				end
 
-				callsign = "TURKEY P-51D - " .. _skin
+				_fullname = "TURKEY P-51D - " .. _skin
 
 			end
 
@@ -5004,7 +5007,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "M Gromov FRI"
 			end
 
-			callsign = "RUSSIA Su-27 - " .. _skin
+			_fullname = "RUSSIA Su-27 - " .. _skin
 
 			_payload =
 			{
@@ -5083,7 +5086,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard last (worn-out)"
 			end
 
-			callsign = "RUSSIA Su-30 - " .. _skin
+			_fullname = "RUSSIA Su-30 - " .. _skin
 
 			_payload =
 			{
@@ -5158,7 +5161,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "t-10k-9 test paint scheme"
 			end
 
-			callsign = "RUSSIA Su-33 - " .. _skin
+			_fullname = "RUSSIA Su-33 - " .. _skin
 
 			_payload =
 			{
@@ -5229,7 +5232,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "af standard 2"
 			end
 
-			callsign = "RUSSIA Su-34 - " .. _skin
+			_fullname = "RUSSIA Su-34 - " .. _skin
 
 			_payload =
 			{
@@ -5343,12 +5346,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "standard"
 				end
 
-				callsign = "USA AH-1W - " .. _skin
+				_fullname = "USA AH-1W - " .. _skin
 
 			else
 				_country = country.id.ISRAEL
 				_skin = "standard"
-				callsign = "ISRAEL AH-1W - " .. _skin
+				_fullname = "ISRAEL AH-1W - " .. _skin
 			end
 
 			_payload =
@@ -5406,20 +5409,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "standard dirty"
 				end
 
-				callsign = "USA AH-64A - " .. _skin
+				_fullname = "USA AH-64A - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.ISRAEL
 				_skin = "ah-64_a_green isr"
-				callsign = "ISRAEL AH-64A - " .. _skin
+				_fullname = "ISRAEL AH-64A - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "ah-64_a_green neth"
-				callsign = "THE_NETHERLANDS AH-64A - " .. _skin
+				_fullname = "THE_NETHERLANDS AH-64A - " .. _skin
 			else
 				_country = country.id.UK
 				_skin = "ah-64_a_green uk"
-				callsign = "UK AH-64A - " .. _skin
+				_fullname = "UK AH-64A - " .. _skin
 			end
 
 			_payload =
@@ -5478,19 +5481,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.USA
 				_skin = "standard"
-				callsign = "USA AH-64D - " .. _skin
+				_fullname = "USA AH-64D - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.ISRAEL
 				_skin = "ah-64_d_isr"
-				callsign = "ISRAEL AH-64D - " .. _skin
+				_fullname = "ISRAEL AH-64D - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "ah-64_d_green neth"
-				callsign = "THE_NETHERLANDS AH-64D - " .. _skin
+				_fullname = "THE_NETHERLANDS AH-64D - " .. _skin
 			else
 				_country = country.id.UK
 				_skin = "ah-64_d_green uk"
-				callsign = "UK AH-64D - " .. _skin
+				_fullname = "UK AH-64D - " .. _skin
 			end
 
 			_payload =
@@ -5526,23 +5529,23 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.USA
 				_skin = "standard"
-				callsign = "USA CH-47D - " .. _skin
+				_fullname = "USA CH-47D - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				_skin = "Australia RAAF"
-				callsign = "AUSTRALIA CH-47D - " .. _skin
+				_fullname = "AUSTRALIA CH-47D - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.SPAIN
 				_skin = "ch-47_green spain"
-				callsign = "SPAIN CH-47D - " .. _skin
+				_fullname = "SPAIN CH-47D - " .. _skin
 			elseif (subtype == 4) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "ch-47_green neth"
-				callsign = "THE_NETHERLANDS CH-47D - " .. _skin
+				_fullname = "THE_NETHERLANDS CH-47D - " .. _skin
 			else
 				_country = country.id.UK
 				_skin = "ch-47_green uk"
-				callsign = "UK CH-47D - " .. _skin
+				_fullname = "UK CH-47D - " .. _skin
 			end
 
 			_payload =
@@ -5559,7 +5562,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "CH-53E"
 			_country = country.id.USA
 			_skin = "standard"
-			callsign = "USA CH-53E - " .. _skin
+			_fullname = "USA CH-53E - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -5574,7 +5577,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Ka-27"
 			_country = country.id.UKRAINE
 			_skin = "ukraine camo 1"
-			callsign = "USA Ka-27 - " .. _skin
+			_fullname = "USA Ka-27 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -5624,12 +5627,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "us marines 2"
 				end
 
-				callsign = "USA Ka-50 - " .. _skin
+				_fullname = "USA Ka-50 - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				_skin = "Russia Worn Black"
-				callsign = "AUSTRALIA Ka-50 - " .. _skin
+				_fullname = "AUSTRALIA Ka-50 - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
 
@@ -5642,12 +5645,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "belgium olive"
 				end
 
-				callsign = "BELGIUM Ka-50 - " .. _skin
+				_fullname = "BELGIUM Ka-50 - " .. _skin
 
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
 				_skin = "canadian forces"
-				callsign = "CANADA Ka-50 - " .. _skin
+				_fullname = "CANADA Ka-50 - " .. _skin
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
 
@@ -5658,7 +5661,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Denmark navy trainer"
 				end
 
-				callsign = "DENMARK Ka-50 - " .. _skin
+				_fullname = "DENMARK Ka-50 - " .. _skin
 
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
@@ -5672,12 +5675,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "France Armee de Terre Desert"
 				end
 
-				callsign = "FRANCE Ka-50 - " .. _skin
+				_fullname = "FRANCE Ka-50 - " .. _skin
 
 			elseif (subtype == 7) then
 				_country = country.id.GEORGIA
 				_skin = "georgia camo"
-				callsign = "GEORGIA Ka-50 - " .. _skin
+				_fullname = "GEORGIA Ka-50 - " .. _skin
 			elseif (subtype == 8) then
 				_country = country.id.GERMANY
 
@@ -5688,7 +5691,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "german 8332"
 				end
 
-				callsign = "GERMANY Ka-50 - " .. _skin
+				_fullname = "GERMANY Ka-50 - " .. _skin
 
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
@@ -5702,7 +5705,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Israel IAF camo 3"
 				end
 
-				callsign = "ISRAEL Ka-50 - " .. _skin
+				_fullname = "ISRAEL Ka-50 - " .. _skin
 
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
@@ -5714,12 +5717,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Italy Esercito Italiano"
 				end
 
-				callsign = "ITALY Ka-50 - " .. _skin
+				_fullname = "ITALY Ka-50 - " .. _skin
 
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
 				_skin = "norway camo"
-				callsign = "NORWAY Ka-50 - " .. _skin
+				_fullname = "NORWAY Ka-50 - " .. _skin
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
 
@@ -5732,7 +5735,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Spain SAA Standard"
 				end
 
-				callsign = "SPAIN Ka-50 - " .. _skin
+				_fullname = "SPAIN Ka-50 - " .. _skin
 
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
@@ -5744,12 +5747,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Netherlands RNAF wooded"
 				end
 
-				callsign = "THE_NETHERLANDS Ka-50 - " .. _skin
+				_fullname = "THE_NETHERLANDS Ka-50 - " .. _skin
 
 			elseif (subtype == 14) then
 				_country = country.id.UK
 				_skin = "uk camo"
-				callsign = "UK Ka-50 - " .. _skin
+				_fullname = "UK Ka-50 - " .. _skin
 			else
 				_country = country.id.UKRAINE
 
@@ -5762,7 +5765,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "ukraine camo 1 dirt"
 				end
 
-				callsign = "UKRAINE Ka-50 - " .. _skin
+				_fullname = "UKRAINE Ka-50 - " .. _skin
 
 			end
 
@@ -5799,7 +5802,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.GEORGIA
 				_skin = "standard"
-				callsign = "GEORGIA Mi-24V - " .. _skin
+				_fullname = "GEORGIA Mi-24V - " .. _skin
 			else
 				_country = country.id.UKRAINE
 
@@ -5810,7 +5813,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "ukraine"
 				end
 
-				callsign = "UKRAINE Mi-24V - " .. _skin
+				_fullname = "UKRAINE Mi-24V - " .. _skin
 
 			end
 
@@ -5851,7 +5854,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "United Nations"
 			end
 
-			callsign = "UKRAINE Mi-26 - " .. _skin
+			_fullname = "UKRAINE Mi-26 - " .. _skin
 
 			_payload = {
 				["pylons"] =
@@ -5878,12 +5881,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "USA Mi-8MT - " .. _skin
+				_fullname = "USA Mi-8MT - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.BELGIUM
 				_skin = "Belgium"
-				callsign = "BELGIUM Mi-8MT - " .. _skin
+				_fullname = "BELGIUM Mi-8MT - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.CANADA
 
@@ -5896,12 +5899,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "CANADA Mi-8MT - " .. _skin
+				_fullname = "CANADA Mi-8MT - " .. _skin
 
 			elseif (subtype == 4) then
 				_country = country.id.DENMARK
 				_skin = "Denmark"
-				callsign = "DENMARK Mi-8MT - " .. _skin
+				_fullname = "DENMARK Mi-8MT - " .. _skin
 			elseif (subtype == 5) then
 				_country = country.id.FRANCE
 
@@ -5916,12 +5919,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "FRANCE Mi-8MT - " .. _skin
+				_fullname = "FRANCE Mi-8MT - " .. _skin
 
 			elseif (subtype == 6) then
 				_country = country.id.GEORGIA
 				_skin = "Georgia"
-				callsign = "GEORGIA Mi-8MT - " .. _skin
+				_fullname = "GEORGIA Mi-8MT - " .. _skin
 			elseif (subtype == 7) then
 				_country = country.id.GERMANY
 
@@ -5934,7 +5937,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "GERMANY Mi-8MT - " .. _skin
+				_fullname = "GERMANY Mi-8MT - " .. _skin
 
 			elseif (subtype == 8) then
 				_country = country.id.ISRAEL
@@ -5948,7 +5951,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "ISRAEL Mi-8MT - " .. _skin
+				_fullname = "ISRAEL Mi-8MT - " .. _skin
 
 			elseif (subtype == 9) then
 				_country = country.id.ITALY
@@ -5964,7 +5967,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "ITALY Mi-8MT - " .. _skin
+				_fullname = "ITALY Mi-8MT - " .. _skin
 
 			elseif (subtype == 10) then
 				_country = country.id.NORWAY
@@ -5978,7 +5981,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "NORWAY Mi-8MT - " .. _skin
+				_fullname = "NORWAY Mi-8MT - " .. _skin
 
 			elseif (subtype == 11) then
 				_country = country.id.SPAIN
@@ -5992,7 +5995,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "SPAIN Mi-8MT - " .. _skin
+				_fullname = "SPAIN Mi-8MT - " .. _skin
 
 			elseif (subtype == 12) then
 				_country = country.id.THE_NETHERLANDS
@@ -6008,7 +6011,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "THE_NETHERLANDS Mi-8MT - " .. _skin
+				_fullname = "THE_NETHERLANDS Mi-8MT - " .. _skin
 
 			elseif (subtype == 13) then
 				_country = country.id.UK
@@ -6022,12 +6025,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "UK Mi-8MT - " .. _skin
+				_fullname = "UK Mi-8MT - " .. _skin
 
 			else
 				_country = country.id.UKRAINE
 				_skin = "Standard"
-				callsign = "UKRAINE Mi-8MT - " .. _skin
+				_fullname = "UKRAINE Mi-8MT - " .. _skin
 			end
 
 			_payload =
@@ -6058,7 +6061,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				},
 			}
 			_skin = ""
-			callsign = "USA OH-58D"
+			_fullname = "USA OH-58D"
 			_payload =
 			{
 				["pylons"] =
@@ -6081,7 +6084,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "SH-60B"
 			_country = country.id.USA
 			_skin = "standard"
-			callsign = "USA SH-60B - " .. _skin
+			_fullname = "USA SH-60B - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -6130,7 +6133,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "[Civilian] VIP"
 				end
 
-				callsign = "USA UH-1H - " .. _skin
+				_fullname = "USA UH-1H - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
@@ -6144,24 +6147,24 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Australia Royal Navy"
 				end
 
-				callsign = "AUSTRALIA UH-1H - " .. _skin
+				_fullname = "AUSTRALIA UH-1H - " .. _skin
 
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
 				_skin = "[Civilian] Standard"
-				callsign = "BELGIUM UH-1H - " .. _skin
+				_fullname = "BELGIUM UH-1H - " .. _skin
 			elseif (subtype == 4) then
 				_country = country.id.CANADA
 				_skin = "Canadian Force"
-				callsign = "CANADA UH-1H - " .. _skin
+				_fullname = "CANADA UH-1H - " .. _skin
 			elseif (subtype == 5) then
 				_country = country.id.DENMARK
 				_skin = "[Civilian] Standard"
-				callsign = "DENMARK UH-1H - " .. _skin
+				_fullname = "DENMARK UH-1H - " .. _skin
 			elseif (subtype == 6) then
 				_country = country.id.FRANCE
 				_skin = "French Army"
-				callsign = "FRANCE UH-1H - " .. _skin
+				_fullname = "FRANCE UH-1H - " .. _skin
 			elseif (subtype == 7) then
 				_country = country.id.GEORGIA
 
@@ -6172,16 +6175,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Georgian Air Force"
 				end
 
-				callsign = "GEORGIA UH-1H - " .. _skin
+				_fullname = "GEORGIA UH-1H - " .. _skin
 
 			elseif (subtype == 8) then
 				_country = country.id.GERMANY
 				_skin = "Luftwaffe"
-				callsign = "GERMANY UH-1H - " .. _skin
+				_fullname = "GERMANY UH-1H - " .. _skin
 			elseif (subtype == 9) then
 				_country = country.id.ISRAEL
 				_skin = "Israel Army"
-				callsign = "ISRAEL UH-1H - " .. _skin
+				_fullname = "ISRAEL UH-1H - " .. _skin
 			elseif (subtype == 10) then
 				_country = country.id.ITALY
 
@@ -6194,12 +6197,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Italy Marina Militare s.n. 80951 7-20"
 				end
 
-				callsign = "ITALY UH-1H - " .. _skin
+				_fullname = "ITALY UH-1H - " .. _skin
 
 			elseif (subtype == 11) then
 				_country = country.id.NORWAY
 				_skin = "[Civilian] Standard"
-				callsign = "NORWAY UH-1H - " .. _skin
+				_fullname = "NORWAY UH-1H - " .. _skin
 			elseif (subtype == 12) then
 				_country = country.id.SPAIN
 
@@ -6210,20 +6213,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Spanish UN"
 				end
 
-				callsign = "SPAIN UH-1H - " .. _skin
+				_fullname = "SPAIN UH-1H - " .. _skin
 
 			elseif (subtype == 13) then
 				_country = country.id.THE_NETHERLANDS
 				_skin = "Royal Netherlands AF"
-				callsign = "THE_NETHERLANDS UH-1H - " .. _skin
+				_fullname = "THE_NETHERLANDS UH-1H - " .. _skin
 			elseif (subtype == 14) then
 				_country = country.id.UK
 				_skin = "[Civilian] Standard"
-				callsign = "UK UH-1H - " .. _skin
+				_fullname = "UK UH-1H - " .. _skin
 			else
 				_country = country.id.UKRAINE
 				_skin = "Ukrainian Army"
-				callsign = "UKRAINE UH-1H - " .. _skin
+				_fullname = "UKRAINE UH-1H - " .. _skin
 			end
 
 			_payload =
@@ -6260,10 +6263,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			if (subtype == 1) then
 				_country = country.id.USA
 				_skin = "standard"
-				callsign = "USA UH-60A - " .. _skin
+				_fullname = "USA UH-60A - " .. _skin
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
-				callsign = "AUSTRALIA UH-60A"
+				_fullname = "AUSTRALIA UH-60A"
 			else
 				_country = country.id.ISRAEL
 
@@ -6274,7 +6277,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "standard"
 				end
 
-				callsign = "ISRAEL UH-60A - " .. _skin
+				_fullname = "ISRAEL UH-60A - " .. _skin
 
 			end
 
@@ -6321,7 +6324,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "Turkey 2"
 			end
 
-			callsign = "TURKEY AH-1W - " .. _skin
+			_fullname = "TURKEY AH-1W - " .. _skin
 
 			_payload =
 			{
@@ -6345,7 +6348,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Ka-27"
 			_country = country.id.RUSSIA
 			_skin = "standard"
-			callsign = "RUSSIA Ka-27 - " .. _skin
+			_fullname = "RUSSIA Ka-27 - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -6414,16 +6417,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Russia Worn Black"
 				end
 
-				callsign = "RUSSIA Ka-50 - " .. _skin
+				_fullname = "RUSSIA Ka-50 - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
 				_skin = "Abkhazia 1"
-				callsign = "ABKHAZIA Ka-50 - " .. _skin
+				_fullname = "ABKHAZIA Ka-50 - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.SOUTH_OSETIA
 				_skin = "South Ossetia 1"
-				callsign = "SOUTH_OSETIA Ka-50 - " .. _skin
+				_fullname = "SOUTH_OSETIA Ka-50 - " .. _skin
 			else
 				_country = country.id.TURKEY
 
@@ -6438,7 +6441,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Turkey fictional desert scheme"
 				end
 
-				callsign = "TURKEY Ka-50 - " .. _skin
+				_fullname = "TURKEY Ka-50 - " .. _skin
 
 			end
 
@@ -6486,16 +6489,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Russia_MVD"
 				end
 
-				callsign = "RUSSIA Mi-24V - " .. _skin
+				_fullname = "RUSSIA Mi-24V - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
 				_skin = "Abkhazia"
-				callsign = "ABKHAZIA Mi-24V - " .. _skin
+				_fullname = "ABKHAZIA Mi-24V - " .. _skin
 			else
 				_country = country.id.SOUTH_OSETIA
 				_skin = "South Ossetia"
-				callsign = "SOUTH_OSETIA Mi-24V - " .. _skin
+				_fullname = "SOUTH_OSETIA Mi-24V - " .. _skin
 			end
 
 			_payload =
@@ -6539,7 +6542,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "United Nations"
 			end
 
-			callsign = "RUSSIA Mi-26 - " .. _skin
+			_fullname = "RUSSIA Mi-26 - " .. _skin
 
 			_payload = {
 				["pylons"] =
@@ -6561,7 +6564,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "standard"
 			end
 
-			callsign = "RUSSIA Mi-28N - " .. _skin
+			_fullname = "RUSSIA Mi-28N - " .. _skin
 
 			_payload =
 			{
@@ -6615,16 +6618,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Russia_UTair"
 				end
 
-				callsign = "RUSSIA Mi-8MT - " .. _skin
+				_fullname = "RUSSIA Mi-8MT - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
 				_skin = "Abkhazia"
-				callsign = "ABKHAZIA Mi-8MT - " .. _skin
+				_fullname = "ABKHAZIA Mi-8MT - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.SOUTH_OSETIA
 				_skin = "South Ossetia"
-				callsign = "SOUTH_OSETIA Mi-8MT - " .. _skin
+				_fullname = "SOUTH_OSETIA Mi-8MT - " .. _skin
 			else
 				_country = country.id.TURKEY
 
@@ -6637,7 +6640,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "Standart"
 				end
 
-				callsign = "TURKEY Mi-8MT - " .. _skin
+				_fullname = "TURKEY Mi-8MT - " .. _skin
 			end
 
 			_payload =
@@ -6664,20 +6667,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					_skin = "RF Air Force Grey"
 				end
 
-				callsign = "RUSSIA UH-1H - " .. _skin
+				_fullname = "RUSSIA UH-1H - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.ABKHAZIA
 				_skin = "[Civilian] Standard"
-				callsign = "ABKHAZIA UH-1H - " .. _skin
+				_fullname = "ABKHAZIA UH-1H - " .. _skin
 			elseif (subtype == 3) then
 				_country = country.id.SOUTH_OSETIA
 				_skin = "[Civilian] Standard"
-				callsign = "SOUTH_OSETIA UH-1H - " .. _skin
+				_fullname = "SOUTH_OSETIA UH-1H - " .. _skin
 			else
 				_country = country.id.TURKEY
 				_skin = "Turkish Air Force"
-				callsign = "TURKEY UH-1H - " .. _skin
+				_fullname = "TURKEY UH-1H - " .. _skin
 			end
 
 			_payload =
@@ -6710,7 +6713,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "UH-60A"
 			_country = country.id.TURKEY
 			_skin = "standard"
-			callsign = "TURKEY UH-60A - " .. _skin
+			_fullname = "TURKEY UH-60A - " .. _skin
 			_payload =
 			{
 				["pylons"] =
@@ -6753,6 +6756,18 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	_flightalt = math.random(0,25000)
 	_flightspeed = math.random(175,2000)
+
+	-- simplified random callsign for now. Not all aircraft supported correctly, but it mostly works...
+	local a = math.random(1,#nameCallname)
+	local b = math.random(1,9)
+	_callsign = nameCallname[a] .. b .. 1
+	_callname =
+		{
+			[1] = a,
+			[2] = b,
+			[3] = 1,
+			["name"] = _callsign,
+		}
 
 	_airplanedata = {
         ["modulation"] = 0,
@@ -6870,14 +6885,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 										["y"] = _spawnairplanepos.z,
 										["x"] = _spawnairplanepos.x,
 										["name"] =  nameP .. nameCoalition[coalitionIndex].."1",
-										["callsign"] =
-                                        {
-                                            [1] = 1,
-                                            [2] = 1,
-                                            [3] = 1,
-                                            ["name"] = "Ford" .. coalitionIndex .. nameCoalition[coalitionIndex],
-										},
-										--["callsign"] = coalitionIndex .. nameCoalition[coalitionIndex],
+										["callsign"] = _callname,
 										["payload"] = _payload,
 										["speed"] = _speed,
 										["unitId"] =  math.random(9999,99999),
@@ -6901,18 +6909,18 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	end
 
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  callsign:' .. callsign, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
-	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  callsign:' .. callsign .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
+	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
 	{
 		groupname = nameP .. nameCoalition[coalitionIndex],
 		unitname1 = nameP .. nameCoalition[coalitionIndex].."1",
 		unitname2 = "none",
-		flightname = callsign,
+		flightname = _fullname,
 		actype = _aircrafttype,
 		origin = spawnIndex.name,
 		destination = landIndex.name,
