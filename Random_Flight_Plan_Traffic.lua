@@ -40,7 +40,7 @@ checkInterval = 20								-- How frequently to check dynamic AI groups status (e
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
 minGroupSize = 1								-- Minimum number of groups for those units supporting formations
-maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
+maxCoalitionAircraft = {8, 8}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {50000, 50000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -48,15 +48,15 @@ minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDa
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.20							-- If randomizing fuel, the low end percent		--check
-highFuelPercent = 0.60							-- If randomizing fuel, the high end percent		--check
+lowFuelPercent = 0.10							-- If randomizing fuel, the low end percent		--check
+highFuelPercent = 0.25							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 		"TakeOffParking", "From Parking Area",
 		"TakeOffParkingHot", "From Parking Area Hot",
 		"TakeOff", "From Runway",
 		"Turning Point", "Turning Point",
-		"Turning Point", "Turning Point"		-- Favour in-air start
+		"Turning Point", "Turning Point"		-- Favor in-air start
 	}
 spawnSpeedTurningPoint = 125					-- When spawning in the air as turning point, starting speed		--check
 defaultAirplaneFormation = 1					-- When not randomizing formations, the default airplane formation #
@@ -127,7 +127,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {1, 4, 5},				-- An-26B
 				[3] = {2, 2},					-- An-30M
 				[4] = {7, 3, 4, 5},				-- IL-76MD
-				[5] = {15, 3, 4, 5},			-- IL-78M
+				[5] = {15, 1, 2, 3},			-- IL-78M
 				[6] = {9, 1},					-- MiG-25RBT
 				[7] = {11, 1},					-- Su-24MR
 				[8] = {12, 1},					-- TF-51D
@@ -292,7 +292,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -360,7 +360,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -386,7 +386,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		{ -- Aircraft types
 		["name"] = "GERMANY",
 		[1] = -- Utility
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[2] = -- Bomber
 			{	-- Aircraft, skins
@@ -424,7 +424,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -455,7 +455,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -487,7 +487,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -521,7 +521,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -552,7 +552,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -583,7 +583,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -651,7 +651,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {13, 1},					-- Yak-40
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -676,7 +676,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[4] = {76, 18, 19},				-- UH-1H
 			},
 		},
-	[17] = 													--INSURGENTS			-- HANDLE INSURGENTS NO AIRCRAFT CONDITION --
+	[17] = 													--INSURGENTS
 		{ -- No aircraft
 		["name"] = "INSURGENTS",
 		},
@@ -689,7 +689,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {12, 1},					-- TF-51D
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -715,10 +715,10 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		{ -- Aircraft types
 		["name"] = "SOUTH_OSETIA",
 		[1] = -- Utility
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -740,7 +740,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		{ -- Aircraft types
 		["name"] = "ITALY",
 		[1] = -- Utility
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[2] = -- Bomber
 			{	-- Aircraft, skins
@@ -770,10 +770,10 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 		{ -- Aircraft types
 		["name"] = "AUSTRALIA",
 		[1] = -- Utility
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[2] = -- Bomber
-			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			{	-- Aircraft, skins
 			},
 		[3] = -- Attack
 			{	-- Aircraft, skins
@@ -802,6 +802,7 @@ aircraftTable =
 	[1] =								-- An-26B
 		{
 			_aircrafttype = "An-26B",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -827,6 +828,7 @@ aircraftTable =
 	[2] =								-- An-30M
 		{
 			_aircrafttype = "An-30M",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -849,6 +851,7 @@ aircraftTable =
 	[3] =								-- C-130
 		{
 			_aircrafttype = "C-130",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -880,6 +883,7 @@ aircraftTable =
 	[4] =								-- C-17A
 		{
 			_aircrafttype = "C-17A",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -901,9 +905,10 @@ aircraftTable =
 	[5] =								-- E-2C
 		{
 			_aircrafttype = "E-2C",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
-			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
+			_nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
 
 			_tasks =
 			{
@@ -939,9 +944,10 @@ aircraftTable =
 	[6] =								-- E-3A
 		{
 			_aircrafttype = "E-3A",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
-			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
+			_nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
 
 			_tasks =
 			{
@@ -977,6 +983,7 @@ aircraftTable =
 	[7] =								-- IL-76MD
 		{
 			_aircrafttype = "IL-76MD",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -1002,9 +1009,10 @@ aircraftTable =
 	[8] =								-- KC-135
 		{
 			_aircrafttype = "KC-135",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
-			nameCallname = {"Texaco", "Arco", "Shell"},
+			_nameCallname = {"Texaco", "Arco", "Shell"},
 
 			_tasks =
 			{
@@ -1063,8 +1071,7 @@ aircraftTable =
 	[9] =								-- MiG-25RBT
 		{
 			_aircrafttype = "MiG-25RBT",
-			_singleInFlight = true,
-
+			_category = "AIRPLANE",
 
 			_task = "Reconnaissance",
 			_tasks =
@@ -1098,9 +1105,10 @@ aircraftTable =
 	[10] =								-- S-3B Tanker
 		{
 			_aircrafttype = "S-3B Tanker",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
-			nameCallname = {"Texaco", "Arco", "Shell"},
+			_nameCallname = {"Texaco", "Arco", "Shell"},
 
 			_tasks =
 			{
@@ -1135,7 +1143,7 @@ aircraftTable =
 	[11] =								-- Su-24MR
 		{
 			_aircrafttype = "Su-24MR",
-			_singleInFlight = true,
+			_category = "AIRPLANE",
 
 			_task = "Reconnaissance",
 			_tasks =
@@ -1181,7 +1189,7 @@ aircraftTable =
 	[12] =								-- TF-51D
 		{
 			_aircrafttype = "TF-51D",
-			_singleInFlight = false,
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -1206,6 +1214,7 @@ aircraftTable =
 	[13] =								-- Yak-40
 		{
 			_aircrafttype = "Yak-40",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -1229,6 +1238,7 @@ aircraftTable =
 	[14] =								-- A-50
 		{
 			_aircrafttype = "A-50",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -1250,7 +1260,8 @@ aircraftTable =
 		},
 	[15] =								-- IL-78M
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "IL-78M",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_payload =
@@ -1274,6 +1285,7 @@ aircraftTable =
 	[16] =								-- B-1B
 		{
 			_aircrafttype = "B-1B",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Ground Attack",
@@ -1331,6 +1343,7 @@ aircraftTable =
 	[17] =								-- B-52H
 		{
 			_aircrafttype = "B-52H",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Ground Attack",
@@ -1388,7 +1401,7 @@ aircraftTable =
 	[18] =								-- F-117A
 		{
 			_aircrafttype = "F-117A",
-			_singleInFlight = true,
+			_category = "AIRPLANE",
 
 			_task = "Pinpoint Strike",
 			_tasks =
@@ -1422,7 +1435,7 @@ aircraftTable =
 	[19] =								-- F-15E
 		{
 			_aircrafttype = "F-15E",
-			_singleInFlight = true,
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -1544,6 +1557,7 @@ aircraftTable =
 	[20] =								-- S-3B
 		{
 			_aircrafttype = "S-3B",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Ground Attack",
@@ -1594,7 +1608,7 @@ aircraftTable =
 	[21] =								-- Su-24M
 		{
 			_aircrafttype = "Su-24M",
-			_singleInFlight = true,
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -1670,7 +1684,7 @@ aircraftTable =
 	[22] =								-- Tornado GR4
 		{
 			_aircrafttype = "Tornado GR4",
-			_singleInFlight = true,
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -1728,7 +1742,7 @@ aircraftTable =
 	[23] =								-- Tornado IDS
 		{
 			_aircrafttype = "Tornado IDS",
-			_singleInFlight = true,
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -1789,6 +1803,7 @@ aircraftTable =
 	[24] =								-- Tu-22M3
 		{
 			_aircrafttype = "Tu-22M3",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Ground Attack",
@@ -1827,6 +1842,7 @@ aircraftTable =
 	[25] =								-- Tu-95MS
 		{
 			_aircrafttype = "Tu-95MS",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Pinpoint Strike",
@@ -1857,6 +1873,7 @@ aircraftTable =
 	[26] =								-- Tu-142
 		{
 			_aircrafttype = "Tu-142",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Antiship Strike",
@@ -1903,6 +1920,7 @@ aircraftTable =
 	[27] =								-- Tu-160
 		{
 			_aircrafttype = "Tu-160",
+			_category = "AIRPLANE",
 			_singleInFlight = true,
 
 			_task = "Pinpoint Strike",
@@ -1937,12 +1955,9 @@ aircraftTable =
 	[28] =								-- A-10A
 		{
 			_aircrafttype = "A-10A",
+			_category = "AIRPLANE",
 
---			local addCallname = {"Hawg", "Boar", "Pig", "Tusk"}
---			local c = #nameCallname
---			for k,v in pairs(addCallname) do						--FIX--
---				nameCallname[c + k] = v
---			end
+			_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
 
 			_task = "CAS",
 			_tasks =
@@ -2048,12 +2063,9 @@ aircraftTable =
 	[29] =								-- A-10C
 		{
 			_aircrafttype = "A-10C",
+			_category = "AIRPLANE",
 
---			local addCallname = {"Hawg", "Boar", "Pig", "Tusk"}
---			local c = #nameCallname
---			for k,v in pairs(addCallname) do						--FIX--
---				nameCallname[c + k] = v
---			end
+			_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
 
 			_task = "CAS",
 			_tasks =
@@ -2189,6 +2201,7 @@ aircraftTable =
 	[30] =								-- Hawk
 		{
 			_aircrafttype = "Hawk",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -2267,6 +2280,7 @@ aircraftTable =
 	[31] =
 		{								-- L-39ZA
 			_aircrafttype = "L-39ZA",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -2331,6 +2345,7 @@ aircraftTable =
 	[32] =								-- MiG-27K
 		{
 			_aircrafttype = "MiG-27K",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -2402,6 +2417,7 @@ aircraftTable =
 	[33] =								-- Su-17M4
 		{
 			_aircrafttype = "Su-17M4",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -2479,6 +2495,7 @@ aircraftTable =
 	[34] =								-- Su-25
 		{
 			_aircrafttype = "Su-25",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -2571,6 +2588,7 @@ aircraftTable =
 	[35] =								-- Su-25T
 		{
 			_aircrafttype = "Su-25T",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -2656,6 +2674,7 @@ aircraftTable =
 	[36] =								-- Su-25TM
 		{
 			_aircrafttype = "Su-25TM",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -2739,6 +2758,7 @@ aircraftTable =
 	[37] =								-- Bf-109K-4
 		{
 			_aircrafttype = "Bf-109K-4",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -2769,6 +2789,7 @@ aircraftTable =
 	[38] =								-- F-14A
 		{
 			_aircrafttype = "F-14A",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -2867,6 +2888,7 @@ aircraftTable =
 	[39] =								-- F-15C
 		{
 			_aircrafttype = "F-15C",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -2960,6 +2982,7 @@ aircraftTable =
 	[40] =								-- F-16A
 		{
 			_aircrafttype = "F-16A",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3037,6 +3060,7 @@ aircraftTable =
 	[41] =								-- F-16C bl.52d
 		{
 			_aircrafttype = "F-16C bl.52d",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3122,6 +3146,7 @@ aircraftTable =
 	[42] =								-- F-16A MLU
 		{
 			_aircrafttype = "F-16A MLU",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -3188,6 +3213,7 @@ aircraftTable =
 	[43] =								-- F-4E
 		{
 			_aircrafttype = "F-4E",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -3241,6 +3267,7 @@ aircraftTable =
 	[44] =								-- F-5E
 		{
 			_aircrafttype = "F-5E",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3319,6 +3346,7 @@ aircraftTable =
 	[45] =								-- F-86F Sabre
 		{
 			_aircrafttype = "F-86F Sabre",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3392,6 +3420,7 @@ aircraftTable =
 	[46] =								-- F/A-18C
 		{
 			_aircrafttype = "F/A-18C",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3474,6 +3503,7 @@ aircraftTable =
 	[47] =								-- FW-190D9
 		{
 			_aircrafttype = "FW-190D9",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3527,6 +3557,7 @@ aircraftTable =
 	[48] =								-- MiG-15bis
 		{
 			_aircrafttype = "MiG-15bis",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -3555,6 +3586,7 @@ aircraftTable =
 	[49] =								-- MiG-21Bis
 		{
 			_aircrafttype = "MiG-21Bis",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3621,6 +3653,7 @@ aircraftTable =
 	[50] =								-- MiG-23MLD
 		{
 			_aircrafttype = "MiG-23MLD",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3685,6 +3718,7 @@ aircraftTable =
 	[51] =								-- MiG-25PD
 		{
 			_aircrafttype = "MiG-25PD",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3742,6 +3776,7 @@ aircraftTable =
 	[52] =								-- MiG-29A
 		{
 			_aircrafttype = "MiG-29A",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3820,6 +3855,7 @@ aircraftTable =
 	[53] = 								-- MiG-29G
 		{
 			_aircrafttype = "MiG-29G",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -3873,6 +3909,7 @@ aircraftTable =
 	[54] =								-- MiG-29S
 		{
 			_aircrafttype = "MiG-29S",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -3944,6 +3981,7 @@ aircraftTable =
 	[55] =								-- Mirage 2000-5
 		{
 			_aircrafttype = "Mirage 2000-5",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -4005,6 +4043,7 @@ aircraftTable =
 	[56] =								-- P-51D
 		{
 			_aircrafttype = "P-51D",
+			_category = "AIRPLANE",
 
 			_tasks =
 			{
@@ -4106,6 +4145,7 @@ aircraftTable =
 	[57] =								-- Su-27
 		{
 			_aircrafttype = "Su-27",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -4205,6 +4245,7 @@ aircraftTable =
 	[58] =								-- F-16C bl.50
 		{
 			_aircrafttype = "F-16C bl.50",
+			_category = "AIRPLANE",
 
 			_payload =
 			{
@@ -4253,6 +4294,7 @@ aircraftTable =
 	[59] =								-- MiG-29S
 		{
 			_aircrafttype = "MiG-29S",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -4328,6 +4370,7 @@ aircraftTable =
 	[60] =								-- MiG-31
 		{
 			_aircrafttype = "MiG-31",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -4395,6 +4438,7 @@ aircraftTable =
 	[61] =								-- Su-30
 		{
 			_aircrafttype = "Su-30",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -4485,6 +4529,7 @@ aircraftTable =
 	[62] =								-- Su-33
 		{
 			_aircrafttype = "Su-33",
+			_category = "AIRPLANE",
 
 			_task = "CAP",
 			_tasks =
@@ -4581,6 +4626,7 @@ aircraftTable =
 	[63] =								-- Su-34
 		{
 			_aircrafttype = "Su-34",
+			_category = "AIRPLANE",
 
 			_task = "CAS",
 			_tasks =
@@ -4673,6 +4719,7 @@ aircraftTable =
 	[64] =								-- AH-1W
 		{
 			_aircrafttype = "AH-1W",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -4736,6 +4783,7 @@ aircraftTable =
 	[65] =								-- AH-64A
 		{
 			_aircrafttype = "AH-64A",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -4799,6 +4847,7 @@ aircraftTable =
 	[66] =								-- AH-64D
 		{
 			_aircrafttype = "AH-64D",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -4861,6 +4910,7 @@ aircraftTable =
 	[67] =								-- CH-47D
 		{
 			_aircrafttype = "CH-47D",
+			_category = "HELICOPTER",
 
 			_payload =
 			{
@@ -4885,6 +4935,7 @@ aircraftTable =
 	[68] =								-- CH-53E
 		{
 			_aircrafttype = "CH-53E",
+			_category = "HELICOPTER",
 
 			_payload =
 			{
@@ -4905,6 +4956,7 @@ aircraftTable =
 	[69] =								-- Ka-27
 		{
 			_aircrafttype = "Ka-27",
+			_category = "HELICOPTER",
 
 			_payload =
 			{
@@ -4926,6 +4978,7 @@ aircraftTable =
 	[70] =								-- Ka-50
 		{
 			_aircrafttype = "Ka-50",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -5034,6 +5087,7 @@ aircraftTable =
 	[71] =								-- Mi-24V
 		{
 			_aircrafttype = "Mi-24V",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -5109,6 +5163,7 @@ aircraftTable =
 	[72] =								-- Mi-26
 		{
 			_aircrafttype = "Mi-26",
+			_category = "HELICOPTER",
 
 			_payload =
 			{
@@ -5134,6 +5189,7 @@ aircraftTable =
 	[73] =								-- Mi-8MT
 		{
 			_aircrafttype = "Mi-8MT",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -5225,6 +5281,7 @@ aircraftTable =
 	[74] =								-- OH-58D
 		{
 			_aircrafttype = "OH-58D",
+			_category = "HELICOPTER",
 
 			_task = "AFAC",
 			_tasks =
@@ -5268,6 +5325,7 @@ aircraftTable =
 	[75] =								-- SH-60B
 		{
 			_aircrafttype = "SH-60B",
+			_category = "HELICOPTER",
 
 			_task = "Antiship Strike",
 			_tasks =
@@ -5313,6 +5371,7 @@ aircraftTable =
 	[76] =								-- UH-1H
 		{
 			_aircrafttype = "UH-1H",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -5402,6 +5461,7 @@ aircraftTable =
 	[77] =									-- Mi-28N
 		{
 			_aircrafttype = "Mi-28N",
+			_category = "HELICOPTER",
 
 			_task = "CAS",
 			_tasks =
@@ -5462,6 +5522,7 @@ aircraftTable =
 	[78] =								-- UH-60A
 		{
 			_aircrafttype = "UH-60A",
+			_category = "HELICOPTER",
 
 			_payload =
 			{
@@ -5487,10 +5548,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 env.info("generate airplane loop start", false)
 
-	_category = "AIRPLANE" -- Default to airplane type
-
 	_acExist = nil
-	while (_acExist == nil) do
+	while (_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
 		-- Pick a country from the given coalition
 		if (coalitionIndex == 1) then
 			_acCountry = math.random(1, #env.mission.coalitions.red)
@@ -5522,7 +5581,6 @@ env.info("generate airplane loop: _acTypeIndex: " .. _acTypeIndex, false)
 		-- Pick an aircraft and skin set from the given aircraft type
 		_acIndex = math.random(1, #coalitionTable[_country][_acTypeIndex])
 
-
 env.info("generate airplane loop: _acIndex: " .. _acIndex, false)
 
 		_acExist = coalitionTable[_country][_acTypeIndex][_acIndex]
@@ -5536,7 +5594,6 @@ env.info("generate airplane loop: _ac: " .. _ac, false)
 	-- Pick a skin from the given aircraft
 	_acSkin = math.random(2, #coalitionTable[_country][_acTypeIndex][_acIndex])
 
-
 env.info("generate airplane loop: _acSkin: " .. _acSkin, false)
 
 	-- The specific aircraft
@@ -5545,7 +5602,10 @@ env.info("generate airplane loop: _acSkin: " .. _acSkin, false)
 
 env.info("generate airplane loop: _aircrafttype: " .. _aircrafttype, false)
 
---env.info("generate airplane loop: aircraftTable[_ac]._singleInFlight: " .. aircraftTable[_ac]["_singleInFlight"], false)
+	-- Set category
+	_category = aircraftTable[_ac]._category
+
+env.info("generate airplane loop: _category: " .. _category, false)
 
 	-- Formation flying or not
 	if (aircraftTable[_ac]["_singleInFlight"] ~= nil) then
@@ -5557,8 +5617,8 @@ env.info("generate airplane loop: _singleInFlight: false", false)
 	end
 
 	-- Set callsign name
-	if (aircraftTable[_ac].nameCallname ~= nil) then
-		nameCallname = aircraftTable[_ac].nameCallname
+	if (aircraftTable[_ac]._nameCallname ~= nil) then
+		nameCallname = aircraftTable[_ac]._nameCallname
 	else
 		nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	end
@@ -5579,25 +5639,22 @@ env.info("generate airplane loop: _singleInFlight: false", false)
 		_tasks = aircraftTable[_ac]._tasks
 --env.info("generate airplane loop: _tasks: " .. mist.utils.tableShow(_tasks), false)
 	else
-		_tasks = ""
+		_tasks = {}
 --env.info("generate airplane loop: _tasks: no tasks", false)
 	end
 
-
 	-- Set payload
 	_payload = aircraftTable[_ac]._payload
-
 
 env.info("generate airplane loop: _payload: " .. mist.utils.tableShow(_payload), false)
 
 	-- Set skin
 	_skin = aircraftTable[_ac]._skins[coalitionTable[_country][_acTypeIndex][_acIndex][_acSkin]]
 
-
 env.info("generate airplane loop: _skin: " .. _skin, false)
 
 	-- Set full name used for messages
-	_fullname = coalitionTable[_country].name .. _aircrafttype .. " - " .. _skin
+	_fullname = coalitionTable[_country].name .. " " .. _aircrafttype .. " - " .. _skin
 
 env.info("generate airplane loop: _fullname: " .. _fullname, false)
 
@@ -6083,7 +6140,7 @@ function checkStatus()
 					i = i + 1
 				end
 			else -- Valid group, make unit checks
---env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames, false)
+env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames, false)
 --env.info('random 1-4: ' .. math.random(1,4), false)
 				local unitNamesLimit = #RATtable[i].unitNames
 				local j = 1
@@ -6271,7 +6328,7 @@ function generateGroup()
 		if (flgSpawn[i] == true) then
 			if checkMax(i) then
 				airbase = makeAirBase(i)
---env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
+env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
 				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
 			end
 		end
