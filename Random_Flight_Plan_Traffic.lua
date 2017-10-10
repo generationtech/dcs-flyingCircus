@@ -121,7 +121,9 @@ g_parkingSpotType           =
 							}
 
 
--- Should be no need to edit these below
+-------------------------------------------
+-- Should be no need to edit these below --
+-------------------------------------------
 g_RATtable      = {}
 g_spawnInterval = math.random(g_spawnIntervalLow, g_spawnIntervalHigh)	-- Initial random spawn repeat interval
 g_AB            = {}													-- Coalition AirBase table
@@ -158,7 +160,11 @@ g_airbasePoints = 					-- These are the start and end x,z points for each airbas
 		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144,4.65116431906051,-4.65116431906051}				-- Beslan
 	}
 
-g_coalitionTable = 					-- Big matrix mapping all countries to their aircraft and skins
+
+------------------------------------------------------------------
+-- Big matrix mapping all countries to their aircraft and skins --
+------------------------------------------------------------------
+g_coalitionTable =
 	{	-- Countries
 	[0] =													--RUSSIA
 		{ -- Aircraft types
@@ -839,11 +845,15 @@ g_coalitionTable = 					-- Big matrix mapping all countries to their aircraft an
 		},
 	}
 
+
+-----------------------------------------------
+-- Big matrix for all sim aircraft and skins --
+-----------------------------------------------
 g_aircraftTable =
 	{
 	[1] =								-- An-26B
 		{
-			_aircrafttype = "An-26B",
+			_aircraftModel = "An-26B",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -869,7 +879,7 @@ g_aircraftTable =
 		},
 	[2] =								-- An-30M
 		{
-			_aircrafttype = "An-30M",
+			_aircraftModel = "An-30M",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -892,7 +902,7 @@ g_aircraftTable =
 		},
 	[3] =								-- C-130
 		{
-			_aircrafttype = "C-130",
+			_aircraftModel = "C-130",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -924,7 +934,7 @@ g_aircraftTable =
 		},
 	[4] =								-- C-17A
 		{
-			_aircrafttype = "C-17A",
+			_aircraftModel = "C-17A",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -946,7 +956,7 @@ g_aircraftTable =
 		},
 	[5] =								-- E-2C
 		{
-			_aircrafttype = "E-2C",
+			_aircraftModel = "E-2C",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -985,7 +995,7 @@ g_aircraftTable =
 		},
 	[6] =								-- E-3A
 		{
-			_aircrafttype = "E-3A",
+			_aircraftModel = "E-3A",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1024,7 +1034,7 @@ g_aircraftTable =
 		},
 	[7] =								-- IL-76MD
 		{
-			_aircrafttype = "IL-76MD",
+			_aircraftModel = "IL-76MD",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1050,7 +1060,7 @@ g_aircraftTable =
 		},
 	[8] =								-- KC-135
 		{
-			_aircrafttype = "KC-135",
+			_aircraftModel = "KC-135",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1112,7 +1122,7 @@ g_aircraftTable =
 		},
 	[9] =								-- MiG-25RBT
 		{
-			_aircrafttype = "MiG-25RBT",
+			_aircraftModel = "MiG-25RBT",
 			_category = "AIRPLANE",
 
 			_task = "Reconnaissance",
@@ -1146,7 +1156,7 @@ g_aircraftTable =
 		},
 	[10] =								-- S-3B Tanker
 		{
-			_aircrafttype = "S-3B Tanker",
+			_aircraftModel = "S-3B Tanker",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1184,7 +1194,7 @@ g_aircraftTable =
 		},
 	[11] =								-- Su-24MR
 		{
-			_aircrafttype = "Su-24MR",
+			_aircraftModel = "Su-24MR",
 			_category = "AIRPLANE",
 
 			_task = "Reconnaissance",
@@ -1230,7 +1240,7 @@ g_aircraftTable =
 		},
 	[12] =								-- TF-51D
 		{
-			_aircrafttype = "TF-51D",
+			_aircraftModel = "TF-51D",
 			_category = "AIRPLANE",
 
 			_payload =
@@ -1255,7 +1265,7 @@ g_aircraftTable =
 		},
 	[13] =								-- Yak-40
 		{
-			_aircrafttype = "Yak-40",
+			_aircraftModel = "Yak-40",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1279,7 +1289,7 @@ g_aircraftTable =
 		},
 	[14] =								-- A-50
 		{
-			_aircrafttype = "A-50",
+			_aircraftModel = "A-50",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1302,7 +1312,7 @@ g_aircraftTable =
 		},
 	[15] =								-- IL-78M
 		{
-			_aircrafttype = "IL-78M",
+			_aircraftModel = "IL-78M",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1340,7 +1350,7 @@ g_aircraftTable =
 		},
 	[16] =								-- B-1B
 		{
-			_aircrafttype = "B-1B",
+			_aircraftModel = "B-1B",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1398,7 +1408,7 @@ g_aircraftTable =
 		},
 	[17] =								-- B-52H
 		{
-			_aircrafttype = "B-52H",
+			_aircraftModel = "B-52H",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1456,7 +1466,7 @@ g_aircraftTable =
 		},
 	[18] =								-- F-117A
 		{
-			_aircrafttype = "F-117A",
+			_aircraftModel = "F-117A",
 			_category = "AIRPLANE",
 
 			_task = "Pinpoint Strike",
@@ -1490,7 +1500,7 @@ g_aircraftTable =
 		},
 	[19] =								-- F-15E
 		{
-			_aircrafttype = "F-15E",
+			_aircraftModel = "F-15E",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -1612,7 +1622,7 @@ g_aircraftTable =
 		},
 	[20] =								-- S-3B
 		{
-			_aircrafttype = "S-3B",
+			_aircraftModel = "S-3B",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1663,7 +1673,7 @@ g_aircraftTable =
 		},
 	[21] =								-- Su-24M
 		{
-			_aircrafttype = "Su-24M",
+			_aircraftModel = "Su-24M",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -1739,7 +1749,7 @@ g_aircraftTable =
 		},
 	[22] =								-- Tornado GR4
 		{
-			_aircrafttype = "Tornado GR4",
+			_aircraftModel = "Tornado GR4",
 			_category = "AIRPLANE",
 
 			_payload =
@@ -1797,7 +1807,7 @@ g_aircraftTable =
 		},
 	[23] =								-- Tornado IDS
 		{
-			_aircrafttype = "Tornado IDS",
+			_aircraftModel = "Tornado IDS",
 			_category = "AIRPLANE",
 
 			_payload =
@@ -1858,7 +1868,7 @@ g_aircraftTable =
 		},
 	[24] =								-- Tu-22M3
 		{
-			_aircrafttype = "Tu-22M3",
+			_aircraftModel = "Tu-22M3",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1897,7 +1907,7 @@ g_aircraftTable =
 		},
 	[25] =								-- Tu-95MS
 		{
-			_aircrafttype = "Tu-95MS",
+			_aircraftModel = "Tu-95MS",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1928,7 +1938,7 @@ g_aircraftTable =
 		},
 	[26] =								-- Tu-142
 		{
-			_aircrafttype = "Tu-142",
+			_aircraftModel = "Tu-142",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -1975,7 +1985,7 @@ g_aircraftTable =
 		},
 	[27] =								-- Tu-160
 		{
-			_aircrafttype = "Tu-160",
+			_aircraftModel = "Tu-160",
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
@@ -2010,7 +2020,7 @@ g_aircraftTable =
 		},
 	[28] =								-- A-10A
 		{
-			_aircrafttype = "A-10A",
+			_aircraftModel = "A-10A",
 			_category = "AIRPLANE",
 
 			_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
@@ -2118,7 +2128,7 @@ g_aircraftTable =
 		},
 	[29] =								-- A-10C
 		{
-			_aircrafttype = "A-10C",
+			_aircraftModel = "A-10C",
 			_category = "AIRPLANE",
 
 			_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
@@ -2256,7 +2266,7 @@ g_aircraftTable =
 		},
 	[30] =								-- Hawk
 		{
-			_aircrafttype = "Hawk",
+			_aircraftModel = "Hawk",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -2335,7 +2345,7 @@ g_aircraftTable =
 		},
 	[31] =
 		{								-- L-39ZA
-			_aircrafttype = "L-39ZA",
+			_aircraftModel = "L-39ZA",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -2400,7 +2410,7 @@ g_aircraftTable =
 		},
 	[32] =								-- MiG-27K
 		{
-			_aircrafttype = "MiG-27K",
+			_aircraftModel = "MiG-27K",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -2472,7 +2482,7 @@ g_aircraftTable =
 		},
 	[33] =								-- Su-17M4
 		{
-			_aircrafttype = "Su-17M4",
+			_aircraftModel = "Su-17M4",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -2550,7 +2560,7 @@ g_aircraftTable =
 		},
 	[34] =								-- Su-25
 		{
-			_aircrafttype = "Su-25",
+			_aircraftModel = "Su-25",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -2643,7 +2653,7 @@ g_aircraftTable =
 		},
 	[35] =								-- Su-25T
 		{
-			_aircrafttype = "Su-25T",
+			_aircraftModel = "Su-25T",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -2729,7 +2739,7 @@ g_aircraftTable =
 		},
 	[36] =								-- Su-25TM
 		{
-			_aircrafttype = "Su-25TM",
+			_aircraftModel = "Su-25TM",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -2813,7 +2823,7 @@ g_aircraftTable =
 		},
 	[37] =								-- Bf-109K-4
 		{
-			_aircrafttype = "Bf-109K-4",
+			_aircraftModel = "Bf-109K-4",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -2865,7 +2875,7 @@ g_aircraftTable =
 		},
 	[38] =								-- F-14A
 		{
-			_aircrafttype = "F-14A",
+			_aircraftModel = "F-14A",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -2964,7 +2974,7 @@ g_aircraftTable =
 		},
 	[39] =								-- F-15C
 		{
-			_aircrafttype = "F-15C",
+			_aircraftModel = "F-15C",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3058,7 +3068,7 @@ g_aircraftTable =
 		},
 	[40] =								-- F-16A
 		{
-			_aircrafttype = "F-16A",
+			_aircraftModel = "F-16A",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3136,7 +3146,7 @@ g_aircraftTable =
 		},
 	[41] =								-- F-16C bl.52d
 		{
-			_aircrafttype = "F-16C bl.52d",
+			_aircraftModel = "F-16C bl.52d",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3222,7 +3232,7 @@ g_aircraftTable =
 		},
 	[42] =								-- F-16A MLU
 		{
-			_aircrafttype = "F-16A MLU",
+			_aircraftModel = "F-16A MLU",
 			_category = "AIRPLANE",
 
 			_payload =
@@ -3285,7 +3295,7 @@ g_aircraftTable =
 		},
 	[43] =								-- F-4E
 		{
-			_aircrafttype = "F-4E",
+			_aircraftModel = "F-4E",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3360,7 +3370,7 @@ g_aircraftTable =
 		},
 	[44] =								-- F-5E
 		{
-			_aircrafttype = "F-5E",
+			_aircraftModel = "F-5E",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3439,7 +3449,7 @@ g_aircraftTable =
 		},
 	[45] =								-- F-86F Sabre
 		{
-			_aircrafttype = "F-86F Sabre",
+			_aircraftModel = "F-86F Sabre",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3513,7 +3523,7 @@ g_aircraftTable =
 		},
 	[46] =								-- F/A-18C
 		{
-			_aircrafttype = "F/A-18C",
+			_aircraftModel = "F/A-18C",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3596,7 +3606,7 @@ g_aircraftTable =
 		},
 	[47] =								-- FW-190D9
 		{
-			_aircrafttype = "FW-190D9",
+			_aircraftModel = "FW-190D9",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3650,7 +3660,7 @@ g_aircraftTable =
 		},
 	[48] =								-- MiG-15bis
 		{
-			_aircrafttype = "MiG-15bis",
+			_aircraftModel = "MiG-15bis",
 			_category = "AIRPLANE",
 
 			_payload =
@@ -3679,7 +3689,7 @@ g_aircraftTable =
 		},
 	[49] =								-- MiG-21Bis
 		{
-			_aircrafttype = "MiG-21Bis",
+			_aircraftModel = "MiG-21Bis",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3746,7 +3756,7 @@ g_aircraftTable =
 		},
 	[50] =								-- MiG-23MLD
 		{
-			_aircrafttype = "MiG-23MLD",
+			_aircraftModel = "MiG-23MLD",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3811,7 +3821,7 @@ g_aircraftTable =
 		},
 	[51] =								-- MiG-25PD
 		{
-			_aircrafttype = "MiG-25PD",
+			_aircraftModel = "MiG-25PD",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3869,7 +3879,7 @@ g_aircraftTable =
 		},
 	[52] =								-- MiG-29A
 		{
-			_aircrafttype = "MiG-29A",
+			_aircraftModel = "MiG-29A",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -3948,7 +3958,7 @@ g_aircraftTable =
 		},
 	[53] = 								-- MiG-29G
 		{
-			_aircrafttype = "MiG-29G",
+			_aircraftModel = "MiG-29G",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4023,7 +4033,7 @@ g_aircraftTable =
 		},
 	[54] =								-- MiG-29S
 		{
-			_aircrafttype = "MiG-29S",
+			_aircraftModel = "MiG-29S",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4095,7 +4105,7 @@ g_aircraftTable =
 		},
 	[55] =								-- Mirage 2000-5
 		{
-			_aircrafttype = "Mirage 2000-5",
+			_aircraftModel = "Mirage 2000-5",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4178,7 +4188,7 @@ g_aircraftTable =
 		},
 	[56] =								-- P-51D
 		{
-			_aircrafttype = "P-51D",
+			_aircraftModel = "P-51D",
 			_category = "AIRPLANE",
 
 			_tasks =
@@ -4280,7 +4290,7 @@ g_aircraftTable =
 		},
 	[57] =								-- Su-27
 		{
-			_aircrafttype = "Su-27",
+			_aircraftModel = "Su-27",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4380,7 +4390,7 @@ g_aircraftTable =
 		},
 	[58] =								-- F-16C bl.50
 		{
-			_aircrafttype = "F-16C bl.50",
+			_aircraftModel = "F-16C bl.50",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4450,7 +4460,7 @@ g_aircraftTable =
 		},
 	[59] =								-- MiG-29S
 		{
-			_aircrafttype = "MiG-29S",
+			_aircraftModel = "MiG-29S",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4526,7 +4536,7 @@ g_aircraftTable =
 		},
 	[60] =								-- MiG-31
 		{
-			_aircrafttype = "MiG-31",
+			_aircraftModel = "MiG-31",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4594,7 +4604,7 @@ g_aircraftTable =
 		},
 	[61] =								-- Su-30
 		{
-			_aircrafttype = "Su-30",
+			_aircraftModel = "Su-30",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4685,7 +4695,7 @@ g_aircraftTable =
 		},
 	[62] =								-- Su-33
 		{
-			_aircrafttype = "Su-33",
+			_aircraftModel = "Su-33",
 			_category = "AIRPLANE",
 
 			_task = "CAP",
@@ -4782,7 +4792,7 @@ g_aircraftTable =
 		},
 	[63] =								-- Su-34
 		{
-			_aircrafttype = "Su-34",
+			_aircraftModel = "Su-34",
 			_category = "AIRPLANE",
 
 			_task = "CAS",
@@ -4875,7 +4885,7 @@ g_aircraftTable =
 		},
 	[64] =								-- AH-1W
 		{
-			_aircrafttype = "AH-1W",
+			_aircraftModel = "AH-1W",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -4939,7 +4949,7 @@ g_aircraftTable =
 		},
 	[65] =								-- AH-64A
 		{
-			_aircrafttype = "AH-64A",
+			_aircraftModel = "AH-64A",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5003,7 +5013,7 @@ g_aircraftTable =
 		},
 	[66] =								-- AH-64D
 		{
-			_aircrafttype = "AH-64D",
+			_aircraftModel = "AH-64D",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5066,7 +5076,7 @@ g_aircraftTable =
 		},
 	[67] =								-- CH-47D
 		{
-			_aircrafttype = "CH-47D",
+			_aircraftModel = "CH-47D",
 			_category = "HELICOPTER",
 
 			_payload =
@@ -5091,7 +5101,7 @@ g_aircraftTable =
 		},
 	[68] =								-- CH-53E
 		{
-			_aircrafttype = "CH-53E",
+			_aircraftModel = "CH-53E",
 			_category = "HELICOPTER",
 
 			_payload =
@@ -5112,7 +5122,7 @@ g_aircraftTable =
 		},
 	[69] =								-- Ka-27
 		{
-			_aircrafttype = "Ka-27",
+			_aircraftModel = "Ka-27",
 			_category = "HELICOPTER",
 
 			_payload =
@@ -5134,7 +5144,7 @@ g_aircraftTable =
 		},
 	[70] =								-- Ka-50
 		{
-			_aircrafttype = "Ka-50",
+			_aircraftModel = "Ka-50",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5243,7 +5253,7 @@ g_aircraftTable =
 		},
 	[71] =								-- Mi-24V
 		{
-			_aircrafttype = "Mi-24V",
+			_aircraftModel = "Mi-24V",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5319,7 +5329,7 @@ g_aircraftTable =
 		},
 	[72] =								-- Mi-26
 		{
-			_aircrafttype = "Mi-26",
+			_aircraftModel = "Mi-26",
 			_category = "HELICOPTER",
 
 			_payload =
@@ -5345,7 +5355,7 @@ g_aircraftTable =
 		},
 	[73] =								-- Mi-8MT
 		{
-			_aircrafttype = "Mi-8MT",
+			_aircraftModel = "Mi-8MT",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5437,7 +5447,7 @@ g_aircraftTable =
 		},
 	[74] =								-- OH-58D
 		{
-			_aircrafttype = "OH-58D",
+			_aircraftModel = "OH-58D",
 			_category = "HELICOPTER",
 
 			_task = "AFAC",
@@ -5481,7 +5491,7 @@ g_aircraftTable =
 		},
 	[75] =								-- SH-60B
 		{
-			_aircrafttype = "SH-60B",
+			_aircraftModel = "SH-60B",
 			_category = "HELICOPTER",
 
 			_task = "Antiship Strike",
@@ -5527,7 +5537,7 @@ g_aircraftTable =
 		},
 	[76] =								-- UH-1H
 		{
-			_aircrafttype = "UH-1H",
+			_aircraftModel = "UH-1H",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5617,7 +5627,7 @@ g_aircraftTable =
 		},
 	[77] =									-- Mi-28N
 		{
-			_aircrafttype = "Mi-28N",
+			_aircraftModel = "Mi-28N",
 			_category = "HELICOPTER",
 
 			_task = "CAS",
@@ -5678,7 +5688,7 @@ g_aircraftTable =
 		},
 	[78] =								-- UH-60A
 		{
-			_aircrafttype = "UH-60A",
+			_aircraftModel = "UH-60A",
 			_category = "HELICOPTER",
 
 			_payload =
@@ -5700,168 +5710,187 @@ g_aircraftTable =
 	}
 
 
--- Create a new aircraft based on coalition, airbase, and name prefix
-function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
+------------------------------------------------------------------------
+-- Create a new aircraft based on coalition, airbase, and name prefix --
+------------------------------------------------------------------------
+function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
+	local l_acExist = nil
+	local l_acTypeIndex
+	local l_acCountry
+	local l_acIndex
+	local l_acChosen
+	local l_acSkin
+	local l_acModel
+	local l_acCategory
+	local l_acSingle
+	local l_acNumGroup
+	local l_acCallname
+	local l_acTask
+	local l_acTasks
+	local l_acPayload
+	local l_acFullTextName
+	local l_acSkill
+	local l_acFlightAlt
+	local l_acFlightSpeed
 
-	_acExist = nil
-	while (_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
+	while (l_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
 		-- Pick a country from the given coalition
-		if (coalitionIndex == 1) then
-			_acCountry = math.random(1, #env.mission.coalitions.red)
-			_country = env.mission.coalitions.red[_acCountry]
+		if (p_coalitionIndex == 1) then
+			l_acCountry = env.mission.coalitions.red[math.random(1, #env.mission.coalitions.red)]
 		else
-			_acCountry = math.random(1, #env.mission.coalitions.blue)
-			_country = env.mission.coalitions.blue[_acCountry]
+			l_acCountry = env.mission.coalitions.blue[math.random(1, #env.mission.coalitions.blue)]
 		end
 
 		-- Pick an aircraft type from the given country
-		AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
-		if ((AircraftType >= 1) and (AircraftType <= g_aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
-			_acTypeIndex = 1
-		elseif ((AircraftType >= g_aircraftDistribution[1]) and (AircraftType <= g_aircraftDistribution[2])) then  -- BOMBERS
-			_acTypeIndex = 2
-		elseif ((AircraftType >= g_aircraftDistribution[2]) and (AircraftType <= g_aircraftDistribution[3])) then  -- ATTACK AIRCRAFT
-			_acTypeIndex = 3
-		elseif ((AircraftType >= g_aircraftDistribution[3]) and (AircraftType <= g_aircraftDistribution[4])) then  -- FIGHTERS
-			_acTypeIndex = 4
-		elseif ((AircraftType >= g_aircraftDistribution[4]) or (AircraftType <= g_aircraftDistribution[5])) then -- HELICOPTERS
-			_acTypeIndex = 5
+		local l_aircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
+
+		if ((l_aircraftType >= 1) and (l_aircraftType <= g_aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
+			l_acTypeIndex = 1
+		elseif ((l_aircraftType >= g_aircraftDistribution[1]) and (l_aircraftType <= g_aircraftDistribution[2])) then -- BOMBERS
+			l_acTypeIndex = 2
+		elseif ((l_aircraftType >= g_aircraftDistribution[2]) and (l_aircraftType <= g_aircraftDistribution[3])) then -- ATTACK AIRCRAFT
+			l_acTypeIndex = 3
+		elseif ((l_aircraftType >= g_aircraftDistribution[3]) and (l_aircraftType <= g_aircraftDistribution[4])) then -- FIGHTERS
+			l_acTypeIndex = 4
+		elseif ((l_aircraftType >= g_aircraftDistribution[4]) or  (l_aircraftType <= g_aircraftDistribution[5])) then -- HELICOPTERS
+			l_acTypeIndex = 5
 		end
 
 		-- Pick an aircraft and skin set from the given aircraft type
-		_acIndex = math.random(1, #g_coalitionTable[_country][_acTypeIndex])
+		l_acIndex = math.random(1, #g_coalitionTable[l_acCountry][l_acTypeIndex])
 
-		_acExist = g_coalitionTable[_country][_acTypeIndex][_acIndex]
+		l_acExist = g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex]
 	end
 
 	-- Pick an aircraft from the given country and type
-	_ac = g_coalitionTable[_country][_acTypeIndex][_acIndex][1]
+	l_acChosen = g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][1]
 
 	-- Pick a skin from the given aircraft
 	if (g_flagRandomSkins) then
-		_skin = g_aircraftTable[_ac]._skins[g_coalitionTable[_country][_acTypeIndex][_acIndex][math.random(2, #g_coalitionTable[_country][_acTypeIndex][_acIndex])]]
+		l_acSkin = g_aircraftTable[l_acChosen]._skins[g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][math.random(2, #g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex])]]
 	else
-		_skin = g_aircraftTable[_ac]._skins[g_coalitionTable[_country][_acTypeIndex][_acIndex][2]]
+		l_acSkin = g_aircraftTable[l_acChosen]._skins[g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][2]]
 	end
 
 	-- The specific aircraft
-	_aircrafttype = g_aircraftTable[_ac]._aircrafttype
+	l_acModel = g_aircraftTable[l_acChosen]._aircraftModel
 
 	-- Set category
-	_category = g_aircraftTable[_ac]._category
+	l_acCategory = g_aircraftTable[l_acChosen]._category
 
 	-- Formation flying or not
-	if (g_aircraftTable[_ac]["_singleInFlight"] ~= nil) then
-		_singleInFlight = true
-		_numGroup = 1
+	if (g_aircraftTable[l_acChosen]["_singleInFlight"] ~= nil) then
+		l_acSingle = true
+		l_acNumGroup = 1
 	else
-		_singleInFlight = false
+		l_acSingle = false
 		if (g_flagRandomGroupSize) then
-			_numGroup = math.random(g_minGroupSize, g_maxGroupSize)
+			l_acNumGroup = math.random(g_minGroupSize, g_maxGroupSize)
 		else
-			_numGroup = g_defaultGroupSize
+			l_acNumGroup = g_defaultGroupSize
 		end
 	end
 
 	-- Set callsign name
-	if (g_aircraftTable[_ac]._nameCallname ~= nil) then
-		l_nameCallname = g_aircraftTable[_ac]._nameCallname
+	if (g_aircraftTable[l_acChosen]._nameCallname ~= nil) then
+		l_acCallname = g_aircraftTable[l_acChosen]._nameCallname
 	else
-		l_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
+		l_acCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	end
 
 	-- Set tasking
-	if (g_aircraftTable[_ac]._task ~= nil) then
-		_task = g_aircraftTable[_ac]._task
+	if (g_aircraftTable[l_acChosen]._task ~= nil) then
+		l_acTask = g_aircraftTable[l_acChosen]._task
 	else
-		_task = ""
+		l_acTask = ""
 	end
 
 	-- Set tasks
-	if (g_aircraftTable[_ac]._tasks ~= nil) then
-		_tasks = g_aircraftTable[_ac]._tasks
+	if (g_aircraftTable[l_acChosen]._tasks ~= nil) then
+		l_acTasks = g_aircraftTable[l_acChosen]._tasks
 	else
-		_tasks = {}
+		l_acTasks = {}
 	end
 
 	-- Set payload
-	_payload = g_aircraftTable[_ac]._payload
+	l_acPayload = g_aircraftTable[l_acChosen]._payload
 
 	-- Set full name used for messages
-	_fullname = g_coalitionTable[_country].name .. " " .. _aircrafttype .. " - " .. _skin
+	l_acFullTextName = g_coalitionTable[l_acCountry].name .. " " .. l_acModel .. " - " .. l_acSkin
 
 	-- Randomize the fuel load
 	if (g_flagRandomFuel) then
-		_payload.fuel = math.random(_payload.fuel * g_lowFuelPercent, _payload.fuel * g_highFuelPercent)
+		l_acPayload.fuel = math.random(l_acPayload.fuel * g_lowFuelPercent, l_acPayload.fuel * g_highFuelPercent)
 	end
 
 	-- Ignore tasks is flag not set
 	if (not g_flagSetTasks) then
-		_task = ""
-		_tasks =
+		l_acTask = ""
+		l_acTasks =
 		{
 		}
 	end
 
 	-- Ignore weapons is flag not set
 	if (not g_flagRandomWeapons) then
-		_payload.pylons = {}
+		l_acPayload.pylons = {}
 	end
 
 	-- Randomize unit skill if flag is set
 	if (g_flagRandomSkill) then
-		_skill = g_unitSkill[math.random(1,#g_unitSkill)]
+		l_acSkill = g_unitSkill[math.random(1,#g_unitSkill)]
 	else
-		_skill = g_unitSkill[g_unitSkillDefault]
+		l_acSkill = g_unitSkill[g_unitSkillDefault]
 	end
 
 	-- Randomize altitude is flag is set
 	if (g_flagRandomAltitude) then
-		_flightalt = math.random(0,10000)
+		l_acFlightAlt = math.random(0,10000)
 	else
-		_flightalt = 2500
+		l_acFlightAlt = 2500
 	end
 
 	-- Randomize speed is flag is set
 	if (g_flagRandomSpeed) then
-		_flightspeed = math.random(100,1000)
+		l_acFlightSpeed = math.random(100,1000)
 	else
-		_flightspeed = 180
+		l_acFlightSpeed = 180
 	end
 
 	if (g_flagRandomParkingType) then
-		local i = math.random(1, #g_parkingSpotType)
-		_parkingType = {g_parkingSpotType[i][1], g_parkingSpotType[i][2]}
+		local l_index = math.random(1, #g_parkingSpotType)
+
+		_parkingType = {g_parkingSpotType[l_index][1], g_parkingSpotType[l_index][2]}
 	else
 		_parkingType = {g_parkingSpotType[g_defaultParkingSpotType][1], g_parkingSpotType[g_defaultParkingSpotType][2]}
 	end
 
 	-- Build up sim callsign
-	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
-		_callname = g_numCoalitionGroup[coalitionIndex] .. 1
+	if ((l_acCountry == country.id.RUSSIA) or (l_acCountry == country.id.ABKHAZIA) or (l_acCountry == country.id.SOUTH_OSETIA) or (l_acCountry == country.id.UKRAINE)) then
+		_callname = g_numCoalitionGroup[p_coalitionIndex] .. 1
 	else
-		local a = math.random(1,#l_nameCallname)
+		local a = math.random(1,#l_acCallname)
 		local b = math.random(1,9)
 		_callname =
 			{
 				[1] = a,
 				[2] = b,
 				[3] = 1,
-				["name"] = l_nameCallname[a] .. b .. 1,
+				["name"] = l_acCallname[a] .. b .. 1,
 			}
 	end
 
-	_spawnairdromeId = spawnIndex.id
+	_spawnairdromeId = p_spawnIndex.id
 	_spawnairplanepos = {}
-	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
+	_spawnairbaseloc = Object.getPoint({id_=p_spawnIndex.id_})
 	if (_parkingType[1] == "Turning Point") then
-		_spawnairplanepos.x = g_airbasePoints[spawnIndex.id][1]
-		_spawnairplanepos.z = g_airbasePoints[spawnIndex.id][2]
-		_spawnPSI = g_airbasePoints[spawnIndex.id][5]
-		_spawnHeading = g_airbasePoints[spawnIndex.id][6]
+		_spawnairplanepos.x = g_airbasePoints[p_spawnIndex.id][1]
+		_spawnairplanepos.z = g_airbasePoints[p_spawnIndex.id][2]
+		_spawnPSI = g_airbasePoints[p_spawnIndex.id][5]
+		_spawnHeading = g_airbasePoints[p_spawnIndex.id][6]
 		_spawnAlt = 29.8704
 	else
-		_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
+		_spawnairbaseloc = Object.getPoint({id_=p_spawnIndex.id_})
 		_spawnairplanepos.x = _spawnairbaseloc.x
 		_spawnairplanepos.z = _spawnairbaseloc.z
 		_spawnPSI = 0
@@ -5879,8 +5908,8 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		_spawnSpeed = 0
 	end
 
-	_landairbaseID = landIndex.id
-	_landairbaseloc = Object.getPoint({id_=landIndex.id_})
+	_landairbaseID = p_landIndex.id
+	_landairbaseloc = Object.getPoint({id_=p_landIndex.id_})
 	_landairplanepos = {}
 	_landairplanepos.x = _landairbaseloc.x
 	_landairplanepos.z = _landairbaseloc.z
@@ -5888,12 +5917,12 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	-- Compute single intermediate waypoint based on used-defined minimum deviation x/z range
 	local _waypoint = {}
 	_waypoint.dist = math.sqrt((_spawnairbaseloc.x - _landairbaseloc.x) * (_spawnairbaseloc.x - _landairbaseloc.x) + (_spawnairbaseloc.z - _landairbaseloc.z) * (_spawnairbaseloc.z - _landairbaseloc.z))
-	if (((_waypoint.dist / 2) < g_waypointRange[1]) or (spawnIndex.id == landIndex.id)) then
+	if (((_waypoint.dist / 2) < g_waypointRange[1]) or (p_spawnIndex.id == p_landIndex.id)) then
 		_waypoint.distx = g_waypointRange[1]
 	else
 		_waypoint.distx = _waypoint.dist / 2
 	end
-	if (((_waypoint.dist / 2) < g_waypointRange[2]) or (spawnIndex.id == landIndex.id)) then
+	if (((_waypoint.dist / 2) < g_waypointRange[2]) or (p_spawnIndex.id == p_landIndex.id)) then
 		_waypoint.distz = g_waypointRange[2]
 	else
 		_waypoint.distz = _waypoint.dist / 2
@@ -5901,13 +5930,13 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	_waypoint.x = _spawnairbaseloc.x + math.random(- _waypoint.distx, _waypoint.distx)
 	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
 
-	_groupname = nameP .. g_numCoalitionGroup[coalitionIndex]
+	_groupname = p_name .. g_numCoalitionGroup[p_coalitionIndex]
 
 	local _formationName = ''
-	if ((_singleInFlight == false) and (_numGroup > 1)) then
+	if ((l_acSingle == false) and (l_acNumGroup > 1)) then
 		local _params = {}
 		local _r
-		if (_category == "AIRPLANE") then
+		if (l_acCategory == "AIRPLANE") then
 			if (g_flagRandomFormation) then
 				_r = math.random(1, #g_airplaneFormation)
 			else
@@ -5942,9 +5971,9 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			--
 		end
 
-		_tasks[#_tasks+1] =
+		l_acTasks[#l_acTasks+1] =
 		{
-			["number"] = #_tasks+1,
+			["number"] = #l_acTasks+1,
 			["auto"] = false,
 			["id"] = "WrappedAction",
 			["enabled"] = true,
@@ -5965,7 +5994,7 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		["tasks"] =
 			{
 			},
-		["task"] = _task,
+		["task"] = l_acTask,
 		["uncontrolled"] = false,
 		["route"] =
 		{
@@ -5989,14 +6018,14 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 						["id"] = "ComboTask",
 						["params"] =
 						{
-							["tasks"] = _tasks,
+							["tasks"] = l_acTasks,
 						},
 					},
 					["speed_locked"] = true,
 				},
 			},
 		},
-		["groupId"] = g_numCoalitionGroup[coalitionIndex],
+		["groupId"] = g_numCoalitionGroup[p_coalitionIndex],
 		["hidden"] = false,
 		["units"] =
 		{
@@ -6004,8 +6033,8 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			{
 				["alt"] = _spawnAlt,
 				["alt_type"] = "RADIO",
-				["livery_id"] = _skin,
-				["type"] = _aircrafttype,
+				["livery_id"] = l_acSkin,
+				["type"] = l_acModel,
 				["psi"] = _spawnPSI,
                 ["heading"] = _spawnHeading,
 				["onboard_num"] = "10",
@@ -6013,10 +6042,10 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 				["x"] = _spawnairplanepos.x,
 				["name"] =  _groupname .. "-1",
 				["callsign"] = _callname,
-				["payload"] = _payload,
+				["payload"] = l_acPayload,
 				["speed"] = _spawnSpeed,
 				["unitId"] =  math.random(9999,99999),
-				["skill"] = _skill,
+				["skill"] = l_acSkill,
 			},
 		},
 		["y"] = _spawnairplanepos.z,
@@ -6030,40 +6059,40 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	_unitNames = {_groupname .. "-1"}
 	_unitCheckTime = {0}
 
-	if ((_singleInFlight == false) and (_numGroup > 1)) then
-		for i=2, _numGroup do
+	if ((l_acSingle == false) and (l_acNumGroup > 1)) then
+		for i=2, l_acNumGroup do
 			_airplanedata.units[i] =
 			{
 				["alt"] = _spawnAlt,
 				["psi"] = _spawnPSI,
                 ["heading"] = _spawnHeading,
-				["livery_id"] = _skin,
-				["type"] = _aircrafttype,
+				["livery_id"] = l_acSkin,
+				["type"] = l_acModel,
 				["onboard_num"] = "10",
 				["y"] = _spawnairplanepos.z,
 				["x"] = _spawnairplanepos.x,
 				["name"] =  _groupname .. "-" .. i,
 				["callsign"] = _callname,
-				["payload"] = _payload,
+				["payload"] = l_acPayload,
 				["speed"] = _spawnSpeed,
 				["unitId"] =  math.random(9999,99999),
 				["alt_type"] = "RADIO",
-				["skill"] = _skill,
+				["skill"] = l_acSkill,
 			}
 
 			_unitNames[#_unitNames+1] = _groupname .. "-" .. i
 			_unitCheckTime[#_unitCheckTime+1] = 0
 
 			-- Build callsign for this unit based on group callsign
-			if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
-				_airplanedata.units[i].callsign = g_numCoalitionGroup[coalitionIndex] .. i
+			if ((l_acCountry == country.id.RUSSIA) or (l_acCountry == country.id.ABKHAZIA) or (l_acCountry == country.id.SOUTH_OSETIA) or (l_acCountry == country.id.UKRAINE)) then
+				_airplanedata.units[i].callsign = g_numCoalitionGroup[p_coalitionIndex] .. i
 			else
 				_airplanedata.units[i].callsign =
 					{
 						[1] = _airplanedata.units[1].callsign[1],
 						[2] = _airplanedata.units[1].callsign[2],
 						[3] = i,
-						["name"] = l_nameCallname[_airplanedata.units[1].callsign[1]] .. _airplanedata.units[1].callsign[2] .. i,
+						["name"] = l_acCallname[_airplanedata.units[1].callsign[1]] .. _airplanedata.units[1].callsign[2] .. i,
 					}
 			end
 
@@ -6074,7 +6103,7 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 				_airplanedata.units[i].skill = g_unitSkill[g_unitSkillDefault]
 			end
 
-			g_numCoalitionAircraft[coalitionIndex] = g_numCoalitionAircraft[coalitionIndex] + 1		-- Add one aircraft to total aircraft in use
+			g_numCoalitionAircraft[p_coalitionIndex] = g_numCoalitionAircraft[p_coalitionIndex] + 1		-- Add one aircraft to total aircraft in use
 		end
 	end
 
@@ -6094,16 +6123,16 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["y"] = g_airbasePoints[spawnIndex.id][4],
-			["x"] = g_airbasePoints[spawnIndex.id][3],
-			["speed"] = _flightspeed,
+			["y"] = g_airbasePoints[p_spawnIndex.id][4],
+			["x"] = g_airbasePoints[p_spawnIndex.id][3],
+			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
 			{
 				["id"] = "ComboTask",
 				["params"] =
 				{
-					["tasks"] = _tasks,
+					["tasks"] = l_acTasks,
 				},
 			},
 			["speed_locked"] = true,
@@ -6113,7 +6142,7 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	if (g_flagRandomWaypoint ) then
 		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
-			["alt"] = _flightalt,
+			["alt"] = l_acFlightAlt,
 			["type"] = "Turning Point",
 			["action"] = "Turning Point",
 			["alt_type"] = "BARO",
@@ -6128,21 +6157,21 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			},
 			["y"] = _waypoint.z,
 			["x"] = _waypoint.x,
-			["speed"] = _flightspeed,
+			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
 			{
 				["id"] = "ComboTask",
 				["params"] =
 				{
-					["tasks"] = _tasks,
+					["tasks"] = l_acTasks,
 				},
 			},
 			["speed_locked"] = true,
 		}
 		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
-			["alt"] = _flightalt / 2,
+			["alt"] = l_acFlightAlt / 2,
 			["type"] = "Land",
 			["action"] = "Landing",
 			["alt_type"] = "BARO",
@@ -6158,7 +6187,7 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			["airdromeId"] = _landairbaseID,
 			["y"] = _landairbaseloc.z,
 			["x"] = _landairbaseloc.x,
-			["speed"] = _flightspeed,
+			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
 			{
@@ -6175,7 +6204,7 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	else
 		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
-			["alt"] = _flightalt / 2,
+			["alt"] = l_acFlightAlt / 2,
 			["type"] = "Land",
 			["action"] = "Landing",
 			["alt_type"] = "BARO",
@@ -6191,7 +6220,7 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			["airdromeId"] = _landairbaseID,
 			["y"] = _landairbaseloc.z,
 			["x"] = _landairbaseloc.x,
-			["speed"] = _flightspeed,
+			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
 			{
@@ -6207,34 +6236,37 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		}
 	end
 
-	if (_category == "HELICOPTER") then
-		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
+	if (l_acCategory == "HELICOPTER") then
+		coalition.addGroup(l_acCountry, Group.Category.HELICOPTER, _airplanedata)
 	else
-		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
+		coalition.addGroup(l_acCountry, Group.Category.AIRPLANE, _airplanedata)
 	end
 
-	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _groupname .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. _fullname, false) end
-	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
-	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. _formationName, false) end
-	if (g_debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _groupname .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
+	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  callsign:' .. _groupname .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName, false) end
+	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, false) end
+	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  formation:' .. _formationName, false) end
+	if (g_debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  callsign:' .. _groupname .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, 10) end
 
 	g_RATtable[#g_RATtable+1] =
-	{
-		groupname = _groupname,
-		flightname = _fullname,
-		actype = _aircrafttype,
-		origin = spawnIndex.name,
-		destination = landIndex.name,
-		counter = groupcounter,
-		coalition = coalitionIndex,
-		unitNames = _unitNames,
-		unitCheckTime = _unitCheckTime,
-		groupCheckTime = 0,
-		formationSize = _numGroup,	-- Store the original number of aircraft in this group
-	}
-
+		{
+			groupname      = _groupname,
+			flightname     = l_acFullTextName,
+			actype         = l_acModel,
+			origin         = p_spawnIndex.name,
+			destination    = p_landIndex.name,
+			counter        = groupcounter,
+			coalition      = p_coalitionIndex,
+			unitNames      = _unitNames,
+			unitCheckTime  = _unitCheckTime,
+			groupCheckTime = 0,
+			formationSize  = l_acNumGroup,	-- Store the original number of aircraft in this group
+		}
 end
 
+
+---------------------------------------------------------
+-- Remove a group from the table and possibly, the sim --
+---------------------------------------------------------
 function f_removeGroup (p_index, p_message, p_destroyFlag, p_aircraftGroup)
 	if ((g_numCoalitionAircraft[g_RATtable[p_index].coalition] > 0) and (#g_RATtable[p_index].unitNames > 0)) then		-- If possible, increase the available aircraft for this coalition by the number of units remaining in the group
 		if ((g_numCoalitionAircraft[g_RATtable[p_index].coalition] - #g_RATtable[p_index].unitNames) > 0) then
@@ -6252,6 +6284,10 @@ function f_removeGroup (p_index, p_message, p_destroyFlag, p_aircraftGroup)
 	if (p_destroyFlag) then p_aircraftGroup:destroy() end
 end
 
+
+--------------------------------------------------------
+-- Remove a unit from the table and possibly, the sim --
+--------------------------------------------------------
 function f_removeUnit (p_index, p_jndex, p_removeMessage, p_destroyFlag, p_aircraftUnit)
 	if (g_numCoalitionAircraft[g_RATtable[p_index].coalition] > 0) then		-- If possible, increase the number of available aircraft for this coalition by one
 		g_numCoalitionAircraft[g_RATtable[p_index].coalition] = g_numCoalitionAircraft[g_RATtable[p_index].coalition] - 1
@@ -6272,7 +6308,10 @@ function f_removeUnit (p_index, p_jndex, p_removeMessage, p_destroyFlag, p_aircr
 	end
 end
 
--- Periodically check all dynamically spawned AI units for existence, movement, wandering, below ground, damage, and stuck/parked
+
+------------------------------------------------------------------------------------------------------------------------------------
+-- Periodically check all dynamically spawned AI units for existence, movement, wandering, below ground, damage, and stuck/parked --
+------------------------------------------------------------------------------------------------------------------------------------
 function f_checkStatus()
 	if (#g_RATtable > 0)
 	then
@@ -6379,7 +6418,10 @@ function f_checkStatus()
 	end
 end
 
--- Determine the bases based on a coalition parameter
+
+--------------------------------------------------------
+-- Determine the bases based on a coalition parameter --
+--------------------------------------------------------
 function f_getAFBases (p_coalitionIndex)
 	local l_AFids = {}
 	local l_AF    = {}
@@ -6396,7 +6438,10 @@ function f_getAFBases (p_coalitionIndex)
 return l_AF
 end
 
--- Choose a random airbase
+
+-----------------------------
+-- Choose a random airbase --
+-----------------------------
 function f_chooseAirbase(AF)
 	local l_airbaseChoice = math.random(1, #AF)
 return AF[airbaseChoice]
@@ -6413,7 +6458,10 @@ function f_checkMax(p_cs)
 	end
 end
 
--- Determine spawn and land airbases
+
+---------------------------------------
+-- Determine spawn and land airbases --
+---------------------------------------
 function f_makeAirBase(p_cs)
 	local l_ab = {}
 
@@ -6428,7 +6476,10 @@ function f_makeAirBase(p_cs)
 return l_ab
 end
 
--- Main scheduled function to create new coalition groups as needed
+
+----------------------------------------------------------------------
+-- Main scheduled function to create new coalition groups as needed --
+----------------------------------------------------------------------
 function f_generateGroup()
 	local l_lowVal						-- lowest available coalition side
 	local l_highVal						-- highest available coalition side
@@ -6494,6 +6545,7 @@ function f_generateGroup()
 
 return timer.getTime() + g_spawnInterval
 end
+
 
 ------------------
 -- MAIN PROGRAM --
