@@ -8424,10 +8424,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		_formationSize = math.random(0, maxGroupSize)
 		if (maxGroupSize > 4) then maxGroupSize = 4 end
---		for i=2, 1 do
 		for i=2, _formationSize do
---		for i=2, math.random(maxGroupSize, maxGroupSize) do
-env.info('Formation loop i: ' .. i, false)
 			_airplanedata.units[i] =
 			{
 				["alt"] = 0,
@@ -8468,7 +8465,6 @@ env.info('Formation loop i: ' .. i, false)
 			end
 		end
 	end
-env.info('Formation size _formationSize: ' .. _formationSize, false)
 
 	if (flagRandomWaypoint) then
 		_airplanedata.route.points[2] =
@@ -8615,7 +8611,6 @@ end
 
 -- Periodically check all dynamically spawned AI units for existence, movement, wandering, below ground, damage, and stuck/parked
 function checkStatus()
-env.info('Check loop begin', false)
 	if (#RATtable > 0)
 	then
 		local RATtableLimit = #RATtable	 -- Array size may change while loop is running due to removing group
@@ -8634,7 +8629,6 @@ env.info('Check loop begin', false)
 			else -- Valid group, make checks
 				local currentunitname1 = RATtable[i].unitname1
 				if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
-env.info('Check loop done: valid unit: ' .. currentunitname1, false)
 					local actualunit = Unit.getByName(currentunitname1)
 					local actualunitvel = actualunit:getVelocity()
 					local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
@@ -8674,13 +8668,11 @@ env.info('Check loop done: valid unit: ' .. currentunitname1, false)
 						i = RATtableLimit
 					end
 				else
-env.info('Check loop done: no valid unit: ' .. currentunitname1, false)
 				end
 				i = i + 1
 			end
 		end
 	end
-env.info('Check loop done', false)
 end
 
 -- Determine the bases based on a coalition parameter
@@ -8780,11 +8772,6 @@ function generateGroup()
 		end
 	end
 
---if (flgSpawn[1]) then f1 = 'true' else f1 = 'false' end
---if (flgSpawn[2]) then f2 = 'true' else f2 = 'false' end
-
---env.info('Spawn loop, red: ' .. f1 .. ' blue: ' .. f2, false)
-
 	-- If needed, spawn new group for each coalition
 	for i = 1, 2 do
 		if (flgSpawn[i] == true) then
@@ -8792,15 +8779,11 @@ function generateGroup()
 				airbase = makeAirBase(i)
 				env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
 				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
---else
---env.info('Spawn loop, not spawning for: ' .. i, false)
 			end
 		end
 	end
 
 	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
-
---env.info('Spawn loop done, interval: ' .. spawnInterval, false)
 
 return timer.getTime() + spawnInterval
 end
