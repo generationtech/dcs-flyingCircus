@@ -337,6 +337,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 9) then
 			_aircrafttype = "MiG-25RBT"
 			_country = country.id.UKRAINE
+
+			_task = "Reconnaissance"
+			_tasks =
+			{
+			}
+
 			_skin = "af standard"
 			_fullname = "UKRAINE MiG-25RBT - " .. _skin
 			_payload =
@@ -390,6 +396,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 11) then
 			_aircrafttype = "Su-24MR"
 			_country = country.id.UKRAINE
+
+			_task = "Reconnaissance"
+			_tasks =
+			{
+			}
+
 			_skin = "af standard"
 			_fullname = "UKRAINE Su-24MR - " .. _skin
 			_payload =
@@ -406,7 +418,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{0519A263-0AB6-11d6-9193-00A0249B6F00}",
+						["CLSID"] = "{0519A262-0AB6-11d6-9193-00A0249B6F00}",
 					},
 					[4] =
 					{
@@ -644,6 +656,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 20) then
 			_aircrafttype = "MiG-25RBT"
 			_country = country.id.RUSSIA
+
+			_task = "Reconnaissance"
+			_tasks =
+			{
+			}
+
 			_skin = "af standard"
 			_fullname = "RUSSIA MiG-25RBT - " .. _skin
 			_payload =
@@ -653,14 +671,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					[1] =
 					{
 						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-					},
-					[2] =
-					{
-						["CLSID"] = "{FB3CE165-BF07-4979-887C-92B87F13276B}",
-					},
-					[3] =
-					{
-						["CLSID"] = "{FB3CE165-BF07-4979-887C-92B87F13276B}",
 					},
 					[4] =
 					{
@@ -675,6 +685,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 21) then
 			_aircrafttype = "Su-24MR"
 			_country = country.id.RUSSIA
+
+			_task = "Reconnaissance"
+			_tasks =
+			{
+			}
+
 			_skin = "af standard"
 			_fullname = "RUSSIA Su-24MR - " .. _skin
 			_payload =
@@ -691,7 +707,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{0519A263-0AB6-11d6-9193-00A0249B6F00}",
+						["CLSID"] = "{0519A262-0AB6-11d6-9193-00A0249B6F00}",
 					},
 					[4] =
 					{
@@ -766,6 +782,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "B-1B"
 			_country = country.id.USA
 
+			_task = "Ground Attack"
 			_tasks =
 			{
 				[1] =
@@ -797,15 +814,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "MK_82*28",
+						["CLSID"] = "GBU-31*8",
 					},
 					[2] =
 					{
-						["CLSID"] = "MK_82*28",
+						["CLSID"] = "GBU-31*8",
 					},
 					[3] =
 					{
-						["CLSID"] = "MK_82*28",
+						["CLSID"] = "GBU-31*8",
 					},
 				},
 				["fuel"] = "88450",
@@ -816,6 +833,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 --		elseif (randomBomber == 2) then
 --			_aircrafttype = "B-52H"
 --			_country = country.id.USA
+--			_task = "Ground Attack"
+--			_tasks =
+--			{
+--				[1] =
+--				{
+--					["enabled"] = true,
+--					["auto"] = true,
+--					["id"] = "WrappedAction",
+--					["number"] = 1,
+--					["params"] =
+--					{
+--						["action"] =
+--						{
+--							["id"] = "EPLRS",
+--							["params"] =
+--							{
+--								["value"] = true,
+--								["groupId"] = 2,
+--							},
+--						},
+--					},
+--				},
+--			}
 --			_skin = "usaf standard"
 --			_fullname = "USA B-52H - " .. _skin
 --			_payload =
@@ -824,15 +864,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 --				{
 --					[1] =
 --					{
---						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
+--						["CLSID"] = "{4CD2BB0F-5493-44EF-A927-9760350F7BA1}",
 --					},
 --					[2] =
 --					{
---						["CLSID"] = "{8DCAF3A3-7FCF-41B8-BB88-58DEDA878EDE}",
+--						["CLSID"] = "{6C47D097-83FF-4FB2-9496-EAB36DDF0B05}",
 --					},
 --					[3] =
 --					{
---						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
+--						["CLSID"] = "{4CD2BB0F-5493-44EF-A927-9760350F7BA1}",
 --					},
 --				},
 --				["fuel"] = "141135",
@@ -843,6 +883,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 3) then
 			_aircrafttype = "F-117A"
 			_country = country.id.USA
+
+			_task = "Pinpoint Strike"
+			_tasks =
+			{
+			}
+
 			_skin = "usaf standard"
 			_fullname = "USA F-117A - " .. _skin
 			_payload =
@@ -865,6 +911,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomBomber == 4) then
 			_aircrafttype = "F-15E"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -891,79 +960,79 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{D078E3E5-30C1-444e-A09E-6EEDCD334582}",
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+						["CLSID"] = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}",
 					},
 					[11] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[12] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[13] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[14] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[15] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[16] =
 					{
-						["CLSID"] = "{Mk82AIR}",
+						["CLSID"] = "{GBU-38}",
 					},
 					[17] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
 					},
 					[18] =
 					{
-						["CLSID"] = "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[19] =
 					{
-						["CLSID"] = "{34271A1E-477E-4754-8C72-DF7C1855A782}",
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
 					},
 				},
 				["fuel"] = "6103",
@@ -975,24 +1044,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "S-3B"
 			_country = country.id.USA
 
+			_task = "Ground Attack"
 			_tasks =
 			{
-				[1] =
-				{
-					["enabled"] = true,
-					["key"] = "AntiShip",
-					["id"] = "EngageTargets",
-					["number"] = 1,
-					["auto"] = true,
-					["params"] =
-					{
-						["targetTypes"] =
-						{
-							[1] = "Ships",
-						},
-						["priority"] = 0,
-					},
-				},
 			}
 
 			_skin = "NAVY Standard"
@@ -1003,11 +1057,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{A504D93B-4E80-4B4F-A533-0D9B65F2C55F}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
 					},
 					[3] =
 					{
@@ -1019,11 +1073,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[5] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{A504D93B-4E80-4B4F-A533-0D9B65F2C55F}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 				},
 				["fuel"] = "5500",
@@ -1034,6 +1088,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 6) then
 			_aircrafttype = "Su-24M"
 			_country = country.id.UKRAINE
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "UKRAINE Su-24M - " .. _skin
 			_payload =
@@ -1042,23 +1118,35 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{16602053-4A12-40A2-B214-AB60D481B20E}",
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 				},
 				["fuel"] = "11700",
@@ -1213,6 +1301,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 9) then
 			_aircrafttype = "Tu-22M3"
 			_country = country.id.UKRAINE
+			_task = "Ground Attack"
+			_tasks =
+			{
+			}
 			_skin = "af standard"
 			_fullname = "UKRAINE Tu-22M3 - " .. _skin
 			_payload =
@@ -1240,6 +1332,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 10) then
 			_aircrafttype = "Tu-95MS"
 			_country = country.id.UKRAINE
+			_task = "Pinpoint Strike"
+			_tasks =
+			{
+			}
 			_skin = "af standard"
 			_fullname = "UKRAINE Tu-95MS - " .. _skin
 			_payload =
@@ -1259,6 +1355,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 11) then
 			_aircrafttype = "Su-24M"
 			_country = country.id.RUSSIA
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA Su-24M - " .. _skin
 			_payload =
@@ -1267,23 +1385,35 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{16602053-4A12-40A2-B214-AB60D481B20E}",
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 				},
 				["fuel"] = "11700",
@@ -1294,6 +1424,26 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 12) then
 			_aircrafttype = "Tu-142"
 			_country = country.id.RUSSIA
+			_task = "Antiship Strike"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "AntiShip",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA Tu-142 - " .. _skin
 			_payload =
@@ -1313,6 +1463,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 13) then
 			_aircrafttype = "Tu-160"
 			_country = country.id.RUSSIA
+			_task = "Pinpoint Strike"
+			_tasks =
+			{
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA Tu-160 - " .. _skin
 			_payload =
@@ -1336,6 +1490,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 14) then
 			_aircrafttype = "Tu-22M3"
 			_country = country.id.RUSSIA
+			_task = "Ground Attack"
+			_tasks =
+			{
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA Tu-22M3 - " .. _skin
 			_payload =
@@ -1363,6 +1521,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 15) then
 			_aircrafttype = "Tu-95MS"
 			_country = country.id.RUSSIA
+			_task = "Pinpoint Strike"
+			_tasks =
+			{
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA Tu-95MS - " .. _skin
 			_payload =
@@ -1415,6 +1577,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "A-10A"
 			_country = country.id.USA
 
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,18)
 			if (subtype == 1) then
 				_skin = "104th FS Maryland ANG, Baltimore (MD)"
@@ -1462,43 +1647,47 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+						["CLSID"] = "ALQ_184",
 					},
 					[2] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{69926055-0DA8-4530-9F2F-C86B157EA9F6}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+						["CLSID"] = "{DAC53A2F-79CA-42FF-A77A-F5649B601308}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{CBU-87}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{CBU-87}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{CBU-87}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+						["CLSID"] = "{DAC53A2F-79CA-42FF-A77A-F5649B601308}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{69926055-0DA8-4530-9F2F-C86B157EA9F6}",
 					},
 					[11] =
 					{
-						["CLSID"] = "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+						["CLSID"] = "{3C0745ED-8B0B-42eb-B907-5BD5C1717447}",
 					},
 				},
 				["fuel"] = 5029,
@@ -1510,6 +1699,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 2)	then
 			_aircrafttype = "A-10C"
 
+			_task = "CAS"
 			_tasks =
 			{
 				[1] =
@@ -1696,43 +1886,39 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
-					},
-					[2] =
-					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "ALQ_184",
 					},
 					[3] =
 					{
-						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+						["CLSID"] = "{DAC53A2F-79CA-42FF-A77A-F5649B601308}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "BRU-42_3*GBU-12",
 					},
 					[5] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "BRU-42_3*GBU-12",
 					},
 					[9] =
 					{
-						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+						["CLSID"] = "{DAC53A2F-79CA-42FF-A77A-F5649B601308}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{A111396E-D3E8-4b9c-8AC9-2432489304D5}",
 					},
 					[11] =
 					{
-						["CLSID"] = "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+						["CLSID"] = "LAU-105_1*AIM-9M_R",
 					},
 				},
 				["fuel"] = 5029,
@@ -1743,6 +1929,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 3)	then
 			_aircrafttype = "Hawk"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,15)
 			if (subtype == 1) then
@@ -1882,6 +2089,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 4)	then
 			_aircrafttype = "L-39ZA"
 
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_country = country.id.GEORGIA
@@ -1922,6 +2152,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 5)	then
 			_aircrafttype = "MiG-27K"
 			_country = country.id.UKRAINE
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "UKRAINE MiG-27K - " .. _skin
 			_payload =
@@ -1930,15 +2182,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[2] =
 					{
-						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[5] =
 					{
@@ -1946,15 +2198,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[6] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 				},
 				["fuel"] = "4500",
@@ -1965,6 +2217,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 6)	then
 			_aircrafttype = "Su-17M4"
 			_country = country.id.UKRAINE
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,3)
 			if (subtype == 1) then
@@ -1983,7 +2258,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[2] =
 					{
@@ -1991,19 +2266,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{E92CBFE5-C153-11d8-9897-000476191836}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{E92CBFE5-C153-11d8-9897-000476191836}",
 					},
 					[7] =
 					{
@@ -2011,7 +2286,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[8] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 				},
 				["fuel"] = "3770",
@@ -2021,6 +2296,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 7)	then
 			_aircrafttype = "Su-25"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -2067,27 +2365,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
 					},
 					[9] =
 					{
@@ -2107,6 +2405,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-25T"
 			_country = country.id.GEORGIA
 
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "af standard"
@@ -2122,39 +2443,39 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82D}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F789E86A-EE2E-4E6B-B81E-D5E5F903B6ED}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+						["CLSID"] = "{96A7F676-F956-404A-AD04-F33FB2C74881}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+						["CLSID"] = "{96A7F676-F956-404A-AD04-F33FB2C74881}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F789E86A-EE2E-4E6B-B81E-D5E5F903B6ED}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
 					},
 					[11] =
 					{
@@ -2169,6 +2490,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 9)	then
 			_aircrafttype = "A-10C"
 
+			_task = "CAS"
 			_tasks =
 			{
 				[1] =
@@ -2235,43 +2557,39 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
-					},
-					[2] =
-					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "ALQ_184",
 					},
 					[3] =
 					{
-						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+						["CLSID"] = "{DAC53A2F-79CA-42FF-A77A-F5649B601308}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "BRU-42_3*GBU-12",
 					},
 					[5] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "BRU-42_3*GBU-12",
 					},
 					[9] =
 					{
-						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+						["CLSID"] = "{DAC53A2F-79CA-42FF-A77A-F5649B601308}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+						["CLSID"] = "{A111396E-D3E8-4b9c-8AC9-2432489304D5}",
 					},
 					[11] =
 					{
-						["CLSID"] = "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+						["CLSID"] = "LAU-105_1*AIM-9M_R",
 					},
 				},
 				["fuel"] = 5029,
@@ -2282,6 +2600,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 10)	then
 			_aircrafttype = "Hawk"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -2301,7 +2640,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				_skin = "100sqn XX189"
 				_fullname = "TURKEY Hawk - " .. _skin
 			end
-
 
 			_payload =
 			{
@@ -2335,6 +2673,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 11)	then
 			_aircrafttype = "L-39ZA"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -2386,6 +2747,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 12)	then
 			_aircrafttype = "MiG-27K"
 			_country = country.id.RUSSIA
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA MiG-27K - " .. _skin
 			_payload =
@@ -2394,15 +2777,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[2] =
 					{
-						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[5] =
 					{
@@ -2410,15 +2793,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[6] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 				},
 				["fuel"] = "4500",
@@ -2429,6 +2812,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 13)	then
 			_aircrafttype = "Su-17M4"
 			_country = country.id.RUSSIA
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -2445,7 +2851,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[2] =
 					{
@@ -2453,19 +2859,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{E92CBFE5-C153-11d8-9897-000476191836}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{E92CBFE5-C153-11d8-9897-000476191836}",
 					},
 					[7] =
 					{
@@ -2473,7 +2879,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[8] =
 					{
-						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 				},
 				["fuel"] = "3770",
@@ -2483,6 +2889,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 14)	then
 			_aircrafttype = "Su-25"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -2521,27 +2950,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
 					},
 					[9] =
 					{
@@ -2561,6 +2990,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-25T"
 			_country = country.id.RUSSIA
 
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_skin = "af standard 1"
@@ -2578,39 +3030,39 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82D}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F789E86A-EE2E-4E6B-B81E-D5E5F903B6ED}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+						["CLSID"] = "{96A7F676-F956-404A-AD04-F33FB2C74881}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+						["CLSID"] = "{96A7F676-F956-404A-AD04-F33FB2C74881}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{F789E86A-EE2E-4E6B-B81E-D5E5F903B6ED}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
 					},
 					[11] =
 					{
@@ -2625,6 +3077,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 16)	then
 			_aircrafttype = "Su-25TM"
 			_country = country.id.RUSSIA
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "Flight Research Institute  VVS"
 			_fullname = "RUSSIA Su-25TM - " .. _skin
 			_payload =
@@ -2641,31 +3115,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
-					},
-					[6] =
-					{
-						["CLSID"] = "{B1EF6B0E-3D91-4047-A7A5-A99E7D8B4A8B}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{4203753F-8198-4E85-9924-6F8FF679F9FF}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
 					[10] =
 					{
@@ -2682,10 +3152,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		end
-
 	elseif ((AircraftType >= aircraftDistribution[3]) and (AircraftType <= aircraftDistribution[4])) then  -- FIGHTERS
 		if (coalitionIndex == 1) then
-			randomFighter = math.random(22,36) -- random for airplane type; Red AC 22-36
+			randomFighter = math.random(22,37) -- random for airplane type; Red AC 22-37
 		else
 			randomFighter = math.random(1,21) -- random for airplane type; Blue AC 1-21
 		end
@@ -2752,6 +3221,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-14A"
 			_country = country.id.USA
 
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,10)
 			if (subtype == 1) then
 				_skin = "black demo scheme"
@@ -2783,11 +3273,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
 						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{82364E69-5564-4043-A866-E13032926C3E}",
 					},
 					[4] =
 					{
@@ -2797,9 +3291,25 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
 					},
+					[6] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
 					[8] =
 					{
 						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{82364E69-5564-4043-A866-E13032926C3E}",
 					},
 					[11] =
 					{
@@ -2807,11 +3317,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[12] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
-					},
-					[9] =
-					{
-						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "7348",
@@ -2821,6 +3327,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 3)	then
 			_aircrafttype = "F-15C"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -2859,7 +3386,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
@@ -2867,7 +3394,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{6FBCDCD7-F984-4202-84A7-15173E02CC5B}",
 					},
 					[4] =
 					{
@@ -2875,7 +3402,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[5] =
 					{
-						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+						["CLSID"] = "{446E122B-8E9D-457e-AE8E-7AE88E3E566B}",
 					},
 					[6] =
 					{
@@ -2887,11 +3414,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[8] =
 					{
-						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+						["CLSID"] = "{DA8F810A-EA40-4091-8127-CC2E026041E7}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9701DB51-AECB-42c6-A4F6-D5D8793E4D81}",
 					},
 					[10] =
 					{
@@ -2899,7 +3426,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[11] =
 					{
-						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "6103",
@@ -2910,6 +3437,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 4) then
 			_aircrafttype = "F-16A"
 			_country = country.id.USA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			_skin = "usaf f16 standard-1"
 			_fullname = "USA F-16A - " .. _skin
 			_payload =
@@ -2918,7 +3467,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
@@ -2926,23 +3475,23 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+						["CLSID"] = "{8A0BE8AE-58D4-4572-9263-3144C0D06364}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 					[9] =
 					{
@@ -2950,7 +3499,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[10] =
 					{
-						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "3104",
@@ -2960,6 +3509,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 5) then
 			_aircrafttype = "F-16C bl.52d"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -2998,31 +3568,39 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+						["CLSID"] = "{8A0BE8AE-58D4-4572-9263-3144C0D06364}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "3104",
@@ -3227,6 +3805,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "F-5E"
 			_country = country.id.USA
 
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,9)
 			if (subtype == 1) then
 				_skin = "`green` paint scheme"
@@ -3256,31 +3855,31 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+						["CLSID"] = "{A021F29D-18AB-4d3e-985C-FC9C60E35E9E}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "2000",
@@ -3290,6 +3889,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 9) then
 			_aircrafttype = "F-86F Sabre"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = ""
 
 			subtype = math.random(1,15)
@@ -3346,19 +3966,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{PTB_200_F86F35}",
+						["CLSID"] = "{HVARx2}",
 					},
 					[2] =
-					{
-						["CLSID"] = "{HVAR_SMOKE_2}",
-					},
-					[3] =
 					{
 						["CLSID"] = "{HVARx2}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{F86ANM64}",
+						["CLSID"] = "{PTB_120_F86F35}",
 					},
 					[5] =
 					{
@@ -3370,19 +3986,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[7] =
 					{
-						["CLSID"] = "{F86ANM64}",
+						["CLSID"] = "{PTB_120_F86F35}",
 					},
-					[8] =
+					[10] =
 					{
 						["CLSID"] = "{HVARx2}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{HVAR_SMOKE_2}",
-					},
-					[10] =
-					{
-						["CLSID"] = "{PTB_200_F86F35}",
+						["CLSID"] = "{HVARx2}",
 					},
 				},
 				["fuel"] = "1282",
@@ -3392,6 +4004,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 10) then
 			_aircrafttype = "F/A-18C"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = ""
 
 			subtype = math.random(1,4)
@@ -3429,19 +4062,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{D5D51E24-348C-4702-96AF-97A714E72697}",
+						["CLSID"] = "LAU_117_AGM_65G",
 					},
 					[3] =
 					{
-						["CLSID"] = "{EFEC8201-B922-11d7-9897-000476191836}",
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{6C0D552F-570B-42ff-9F6D-F10D9C1D4E1C}",
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
 					},
 					[5] =
 					{
@@ -3449,19 +4082,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[6] =
 					{
-						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{EFEC8201-B922-11d7-9897-000476191836}",
+						["CLSID"] = "{BRU-42_3*Mk-82AIR}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{D5D51E24-348C-4702-96AF-97A714E72697}",
+						["CLSID"] = "LAU_117_AGM_65G",
 					},
 					[9] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "6531",
@@ -3471,6 +4104,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 11) then
 			_aircrafttype = "FW-190D9"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,3)
 			if (subtype == 1) then
@@ -3509,7 +4163,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "SC_501_SC500",
+						["CLSID"] = "ER_4_SC50",
 					},
 				},
 				["fuel"] = "388",
@@ -3591,6 +4245,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-21Bis"
 			_country = country.id.USA
 
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,6)
 			if (subtype == 1) then
 				_skin = "32nd FG - Northeria"
@@ -3658,33 +4333,25 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			{
 				["pylons"] =
 				{
-					[1] =
-					{
-						["CLSID"] = "{R-3R}",
-					},
 					[2] =
 					{
-						["CLSID"] = "{R-60 2L}",
+						["CLSID"] = "{R-3R}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{PTB_800_MIG21}",
+						["CLSID"] = "{SPS-141-100}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{R-3S}",
+						["CLSID"] = "{R-3R}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{R-3R}",
+						["CLSID"] = "{R-60M 2R}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{ASO-2}",
-					},
-					[7] =
-					{
-						["CLSID"] = "{SMOKE_WHITE}",
+						["CLSID"] = "{SPRD}",
 					},
 				},
 				["fuel"] = "2280",
@@ -3695,6 +4362,26 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 14) then
 			_aircrafttype = "MiG-23MLD"
 			_country = country.id.UKRAINE
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "UKRAINE MiG-23MLD - " .. _skin
 			_payload =
@@ -3730,6 +4417,26 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 15) then
 			_aircrafttype = "MiG-25PD"
 			_country = country.id.UKRAINE
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "UKRAINE MiG-25PD - " .. _skin
 			_payload =
@@ -3738,7 +4445,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{5F26DBC2-FB43-4153-92DE-6BBCE26CB0FF}",
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
 					},
 					[2] =
 					{
@@ -3750,7 +4457,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[4] =
 					{
-						["CLSID"] = "{5F26DBC2-FB43-4153-92DE-6BBCE26CB0FF}",
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
 					},
 				},
 				["fuel"] = "15245",
@@ -3761,6 +4468,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 16) then
 			_aircrafttype = "MiG-29A"
 			_country = country.id.UKRAINE
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,3)
 			if (subtype == 1) then
@@ -3787,7 +4515,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
 					},
 					[4] =
 					{
@@ -3795,7 +4523,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[5] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
 					},
 					[6] =
 					{
@@ -3874,6 +4602,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "MiG-29S"
 			_country = country.id.UKRAINE
 
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_skin = "14th army, vinnitsa ab"
@@ -3899,7 +4648,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{C0FF4842-FBAC-11d5-9190-00A0249B6F00}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[4] =
 					{
@@ -3907,7 +4656,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[5] =
 					{
-						["CLSID"] = "{C0FF4842-FBAC-11d5-9190-00A0249B6F00}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[6] =
 					{
@@ -4283,7 +5032,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{HVAR_SMOKE_GENERATOR}",
+						["CLSID"] = "{HVAR}",
 					},
 					[2] =
 					{
@@ -4293,33 +5042,17 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{HVAR}",
 					},
-					[4] =
-					{
-						["CLSID"] = "{AN-M64}",
-					},
-					[5] =
-					{
-						["CLSID"] = "{HVAR}",
-					},
-					[6] =
-					{
-						["CLSID"] = "{HVAR}",
-					},
-					[7] =
-					{
-						["CLSID"] = "{AN-M64}",
-					},
 					[8] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[10] =
 					{
 						["CLSID"] = "{HVAR}",
 					},
 					[9] =
 					{
 						["CLSID"] = "{HVAR}",
-					},
-					[10] =
-					{
-						["CLSID"] = "{HVAR_SMOKE_GENERATOR}",
 					},
 				},
 				["fuel"] = "732",
@@ -4330,6 +5063,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 21) then
 			_aircrafttype = "Su-27"
 			_country = country.id.UKRAINE
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,5)
 			if (subtype == 1) then
@@ -4352,7 +5106,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}",
 					},
 					[2] =
 					{
@@ -4388,7 +5142,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[10] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82A}",
 					},
 				},
 				["fuel"] = "9400",
@@ -4489,6 +5243,26 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 24) then
 			_aircrafttype = "F-5E"
 			_country = country.id.TURKEY
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "`af standard"
 			_fullname = "TURKEY F-5E - " .. _skin
 			_payload =
@@ -4497,31 +5271,31 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+						["CLSID"] = "{A021F29D-18AB-4d3e-985C-FC9C60E35E9E}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
 					},
 				},
 				["fuel"] = "2000",
@@ -4531,6 +5305,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 25) then
 			_aircrafttype = "F-86F Sabre"
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			_skin = ""
 
 			subtype = math.random(1,4)
@@ -4554,19 +5350,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{PTB_200_F86F35}",
+						["CLSID"] = "{HVARx2}",
 					},
 					[2] =
-					{
-						["CLSID"] = "{HVAR_SMOKE_2}",
-					},
-					[3] =
 					{
 						["CLSID"] = "{HVARx2}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{F86ANM64}",
+						["CLSID"] = "{PTB_120_F86F35}",
 					},
 					[5] =
 					{
@@ -4578,19 +5370,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[7] =
 					{
-						["CLSID"] = "{F86ANM64}",
+						["CLSID"] = "{PTB_120_F86F35}",
 					},
-					[8] =
+					[10] =
 					{
 						["CLSID"] = "{HVARx2}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{HVAR_SMOKE_2}",
-					},
-					[10] =
-					{
-						["CLSID"] = "{PTB_200_F86F35}",
+						["CLSID"] = "{HVARx2}",
 					},
 				},
 				["fuel"] = "1282",
@@ -4601,6 +5389,26 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 26) then
 			_aircrafttype = "FW-190D9"
 			_country = country.id.RUSSIA
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "FW-190D9_USSR"
 			_fullname = "RUSSIA FW-190D9 - " .. _skin
 			_payload =
@@ -4609,7 +5417,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "SC_501_SC500",
+						["CLSID"] = "ER_4_SC50",
 					},
 				},
 				["fuel"] = "388",
@@ -4618,8 +5426,114 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		elseif (randomFighter == 27) then
+			_aircrafttype = "MiG-21Bis"
+			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			subtype = math.random(1,6)
+			if (subtype == 1) then
+				_skin = "32nd FG - Northeria"
+			elseif (subtype == 2) then
+				_skin = "101FS - Serbia"
+			elseif (subtype == 3) then
+				_skin = "Factory Test"
+			elseif (subtype == 4) then
+				_skin = "HavLLv 31 - Finland"
+			elseif (subtype == 5) then
+				_skin = "VVS Camo"
+			else
+				_skin = "VVS Grey"
+			end
+
+			subtype = math.random(1,4)
+			if (subtype == 1) then
+				_country = country.id.RUSSIA
+				_fullname = "RUSSIA MiG-21BiS - " .. _skin
+			elseif (subtype == 2) then
+				_country = country.id.ABKHAZIA
+				_fullname = "ABKHAZIA MiG-21BiS - " .. _skin
+			elseif (subtype == 3) then
+				_country = country.id.SOUTH_OSETIA
+				_fullname = "SOUTH_OSETIA MiG-21BiS - " .. _skin
+			else
+				_country = country.id.TURKEY
+				_fullname = "TURKEY MiG-21BiS - " .. _skin
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[2] =
+					{
+						["CLSID"] = "{R-3R}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{SPS-141-100}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{R-3R}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{R-60M 2R}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{SPRD}",
+					},
+				},
+				["fuel"] = "2280",
+				["flare"] = 32,
+				["chaff"] = 32,
+				["gun"] = 100,
+			}
+		elseif (randomFighter == 28) then
 			_aircrafttype = "MiG-23MLD"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -4664,9 +5578,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 60,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 28) then
+		elseif (randomFighter == 29) then
 			_aircrafttype = "MiG-25PD"
 			_country = country.id.RUSSIA
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "af standard"
 			_fullname = "RUSSIA MiG-25PD - " .. _skin
 			_payload =
@@ -4675,7 +5609,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{5F26DBC2-FB43-4153-92DE-6BBCE26CB0FF}",
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
 					},
 					[2] =
 					{
@@ -4687,7 +5621,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[4] =
 					{
-						["CLSID"] = "{5F26DBC2-FB43-4153-92DE-6BBCE26CB0FF}",
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
 					},
 				},
 				["fuel"] = "15245",
@@ -4695,9 +5629,30 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 64,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 29) then
+		elseif (randomFighter == 30) then
 			_aircrafttype = "MiG-29A"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,5)
 			if (subtype == 1) then
@@ -4728,7 +5683,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
 					},
 					[4] =
 					{
@@ -4736,7 +5691,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[5] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
 					},
 					[6] =
 					{
@@ -4752,9 +5707,30 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 30,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 30) then
+		elseif (randomFighter == 31) then
 			_aircrafttype = "MiG-29S"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,7)
 			if (subtype == 1) then
@@ -4789,7 +5765,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{C0FF4842-FBAC-11d5-9190-00A0249B6F00}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[4] =
 					{
@@ -4797,7 +5773,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[5] =
 					{
-						["CLSID"] = "{C0FF4842-FBAC-11d5-9190-00A0249B6F00}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[6] =
 					{
@@ -4813,9 +5789,30 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 30,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 31) then
+		elseif (randomFighter == 32) then
 			_aircrafttype = "MiG-31"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,3)
 			if (subtype == 1) then
@@ -4834,7 +5831,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{4EDBA993-2E34-444C-95FB-549300BF7CAF}",
+						["CLSID"] = "{B0DBC591-0F52-4F7D-AD7B-51E67725FB81}",
 					},
 					[2] =
 					{
@@ -4854,7 +5851,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[6] =
 					{
-						["CLSID"] = "{4EDBA993-2E34-444C-95FB-549300BF7CAF}",
+						["CLSID"] = "{275A2855-4A79-4B2D-B082-91EA2ADF4691}",
 					},
 				},
 				["fuel"] = "15500",
@@ -4862,8 +5859,32 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 0,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 32) then
+		elseif (randomFighter == 33) then
 			_aircrafttype = "P-51D"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			_skin = ""
 
 			subtype = math.random(1,3)
@@ -4931,7 +5952,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{HVAR_SMOKE_GENERATOR}",
+						["CLSID"] = "{HVAR}",
 					},
 					[2] =
 					{
@@ -4941,23 +5962,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{HVAR}",
 					},
-					[4] =
-					{
-						["CLSID"] = "{AN-M64}",
-					},
-					[5] =
-					{
-						["CLSID"] = "{HVAR}",
-					},
-					[6] =
-					{
-						["CLSID"] = "{HVAR}",
-					},
-					[7] =
-					{
-						["CLSID"] = "{AN-M64}",
-					},
 					[8] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[10] =
 					{
 						["CLSID"] = "{HVAR}",
 					},
@@ -4965,19 +5974,36 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{HVAR}",
 					},
-					[10] =
-					{
-						["CLSID"] = "{HVAR_SMOKE_GENERATOR}",
-					},
 				},
 				["fuel"] = "732",
 				["flare"] = 0,
 				["chaff"] = 0,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 33) then
+		elseif (randomFighter == 34) then
 			_aircrafttype = "Su-27"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,14)
 			if (subtype == 1) then
@@ -5018,7 +6044,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}",
 					},
 					[2] =
 					{
@@ -5054,7 +6080,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[10] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82A}",
 					},
 				},
 				["fuel"] = "9400",
@@ -5062,9 +6088,30 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 96,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 34) then
+		elseif (randomFighter == 35) then
 			_aircrafttype = "Su-30"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,10)
 			if (subtype == 1) then
@@ -5097,7 +6144,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}",
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
 					},
 					[2] =
 					{
@@ -5105,11 +6152,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+						["CLSID"] = "{88DAC840-9F75-4531-8689-B46E64E42E53}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+						["CLSID"] = "{B79C379A-9E87-4E50-A1EE-7F7E29C2E87A}",
 					},
 					[5] =
 					{
@@ -5121,11 +6168,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[7] =
 					{
-						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+						["CLSID"] = "{B79C379A-9E87-4E50-A1EE-7F7E29C2E87A}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+						["CLSID"] = "{88DAC840-9F75-4531-8689-B46E64E42E53}",
 					},
 					[9] =
 					{
@@ -5133,7 +6180,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[10] =
 					{
-						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82A}",
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
 					},
 				},
 				["fuel"] = "9400",
@@ -5141,9 +6188,30 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 96,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 35) then
+		elseif (randomFighter == 36) then
 			_aircrafttype = "Su-33"
 			_country = country.id.RUSSIA
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,8)
 			if (subtype == 1) then
@@ -5180,35 +6248,35 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[3] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
 					},
 					[4] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
 					},
 					[5] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
 					},
 					[10] =
 					{
-						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
 					},
 					[11] =
 					{
@@ -5224,9 +6292,32 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 48,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 36) then
+		elseif (randomFighter == 37) then
 			_aircrafttype = "Su-34"
 			_country = country.id.RUSSIA
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -5243,51 +6334,51 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				{
 					[1] =
 					{
-						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}",
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[3] =
 					{
-						["CLSID"] = "{6DADF342-D4BA-4D8A-B081-BA928C4AF86D}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[4] =
 					{
-						["CLSID"] = "{6DADF342-D4BA-4D8A-B081-BA928C4AF86D}",
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
 					},
 					[5] =
 					{
-						["CLSID"] = "{6DADF342-D4BA-4D8A-B081-BA928C4AF86D}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[6] =
 					{
-						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[7] =
 					{
-						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[8] =
 					{
-						["CLSID"] = "{6DADF342-D4BA-4D8A-B081-BA928C4AF86D}",
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
 					},
 					[9] =
 					{
-						["CLSID"] = "{6DADF342-D4BA-4D8A-B081-BA928C4AF86D}",
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{6DADF342-D4BA-4D8A-B081-BA928C4AF86D}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[11] =
 					{
-						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
 					},
 					[12] =
 					{
-						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82A}",
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
 					},
 				},
 				["fuel"] = "9800",
@@ -5295,9 +6386,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 64,
 				["gun"] = 100,
 			}
-
 		end
-
 	elseif ((AircraftType >= aircraftDistribution[4]) or (AircraftType <= aircraftDistribution[5])) then -- HELICOPTERS
 		if (coalitionIndex == 1) then
 			randomHeli = math.random(15,23) -- random for airplane type; Red AC 15-23
@@ -5361,13 +6450,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{3EA17AB0-A805-4D9E-8732-4CE00CB00F17}",
+					},
 					[2] =
 					{
-						["CLSID"] = "M260_HYDRA",
+						["CLSID"] = "{FD90A1DC-9147-49FA-BF56-CB83EF0BD32B}",
 					},
 					[3] =
 					{
-						["CLSID"] = "M260_HYDRA",
+						["CLSID"] = "{FD90A1DC-9147-49FA-BF56-CB83EF0BD32B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{3EA17AB0-A805-4D9E-8732-4CE00CB00F17}",
 					},
 				},
 				["fuel"] = 1250,
@@ -5595,6 +6692,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Ka-50"
 			_country = country.id.USA
 
+			_task = "CAS"
 			_tasks =
 			{
 				[1] =
@@ -5801,6 +6899,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 8) then
 			_aircrafttype = "Mi-24V"
 
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_country = country.id.GEORGIA
@@ -5830,13 +6951,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[2] =
 					{
-						["CLSID"] = "{B919B0F4-7C25-455E-9A02-CEA51DB895E3}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
-					[6] =
+					[3] =
 					{
-						["CLSID"] = "{B919B0F4-7C25-455E-9A02-CEA51DB895E3}",
+						["CLSID"] = "{FC56DF80-9B09-44C5-8976-DCFAFF219062}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{FC56DF80-9B09-44C5-8976-DCFAFF219062}",
 					},
 					[5] =
+					{
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[6] =
 					{
 						["CLSID"] = "{B919B0F4-7C25-455E-9A02-CEA51DB895E3}",
 					},
@@ -5870,6 +6999,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 10) then
 			_aircrafttype = "Mi-8MT"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,14)
 			if (subtype == 1) then
@@ -6040,6 +7192,22 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			{
 				["pylons"] =
 				{
+					[5] =
+					{
+						["CLSID"] = "{05544F1A-C39C-466b-BC37-5BD1D52E57BB}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{05544F1A-C39C-466b-BC37-5BD1D52E57BB}",
+					},
+					[4] =
+					{
+						["CLSID"] = "B_8V20A_OFP2",
+					},
+					[3] =
+					{
+						["CLSID"] = "B_8V20A_OFP2",
+					},
 				},
 				["fuel"] = "2073",
 				["flare"] = 192,
@@ -6086,6 +7254,26 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 12) then
 			_aircrafttype = "SH-60B"
 			_country = country.id.USA
+			_task = "Antiship Strike"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "AntiShip",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 			_skin = "standard"
 			_fullname = "USA SH-60B - " .. _skin
 			_payload =
@@ -6104,6 +7292,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 13) then
 			_aircrafttype = "UH-1H"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,15)
 			if (subtype == 1) then
@@ -6244,13 +7455,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "XM158_MK5",
 					},
-					[3] =
-					{
-						["CLSID"] = "XM158_MK5",
-					},
-					[4] =
+					[6] =
 					{
 						["CLSID"] = "M134_R",
+					},
+					[5] =
+					{
+						["CLSID"] = "XM158_MK5",
 					},
 				},
 				["fuel"] = "631",
@@ -6333,13 +7544,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{3EA17AB0-A805-4D9E-8732-4CE00CB00F17}",
+					},
 					[2] =
 					{
-						["CLSID"] = "M260_HYDRA",
+						["CLSID"] = "{FD90A1DC-9147-49FA-BF56-CB83EF0BD32B}",
 					},
 					[3] =
 					{
-						["CLSID"] = "M260_HYDRA",
+						["CLSID"] = "{FD90A1DC-9147-49FA-BF56-CB83EF0BD32B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{3EA17AB0-A805-4D9E-8732-4CE00CB00F17}",
 					},
 				},
 				["fuel"] = 1250,
@@ -6365,6 +7584,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 17) then
 			_aircrafttype = "Ka-50"
 
+			_task = "CAS"
 			_tasks =
 			{
 				[1] =
@@ -6477,6 +7697,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 18) then
 			_aircrafttype = "Mi-24V"
 
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
@@ -6514,13 +7757,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					[2] =
 					{
-						["CLSID"] = "{B919B0F4-7C25-455E-9A02-CEA51DB895E3}",
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
 					},
-					[6] =
+					[3] =
 					{
-						["CLSID"] = "{B919B0F4-7C25-455E-9A02-CEA51DB895E3}",
+						["CLSID"] = "{FC56DF80-9B09-44C5-8976-DCFAFF219062}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{FC56DF80-9B09-44C5-8976-DCFAFF219062}",
 					},
 					[5] =
+					{
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[6] =
 					{
 						["CLSID"] = "{B919B0F4-7C25-455E-9A02-CEA51DB895E3}",
 					},
@@ -6559,6 +7810,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 20) then
 			_aircrafttype = "Mi-28N"
 			_country = country.id.RUSSIA
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -6577,6 +7850,14 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{57232979-8B0F-4db7-8D9A-55197E06B0F5}",
 					},
+					[2] =
+					{
+						["CLSID"] = "{6A4B9E69-64FE-439a-9163-3A87FB6A4D81}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{6A4B9E69-64FE-439a-9163-3A87FB6A4D81}",
+					},
 					[4] =
 					{
 						["CLSID"] = "{57232979-8B0F-4db7-8D9A-55197E06B0F5}",
@@ -6589,6 +7870,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 21) then
 			_aircrafttype = "Mi-8MT"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -6650,6 +7954,22 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			{
 				["pylons"] =
 				{
+					[5] =
+					{
+						["CLSID"] = "{05544F1A-C39C-466b-BC37-5BD1D52E57BB}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{05544F1A-C39C-466b-BC37-5BD1D52E57BB}",
+					},
+					[4] =
+					{
+						["CLSID"] = "B_8V20A_OFP2",
+					},
+					[3] =
+					{
+						["CLSID"] = "B_8V20A_OFP2",
+					},
 				},
 				["fuel"] = "2073",
 				["flare"] = 192,
@@ -6658,6 +7978,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 22) then
 			_aircrafttype = "UH-1H"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -6698,13 +8041,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "XM158_MK5",
 					},
-					[3] =
-					{
-						["CLSID"] = "XM158_MK5",
-					},
-					[4] =
+					[6] =
 					{
 						["CLSID"] = "M134_R",
+					},
+					[5] =
+					{
+						["CLSID"] = "XM158_MK5",
 					},
 				},
 				["fuel"] = "631",
@@ -6922,8 +8265,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
+--	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
+--	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
 	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
