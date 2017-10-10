@@ -108,9 +108,9 @@ g_spawnSpeedTurningPoint    = 125	-- When spawning in the air as turning point, 
 g_flagRandomWaypoint        = true	-- Create intermediate waypoint?
 g_waypointRange             = {40000, 40000}	-- Maximum x,y of where to place intermediate waypoint between takeoff
 
-g_flagRandomParkingType     = true	-- Randomize type of parking spot for spawn location
-g_defaultParkingSpotType    = 5		-- If not randomizing spawn parking spot, which one should be used as default g_parkingSpotType[?/2+1]
-g_parkingSpotType           =
+g_flagRandomSpawnType       = true	-- Randomize type of parking spot for spawn location
+g_defaultSpawnType    		= 5		-- If not randomizing spawn parking spot, which one should be used as default g_spawnType[?/2+1]
+g_spawnType           =
 							{		-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)
 								{"TakeOffParking", "From Parking Area"},
 								{"TakeOffParkingHot", "From Parking Area Hot"},
@@ -5732,6 +5732,15 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	local l_acSkill
 	local l_acFlightAlt
 	local l_acFlightSpeed
+	local l_acSpawnType
+	local l_acCallSign
+	local l_acSpawnAirdromeID
+	local l_acSpawnAirdromePos
+	local l_acSpawnPos
+	local l_acSpawnPSI
+	local l_acSpawnHeading
+	local l_acSpawnAlt
+	local l_acSpawnSpeed
 
 	while (l_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
 		-- Pick a country from the given coalition
@@ -5857,55 +5866,52 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		l_acFlightSpeed = 180
 	end
 
-	if (g_flagRandomParkingType) then
-		local l_index = math.random(1, #g_parkingSpotType)
+	if (g_flagRandomSpawnType) then
+		local l_index = math.random(1, #g_spawnType)
 
-		_parkingType = {g_parkingSpotType[l_index][1], g_parkingSpotType[l_index][2]}
+		l_acSpawnType = {g_spawnType[l_index][1], g_spawnType[l_index][2]}
 	else
-		_parkingType = {g_parkingSpotType[g_defaultParkingSpotType][1], g_parkingSpotType[g_defaultParkingSpotType][2]}
+		l_acSpawnType = {g_spawnType[g_defaultSpawnType][1], g_spawnType[g_defaultSpawnType][2]}
 	end
 
 	-- Build up sim callsign
 	if ((l_acCountry == country.id.RUSSIA) or (l_acCountry == country.id.ABKHAZIA) or (l_acCountry == country.id.SOUTH_OSETIA) or (l_acCountry == country.id.UKRAINE)) then
-		_callname = g_numCoalitionGroup[p_coalitionIndex] .. 1
+		l_acCallSign = g_numCoalitionGroup[p_coalitionIndex] .. 1
 	else
-		local a = math.random(1,#l_acCallname)
-		local b = math.random(1,9)
-		_callname =
+		local l_anum = math.random(1,#l_acCallname)
+		local l_bnum = math.random(1,9)
+
+		l_acCallSign =
 			{
-				[1] = a,
-				[2] = b,
-				[3] = 1,
-				["name"] = l_acCallname[a] .. b .. 1,
+				[1]      = l_anum,
+				[2]      = l_bnum,
+				[3]      = 1,
+				["name"] = l_acCallname[l_anum] .. l_bnum .. 1,
 			}
 	end
 
-	_spawnairdromeId = p_spawnIndex.id
-	_spawnairplanepos = {}
-	_spawnairbaseloc = Object.getPoint({id_=p_spawnIndex.id_})
-	if (_parkingType[1] == "Turning Point") then
-		_spawnairplanepos.x = g_airbasePoints[p_spawnIndex.id][1]
-		_spawnairplanepos.z = g_airbasePoints[p_spawnIndex.id][2]
-		_spawnPSI = g_airbasePoints[p_spawnIndex.id][5]
-		_spawnHeading = g_airbasePoints[p_spawnIndex.id][6]
-		_spawnAlt = 29.8704
+	l_acSpawnAirdromeID = p_spawnIndex.id
+	l_acSpawnPos = {}
+	l_acSpawnAirdromePos = Object.getPoint({id_=p_spawnIndex.id_})
+	if (l_acSpawnType[1] == "Turning Point") then
+		l_acSpawnPos.x   = g_airbasePoints[p_spawnIndex.id][1]
+		l_acSpawnPos.z   = g_airbasePoints[p_spawnIndex.id][2]
+		l_acSpawnPSI     = g_airbasePoints[p_spawnIndex.id][5]
+		l_acSpawnHeading = g_airbasePoints[p_spawnIndex.id][6]
+		l_acSpawnAlt     = 29.8704
 	else
-		_spawnairbaseloc = Object.getPoint({id_=p_spawnIndex.id_})
-		_spawnairplanepos.x = _spawnairbaseloc.x
-		_spawnairplanepos.z = _spawnairbaseloc.z
-		_spawnPSI = 0
-		_spawnHeading = 0
-		_spawnAlt = 0
+		l_acSpawnAirdromePos = Object.getPoint({id_=p_spawnIndex.id_})
+		l_acSpawnPos.x   = l_acSpawnAirdromePos.x
+		l_acSpawnPos.z   = l_acSpawnAirdromePos.z
+		l_acSpawnPSI     = 0
+		l_acSpawnHeading = 0
+		l_acSpawnAlt     = 0
 	end
 
-	_spawnairplaneparking = math.random(1,40)
-
-	_waypointtype = _parkingType[1]
-	_waypointaction = _parkingType[2]
-	if (_waypointtype == "Turning Point") then
-		_spawnSpeed = g_spawnSpeedTurningPoint
+	if (l_acSpawnType[1] == "Turning Point") then
+		l_acSpawnSpeed = g_spawnSpeedTurningPoint
 	else
-		_spawnSpeed = 0
+		l_acSpawnSpeed = 0
 	end
 
 	_landairbaseID = p_landIndex.id
@@ -5916,7 +5922,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 
 	-- Compute single intermediate waypoint based on used-defined minimum deviation x/z range
 	local _waypoint = {}
-	_waypoint.dist = math.sqrt((_spawnairbaseloc.x - _landairbaseloc.x) * (_spawnairbaseloc.x - _landairbaseloc.x) + (_spawnairbaseloc.z - _landairbaseloc.z) * (_spawnairbaseloc.z - _landairbaseloc.z))
+	_waypoint.dist = math.sqrt((l_acSpawnAirdromePos.x - _landairbaseloc.x) * (l_acSpawnAirdromePos.x - _landairbaseloc.x) + (l_acSpawnAirdromePos.z - _landairbaseloc.z) * (l_acSpawnAirdromePos.z - _landairbaseloc.z))
 	if (((_waypoint.dist / 2) < g_waypointRange[1]) or (p_spawnIndex.id == p_landIndex.id)) then
 		_waypoint.distx = g_waypointRange[1]
 	else
@@ -5927,8 +5933,8 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	else
 		_waypoint.distz = _waypoint.dist / 2
 	end
-	_waypoint.x = _spawnairbaseloc.x + math.random(- _waypoint.distx, _waypoint.distx)
-	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
+	_waypoint.x = l_acSpawnAirdromePos.x + math.random(- _waypoint.distx, _waypoint.distx)
+	_waypoint.z = l_acSpawnAirdromePos.z + math.random(- _waypoint.distz, _waypoint.distz)
 
 	_groupname = p_name .. g_numCoalitionGroup[p_coalitionIndex]
 
@@ -6002,16 +6008,16 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			{
 				[1] =
 				{
-					["alt"] = _spawnAlt,
+					["alt"] = l_acSpawnAlt,
 					["alt_type"] = "RADIO",
-					["type"] = _waypointtype,
-					["action"] = _waypointaction,
+					["type"] = l_acSpawnType[1],
+					["action"] = l_acSpawnType[2],
 					["formation_template"] = "",
 					["ETA"] = 0,
-					["airdromeId"] = _spawnairdromeId,
-					["y"] = _spawnairplanepos.z,
-					["x"] = _spawnairplanepos.x,
-					["speed"] = _spawnSpeed,
+					["airdromeId"] = l_acSpawnAirdromeID,
+					["y"] = l_acSpawnPos.z,
+					["x"] = l_acSpawnPos.x,
+					["speed"] = l_acSpawnSpeed,
 					["ETA_locked"] = true,
 					["task"] =
 					{
@@ -6031,25 +6037,25 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		{
 			[1] =
 			{
-				["alt"] = _spawnAlt,
+				["alt"] = l_acSpawnAlt,
 				["alt_type"] = "RADIO",
 				["livery_id"] = l_acSkin,
 				["type"] = l_acModel,
-				["psi"] = _spawnPSI,
-                ["heading"] = _spawnHeading,
+				["psi"] = l_acSpawnPSI,
+                ["heading"] = l_acSpawnHeading,
 				["onboard_num"] = "10",
-				["y"] = _spawnairplanepos.z,
-				["x"] = _spawnairplanepos.x,
+				["y"] = l_acSpawnPos.z,
+				["x"] = l_acSpawnPos.x,
 				["name"] =  _groupname .. "-1",
-				["callsign"] = _callname,
+				["callsign"] = l_acCallSign,
 				["payload"] = l_acPayload,
-				["speed"] = _spawnSpeed,
+				["speed"] = l_acSpawnSpeed,
 				["unitId"] =  math.random(9999,99999),
 				["skill"] = l_acSkill,
 			},
 		},
-		["y"] = _spawnairplanepos.z,
-		["x"] = _spawnairplanepos.x,
+		["y"] = l_acSpawnPos.z,
+		["x"] = l_acSpawnPos.x,
 		["name"] = _groupname,
 		["communication"] = true,
 		["start_time"] = 0,
@@ -6063,18 +6069,18 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		for i=2, l_acNumGroup do
 			_airplanedata.units[i] =
 			{
-				["alt"] = _spawnAlt,
-				["psi"] = _spawnPSI,
-                ["heading"] = _spawnHeading,
+				["alt"] = l_acSpawnAlt,
+				["psi"] = l_acSpawnPSI,
+                ["heading"] = l_acSpawnHeading,
 				["livery_id"] = l_acSkin,
 				["type"] = l_acModel,
 				["onboard_num"] = "10",
-				["y"] = _spawnairplanepos.z,
-				["x"] = _spawnairplanepos.x,
+				["y"] = l_acSpawnPos.z,
+				["x"] = l_acSpawnPos.x,
 				["name"] =  _groupname .. "-" .. i,
-				["callsign"] = _callname,
+				["callsign"] = l_acCallSign,
 				["payload"] = l_acPayload,
-				["speed"] = _spawnSpeed,
+				["speed"] = l_acSpawnSpeed,
 				["unitId"] =  math.random(9999,99999),
 				["alt_type"] = "RADIO",
 				["skill"] = l_acSkill,
@@ -6107,13 +6113,13 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		end
 	end
 
-	if (_parkingType[1] == "Turning Point") then
+	if (l_acSpawnType[1] == "Turning Point") then
 		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
-			["alt"] = _spawnAlt * 3,
+			["alt"] = l_acSpawnAlt * 3,
 			["alt_type"] = "RADIO",
-			["type"] = _parkingType[1],
-			["action"] = _parkingType[2],
+			["type"] = l_acSpawnType[1],
+			["action"] = l_acSpawnType[2],
 			["formation_template"] = "",
 			["properties"] =
 			{
