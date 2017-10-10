@@ -539,7 +539,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 4) or (AircraftType <= 4)) then  -- BOMBERS
+	elseif ((AircraftType == 4) or (AircraftType == 4)) then  -- BOMBERS
 		if (coalitionIndex == 1) then
 			randomBomber = math.random(11,15) -- random for airplane type; Red AC 11-15
 		else
@@ -1122,75 +1122,70 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	elseif ((AircraftType >= 5) or (AircraftType <= 6)) then  -- ATTACK AIRCRAFT
 		if (coalitionIndex == 1) then
-			randomAttack = math.random(11,15) -- random for airplane type; Red AC 11-15
+			randomAttack = math.random(2,2) -- random for airplane type; Red AC 11-15
 		else
-			randomAttack = math.random(1,10) -- random for airplane type; Blue AC 1-10
+			randomAttack = math.random(2,2) -- random for airplane type; Blue AC 1-10
 		end
 
 		if (randomAttack == 1) then
 			_aircrafttype = "A-10A"
+			_country = country.id.USA
 
-			subtype = math.random(1,1)
+			subtype = math.random(1,18)
 			if (subtype == 1) then
-				_country = country.id.USA
-				subtype1 = math.random(1,18)
-				if (subtype1 == 1) then
-					_skin = "104th FS Maryland ANG, Baltimore (MD)"
-					callsign = "USA A-10A - 104th FS Maryland ANG, Baltimore (MD)"
-				elseif (subtype1 == 2) then
-					_skin = "118th FS Bradley ANGB, Connecticut (CT)"
-					callsign = "USA A-10A - 118th FS Bradley ANGB, Connecticut (CT)"
-				elseif (subtype1 == 3) then
-					_skin = "118th FS Bradley ANGB, Connecticut (CT) N621"
-					callsign = "USA A-10A - 118th FS Bradley ANGB, Connecticut (CT) N621"
-				elseif (subtype1 == 4) then
-					_skin = "172nd FS Battle Creek ANGB, Michigan (BC)"
-					callsign = "USA A-10A - 172nd FS Battle Creek ANGB, Michigan (BC)"
-				elseif (subtype1 == 5) then
-					_skin = "184th FS Arkansas ANG, Fort Smith (FS)"
-					callsign = "USA A-10A - 184th FS Arkansas ANG, Fort Smith (FS)"
-				elseif (subtype1 == 6) then
-					_skin = "190th FS Boise ANGB, Idaho (ID)"
-					callsign = "USA A-10A - 190th FS Boise ANGB, Idaho (ID)"
-				elseif (subtype1 == 7) then
-					_skin = "23rd TFW England AFB (EL)"
-					callsign = "USA A-10A - 23rd TFW England AFB (EL)"
-				elseif (subtype1 == 8) then
-					_skin = "25th FS Osan AB, Korea (OS)"
-					callsign = "USA A-10A - 25th FS Osan AB, Korea (OS)"
-				elseif (subtype1 == 9) then
-					_skin = "354th FS Davis Monthan AFB, Arizona (DM)"
-					callsign = "USA A-10A - 354th FS Davis Monthan AFB, Arizona (DM)"
-				elseif (subtype1 == 10) then
-					_skin = "355th FS Eielson AFB, Alaska (AK)"
-					callsign = "USA A-10A - 355th FS Eielson AFB, Alaska (AK)"
-				elseif (subtype1 == 11) then
-					_skin = "357th FS Davis Monthan AFB, Arizona (DM)"
-					callsign = "USA A-10A - 357th FS Davis Monthan AFB, Arizona (DM)"
-				elseif (subtype1 == 12) then
-					_skin = "358th FS Davis Monthan AFB, Arizona (DM)"
-					callsign = "USA A-10A - 358th FS Davis Monthan AFB, Arizona (DM)"
-				elseif (subtype1 == 13) then
-					_skin = "422nd TES Nellis AFB, Nevada (OT)"
-					callsign = "USA A-10A - 422nd TES Nellis AFB, Nevada (OT)"
-				elseif (subtype1 == 14) then
-					_skin = "47th FS Barksdale AFB, Louisiana (BD)"
-					callsign = "USA A-10A - 47th FS Barksdale AFB, Louisiana (BD)"
-				elseif (subtype1 == 15) then
-					_skin = "66th WS Nellis AFB, Nevada (WA)"
-					callsign = "USA A-10A - 66th WS Nellis AFB, Nevada (WA)"
-				elseif (subtype1 == 16) then
-					_skin = "74th FS Moody AFB, Georgia (FT)"
-					callsign = "USA A-10A - 74th FS Moody AFB, Georgia (FT)"
-				elseif (subtype1 == 17) then
-					_skin = "81st FS Spangdahlem AB, Germany (SP) 1"
-					callsign = "USA A-10A - 81st FS Spangdahlem AB, Germany (SP) 1"
-				else
-					_skin = "81st FS Spangdahlem AB, Germany (SP) 2"
-					callsign = "USA A-10A - 81st FS Spangdahlem AB, Germany (SP) 2"
-				end
+				_skin = "104th FS Maryland ANG, Baltimore (MD)"
+				callsign = "USA A-10A - 104th FS Maryland ANG, Baltimore (MD)"
 			elseif (subtype == 2) then
-
+				_skin = "118th FS Bradley ANGB, Connecticut (CT)"
+				callsign = "USA A-10A - 118th FS Bradley ANGB, Connecticut (CT)"
+			elseif (subtype == 3) then
+				_skin = "118th FS Bradley ANGB, Connecticut (CT) N621"
+				callsign = "USA A-10A - 118th FS Bradley ANGB, Connecticut (CT) N621"
+			elseif (subtype == 4) then
+				_skin = "172nd FS Battle Creek ANGB, Michigan (BC)"
+				callsign = "USA A-10A - 172nd FS Battle Creek ANGB, Michigan (BC)"
+			elseif (subtype == 5) then
+				_skin = "184th FS Arkansas ANG, Fort Smith (FS)"
+				callsign = "USA A-10A - 184th FS Arkansas ANG, Fort Smith (FS)"
+			elseif (subtype == 6) then
+				_skin = "190th FS Boise ANGB, Idaho (ID)"
+				callsign = "USA A-10A - 190th FS Boise ANGB, Idaho (ID)"
+			elseif (subtype == 7) then
+				_skin = "23rd TFW England AFB (EL)"
+				callsign = "USA A-10A - 23rd TFW England AFB (EL)"
+			elseif (subtype == 8) then
+				_skin = "25th FS Osan AB, Korea (OS)"
+				callsign = "USA A-10A - 25th FS Osan AB, Korea (OS)"
+			elseif (subtype == 9) then
+				_skin = "354th FS Davis Monthan AFB, Arizona (DM)"
+				callsign = "USA A-10A - 354th FS Davis Monthan AFB, Arizona (DM)"
+			elseif (subtype == 10) then
+				_skin = "355th FS Eielson AFB, Alaska (AK)"
+				callsign = "USA A-10A - 355th FS Eielson AFB, Alaska (AK)"
+			elseif (subtype == 11) then
+				_skin = "357th FS Davis Monthan AFB, Arizona (DM)"
+				callsign = "USA A-10A - 357th FS Davis Monthan AFB, Arizona (DM)"
+			elseif (subtype == 12) then
+				_skin = "358th FS Davis Monthan AFB, Arizona (DM)"
+				callsign = "USA A-10A - 358th FS Davis Monthan AFB, Arizona (DM)"
+			elseif (subtype == 13) then
+				_skin = "422nd TES Nellis AFB, Nevada (OT)"
+				callsign = "USA A-10A - 422nd TES Nellis AFB, Nevada (OT)"
+			elseif (subtype == 14) then
+				_skin = "47th FS Barksdale AFB, Louisiana (BD)"
+				callsign = "USA A-10A - 47th FS Barksdale AFB, Louisiana (BD)"
+			elseif (subtype == 15) then
+				_skin = "66th WS Nellis AFB, Nevada (WA)"
+				callsign = "USA A-10A - 66th WS Nellis AFB, Nevada (WA)"
+			elseif (subtype == 16) then
+				_skin = "74th FS Moody AFB, Georgia (FT)"
+				callsign = "USA A-10A - 74th FS Moody AFB, Georgia (FT)"
+			elseif (subtype == 17) then
+				_skin = "81st FS Spangdahlem AB, Germany (SP) 1"
+				callsign = "USA A-10A - 81st FS Spangdahlem AB, Germany (SP) 1"
+			else
+				_skin = "81st FS Spangdahlem AB, Germany (SP) 2"
+				callsign = "USA A-10A - 81st FS Spangdahlem AB, Germany (SP) 2"
 			end
 
 			_payload =
@@ -1245,8 +1240,806 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		elseif (randomAttack == 2)	then
+			_aircrafttype = "A-10C"
 
+			subtype = math.random(1,15)
+			if (subtype == 1) then
+				_country = country.id.USA
+				subtype1 = math.random(1,18)
+				if (subtype1 == 1) then
+					_skin = "104th FS Maryland ANG, Baltimore (MD)"
+					callsign = "USA A-10C - 104th FS Maryland ANG, Baltimore (MD)"
+				elseif (subtype1 == 2) then
+					_skin = "118th FS Bradley ANGB, Connecticut (CT)"
+					callsign = "USA A-10C - 118th FS Bradley ANGB, Connecticut (CT)"
+				elseif (subtype1 == 3) then
+					_skin = "118th FS Bradley ANGB, Connecticut (CT) N621"
+					callsign = "USA A-10C - 118th FS Bradley ANGB, Connecticut (CT) N621"
+				elseif (subtype1 == 4) then
+					_skin = "172nd FS Battle Creek ANGB, Michigan (BC)"
+					callsign = "USA A-10C - 172nd FS Battle Creek ANGB, Michigan (BC)"
+				elseif (subtype1 == 5) then
+					_skin = "184th FS Arkansas ANG, Fort Smith (FS)"
+					callsign = "USA A-10C - 184th FS Arkansas ANG, Fort Smith (FS)"
+				elseif (subtype1 == 6) then
+					_skin = "190th FS Boise ANGB, Idaho (ID)"
+					callsign = "USA A-10C - 190th FS Boise ANGB, Idaho (ID)"
+				elseif (subtype1 == 7) then
+					_skin = "23rd TFW England AFB (EL)"
+					callsign = "USA A-10C - 23rd TFW England AFB (EL)"
+				elseif (subtype1 == 8) then
+					_skin = "25th FS Osan AB, Korea (OS)"
+					callsign = "USA A-10C - 25th FS Osan AB, Korea (OS)"
+				elseif (subtype1 == 9) then
+					_skin = "354th FS Davis Monthan AFB, Arizona (DM)"
+					callsign = "USA A-10C - 354th FS Davis Monthan AFB, Arizona (DM)"
+				elseif (subtype1 == 10) then
+					_skin = "355th FS Eielson AFB, Alaska (AK)"
+					callsign = "USA A-10C - 355th FS Eielson AFB, Alaska (AK)"
+				elseif (subtype1 == 11) then
+					_skin = "357th FS Davis Monthan AFB, Arizona (DM)"
+					callsign = "USA A-10C - 357th FS Davis Monthan AFB, Arizona (DM)"
+				elseif (subtype1 == 12) then
+					_skin = "358th FS Davis Monthan AFB, Arizona (DM)"
+					callsign = "USA A-10C - 358th FS Davis Monthan AFB, Arizona (DM)"
+				elseif (subtype1 == 13) then
+					_skin = "422nd TES Nellis AFB, Nevada (OT)"
+					callsign = "USA A-10C - 422nd TES Nellis AFB, Nevada (OT)"
+				elseif (subtype1 == 14) then
+					_skin = "47th FS Barksdale AFB, Louisiana (BD)"
+					callsign = "USA A-10C - 47th FS Barksdale AFB, Louisiana (BD)"
+				elseif (subtype1 == 15) then
+					_skin = "66th WS Nellis AFB, Nevada (WA)"
+					callsign = "USA A-10C - 66th WS Nellis AFB, Nevada (WA)"
+				elseif (subtype1 == 16) then
+					_skin = "74th FS Moody AFB, Georgia (FT)"
+					callsign = "USA A-10C - 74th FS Moody AFB, Georgia (FT)"
+				elseif (subtype1 == 17) then
+					_skin = "81st FS Spangdahlem AB, Germany (SP) 1"
+					callsign = "USA A-10C - 81st FS Spangdahlem AB, Germany (SP) 1"
+				else
+					_skin = "81st FS Spangdahlem AB, Germany (SP) 2"
+					callsign = "USA A-10C - 81st FS Spangdahlem AB, Germany (SP) 2"
+				end
+			elseif (subtype == 2) then
+				_country = country.id.AUSTRALIA
+				_skin = "Australia Notional RAAF"
+				callsign = "AUSTRALIA A-10C - Australia Notional RAAF"
+			elseif (subtype == 3) then
+				_country = country.id.BELGIUM
+				_skin = "A-10 Grey"
+				callsign = "BELGIUM A-10C - A-10 Grey"
+			elseif (subtype == 4) then
+				_country = country.id.CANADA
+				subtype1 = math.random(1,3)
+				if (subtype1 == 1) then
+					_skin = "Fictional Canadian Air Force Pixel Camo"
+					callsign = "CANADA A-10C - Fictional Canadian Air Force Pixel Camo"
+				elseif (subtype1 == 2) then
+					_skin = "Canada RCAF 409 Squadron"
+					callsign = "CANADA A-10C - Canada RCAF 409 Squadron"
+				else
+					_skin = "Canada RCAF 442 Snow Scheme"
+					callsign = "CANADA A-10C - Canada RCAF 442 Snow Scheme"
+				end
+			elseif (subtype == 5) then
+				_country = country.id.DENMARK
+				_skin = "A-10 Grey"
+				callsign = "DENMARK A-10C - A-10 Grey"
+			elseif (subtype == 6) then
+				_country = country.id.FRANCE
+				_skin = "Fictional France Escadron de Chasse 03.003 ARDENNES"
+				callsign = "FRANCE A-10C - Fictional France Escadron de Chasse 03.003 ARDENNES"
+			elseif (subtype == 7) then
+				_country = country.id.GEORGIA
+				subtype1 = math.random(1,2)
+				if (subtype1 == 1) then
+					_skin = "Fictional Georgian Grey"
+					callsign = "GEORGIA A-10C - Fictional Georgian Grey"
+				else
+					_skin = "Fictional Georgian Olive"
+					callsign = "GEORGIA A-10C - Fictional Georgian Olive"
+				end
+			elseif (subtype == 8) then
+				_country = country.id.GERMANY
+				subtype1 = math.random(1,2)
+				if (subtype1 == 1) then
+					_skin = "Fictional German 3322"
+					callsign = "GERMANY A-10C - Fictional German 3322"
+				else
+					_skin = "Fictional German 3323"
+					callsign = "GERMANY A-10C - Fictional German 3323"
+				end
+			elseif (subtype == 9) then
+				_country = country.id.ISRAEL
+				_skin = "Fictional Israel 115 Sqn Flying Dragon"
+				callsign = "ISRAEL A-10C - Fictional Israel 115 Sqn Flying Dragon"
+			elseif (subtype == 10) then
+				_country = country.id.ITALY
+				_skin = "Fictional Italian AM (23Gruppo)"
+				callsign = "ITALY A-10C - Fictional Italian AM (23Gruppo)"
+			elseif (subtype == 11) then
+				_country = country.id.NORWAY
+				_skin = "Fictional Royal Norwegian Air Force"
+				callsign = "NORWAY A-10C - Fictional Royal Norwegian Air Force"
+			elseif (subtype == 12) then
+				_country = country.id.SPAIN
+				subtype1 = math.random(1,3)
+				if (subtype1 == 1) then
+					_skin = "Fictional Spanish 12nd Wing"
+					callsign = "SPAIN A-10C - Fictional Spanish 12nd Wing"
+				elseif (subtype1 == 2) then
+					_skin = "Fictional Spanish AGA"
+					callsign = "SPAIN A-10C - Fictional Spanish AGA"
+				else
+					_skin = "Fictional Spanish Tritonal"
+					callsign = "SPAIN A-10C - Fictional Spanish Tritonal"
+				end
+			elseif (subtype == 13) then
+				_country = country.id.THE_NETHERLANDS
+				_skin = "A-10 Grey"
+				callsign = "THE_NETHERLANDS A-10C - A-10 Grey"
+			elseif (subtype == 14) then
+				_country = country.id.UK
+				_skin = "A-10 Grey"
+				callsign = "UK A-10C - A-10 Grey"
+			else
+				_country = country.id.UKRAINE
+				_skin = "Fictional Ukraine Air Force 1"
+				callsign = "UKRAINE A-10C - Fictional Ukraine Air Force 1"
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+					},
+				},
+				["fuel"] = 5029,
+				["flare"] = 120,
+				["ammo_type"] = 1,
+				["chaff"] = 240,
+				["gun"] = 100,
+			}
 		elseif (randomAttack == 3)	then
+			_aircrafttype = "Su-25"
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_country = country.id.GEORGIA
+				subtype1 = math.random(1,2)
+				if (subtype1 == 1) then
+					_skin = "`scorpion` demo scheme (native)"
+					callsign = "GEORGIA Su-25 - `scorpion` demo scheme (native)"
+				else
+					_skin = "field camo scheme #1 (native)"
+					callsign = "GEORGIA Su-25 - field camo scheme #1 (native)"
+				end
+			else
+				_country = country.id.UKRAINE
+				subtype1 = math.random(1,4)
+				if (subtype1 == 1) then
+					_skin = "broken camo scheme #1 (native). 299th oshap"
+					callsign = "UKRAINE Su-25 - broken camo scheme #1 (native). 299th oshap"
+				elseif (subtype1 == 2) then
+					_skin = "broken camo scheme #2 (native). 452th shap"
+					callsign = "UKRAINE Su-25 - broken camo scheme #2 (native). 452th shap"
+				elseif (subtype1 == 3) then
+					_skin = "petal camo scheme #1 (native). 299th brigade"
+					callsign = "UKRAINE Su-25 - petal camo scheme #1 (native). 299th brigade"
+				else
+					_skin = "petal camo scheme #2 (native). 299th brigade"
+					callsign = "UKRAINE Su-25 - petal camo scheme #2 (native). 299th brigade"
+				end
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "2835",
+				["flare"] = 128,
+				["chaff"] = 128,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 4)	then
+			_aircrafttype = "Su-25T"
+			_country = country.id.GEORGIA
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_skin = "af standard"
+				callsign = "GEORGIA Su-25T - af standard"
+			else
+				_skin = "af standard 1"
+				callsign = "GEORGIA Su-25T - af standard 1"
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "3790",
+				["flare"] = 128,
+				["chaff"] = 128,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 5)	then
+			_aircrafttype = "MiG-27K"
+			_country = country.id.UKRAINE
+			_skin = "af standard"
+			callsign = "UKRAINE MiG-27K"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[2] =
+					{
+						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+					},
+				},
+				["fuel"] = "4500",
+				["flare"] = 60,
+				["chaff"] = 60,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 6)	then
+			_aircrafttype = "Su-17M4"
+			_country = country.id.UKRAINE
+
+			subtype = math.random(1,3)
+			if (subtype == 1) then
+				_skin = "af standard"
+				callsign = "UKRAINE Su-17M4 - af standard"
+			elseif (subtype == 2) then
+				_skin = "af standard (worn-out)"
+				callsign = "UKRAINE Su-17M4 - af standard (worn-out)"
+			else
+				_skin = "shap limanskoye ab"
+				callsign = "UKRAINE Su-17M4 - shap limanskoye ab"
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+				},
+				["fuel"] = "3770",
+				["flare"] = 64,
+				["chaff"] = 64,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 7)	then
+			_aircrafttype = "A-10C"
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_country = country.id.RUSSIA
+				subtype1 = math.random(1,2)
+				if (subtype1 == 1) then
+					_skin = "Fictional Russian Air Force 1"
+					callsign = "RUSSIA A-10C - Fictional Russian Air Force 1"
+				else
+					_skin = "Fictional Russian Air Force 2"
+					callsign = "RUSSIA A-10C - Fictional Russian Air Force 2"
+				end
+			else
+
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
+					},
+				},
+				["fuel"] = 5029,
+				["flare"] = 120,
+				["ammo_type"] = 1,
+				["chaff"] = 240,
+				["gun"] = 100,
+			}
+
+
+		elseif (randomAttack == 8)	then
+			_aircrafttype = "Hawk"
+
+			subtype = math.random(1,4)
+			if (subtype == 1) then
+				_country = country.id.RUSSIA
+				_skin = "100sqn XX189"
+				callsign = "RUSSIA Hawk - 100sqn XX189"
+			else
+				_country = country.id.UKRAINE
+				subtype1 = math.random(1,4)
+				if (subtype1 == 1) then
+					_skin = "broken camo scheme #1 (native). 299th oshap"
+					callsign = "UKRAINE Su-25 - broken camo scheme #1 (native). 299th oshap"
+				elseif (subtype1 == 2) then
+					_skin = "broken camo scheme #2 (native). 452th shap"
+					callsign = "UKRAINE Su-25 - broken camo scheme #2 (native). 452th shap"
+				elseif (subtype1 == 3) then
+					_skin = "petal camo scheme #1 (native). 299th brigade"
+					callsign = "UKRAINE Su-25 - petal camo scheme #1 (native). 299th brigade"
+				else
+					_skin = "petal camo scheme #2 (native). 299th brigade"
+					callsign = "UKRAINE Su-25 - petal camo scheme #2 (native). 299th brigade"
+				end
+			end
+
+			-- no payload in liveries yet
+
+		elseif (randomAttack == 9)	then
+			_aircrafttype = "MiG-27K"
+			_country = country.id.RUSSIA
+			_skin = "af standard"
+			callsign = "UKRAINE MiG-27K - af standard"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[2] =
+					{
+						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
+					},
+				},
+				["fuel"] = "4500",
+				["flare"] = 60,
+				["chaff"] = 60,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 10)	then
+			_aircrafttype = "Su-17M4"
+			_country = country.id.RUSSIA
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_skin = "af standard"
+				callsign = "RUSSIA Su-17M4 - af standard"
+			else
+				_skin = "af standard (worn-out)"
+				callsign = "RUSSIA Su-17M4 - af standard (worn-out)"
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+				},
+				["fuel"] = "3770",
+				["flare"] = 64,
+				["chaff"] = 64,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 11)	then
+			_aircrafttype = "Su-25"
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_country = country.id.RUSSIA
+				subtype1 = math.random(1,4)
+				if (subtype1 == 1) then
+					_skin = "field camo scheme #1 (native)"
+					callsign = "RUSSIA Su-25 - field camo scheme #1 (native)"
+				elseif (subtype1 == 2) then
+					_skin = "field camo scheme #2 (native). 960th shap"
+					callsign = "RUSSIA Su-25 - field camo scheme #2 (native). 960th shap"
+				elseif (subtype1 == 3) then
+					_skin = "field camo scheme #3 (worn-out). 960th shap"
+					callsign = "RUSSIA Su-25 - field camo scheme #3 (worn-out). 960th shap"
+				else
+					_skin = "forest camo scheme #1 (native)"
+					callsign = "RUSSIA Su-25 - forest camo scheme #1 (native)"
+				end
+			else
+				_country = country.id.UKRAINE
+				subtype1 = math.random(1,4)
+				if (subtype1 == 1) then
+					_skin = "broken camo scheme #1 (native). 299th oshap"
+					callsign = "UKRAINE Su-25 - broken camo scheme #1 (native). 299th oshap"
+				elseif (subtype1 == 2) then
+					_skin = "broken camo scheme #2 (native). 452th shap"
+					callsign = "UKRAINE Su-25 - broken camo scheme #2 (native). 452th shap"
+				elseif (subtype1 == 3) then
+					_skin = "petal camo scheme #1 (native). 299th brigade"
+					callsign = "UKRAINE Su-25 - petal camo scheme #1 (native). 299th brigade"
+				else
+					_skin = "petal camo scheme #2 (native). 299th brigade"
+					callsign = "UKRAINE Su-25 - petal camo scheme #2 (native). 299th brigade"
+				end
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "2835",
+				["flare"] = 128,
+				["chaff"] = 128,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 12)	then
+			_aircrafttype = "Su-25T"
+			_country = country.id.RUSSIA
+
+			subtype = math.random(1,3)
+			if (subtype == 1) then
+				_skin = "af standard 1"
+				callsign = "RUSSIA Su-25T - af standard 1"
+			elseif (subtype == 2) then
+				_skin = "af standard 2"
+				callsign = "RUSSIA Su-25T - af standard 2"
+			else
+				_skin = "su-25t test scheme"
+				callsign = "RUSSIA Su-25T - su-25t test scheme"
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "3790",
+				["flare"] = 128,
+				["chaff"] = 128,
+				["gun"] = 100,
+			}
+		elseif (randomAttack == 13)	then
+
+		elseif (randomAttack == 14)	then
 
 
 
@@ -1266,60 +2059,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 
 
-			_aircrafttype = "A-10C"
-			_country = country.id.USA
-			_skin = "23rd TFW England AFB (EL)"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
-			}, -- end of [3]
-			[4] =
-			{
-			["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
-			}, -- end of [4]
-			[5] =
-			{
-			["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
-			}, -- end of [5]
-			[7] =
-			{
-			["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
-			}, -- end of [7]
-			[8] =
-			{
-			["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
-			}, -- end of [8]
-			[9] =
-			{
-			["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
-			}, -- end of [9]
-			[10] =
-			{
-			["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
-			}, -- end of [10]
-			[11] =
-			{
-			["CLSID"] = "{DB434044-F5D0-4F1F-9BA9-B73027E18DD3}",
-			}, -- end of [11]
-			}, -- end of ["pylons"]
-			["fuel"] = 5029,
-			["flare"] = 120,
-			["ammo_type"] = 1,
-			["chaff"] = 240,
-			["gun"] = 100,
-			}
-			callsign = "ENFIELD"
 
 		elseif (randomFighter == 3)	then
 
@@ -1912,47 +2651,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 
 		elseif (randomFighter == 22) then
-			_aircrafttype = "MiG-27K"
-			_country = country.id.RUSSIA
-			_skin = "af standard"
-			_payload = {
-			["pylons"] =
-			{
-			[2] =
-			{
-			["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [3]
-			[4] =
-			{
-			["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
-			}, -- end of [4]
-			[5] =
-			{
-			["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
-			}, -- end of [5]
-			[6] =
-			{
-			["CLSID"] = "{3C612111-C7AD-476E-8A8E-2485812F4E5C}",
-			}, -- end of [6]
-			[7] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [7]
-			[8] =
-			{
-			["CLSID"] = "{37DCC01E-9E02-432F-B61D-10C166CA2798}",
-			}, -- end of [8]
-			}, -- end of ["pylons"]
-			["fuel"] = "4500",
-			["flare"] = 60,
-			["chaff"] = 60,
-			["gun"] = 100,
-			}
-			callsign = "RFF311"
 
 		elseif (randomFighter == 23) then
 			_aircrafttype = "MiG-29A"
@@ -2080,163 +2778,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF434"
 
 		elseif (randomFighter == 26) then
-			_aircrafttype = "Su-17M4"
-			_country = country.id.RUSSIA
-			_skin = "af standard (worn-out) (RUS)"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
-			}, -- end of [3]
-			[4] =
-			{
-			["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
-			}, -- end of [4]
-			[5] =
-			{
-			["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
-			}, -- end of [5]
-			[6] =
-			{
-			["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
-			}, -- end of [6]
-			[7] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [7]
-			[8] =
-			{
-			["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
-			}, -- end of [8]
-			}, -- end of ["pylons"]
-			["fuel"] = "3770",
-			["flare"] = 64,
-			["chaff"] = 64,
-			["gun"] = 100,
-			}
-			callsign = "RFF904"
 
 		elseif (randomFighter == 27) then
 
 		elseif (randomFighter == 29) then
-			_aircrafttype = "Su-25"
-			_country = country.id.RUSSIA
-			_skin = "field camo scheme #3 (worn-out). 960th shap"
-			_payload ={
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
-			}, -- end of [3]
-			[4] =
-			{
-			["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
-			}, -- end of [4]
-			[5] =
-			{
-			["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
-			}, -- end of [5]
-			[6] =
-			{
-			["CLSID"] = "{0180F983-C14A-11d8-9897-000476191836}",
-			}, -- end of [6]
-			[7] =
-			{
-			["CLSID"] = "{79D73885-0801-45a9-917F-C90FE1CE3DFC}",
-			}, -- end of [7]
-			[8] =
-			{
-			["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
-			}, -- end of [8]
-			[9] =
-			{
-			["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
-			}, -- end of [9]
-			[10] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [10]
-			}, -- end of ["pylons"]
-			["fuel"] = "2835",
-			["flare"] = 128,
-			["chaff"] = 128,
-			["gun"] = 100,
-			}
-			callsign = "RFF84"
 
 		elseif (randomFighter == 30) then
-			_aircrafttype = "Su-25T"
-			_country = country.id.RUSSIA
-			_skin = "af standard 2"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
-			}, -- end of [3]
-			[4] =
-			{
-			["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
-			}, -- end of [4]
-			[5] =
-			{
-			["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
-			}, -- end of [5]
-			[7] =
-			{
-			["CLSID"] = "{E8D4652F-FD48-45B7-BA5B-2AE05BB5A9CF}",
-			}, -- end of [7]
-			[8] =
-			{
-			["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
-			}, -- end of [8]
-			[9] =
-			{
-			["CLSID"] = "{D5435F26-F120-4FA3-9867-34ACE562EF1B}",
-			}, -- end of [9]
-			[10] =
-			{
-			["CLSID"] = "{637334E4-AB5A-47C0-83A6-51B7F1DF3CD5}",
-			}, -- end of [10]
-			[11] =
-			{
-			["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
-			}, -- end of [11]
-			}, -- end of ["pylons"]
-			["fuel"] = "3790",
-			["flare"] = 128,
-			["chaff"] = 128,
-			["gun"] = 100,
-			}
-			callsign = "RFF66"
 
 		elseif (randomFighter == 31) then
 			_aircrafttype = "Su-27"
