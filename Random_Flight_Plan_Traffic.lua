@@ -14,6 +14,7 @@ flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise jus
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
 flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
+flgRandomParkingType = false			-- Randomize type of parking spot for spawn location
 
 --DEBUG
 debugLog = true		-- write entries to the log		--check
@@ -25,11 +26,19 @@ aircraftDistribution = {30, 45, 70, 90, 100}	-- Distribution of aircraft type Ut
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
 maxCoalition = {30, 30}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {10000, 10000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
+waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
+defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]
+parkingSpotType = {								-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)
+	"TakeOffParking", "From Parking Area",
+	"TakeOffParkingHot", "From Parking Area Hot",
+	"TakeOff", "From Runway",
+	"Turning Point", "Turning Point"
+}
+spawnSpeedTurningPoint = 100					-- When spawning in the air as turning point, starting speed
 
 -- Should be no need to edit these below
 RATtable = {}
@@ -8164,6 +8173,14 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	_waypointtype = parkingT[1]
 	_waypointaction = parkingT[2]
+	if (_waypointtype == "Turning Point") then
+		_spawnSpeed = spawnSpeedTurningPoint
+		Pos3 = Object.getPosition({id_=spawnIndex.id_})
+		_spawnHeading = (Pos3.p.y / 360) * 6.28
+	else
+		_spawnSpeed = 0
+		_spawnHeading = 0
+	end
 
 	_landairbaseID = landIndex.id
 	_landairbaseloc = Object.getPoint({id_=landIndex.id_})
@@ -8174,12 +8191,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	-- Compute single intermediate waypoint based on used-defined minimum deviation x/z range
 	local _waypoint = {}
 	_waypoint.dist = math.sqrt((_spawnairbaseloc.x - _landairbaseloc.x) * (_spawnairbaseloc.x - _landairbaseloc.x) + (_spawnairbaseloc.z - _landairbaseloc.z) * (_spawnairbaseloc.z - _landairbaseloc.z))
-	if ((_waypoint.dist / 2) < waypointRange[1]) then
+	if (((_waypoint.dist / 2) < waypointRange[1]) or (spawnIndex.id == landIndex.id)) then
 		_waypoint.distx = waypointRange[1]
 	else
 		_waypoint.distx = _waypoint.dist / 2
 	end
-	if ((_waypoint.dist / 2) < waypointRange[2]) then
+	if (((_waypoint.dist / 2) < waypointRange[2]) or (spawnIndex.id == landIndex.id)) then
 		_waypoint.distz = waypointRange[2]
 	else
 		_waypoint.distz = _waypoint.dist / 2
@@ -8197,6 +8214,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			},
 		["task"] = _task,
 		["uncontrolled"] = false,
+        ["heading"] = _spawnHeading,
 		["route"] =
 		{
 			["points"] =
@@ -8213,7 +8231,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					["airdromeId"] = _spawnairdromeId,
 					["y"] = _spawnairplanepos.z,
 					["x"] = _spawnairplanepos.x,
-					["speed"] = 0,
+					["speed"] = _spawnSpeed,
 					["ETA_locked"] = true,
 					["task"] =
 					{
@@ -8242,10 +8260,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["parking"] = _spawnairplaneparking,
 				["y"] = _spawnairplanepos.z,
 				["x"] = _spawnairplanepos.x,
+                ["heading"] = _spawnHeading,
 				["name"] =  _groupname.."1",
 				["callsign"] = _callname,
 				["payload"] = _payload,
-				["speed"] = 0,
+				["speed"] = _spawnSpeed,
 				["unitId"] =  math.random(9999,99999),
 				["alt_type"] = "RADIO",
 				["skill"] = _skill,
@@ -8367,6 +8386,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
 	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
@@ -8427,43 +8447,33 @@ function checkStatus()
 						-- Check for movement
 						if absactualunitvel > 4 then
 							RATtable[i].checktime = 0 -- If it's moving, reset checktime
+						else
+							RATtable[i].checktime = RATtable[i].checktime + 1
 						end
 
-						-- Check for wandering
 						local actualunitpos = actualunit:getPosition().p
 						local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
+						local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
+						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then -- Check for wandering
 							removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
 							RATtableLimit = RATtableLimit - 1
 							i = i - 1
-						end
-
-						-- Check for under ground level
-						if (actualunitheight < 0) then
+						elseif (actualunitheight < 0) then -- Check for under ground level
 							removeGroup(i, "  removed due to being under ground level", true, Unit.getGroup(actualunit))
 							RATtableLimit = RATtableLimit - 1
 							i = i - 1
-						end
-
-						-- Check for damage
-						local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
-						if ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
+						elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
 							removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
 							RATtableLimit = RATtableLimit - 1
 							i = i - 1
-						end
-
-						-- Check for stuck
-						if (RATtable[i].checktime > waitTime) then -- This group hasn't moved in a very long time
+						elseif (RATtable[i].checktime > waitTime) then -- Check for stuck
 							removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
 							RATtableLimit = RATtableLimit - 1
-							-- Lets exit the function for this cycle because an aircraft was remove
-							--  possible for another blocked aircraft to now move
-							--  (instead would be deleted during next run of the current loop)
+							-- Lets exit the function for this cycle because an aircraft was removed.
+							--  Possible for another blocked aircraft to now move.
+							--  (instead that aircraft would be deleted during next run of the current loop)
 							i = RATtableLimit
 						end
-
-						RATtable[i].checktime = RATtable[i].checktime + 1
 						i = i + 1
 					end
 				end
@@ -8510,13 +8520,11 @@ function generateGroup()
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
 		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
 
-		i = math.random(1, 3)
-		if (i == 1) then
-			parkingType = {"TakeOffParking", "From Parking Area"}
-		elseif (i == 2) then
-			parkingType = {"TakeOffParkingHot", "From Parking Area Hot"}
+		if (flgRandomParkingType) then
+			local i = math.random(1, #parkingSpotType / 2)
+			parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
 		else
-			parkingType = {"TakeOff", "From Runway"}
+			parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
 		end
 
 		if (coalitionSide == 1) then
