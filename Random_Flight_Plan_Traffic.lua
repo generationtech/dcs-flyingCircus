@@ -4,7 +4,7 @@
 do
 --EDIT BELOW
 intervall = math.random(60,300) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {20, 20} 	-- maximum number of red, blue units
+maxCoalition = {4, 4} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 
@@ -2464,8 +2464,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 								["alt_type"] = "RADIO",
                                 ["formation_template"] = "",
                                 ["ETA"] = 0,
-                                ["y"] = _spawnairbaseloc.z+500,
-                                ["x"] = _spawnairbaseloc.x+1000,
+                                ["y"] = _spawnairbaseloc.z+5000,
+                                ["x"] = _spawnairbaseloc.x+5000,
 								["speed"] = 300,
                                 ["ETA_locked"] = false,
                                 ["task"] =
@@ -2483,68 +2483,61 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 								}
 
 	_landingpoint =
-                    {
-						["alt"] = 600,
-						["type"] = "LAND",
-						["action"] = "Landing",
-						["alt_type"] = "RADIO",
-						["formation_template"] = "",
-						["ETA"] = 0,
-						["y"] = _landairplanepos.z,
-						["x"] = _landairplanepos.x,
-						["speed"] = 250,
-						["ETA_locked"] = false,
-						["task"] =
-							{
-								["id"] = "ComboTask",
-								["params"] =
+{
+								["alt"] = 0, -- set a quarter of the climb altitute
+								["type"] = "Land",
+								["action"] = "Landing",
+								["alt_type"] = "RADIO",
+								["formation_template"] = "Trail",
+								["properties"] =
+								{
+									["vnav"] = 1,
+									["scale"] = 0,
+									["angle"] = 0,
+									["vangle"] = 0,
+									["steer"] = 2,
+								}, -- end of ["properties"]
+								["ETA"] = 0,-- REVIEW
+								["airdromeId"] = _landairdromeId,
+								["y"] = _landairplanepos.z, -- AFBy,
+								["x"] = _landairplanepos.x, --AFBx,
+								["speed"] = 250, -- REVIEW
+								["ETA_locked"] = false,
+								["task"] =
+								{
+									["id"] = "ComboTask",
+									["params"] =
 									{
 										["tasks"] =
-											{
+										{
+										}, -- end of ["tasks"]
+									}, -- end of ["params"]
+								}, -- end of ["task"]
+								["speed_locked"] = true,
+							}
 
-											},
-									},
-							},
-						["speed_locked"] = true,
-					}
+
+
+
+
+
+
+
 
 
 	env.warning("Adding route for group: " .. nameP .. numCoalition[coalitionIndex] .. " Land airbase: " .. landIndex.name, false)
 
+	if (AircraftType == 2) then
+		env.warning("Build Heli route", false)
+		_landwaypoints[#_landwaypoints+1] =  _turningpoint
+		_landwaypoints[#_landwaypoints+1] =  _landingpoint
+	else
+		env.warning("Build Plane route", false)
+		_landwaypoints[#_landwaypoints+1] =  _turningpoint
+		_landwaypoints[#_landwaypoints+1] =  _landingpoint
+	end
 
---	if (AircraftType == 2) then
---		env.warning("Build Heli route", false)
---		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_turningpoint, "Turning Point", 80, 800, "RADIO")
---		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_landingpoint, "LAND", 80, 600, "RADIO")
---	else
---		env.warning("Build Plane route", false)
---		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_turningpoint, "Turning Point", 200, 11500, "RADIO")
---		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_landingpoint, "LAND", 200, 8000, "RADIO")
---	end
-
-
-_landwaypoints[1] =
-{
-    ["action"] = "Turning Point",
-    ["alt"] = 600,
-    ["alt_type"] = "RADIO",
-    ["speed"] = 250,
-    ["type"] = "Turning Point",
-    ["x"] = -2321411.734375,
-    ["y"] = 545968.875
-}
-_landwaypoints[2] =
-{
-    ["action"] = "Landing",
-    ["alt"] = 9,
-    ["alt_type"] = "RADIO",
-    ["speed"] = 250,
-    ["type"] = "Land",
-    ["x"] = -221411.734375,
-    ["y"] = 565968.875
-}
-
-	mist.goRoute(Group.getByName(nameP .. numCoalition[coalitionIndex]), _landwaypoints)
+	mist.scheduleFunction(mist.goRoute, {Group.getByName(nameP .. numCoalition[coalitionIndex]), _landwaypoints}, timer.getTime() + 1)
 end
 
 function chooseAirbase(AF)
