@@ -22,9 +22,9 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 intervall = math.random(30,30)					-- Random spawn repeat interval
-aircraftDistribution = {30, 45, 70, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftDistribution = {40, 50, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {20, 20}							-- Maximum number of red, blue units		--check
+maxCoalition = {15, 15}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -36,7 +36,8 @@ parkingSpotType = {								-- List of waypoint styles used for spawn point (2 en
 	"TakeOffParking", "From Parking Area",
 	"TakeOffParkingHot", "From Parking Area Hot",
 	"TakeOff", "From Runway",
-	"Turning Point", "Turning Point"
+	"Turning Point", "Turning Point",
+	"Turning Point", "Turning Point"			-- Favor in-air start
 }
 spawnSpeedTurningPoint = 120					-- When spawning in the air as turning point, starting speed
 
@@ -8163,7 +8164,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 	end
 
-
 	_spawnairdromeId = spawnIndex.id
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
 	_spawnairplanepos = {}
@@ -8386,7 +8386,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
+--	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
 	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
@@ -8407,6 +8407,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		checktime = 0,
 		status = "taxiing"
 	}
+
+	--if (debugLog) then env.info('#RATtable:' .. #RATtable .. " RATtable:" .. mist.utils.tableShow(RATtable), false) end
+
 end
 
 function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
@@ -8419,7 +8422,7 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
--- Periodically check all dynamically spawned AI units for existence, movement, wandering, under ground, damage, and stuck/parked
+-- Periodically check all dynamically spawned AI units for existence, movement, wandering, below ground, damage, and stuck/parked
 function checkStatus()
 	if (#RATtable > 0)
 	then
@@ -8427,56 +8430,58 @@ function checkStatus()
 		local i = 1
 		while (i <= RATtableLimit)
 		do
-			if (i <= RATtableLimit) then
-				local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
-				if (currentaircraftgroup) == nil then		-- This group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
-					if (RATtable[i].checktime > 0) then		-- Have we checked this group yet? (should have spawned by now)
-						removeGroup(i, "  removed by sim, not script", false, nil)
-						RATtableLimit = RATtableLimit - 1	-- Array shrinks
+			local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
+			if (currentaircraftgroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
+				if (RATtable[i].checktime > 0) then		-- Have we checked this group yet? (should have spawned by now)
+					removeGroup(i, "  removed by sim, not script", false, nil)
+					RATtableLimit = RATtableLimit - 1	-- Array shrinks
+				else
+					RATtable[i].checktime = RATtable[i].checktime + 1
+					i = i + 1
+				end
+			else -- Valid group, make checks
+				local currentunitname1 = RATtable[i].unitname1
+				if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
+					local actualunit = Unit.getByName(currentunitname1)
+					local actualunitvel = actualunit:getVelocity()
+					local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
+
+				-- Check for movement
+					if absactualunitvel > 4 then
+						RATtable[i].checktime = 0 -- If it's moving, reset checktime
 					else
 						RATtable[i].checktime = RATtable[i].checktime + 1
-						i = i + 1
 					end
-				else -- Valid group, make checks
-					local currentunitname1 = RATtable[i].unitname1
-					if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
-						local actualunit = Unit.getByName(currentunitname1)
-						local actualunitvel = actualunit:getVelocity()
-						local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
-						-- Check for movement
-						if absactualunitvel > 4 then
-							RATtable[i].checktime = 0 -- If it's moving, reset checktime
-						else
-							RATtable[i].checktime = RATtable[i].checktime + 1
-						end
-
-						local actualunitpos = actualunit:getPosition().p
-						local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-						local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
-						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then -- Check for wandering
-							removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1
-						elseif (actualunitheight < 0) then -- Check for under ground level
-							removeGroup(i, "  removed due to being under ground level", true, Unit.getGroup(actualunit))
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1
-						elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
-							removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1
-						elseif (RATtable[i].checktime > waitTime) then -- Check for stuck
-							removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
-							RATtableLimit = RATtableLimit - 1
-							-- Lets exit the function for this cycle because an aircraft was removed.
-							--  Possible for another blocked aircraft to now move.
-							--  (instead that aircraft would be deleted during next run of the current loop)
-							i = RATtableLimit
-						end
-						i = i + 1
+					local actualunitpos = actualunit:getPosition().p
+					local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
+					local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
+				-- Check for wandering
+					if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
+						removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
+						RATtableLimit = RATtableLimit - 1
+						i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+				-- Check for below ground level
+					elseif (actualunitheight < 0) then
+						removeGroup(i, "  removed due to being below ground level", true, Unit.getGroup(actualunit))
+						RATtableLimit = RATtableLimit - 1
+						i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+				-- check for damaged unit
+					elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
+						removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
+						RATtableLimit = RATtableLimit - 1
+						i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+				-- Check for stuck
+					elseif (RATtable[i].checktime > waitTime) then
+						removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
+						RATtableLimit = RATtableLimit - 1
+						-- Lets exit the function for this cycle because an aircraft was removed.
+						--  Possible for another blocked aircraft to now move.
+						--  (instead that aircraft would be deleted during next run of the current loop)
+						i = RATtableLimit
 					end
 				end
+				i = i + 1
 			end
 		end
 	end
@@ -8493,7 +8498,6 @@ function generateGroup()
 	local coalitionSide
 	local airbaseSpawn
 	local airbaseLand
-	local i
 	local parkingType
 
 	-- Choose which coalition side to possibly spawn new aircraft
