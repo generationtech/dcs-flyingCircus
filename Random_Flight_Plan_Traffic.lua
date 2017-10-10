@@ -7,8 +7,8 @@ do
 flgRandomCoalitionSpawn = true		-- Random sequence of Red/Blue coalition spawning?
 flgRandomFuel = true				-- Random fuel loadout?		--check
 flagRandomWeapons = true			-- Add weapons to aircraft?		--check
-flagRandomWaypoint = true			-- Create intermediate waypoint?
-flgAllowSpawnLandingAirbase = true	-- Allow spawning airbase and landing airbase to be the same?
+flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
+flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?
 flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
 flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
@@ -27,7 +27,7 @@ maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 numCoalition = {0, 0}							-- Number of active Red, Blue dynamic spawned units		--check
 waypointRange = {10000, 10000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
-waitTime = 20									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
+waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]
@@ -8225,69 +8225,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					},
 					["speed_locked"] = true,
 				},
-				[2] =
-				{
-					["alt"] = _flightalt,
-					["type"] = "Turning Point",
-					["action"] = "Turning Point",
-					["alt_type"] = "BARO",
-					["formation_template"] = "",
-					["properties"] =
-					{
-						["vnav"] = 1,
-						["scale"] = 0,
-						["angle"] = 0,
-						["vangle"] = 0,
-						["steer"] = 2,
-					},
---					["ETA"] = 51.632064419993,
-					["y"] = _waypoint.z,
-					["x"] = _waypoint.x,
-					["speed"] = _flightspeed,
-					["ETA_locked"] = false,
-					["task"] =
-					{
-						["id"] = "ComboTask",
-						["params"] =
-						{
-							["tasks"] = _tasks,
-						},
-					},
-					["speed_locked"] = true,
-				},
-				[3] =
-				{
-					["alt"] = _flightalt / 2,
-					["type"] = "Land",
-					["action"] = "Landing",
-					["alt_type"] = "BARO",
-					["formation_template"] = "",
-					["properties"] =
-					{
-						["vnav"] = 1,
-						["scale"] = 0,
-						["angle"] = 0,
-						["vangle"] = 0,
-						["steer"] = 2,
-					},
---					["ETA"] = 0,
-					["airdromeId"] = _landairbaseID,
-					["y"] = _landairbaseloc.z,
-					["x"] = _landairbaseloc.x,
-					["speed"] = _flightspeed,
-					["ETA_locked"] = false,
-					["task"] =
-					{
-						["id"] = "ComboTask",
-						["params"] =
-						{
-							["tasks"] =
-							{
-							},
-						},
-					},
-					["speed_locked"] = true,
-				},
 			},
 		},
 		["groupId"] = nameCoalition[coalitionIndex],
@@ -8321,6 +8258,106 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		["start_time"] = 0,
 		["frequency"] = 124,
 	}
+
+	if (flagRandomWaypoint) then
+		_airplanedata.route.points[2] =
+		{
+			["alt"] = _flightalt,
+			["type"] = "Turning Point",
+			["action"] = "Turning Point",
+			["alt_type"] = "BARO",
+			["formation_template"] = "",
+			["properties"] =
+			{
+				["vnav"] = 1,
+				["scale"] = 0,
+				["angle"] = 0,
+				["vangle"] = 0,
+				["steer"] = 2,
+			},
+--					["ETA"] = 51.632064419993,
+			["y"] = _waypoint.z,
+			["x"] = _waypoint.x,
+			["speed"] = _flightspeed,
+			["ETA_locked"] = false,
+			["task"] =
+			{
+				["id"] = "ComboTask",
+				["params"] =
+				{
+					["tasks"] = _tasks,
+				},
+			},
+			["speed_locked"] = true,
+		}
+		_airplanedata.route.points[3] =
+		{
+			["alt"] = _flightalt / 2,
+			["type"] = "Land",
+			["action"] = "Landing",
+			["alt_type"] = "BARO",
+			["formation_template"] = "",
+			["properties"] =
+			{
+				["vnav"] = 1,
+				["scale"] = 0,
+				["angle"] = 0,
+				["vangle"] = 0,
+				["steer"] = 2,
+			},
+--					["ETA"] = 0,
+			["airdromeId"] = _landairbaseID,
+			["y"] = _landairbaseloc.z,
+			["x"] = _landairbaseloc.x,
+			["speed"] = _flightspeed,
+			["ETA_locked"] = false,
+			["task"] =
+			{
+				["id"] = "ComboTask",
+				["params"] =
+				{
+					["tasks"] =
+					{
+					},
+				},
+			},
+			["speed_locked"] = true,
+		}
+	else
+		_airplanedata.route.points[2] =
+		{
+			["alt"] = _flightalt / 2,
+			["type"] = "Land",
+			["action"] = "Landing",
+			["alt_type"] = "BARO",
+			["formation_template"] = "",
+			["properties"] =
+			{
+				["vnav"] = 1,
+				["scale"] = 0,
+				["angle"] = 0,
+				["vangle"] = 0,
+				["steer"] = 2,
+			},
+--					["ETA"] = 0,
+			["airdromeId"] = _landairbaseID,
+			["y"] = _landairbaseloc.z,
+			["x"] = _landairbaseloc.x,
+			["speed"] = _flightspeed,
+			["ETA_locked"] = false,
+			["task"] =
+			{
+				["id"] = "ComboTask",
+				["params"] =
+				{
+					["tasks"] =
+					{
+					},
+				},
+			},
+			["speed_locked"] = true,
+		}
+	end
 
 	if (AircraftType == 1 or AircraftType == 3) then
 		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
@@ -8464,9 +8501,21 @@ function generateGroup()
 		if (coalitionSide == 1) then
 			airbaseSpawn = chooseAirbase(redAF)
 			airbaseLand = chooseAirbase(redAF)
+			if ((flgNoSpawnLandingAirbase) and (#redAF > 1)) then -- If flag is set and more than 1 airbase, don't let Red spawn and land airbase be the same
+				while (airbaseSpawn == airbaseLand) do
+					airbaseSpawn = chooseAirbase(redAF)
+					airbaseLand = chooseAirbase(redAF)
+				end
+			end
 		else
 			airbaseSpawn = chooseAirbase(blueAF)
 			airbaseLand = chooseAirbase(blueAF)
+			if ((flgNoSpawnLandingAirbase) and (#blueAF > 1)) then -- If flag is set and more than 1 airbase, don't let Blue spawn and land airbase be the same
+				while (airbaseSpawn == airbaseLand) do
+					airbaseSpawn = chooseAirbase(blueAF)
+					airbaseLand = chooseAirbase(blueAF)
+				end
+			end
 		end
 
 		-- Create new aircraft
