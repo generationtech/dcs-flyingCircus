@@ -6922,7 +6922,7 @@ local icount = {0, 0} -- verify how many units script think are active vs active
 			if (i <= RATtableLimit) then
 				local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
 
-				if (currentaircraftgroup)) == nil then					-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
+				if (currentaircraftgroup) == nil then					-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
 					if ((RATtable[i].checktime > 0) and (RATtable[i].status ~= nil)) then	-- have we checked this group yet? (should have spawned by now) AND we've not already erased this group from the array
 
 env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  removed by sim, not script', false)
@@ -6962,7 +6962,7 @@ icount[RATtable[i].coalition] = icount[RATtable[i].coalition] - 1
 						if ((Unit.getByName(currentunitname1) ~= nil) and (RATtable[i].status ~= nil)) then -- valid, active unit
 							local actualunit = Unit.getByName(currentunitname1)
 							local initunitstatus = actualunit:getLife0()
-							local lowerstatuslimit = 0.95* initunitstatus
+							local lowerstatuslimit = 0.10 * initunitstatus -- was 0.95. changed to 0.10
 							local actualunitpos = actualunit:getPosition().p
 							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
 							if ((actualunitheight < 20) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
@@ -6982,8 +6982,6 @@ icount[RATtable[i].coalition] = icount[RATtable[i].coalition] - 1
 								table.remove(RATtable, i)										-- unit does not exist any longer for this script
 								RATtableLimit = RATtableLimit - 1
 							else -- valid unit, check for movement
-								local currentunitname = RATtable[i].unitname1
-								local actualunit = Unit.getByName(currentunitname)
 								local actualunitvel = actualunit:getVelocity()
 								local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
