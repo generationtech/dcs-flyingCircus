@@ -8307,7 +8307,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	--
 
 	-- set max group size based on availability and limit
-	if ((maxCoalitionAircraft[coalitionIndex] - numCoalitionAircraft[coalitionIndex]) > maxGroupSize) then
+	if ((maxCoalitionAircraft[coalitionIndex] - numCoalitionAircraft[coalitionIndex]) >= maxGroupSize) then
 		_maxGroupSize = maxGroupSize
 	else
 		_maxGroupSize = maxCoalitionAircraft[coalitionIndex] - numCoalitionAircraft[coalitionIndex]
@@ -8444,14 +8444,14 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 	_unitNames = {_groupname .. "-1"}
 	_unitCheckTime = {0}
-
 	_formationSize = 1
+
 	-- Create additional units for this group if applicable
 	if ((_singleInFlight == false) and (_maxGroupSize > 1)) then
 		_formationSize = math.random(1, _maxGroupSize)
 env.info('formation size: ' .. _formationSize, false)
 		for i=2, _formationSize do
-env.info('formation loop: ' .. i, false)
+env.info('start formation loop: ' .. i, false)
 			_airplanedata.units[i] =
 			{
 				["alt"] = 0,
@@ -8494,7 +8494,7 @@ env.info('formation loop: ' .. i, false)
 				_airplanedata.units[i].skill = unitSkill[unitSkillDefault]
 			end
 
-			numCoalitionAircraft[cs] = numCoalitionAircraft[cs] + 1		-- Add one aircraft to total aircraft in use
+			numCoalitionAircraft[coalitionIndex] = numCoalitionAircraft[coalitionIndex] + 1		-- Add one aircraft to total aircraft in use
 		end
 	end
 
