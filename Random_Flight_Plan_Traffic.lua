@@ -8643,7 +8643,7 @@ function checkStatus()
 	then
 		local RATtableLimit = #RATtable	 -- Array size may change while loop is running due to removing group
 		local i = 1
-		while (i <= RATtableLimit)
+		while ((i <= RATtableLimit) and (not RATtableLimit <= 0))
 		do
 			local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
 			if (currentaircraftgroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
@@ -8658,7 +8658,7 @@ function checkStatus()
 env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames, false)
 				local unitNamesLimit = #RATtable[i].unitNames
 				local j = 1
-				while (j <= unitNamesLimit)
+				while ((j <= unitNamesLimit) and (not unitNamesLimit <= 0))
 				do
 					local currentunitname = RATtable[i].unitNames[j]
 					if (Unit.getByName(currentunitname) ~= nil) then -- Valid, active unit
@@ -8683,6 +8683,9 @@ env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].u
 								RATtableLimit = RATtableLimit - 1
 								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							else
+							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
+							unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- Check for below ground level
 						elseif (actualunitheight < 0) then
@@ -8691,6 +8694,9 @@ env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].u
 								RATtableLimit = RATtableLimit - 1
 								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							else
+								j = j - 1	-- -1 then +1, stay on current j because table has shrunk
+								unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- check for damaged unit
 						elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
@@ -8699,18 +8705,20 @@ env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].u
 								RATtableLimit = RATtableLimit - 1
 								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							else
+								j = j - 1	-- -1 then +1, stay on current j because table has shrunk
+								unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- Check for stuck
 						elseif (RATtable[i].unitCheckTime[j] > waitTime) then
 							if removeUnit(i, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
 								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
-								RATtableLimit = RATtableLimit - 1
 							end
 							-- Lets exit the function for this cycle because an aircraft was removed.
 							--  Possible for another blocked aircraft to now move.
 							--  (instead that aircraft would be deleted during next run of the current loop)
-							i = RATtableLimit
-							j = unitNamesLimit
+							RATtableLimit = 0
+							unitNamesLimit = 0
 						end
 					else
 					-- Unit removed by sim
@@ -8721,6 +8729,7 @@ env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].u
 							j = unitNamesLimit	-- No need to iterate through anymore units in this group
 						else
 							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
+							unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
 						end
 					end
 					j = j + 1
