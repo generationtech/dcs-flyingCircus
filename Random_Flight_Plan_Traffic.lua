@@ -10,9 +10,10 @@
 
 
 do
---
---EDIT BELOW
---
+
+----------------------
+-- GLOBAL VARIABLES --
+----------------------
 
 --DEBUG
 g_debugLog             = true		-- write entries to the log
@@ -27,7 +28,7 @@ g_aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type 
 g_namePrefix           = {"Red-", "Blue-"}		-- Prefix to use for naming groups
 
 --STUCK CONDITION CHECKING
-g_checkInterval        = 20			-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with g_waitTime in checkStatus() function)
+g_checkInterval        = 20			-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with g_waitTime in f_checkStatus() function)
 g_waitTime             = 15			-- Amount to time to wait before considering aircraft to be parked or stuck
 g_minDamagedLife       = 0.10		-- Minimum % amount of life for aircraft under g_minDamagedHeight
 g_minDamagedHeight     = 20			-- Minimum height to start checking for g_minDamagedLife
@@ -44,55 +45,55 @@ g_flagRandomSkins      = true		-- Randomize the skins for each aircraft (otherwi
 g_flagRandomSkill      = true		-- Randomize AI pilot skill level
 g_unitSkillDefault     = 3			-- Default unit skill if not using randomize unitSkill[g_unitSkillDefault]
 g_unitSkill            = 			-- List of possible skill levels for AI units
-					{
-						"Average",
-						"Good",
-						"High",
-						"Excellent",
-						"Random"
-					}
+						{
+							"Average",
+							"Good",
+							"High",
+							"Excellent",
+							"Random"
+						}
 
 --AIRCRAFT FORMATIONS
-g_flagRandomGroupSize  = true	-- Randomize group size, if applicable
-g_defaultGroupSize	= 2			-- If not randomized, group size for those units supporting formations
-g_maxGroupSize        = 4			-- Maximum number of groups for those units supporting formations
-g_minGroupSize        = 1			-- Minimum number of groups for those units supporting formations
+g_flagRandomGroupSize  = true		-- Randomize group size, if applicable
+g_defaultGroupSize	   = 2			-- If not randomized, group size for those units supporting formations
+g_maxGroupSize         = 4			-- Maximum number of groups for those units supporting formations
+g_minGroupSize         = 1			-- Minimum number of groups for those units supporting formations
 
 g_flagRandomFormation  = true		-- Randomize formations in multiple unit groups, else use default formation value
 g_defaultAirplaneFormation   = 1	-- When not randomizing formations, the default airplane formation #
 g_defaultHelicopterFormation = 1	-- When not randomizing formations, the default helicopter formation #
-g_airplaneFormation   =			-- Airplane formations
-					{			-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
-						[1]  = {"Line Abreast - Open", 2, 5, 1, 65538},
-						[2]  = {"Line Abreast - Close", 1, 5, 1, 65537},
-						[3]  = {"Trail - Open", 2, 5, 2, 131074},
-						[4]  = {"Trail - Close", 1, 5, 2, 131073},
-						[5]  = {"Wedge - Open", 2, 5, 3, 196610},
-						[6]  = {"Wedge - Close", 1, 5, 3, 196609},
-						[7]  = {"Echelon Right - Open", 2, 5, 4, 262146},
-						[8]  = {"Echelon Right - Close", 1, 5, 4, 262145},
-						[9]  = {"Echelon Left - Open", 2, 5, 5, 327682},
-						[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
-						[11] = {"Finger Four - Open", 2, 5, 6, 393218},
-						[12] = {"Finger Four - Close", 1, 5, 6, 393217},
-						[13] = {"Spread Four - Open", 2, 5, 7, 458754},
-						[14] = {"Spread Four - Close", 1, 5, 7, 458753}
-					}
-g_helicopterFormation =			-- Helicopter formations
-					{			-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
-						[1]  = {"Wedge",	nil, nil, 5, 8, 8},
-						[2]  = {"Right - interval 300", 1, 0, 5, 10, 655361},
-						[3]  = {"Right - interval 600", 2, 0, 5, 10, 655362},
-						[4]  = {"Left - interval 300", 1, 1, 5, 10, 655617},
-						[5]  = {"Left - interval 600", 2, 1, 5, 10, 655618},
-						[6]  = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
-						[7]  = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
-						[8]  = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
-						[9]  = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
-						[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
-						[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
-						[12] = {"Column", nil, nil, 5, 11, 720896}
-					}
+g_airplaneFormation    =			-- Airplane formations
+						{			-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
+							[1]  = {"Line Abreast - Open", 2, 5, 1, 65538},
+							[2]  = {"Line Abreast - Close", 1, 5, 1, 65537},
+							[3]  = {"Trail - Open", 2, 5, 2, 131074},
+							[4]  = {"Trail - Close", 1, 5, 2, 131073},
+							[5]  = {"Wedge - Open", 2, 5, 3, 196610},
+							[6]  = {"Wedge - Close", 1, 5, 3, 196609},
+							[7]  = {"Echelon Right - Open", 2, 5, 4, 262146},
+							[8]  = {"Echelon Right - Close", 1, 5, 4, 262145},
+							[9]  = {"Echelon Left - Open", 2, 5, 5, 327682},
+							[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
+							[11] = {"Finger Four - Open", 2, 5, 6, 393218},
+							[12] = {"Finger Four - Close", 1, 5, 6, 393217},
+							[13] = {"Spread Four - Open", 2, 5, 7, 458754},
+							[14] = {"Spread Four - Close", 1, 5, 7, 458753}
+						}
+g_helicopterFormation  =			-- Helicopter formations
+						{			-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
+							[1]  = {"Wedge",	nil, nil, 5, 8, 8},
+							[2]  = {"Right - interval 300", 1, 0, 5, 10, 655361},
+							[3]  = {"Right - interval 600", 2, 0, 5, 10, 655362},
+							[4]  = {"Left - interval 300", 1, 1, 5, 10, 655617},
+							[5]  = {"Left - interval 600", 2, 1, 5, 10, 655618},
+							[6]  = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
+							[7]  = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
+							[8]  = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
+							[9]  = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
+							[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
+							[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
+							[12] = {"Column", nil, nil, 5, 11, 720896}
+						}
 
 --AIRCRAFT FLIGHTPATH
 g_flagNoSpawnLandingAirbase = true	-- Don't allow spawning airbase and landing airbase to be the same?
@@ -102,38 +103,38 @@ g_flagSetTasks              = true	-- Enable general tasks appropriate for each 
 g_flagRandomAltitude        = true	-- Randomize altitude (otherwise use standard altitude per aircraft type)
 
 g_flagRandomSpeed           = true	-- Randomize altitude (otherwise use standard speed per aircraft type)
-g_spawnSpeedTurningPoint   = 125	-- When spawning in the air as turning point, starting speed
+g_spawnSpeedTurningPoint    = 125	-- When spawning in the air as turning point, starting speed
 
-g_flagRandomWaypoint       = true	-- Create intermediate waypoint?
-g_waypointRange            = {40000, 40000}	-- Maximum x,y of where to place intermediate waypoint between takeoff
+g_flagRandomWaypoint        = true	-- Create intermediate waypoint?
+g_waypointRange             = {40000, 40000}	-- Maximum x,y of where to place intermediate waypoint between takeoff
 
 g_flagRandomParkingType     = true	-- Randomize type of parking spot for spawn location
-g_defaultParkingSpotType   = 5	-- If not randomizing spawn parking spot, which one should be used as default g_parkingSpotType[?/2+1]
-g_parkingSpotType          =
-						{		-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)
-							{"TakeOffParking", "From Parking Area"},
-							{"TakeOffParkingHot", "From Parking Area Hot"},
-							{"TakeOff", "From Runway"},
-							{"Turning Point", "Fly Over Point"},		-- Favor in-air start
-							{"Turning Point", "Fly Over Point"},		-- Favor in-air start
-					--		{"Turning Point", "Turning Point"},
-						}
+g_defaultParkingSpotType    = 5		-- If not randomizing spawn parking spot, which one should be used as default g_parkingSpotType[?/2+1]
+g_parkingSpotType           =
+							{		-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)
+								{"TakeOffParking", "From Parking Area"},
+								{"TakeOffParkingHot", "From Parking Area Hot"},
+								{"TakeOff", "From Runway"},
+								{"Turning Point", "Fly Over Point"},	-- Favor in-air start
+								{"Turning Point", "Fly Over Point"},	-- Favor in-air start
+						--		{"Turning Point", "Turning Point"},
+							}
 
 
 -- Should be no need to edit these below
-g_RATtable = {}
+g_RATtable      = {}
 g_spawnInterval = math.random(g_spawnIntervalLow, g_spawnIntervalHigh)	-- Initial random spawn repeat interval
-g_AB = {}																-- Coalition AirBase table
+g_AB            = {}													-- Coalition AirBase table
 
 -- Inventory running limits
-g_numCoalitionAircraft = {0, 0}										-- Current number of active coalition units
-g_numCoalitionGroup = {0, 0}											-- Cumulative highest coalition groups
+g_numCoalitionAircraft = {0, 0}											-- Current number of active coalition units
+g_numCoalitionGroup    = {0, 0}											-- Cumulative highest coalition groups
 
 --env.setErrorMessageBoxEnabled(false)
 
-g_airbasePoints = 													-- These are the start and end x,z points for each airbase
-	{																-- Use for the fly over points when spawning aircraft airborne
-																	-- {x1, z1, x2, z2, psi, heading}
+g_airbasePoints = 					-- These are the start and end x,z points for each airbase runway in the direction of normal take-off traffic
+	{								-- Use for the fly over points when spawning aircraft airborne
+									-- {x1, z1, x2, z2, psi, heading}
 		[12] = {-6495.7142857133,242167.42857143,-4321.7142857133,244091.42857143,-0.724468306690539,0.724468306690539},	-- Anapa-Vityazevo
 		[13] = {11751.428571429,369204.85714286,11620.000000001,366703.71428572,1.62329544850684,-1.62329544850684},		-- Krasnodar-Center
 		[14] = {-40248.857142856,279856.28571428,-41589.428571427,278650.57142857,2.40910735155739,-2.40910735155739},		-- Novorossiysk
@@ -157,7 +158,7 @@ g_airbasePoints = 													-- These are the start and end x,z points for eac
 		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144,4.65116431906051,-4.65116431906051}				-- Beslan
 	}
 
-g_coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skins
+g_coalitionTable = 					-- Big matrix mapping all countries to their aircraft and skins
 	{	-- Countries
 	[0] =													--RUSSIA
 		{ -- Aircraft types
@@ -5700,7 +5701,7 @@ g_aircraftTable =
 
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
-function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
+function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 	_acExist = nil
 	while (_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
@@ -6234,7 +6235,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 end
 
-function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
+function f_removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if ((g_numCoalitionAircraft[g_RATtable[indeX].coalition] > 0) and (#g_RATtable[indeX].unitNames > 0)) then		-- If possible, increase the available aircraft for this coalition by the number of units remaining in the group
 		if ((g_numCoalitionAircraft[g_RATtable[indeX].coalition] - #g_RATtable[indeX].unitNames) > 0) then
 				g_numCoalitionAircraft[g_RATtable[indeX].coalition] = g_numCoalitionAircraft[g_RATtable[indeX].coalition] - #g_RATtable[indeX].unitNames
@@ -6251,7 +6252,7 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
-function removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
+function f_removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
 	if (g_numCoalitionAircraft[g_RATtable[indexI].coalition] > 0) then		-- If possible, increase the number of available aircraft for this coalition by one
 		g_numCoalitionAircraft[g_RATtable[indexI].coalition] = g_numCoalitionAircraft[g_RATtable[indexI].coalition] - 1
 	end
@@ -6272,7 +6273,7 @@ function removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
 end
 
 -- Periodically check all dynamically spawned AI units for existence, movement, wandering, below ground, damage, and stuck/parked
-function checkStatus()
+function f_checkStatus()
 	if (#g_RATtable > 0)
 	then
 		local RATtableLimit = #g_RATtable	 -- Array size may change while loop is running due to removing group
@@ -6282,7 +6283,7 @@ function checkStatus()
 			local currentaircraftgroup = Group.getByName(g_RATtable[i].groupname)
 			if (currentaircraftgroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
 				if (g_RATtable[i].groupCheckTime > 0) then		-- Have we checked this group yet? (should have spawned by now)
-					removeGroup(i, "  removed by sim, not script", false, nil)
+					f_removeGroup(i, "  removed by sim, not script", false, nil)
 					RATtableLimit = RATtableLimit - 1	-- Array shrinks
 				else
 					g_RATtable[i].groupCheckTime = g_RATtable[i].groupCheckTime + 1
@@ -6311,8 +6312,8 @@ function checkStatus()
 						local lowerstatuslimit = g_minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
 					-- Check for wandering
 						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-							if removeUnit(i, j, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
-								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(i, j, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
 								RATtableLimit = RATtableLimit - 1
 								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
@@ -6322,8 +6323,8 @@ function checkStatus()
 							end
 					-- Check for below ground level
 						elseif (actualunitheight < 0) then
-							if removeUnit(i, j, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
-								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(i, j, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
 								RATtableLimit = RATtableLimit - 1
 								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
@@ -6333,8 +6334,8 @@ function checkStatus()
 							end
 					-- check for damaged unit
 						elseif ((actualunitheight < g_minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
-							if removeUnit(i, j, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
-								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(i, j, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
 								RATtableLimit = RATtableLimit - 1
 								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
@@ -6344,8 +6345,8 @@ function checkStatus()
 							end
 					-- Check for stuck
 						elseif (g_RATtable[i].unitCheckTime[j] > g_waitTime) then
-							if removeUnit(i, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
-								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+							if f_removeUnit(i, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
 							end
 							-- Lets exit the function for this cycle because an aircraft was removed.
 							--  Possible for another blocked aircraft to now move.
@@ -6355,8 +6356,8 @@ function checkStatus()
 						end
 					else
 					-- Unit removed by sim
-						if removeUnit(i, j, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
-							removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+						if f_removeUnit(i, j, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
+							f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
 							RATtableLimit = RATtableLimit - 1
 							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
 							j = unitNamesLimit	-- No need to iterate through anymore units in this group
@@ -6374,29 +6375,29 @@ function checkStatus()
 end
 
 -- Determine the bases based on a coalition parameter
-function getAFBases (coalitionIndex)
+function f_getAFBases (coalitionIndex)
 	local AFids = {}
-	local AF = {}
+	local AF    = {}
 	AFids = coalition.getAirbases(coalitionIndex)
 	for i = 1, #AFids do
 		AF[i] =
 		{
 			name = AFids[i]:getName(),
-			id_ = AFids[i].id_,
-			id = AFids[i]:getID()
+			id_  = AFids[i].id_,
+			id   = AFids[i]:getID()
 		}
 	end
 return AF
 end
 
 -- Choose a random airbase
-function chooseAirbase(AF)
+function f_chooseAirbase(AF)
 	airbaseChoice = math.random(1, #AF)
 return AF[airbaseChoice]
 end
 
 -- Check if possible to spawn a new group for the coalition
-function checkMax(cs)
+function f_checkMax(cs)
 	if ((g_numCoalitionAircraft[cs] < g_maxCoalitionAircraft[cs]) and ((g_maxCoalitionAircraft[cs] - g_numCoalitionAircraft[cs]) >= g_maxGroupSize))then  -- Is ok to spawn a new unit?
 		g_numCoalitionAircraft[cs] = g_numCoalitionAircraft[cs] + 1
 		g_numCoalitionGroup[cs] = g_numCoalitionGroup[cs] + 1
@@ -6407,33 +6408,33 @@ function checkMax(cs)
 end
 
 -- Determine spawn and land airbases
-function makeAirBase(cs)
+function f_makeAirBase(cs)
 	local ab = {}
-	ab[1] = chooseAirbase(g_AB[cs])
-	ab[2] = chooseAirbase(g_AB[cs])
+	ab[1] = f_chooseAirbase(g_AB[cs])
+	ab[2] = f_chooseAirbase(g_AB[cs])
 	if ((g_flagNoSpawnLandingAirbase) and (#g_AB[cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
 		while (ab[1] == ab[2]) do
-			ab[2] = chooseAirbase(g_AB[cs])
+			ab[2] = f_chooseAirbase(g_AB[cs])
 		end
 	end
 return ab
 end
 
 -- Main scheduled function to create new coalition groups as needed
-function generateGroup()
+function f_generateGroup()
 	local lowVal						-- lowest available coalition side
 	local highVal						-- highest available coalition side
 	local airbase = {}					-- table of spawn and landing airbases
 	local flgSpawn = {false, false}		-- flags to determine which coalitions get new groups
 
 	-- Names of red bases
-	g_AB[1] = getAFBases(1)
+	g_AB[1] = f_getAFBases(1)
 	if (#g_AB[1] < 1) then
 		env.warning("There are no red bases in this mission.", false)
 	end
 
 	-- Names of blue bases
-	g_AB[2] = getAFBases(2)
+	g_AB[2] = f_getAFBases(2)
 	if (#g_AB[2] < 1) then
 		env.warning("There are no blue bases in this mission.", false)
 	end
@@ -6474,9 +6475,9 @@ function generateGroup()
 	-- If needed, spawn new group for each coalition
 	for i = 1, 2 do
 		if (flgSpawn[i] == true) then
-			if checkMax(i) then
-				airbase = makeAirBase(i)
-				generateAirplane(i, airbase[1], airbase[2], g_namePrefix[i])
+			if f_checkMax(i) then
+				airbase = f_makeAirBase(i)
+				f_generateAirplane(i, airbase[1], airbase[2], g_namePrefix[i])
 			end
 		end
 	end
@@ -6486,12 +6487,13 @@ function generateGroup()
 return timer.getTime() + g_spawnInterval
 end
 
---
--- MAIN PROGRAM
---
+------------------
+-- MAIN PROGRAM --
+------------------
+
 env.info("Dynamic AI group spawn script loaded.", false)
-timer.scheduleFunction(generateGroup, nil, timer.getTime() + g_spawnInterval)
-Checktimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, g_checkInterval)
+timer.scheduleFunction(f_generateGroup, nil, timer.getTime() + g_spawnInterval)
+mist.scheduleFunction(f_checkStatus, {}, timer.getTime() + 4, g_checkInterval)
 env.info("Dynamic AI group spawn script running.", false)
 
 end
