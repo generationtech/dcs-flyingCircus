@@ -8,7 +8,7 @@ flgRandomCoalitionSpawn = true		-- Random sequence of Red/Blue coalition spawnin
 flgRandomFuel = true				-- Random fuel loadout?		--check
 flagRandomWeapons = true			-- Add weapons to aircraft?		--check
 flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
-flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?
+flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?		--check
 flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
 flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
@@ -23,18 +23,18 @@ debugScreen = true	-- write messages to screen		--check
 intervall = math.random(30,30)					-- Random spawn repeat interval
 aircraftDistribution = {30, 45, 70, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
+maxCoalition = {30, 30}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-numCoalition = {0, 0}							-- Number of active Red, Blue dynamic spawned units		--check
 waypointRange = {10000, 10000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
-unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]
+unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 
 -- Should be no need to edit these below
 RATtable = {}
-nameCoalition = {0, 0} -- highest coalition name used
+numCoalition = {0, 0}							-- Current number of active Red, Blue dynamic spawned units
+nameCoalition = {0, 0}							-- Highest coalition name used
 nameCallname = {}
 unitSkill = {Average, Good, High, Excellent, Random}
 
@@ -8399,7 +8399,7 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
--- Periodically check all dynamically spawned AI units for existence, wandering, damage, and stuck/parked
+-- Periodically check all dynamically spawned AI units for existence, movement, wandering, under ground, damage, and stuck/parked
 function checkStatus()
 	if (#RATtable > 0)
 	then
@@ -8414,36 +8414,57 @@ function checkStatus()
 						removeGroup(i, "  removed by sim, not script", false, nil)
 						RATtableLimit = RATtableLimit - 1	-- Array shrinks
 					else
+						RATtable[i].checktime = RATtable[i].checktime + 1
 						i = i + 1
 					end
 				else -- Valid group, make checks
-					if (RATtable[i].checktime > waitTime) then -- This group hasn't moved in a very long time
-						removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
-						RATtableLimit = RATtableLimit - 1
-					else -- Active group
-						local currentunitname1 = RATtable[i].unitname1
-						if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
-							local actualunit = Unit.getByName(currentunitname1)
-							local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
-							local actualunitpos = actualunit:getPosition().p
-							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-							if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-								removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
-								RATtableLimit = RATtableLimit - 1
-							elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
-								removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
-								RATtableLimit = RATtableLimit - 1
-							else -- Valid unit, check for movement
-								local actualunitvel = actualunit:getVelocity()
-								local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
+					local currentunitname1 = RATtable[i].unitname1
+					if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
+						local actualunit = Unit.getByName(currentunitname1)
+						local actualunitvel = actualunit:getVelocity()
+						local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
-								if absactualunitvel > 4 then
-									RATtable[i].checktime = 0 -- If it's moving, reset checktime
-								end
-								RATtable[i].checktime = RATtable[i].checktime + 1
-								i = i + 1
-							end
+						-- Check for movement
+						if absactualunitvel > 4 then
+							RATtable[i].checktime = 0 -- If it's moving, reset checktime
 						end
+
+						-- Check for wandering
+						local actualunitpos = actualunit:getPosition().p
+						local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
+						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
+							removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1
+						end
+
+						-- Check for under ground level
+						if (actualunitheight < 0) then
+							removeGroup(i, "  removed due to being under ground level", true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1
+						end
+
+						-- Check for damage
+						local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
+						if ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
+							removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1
+						end
+
+						-- Check for stuck
+						if (RATtable[i].checktime > waitTime) then -- This group hasn't moved in a very long time
+							removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
+							RATtableLimit = RATtableLimit - 1
+							-- Lets exit the function for this cycle because an aircraft was remove
+							--  possible for another blocked aircraft to now move
+							--  (instead would be deleted during next run of the current loop)
+							i = RATtableLimit
+						end
+
+						RATtable[i].checktime = RATtable[i].checktime + 1
+						i = i + 1
 					end
 				end
 			end
