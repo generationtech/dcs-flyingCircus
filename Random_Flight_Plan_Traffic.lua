@@ -31,7 +31,7 @@ spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {1, 2, 3, 49, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {2, 0}							-- Maximum number of red, blue units		--check
+maxCoalition = {0, 2}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -102,25 +102,6 @@ spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh)	-- Initial rand
 AB = {}																-- Coalition AirBase table
 
 --env.setErrorMessageBoxEnabled(false)
-
--- Build up sim callsign
-function makeCallSign(p_country, p_coalition, p_unit, p_nameCallName)
-	local f_callname
-	if ((p_country == country.id.RUSSIA) or (p_country == country.id.ABKHAZIA) or (p_country == country.id.SOUTH_OSETIA) or (p_country == country.id.UKRAINE)) then
-		f_callname = nameCoalition[p_coalition] .. p_unit
-	else
-		local a = math.random(1,#p_nameCallName)
-		local b = math.random(1,9)
-		f_callname =
-			{
-				[1] = a,
-				[2] = b,
-				[3] = 1,
-				["name"] = p_nameCallName[a] .. b .. p_unit,
-			}
-	end
-return f_callname
-end
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
@@ -8249,7 +8230,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		_parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
 	end
 
-	_callname = makeCallSign(_country, coalitionIndex, 1, nameCallname)
+	-- Build up sim callsign
+	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
+		_callname = nameCoalition[coalitionIndex] .. 1
+	else
+		local a = math.random(1,#nameCallname)
+		local b = math.random(1,9)
+		_callname =
+			{
+				[1] = a,
+				[2] = b,
+				[3] = 1,
+				["name"] = nameCallname[a] .. b .. 1,
+			}
+	end
 
 	_spawnairdromeId = spawnIndex.id
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
@@ -8428,9 +8422,39 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	-- Create additional units for this group if applicable
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		if (maxGroupSize > 4) then maxGroupSize = 4 end
---		for i = 2, math.random(1, maxGroupSize) do
-		for i = 2, math.random(maxGroupSize, maxGroupSize) do
-			_airplanedata.units[i] = _airplanedata.units[1]
+--		for i=2, math.random(1, maxGroupSize) do
+		for i=2, math.random(maxGroupSize, maxGroupSize) do
+			_airplanedata.units[i] =
+			{
+				["alt"] = 0,
+				["heading"] = 0,
+				["livery_id"] = _skin,
+				["type"] = _aircrafttype,
+				["psi"] = 0,
+				["onboard_num"] = "10",
+				["y"] = _spawnairplanepos.z,
+				["x"] = _spawnairplanepos.x,
+				["name"] =  _groupname .. "-" .. i,
+				["callsign"] = _callname,
+				["payload"] = _payload,
+				["speed"] = _spawnSpeed,
+				["unitId"] =  math.random(9999,99999),
+				["alt_type"] = "RADIO",
+				["skill"] = _skill,
+			}
+
+			-- Build callsign for this unit based on group callsign
+			if ((p_country == country.id.RUSSIA) or (p_country == country.id.ABKHAZIA) or (p_country == country.id.SOUTH_OSETIA) or (p_country == country.id.UKRAINE)) then
+				_airplanedata.units[i].callsign = nameCoalition[coalitionIndex] .. i
+			else
+				_airplanedata.units[i].callsign =
+					{
+						[1] = _airplanedata.units[1].callsign[1],
+						[2] = _airplanedata.units[1].callsign[2],
+						[3] = i,
+						["name"] = nameCallname[_airplanedata.units[1].callsign[1]] .. _airplanedata.units[1].callsign[2] .. i,
+					}
+			end
 
 			-- Randomize unit skill if flag is set
 			if (flgRandomSkill) then
@@ -8438,12 +8462,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			else
 				_airplanedata.units[i].skill = unitSkill[unitSkillDefault]
 			end
-
-			-- Make callsign specific to this unit
-			_airplanedata.units[i].callsign = makeCallSign(_country, coalitionIndex, i, nameCallname)
-
-			-- Unit specific name
-			_airplanedata.units[i].name = _groupname .. "-" .. i
 		end
 	end
 
