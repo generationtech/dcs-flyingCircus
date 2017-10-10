@@ -22,9 +22,9 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 intervall = math.random(30,30)					-- Random spawn repeat interval
-aircraftDistribution = {40, 50, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftDistribution = {20, 40, 60, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {15, 15}							-- Maximum number of red, blue units		--check
+maxCoalition = {20, 20}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -796,6 +796,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		{
 		}
 
+--		if (randomBomber == 1) then -- B-52 removed for now. Behaves badly on taxiway and takeoff
 		if ((randomBomber == 1) or (randomBomber == 2)) then -- B-52 removed for now. Behaves badly on taxiway and takeoff
 			_aircrafttype = "B-1B"
 			_country = country.id.USA
