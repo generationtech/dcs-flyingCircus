@@ -5741,6 +5741,15 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	local l_acSpawnHeading
 	local l_acSpawnAlt
 	local l_acSpawnSpeed
+	local l_acLandAirdromeID
+	local l_acLandAirdromePos
+	local l_acLandPos
+	local l_acWaypoint = {}
+	local l_acGroupName
+	local l_acFormation = ''
+	local l_aircraftData
+	local l_acUnitNames
+	local l_acUnitCheckTime
 
 	while (l_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
 		-- Pick a country from the given coalition
@@ -5914,93 +5923,87 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		l_acSpawnSpeed = 0
 	end
 
-	_landairbaseID = p_landIndex.id
-	_landairbaseloc = Object.getPoint({id_=p_landIndex.id_})
-	_landairplanepos = {}
-	_landairplanepos.x = _landairbaseloc.x
-	_landairplanepos.z = _landairbaseloc.z
+	l_acLandAirdromeID = p_landIndex.id
+	l_acLandAirdromePos = Object.getPoint({id_=p_landIndex.id_})
+	l_acLandPos = {}
+	l_acLandPos.x = l_acLandAirdromePos.x
+	l_acLandPos.z = l_acLandAirdromePos.z
 
 	-- Compute single intermediate waypoint based on used-defined minimum deviation x/z range
-	local _waypoint = {}
-	_waypoint.dist = math.sqrt((l_acSpawnAirdromePos.x - _landairbaseloc.x) * (l_acSpawnAirdromePos.x - _landairbaseloc.x) + (l_acSpawnAirdromePos.z - _landairbaseloc.z) * (l_acSpawnAirdromePos.z - _landairbaseloc.z))
-	if (((_waypoint.dist / 2) < g_waypointRange[1]) or (p_spawnIndex.id == p_landIndex.id)) then
-		_waypoint.distx = g_waypointRange[1]
+	l_acWaypoint.dist = math.sqrt((l_acSpawnAirdromePos.x - l_acLandAirdromePos.x) * (l_acSpawnAirdromePos.x - l_acLandAirdromePos.x) + (l_acSpawnAirdromePos.z - l_acLandAirdromePos.z) * (l_acSpawnAirdromePos.z - l_acLandAirdromePos.z))
+	if (((l_acWaypoint.dist / 2) < g_waypointRange[1]) or (p_spawnIndex.id == p_landIndex.id)) then
+		l_acWaypoint.distx = g_waypointRange[1]
 	else
-		_waypoint.distx = _waypoint.dist / 2
+		l_acWaypoint.distx = l_acWaypoint.dist / 2
 	end
-	if (((_waypoint.dist / 2) < g_waypointRange[2]) or (p_spawnIndex.id == p_landIndex.id)) then
-		_waypoint.distz = g_waypointRange[2]
+	if (((l_acWaypoint.dist / 2) < g_waypointRange[2]) or (p_spawnIndex.id == p_landIndex.id)) then
+		l_acWaypoint.distz = g_waypointRange[2]
 	else
-		_waypoint.distz = _waypoint.dist / 2
+		l_acWaypoint.distz = l_acWaypoint.dist / 2
 	end
-	_waypoint.x = l_acSpawnAirdromePos.x + math.random(- _waypoint.distx, _waypoint.distx)
-	_waypoint.z = l_acSpawnAirdromePos.z + math.random(- _waypoint.distz, _waypoint.distz)
+	l_acWaypoint.x = l_acSpawnAirdromePos.x + math.random(- l_acWaypoint.distx, l_acWaypoint.distx)
+	l_acWaypoint.z = l_acSpawnAirdromePos.z + math.random(- l_acWaypoint.distz, l_acWaypoint.distz)
 
-	_groupname = p_name .. g_numCoalitionGroup[p_coalitionIndex]
+	l_acGroupName = p_name .. g_numCoalitionGroup[p_coalitionIndex]
 
-	local _formationName = ''
 	if ((l_acSingle == false) and (l_acNumGroup > 1)) then
-		local _params = {}
-		local _r
+		local l_params = {}
+		local l_rndex
 		if (l_acCategory == "AIRPLANE") then
 			if (g_flagRandomFormation) then
-				_r = math.random(1, #g_airplaneFormation)
+				l_rndex = math.random(1, #g_airplaneFormation)
 			else
-				_r = g_defaultAirplaneFormation
+				l_rndex = g_defaultAirplaneFormation
 			end
-			_params =
+			l_params =
 				{
-					["variantIndex"] = g_airplaneFormation[_r][2],
-					["name"] = g_airplaneFormation[_r][3],
-					["formationIndex"] = g_airplaneFormation[_r][4],
-					["value"] = g_airplaneFormation[_r][5]
+					["variantIndex"]   = g_airplaneFormation[l_rndex][2],
+					["name"]           = g_airplaneFormation[l_rndex][3],
+					["formationIndex"] = g_airplaneFormation[l_rndex][4],
+					["value"]          = g_airplaneFormation[l_rndex][5]
 				}
-			--
-			_formationName = g_airplaneFormation[_r][1]
-			--
+			l_acFormation = g_airplaneFormation[l_rndex][1]
 		else
 			if (g_flagRandomFormation) then
-				_r = math.random(1, #g_helicopterFormation)
+				l_rndex = math.random(1, #g_helicopterFormation)
 			else
-				_r = g_defaultHelicopterFormation
+				l_rndex = g_defaultHelicopterFormation
 			end
-			_params =
+			l_params =
 				{
-					["variantIndex"] = g_helicopterFormation[_r][2],
-					["zInverse"] = g_helicopterFormation[_r][3],
-					["name"] = g_helicopterFormation[_r][4],
-					["formationIndex"] = g_helicopterFormation[_r][5],
-					["value"] = g_helicopterFormation[_r][6]
+					["variantIndex"]   = g_helicopterFormation[l_rndex][2],
+					["zInverse"]       = g_helicopterFormation[l_rndex][3],
+					["name"]           = g_helicopterFormation[l_rndex][4],
+					["formationIndex"] = g_helicopterFormation[l_rndex][5],
+					["value"]          = g_helicopterFormation[l_rndex][6]
 				}
-			--
-			_formationName = g_helicopterFormation[_r][1]
-			--
+			l_acFormation = g_helicopterFormation[l_rndex][1]
 		end
 
 		l_acTasks[#l_acTasks+1] =
 		{
-			["number"] = #l_acTasks+1,
-			["auto"] = false,
-			["id"] = "WrappedAction",
+			["number"]  = #l_acTasks+1,
+			["auto"]    = false,
+			["id"]      = "WrappedAction",
 			["enabled"] = true,
-			["params"] =
+			["params"]  =
 			{
 				["action"] =
 				{
-					["id"] = "Option",
-					["params"] = _params,
+					["id"]     = "Option",
+					["params"] = l_params,
 				},
 			},
 		}
 	end
 
-	_airplanedata =
+	l_aircraftData =
 	{
-        ["modulation"] = 0,
+        ["modulation"]   = 0,
 		["tasks"] =
 			{
 			},
-		["task"] = l_acTask,
+		["task"]         = l_acTask,
 		["uncontrolled"] = false,
 		["route"] =
 		{
@@ -6008,20 +6011,20 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			{
 				[1] =
 				{
-					["alt"] = l_acSpawnAlt,
-					["alt_type"] = "RADIO",
-					["type"] = l_acSpawnType[1],
-					["action"] = l_acSpawnType[2],
+					["alt"]        = l_acSpawnAlt,
+					["alt_type"]   = "RADIO",
+					["type"]       = l_acSpawnType[1],
+					["action"]     = l_acSpawnType[2],
 					["formation_template"] = "",
-					["ETA"] = 0,
+					["ETA"]        = 0,
 					["airdromeId"] = l_acSpawnAirdromeID,
-					["y"] = l_acSpawnPos.z,
-					["x"] = l_acSpawnPos.x,
-					["speed"] = l_acSpawnSpeed,
+					["y"]          = l_acSpawnPos.z,
+					["x"]          = l_acSpawnPos.x,
+					["speed"]      = l_acSpawnSpeed,
 					["ETA_locked"] = true,
 					["task"] =
 					{
-						["id"] = "ComboTask",
+						["id"]     = "ComboTask",
 						["params"] =
 						{
 							["tasks"] = l_acTasks,
@@ -6032,42 +6035,42 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			},
 		},
 		["groupId"] = g_numCoalitionGroup[p_coalitionIndex],
-		["hidden"] = false,
+		["hidden"]  = false,
 		["units"] =
 		{
 			[1] =
 			{
-				["alt"] = l_acSpawnAlt,
-				["alt_type"] = "RADIO",
-				["livery_id"] = l_acSkin,
-				["type"] = l_acModel,
-				["psi"] = l_acSpawnPSI,
-                ["heading"] = l_acSpawnHeading,
+				["alt"]         = l_acSpawnAlt,
+				["alt_type"]    = "RADIO",
+				["livery_id"]   = l_acSkin,
+				["type"]        = l_acModel,
+				["psi"]         = l_acSpawnPSI,
+                ["heading"]     = l_acSpawnHeading,
 				["onboard_num"] = "10",
-				["y"] = l_acSpawnPos.z,
-				["x"] = l_acSpawnPos.x,
-				["name"] =  _groupname .. "-1",
-				["callsign"] = l_acCallSign,
-				["payload"] = l_acPayload,
-				["speed"] = l_acSpawnSpeed,
-				["unitId"] =  math.random(9999,99999),
-				["skill"] = l_acSkill,
+				["y"]           = l_acSpawnPos.z,
+				["x"]           = l_acSpawnPos.x,
+				["name"]        = l_acGroupName .. "-1",
+				["callsign"]    = l_acCallSign,
+				["payload"]     = l_acPayload,
+				["speed"]       = l_acSpawnSpeed,
+				["unitId"]      = math.random(9999,99999),
+				["skill"]       = l_acSkill,
 			},
 		},
-		["y"] = l_acSpawnPos.z,
-		["x"] = l_acSpawnPos.x,
-		["name"] = _groupname,
+		["y"]             = l_acSpawnPos.z,
+		["x"]             = l_acSpawnPos.x,
+		["name"]          = l_acGroupName,
 		["communication"] = true,
-		["start_time"] = 0,
-		["frequency"] = 124,
+		["start_time"]    = 0,
+		["frequency"]     = 124,
 	}
 
-	_unitNames = {_groupname .. "-1"}
-	_unitCheckTime = {0}
+	l_acUnitNames = {l_acGroupName .. "-1"}
+	l_acUnitCheckTime = {0}
 
 	if ((l_acSingle == false) and (l_acNumGroup > 1)) then
-		for i=2, l_acNumGroup do
-			_airplanedata.units[i] =
+		for l_index=2, l_acNumGroup do
+			l_aircraftData.units[l_index] =
 			{
 				["alt"] = l_acSpawnAlt,
 				["psi"] = l_acSpawnPSI,
@@ -6077,7 +6080,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["onboard_num"] = "10",
 				["y"] = l_acSpawnPos.z,
 				["x"] = l_acSpawnPos.x,
-				["name"] =  _groupname .. "-" .. i,
+				["name"] =  l_acGroupName .. "-" .. l_index,
 				["callsign"] = l_acCallSign,
 				["payload"] = l_acPayload,
 				["speed"] = l_acSpawnSpeed,
@@ -6086,27 +6089,27 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["skill"] = l_acSkill,
 			}
 
-			_unitNames[#_unitNames+1] = _groupname .. "-" .. i
-			_unitCheckTime[#_unitCheckTime+1] = 0
+			l_acUnitNames[#l_acUnitNames+1] = l_acGroupName .. "-" .. l_index
+			l_acUnitCheckTime[#l_acUnitCheckTime+1] = 0
 
 			-- Build callsign for this unit based on group callsign
 			if ((l_acCountry == country.id.RUSSIA) or (l_acCountry == country.id.ABKHAZIA) or (l_acCountry == country.id.SOUTH_OSETIA) or (l_acCountry == country.id.UKRAINE)) then
-				_airplanedata.units[i].callsign = g_numCoalitionGroup[p_coalitionIndex] .. i
+				l_aircraftData.units[l_index].callsign = g_numCoalitionGroup[p_coalitionIndex] .. l_index
 			else
-				_airplanedata.units[i].callsign =
+				l_aircraftData.units[l_index].callsign =
 					{
-						[1] = _airplanedata.units[1].callsign[1],
-						[2] = _airplanedata.units[1].callsign[2],
-						[3] = i,
-						["name"] = l_acCallname[_airplanedata.units[1].callsign[1]] .. _airplanedata.units[1].callsign[2] .. i,
+						[1] = l_aircraftData.units[1].callsign[1],
+						[2] = l_aircraftData.units[1].callsign[2],
+						[3] = l_index,
+						["name"] = l_acCallname[l_aircraftData.units[1].callsign[1]] .. l_aircraftData.units[1].callsign[2] .. l_index,
 					}
 			end
 
 			-- Randomize unit skill if flag is set
 			if (g_flagRandomSkill) then
-				_airplanedata.units[i].skill = g_unitSkill[math.random(1,#g_unitSkill)]
+				l_aircraftData.units[l_index].skill = g_unitSkill[math.random(1,#g_unitSkill)]
 			else
-				_airplanedata.units[i].skill = g_unitSkill[g_unitSkillDefault]
+				l_aircraftData.units[l_index].skill = g_unitSkill[g_unitSkillDefault]
 			end
 
 			g_numCoalitionAircraft[p_coalitionIndex] = g_numCoalitionAircraft[p_coalitionIndex] + 1		-- Add one aircraft to total aircraft in use
@@ -6114,7 +6117,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	end
 
 	if (l_acSpawnType[1] == "Turning Point") then
-		_airplanedata.route.points[#_airplanedata.route.points + 1] =
+		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
 			["alt"] = l_acSpawnAlt * 3,
 			["alt_type"] = "RADIO",
@@ -6146,7 +6149,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	end
 
 	if (g_flagRandomWaypoint ) then
-		_airplanedata.route.points[#_airplanedata.route.points + 1] =
+		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
 			["alt"] = l_acFlightAlt,
 			["type"] = "Turning Point",
@@ -6161,8 +6164,8 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["y"] = _waypoint.z,
-			["x"] = _waypoint.x,
+			["y"] = l_acWaypoint.z,
+			["x"] = l_acWaypoint.x,
 			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
@@ -6175,7 +6178,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			},
 			["speed_locked"] = true,
 		}
-		_airplanedata.route.points[#_airplanedata.route.points + 1] =
+		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
 			["alt"] = l_acFlightAlt / 2,
 			["type"] = "Land",
@@ -6190,9 +6193,9 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["airdromeId"] = _landairbaseID,
-			["y"] = _landairbaseloc.z,
-			["x"] = _landairbaseloc.x,
+			["airdromeId"] = l_acLandAirdromeID,
+			["y"] = l_acLandAirdromePos.z,
+			["x"] = l_acLandAirdromePos.x,
 			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
@@ -6208,7 +6211,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			["speed_locked"] = true,
 		}
 	else
-		_airplanedata.route.points[#_airplanedata.route.points + 1] =
+		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
 			["alt"] = l_acFlightAlt / 2,
 			["type"] = "Land",
@@ -6223,9 +6226,9 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["airdromeId"] = _landairbaseID,
-			["y"] = _landairbaseloc.z,
-			["x"] = _landairbaseloc.x,
+			["airdromeId"] = l_acLandAirdromeID,
+			["y"] = l_acLandAirdromePos.z,
+			["x"] = l_acLandAirdromePos.x,
 			["speed"] = l_acFlightSpeed,
 			["ETA_locked"] = false,
 			["task"] =
@@ -6243,27 +6246,27 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	end
 
 	if (l_acCategory == "HELICOPTER") then
-		coalition.addGroup(l_acCountry, Group.Category.HELICOPTER, _airplanedata)
+		coalition.addGroup(l_acCountry, Group.Category.HELICOPTER, l_aircraftData)
 	else
-		coalition.addGroup(l_acCountry, Group.Category.AIRPLANE, _airplanedata)
+		coalition.addGroup(l_acCountry, Group.Category.AIRPLANE, l_aircraftData)
 	end
 
-	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  callsign:' .. _groupname .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName, false) end
-	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, false) end
-	if (g_debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  formation:' .. _formationName, false) end
-	if (g_debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. l_acModel .. '  callsign:' .. _groupname .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, 10) end
+	if (g_debugLog) then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  callsign:' .. l_acGroupName .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName, false) end
+	if (g_debugLog) then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, false) end
+	if (g_debugLog) then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  formation:' .. l_acFormation, false) end
+	if (g_debugScreen) then trigger.action.outText(' group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  callsign:' .. l_acGroupName .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, 10) end
 
 	g_RATtable[#g_RATtable+1] =
 		{
-			groupname      = _groupname,
+			groupname      = l_acGroupName,
 			flightname     = l_acFullTextName,
 			actype         = l_acModel,
 			origin         = p_spawnIndex.name,
 			destination    = p_landIndex.name,
 			counter        = groupcounter,
 			coalition      = p_coalitionIndex,
-			unitNames      = _unitNames,
-			unitCheckTime  = _unitCheckTime,
+			unitNames      = l_acUnitNames,
+			unitCheckTime  = l_acUnitCheckTime,
 			groupCheckTime = 0,
 			formationSize  = l_acNumGroup,	-- Store the original number of aircraft in this group
 		}
