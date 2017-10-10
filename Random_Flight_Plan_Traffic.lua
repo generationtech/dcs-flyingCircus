@@ -1,5 +1,13 @@
 -- Randomly spawn a different kind of aircraft at different coalition airbase up to a limit of total spawned aircraft.
--- In the ME, just designate each coalition airbase assignment on the ME airbase object, not with target zones
+-- In the ME, just designate each coalition airbase assignment on the ME airbase object.
+
+
+-- Possible way to remove wrecks:
+--If another group has the same name new group has, that group will be destroyed and new group will take its mission ID.
+--If another units has the same name an unit of new group has, that unit will be destroyed and the unit of new group will take its mission ID.
+--If new group contains player's aircraft current unit that is under player's control will be destroyed.
+--http://wiki.hoggit.us/view/Part_1
+
 
 do
 --
@@ -31,7 +39,7 @@ spawnIntervalHigh = 40							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {5, 5}							-- Maximum number of red, blue units		--check
+maxCoalition = {3, 3}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -8648,14 +8656,17 @@ function checkStatus()
 				end
 			else -- Valid group, make unit checks
 env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames, false)
-				for j=1, #RATtable[i].unitNames do
+				local unitNamesLimit = #RATtable[i].unitNames
+				local j = 1
+				while (j <= unitNamesLimit)
+				do
 					local currentunitname = RATtable[i].unitNames[j]
 					if (Unit.getByName(currentunitname) ~= nil) then -- Valid, active unit
 						local actualunit = Unit.getByName(currentunitname)
 						local actualunitvel = actualunit:getVelocity()
 						local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
-					-- Check for movement
+					-- Check for unit movement
 						if absactualunitvel > 4 then
 							RATtable[i].unitCheckTime[j] = 0 -- If it's moving, reset checktime
 						else
@@ -8667,38 +8678,52 @@ env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].u
 						local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
 					-- Check for wandering
 						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-							removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							if removeUnit(i, j, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
+								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+								RATtableLimit = RATtableLimit - 1
+								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							end
 					-- Check for below ground level
 						elseif (actualunitheight < 0) then
-							removeGroup(i, "  removed due to being below ground level", true, Unit.getGroup(actualunit))
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							if removeUnit(i, j, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
+								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+								RATtableLimit = RATtableLimit - 1
+								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							end
 					-- check for damaged unit
 						elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
-							removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							if removeUnit(i, j, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
+								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+								RATtableLimit = RATtableLimit - 1
+								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+								j = unitNamesLimit	-- No need to iterate through anymore units in this group
+							end
 					-- Check for stuck
 						elseif (RATtable[i].unitCheckTime[j] > waitTime) then
-							removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
-							RATtableLimit = RATtableLimit - 1
+							if removeUnit(i, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
+								removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+								RATtableLimit = RATtableLimit - 1
+							end
 							-- Lets exit the function for this cycle because an aircraft was removed.
 							--  Possible for another blocked aircraft to now move.
 							--  (instead that aircraft would be deleted during next run of the current loop)
 							i = RATtableLimit
+							j = unitNamesLimit
 						end
 					else
 					-- Unit removed by sim
-						if removeUnit(i, j, '  removed by sim, not script', false, currentunitname) then
-							removeGroup(i, '  removed, no more units', true, Unit.getGroup(actualunit))
+						if removeUnit(i, j, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
+							removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
 							RATtableLimit = RATtableLimit - 1
 							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							j = unitNamesLimit	-- No need to iterate through anymore units in this group
+						else
+							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
 						end
-						-- need to handle reduction in units while inner loop is running by setting up structure like outer loop without for-loop statement
-
 					end
+					j = j + 1
 				end
 				i = i + 1
 			end
