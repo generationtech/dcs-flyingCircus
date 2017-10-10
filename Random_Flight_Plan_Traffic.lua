@@ -3,12 +3,6 @@ do
 intervall = math.random(90,180) 	--random repeat interval between (A and B) in seconds
 maxCoalition = {20, 20} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
-
-Nameprefix = "A-" 				--Unit and Group name should not be used in ME by other units, this prefix can be altered if used by other scripts
-AF1 = 'Kutaisi'
-
-groupcounter = 0 --counts number of spawned and provides group and unit name
-
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 
 -- determine the bases based on a coalition parameter
@@ -28,15 +22,13 @@ return AF
 end
 
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
-function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
+function generateAirplane(coalitionIndex, airbaseIndex, parkingT, nameP)
 
-	groupcounter = groupcounter + 1
-
-	randomAirplane = math.random(1,9) -- random for airplane type; Russian AC 10-18
-
-	AF1IDname = Airbase.getByName(AF1)
-	AF1ID = AF1IDname:getID()
-
+	if (coalitionIndex == 1) then
+		randomAirplane = math.random(10,18) -- random for airplane type; Russian AC 10-18
+	else
+		randomAirplane = math.random(1,9) -- random for airplane type; Russian AC 10-18
+	end
 
 			if (randomAirplane == 1) --airplane types
 			then
@@ -343,24 +335,17 @@ function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
 			callsign = "RFF"
 		end
 
-			_spawnairplane = trigger.misc.getZone(AF1)
+			_spawnairbaseloc = Object.getPoint({id_=airbaseIndex.id_})
 			_spawnairplanepos = {}
---			_spawnairplanepos.x = _spawnairplane.point.x + math.random(_spawnairplane.radius * -1, _spawnairplane.radius)
---			_spawnairplanepos.z = _spawnairplane.point.z + math.random(_spawnairplane.radius * -1, _spawnairplane.radius)
-			_spawnairplanepos.x = closestairfieldlocation.x
-			_spawnairplanepos.z = closestairfieldlocation.z
+			_spawnairplanepos.x = _spawnairbaseloc.x
+			_spawnairplanepos.z = _spawnairbaseloc.z
 			_spawnairplaneparking = math.random(1,40)
 			_alt = 0
 			_speed = 0
---			_waypointtype = "TakeOffParking"
---			_waypointaction = "From Parking Area"
---			_waypointtype = "TakeOffParkingHot"
---			_waypointaction = "From Parking Area Hot"
-			_waypointtype = "TakeOffParking"
-			_waypointaction = "From Parking Area"
-			_airdromeId = AF1ID
-			takeoffairfield = AF1
-
+			_waypointtype = parkingT[1]
+			_waypointaction = parkingT[2]
+			_airdromeId = airbaseIndex.id
+			takeoffairfield = airbaseIndex.name
 
 		_airplanedata = 	{
                                 ["modulation"] = 0,
@@ -402,7 +387,7 @@ function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
                                         }, -- end of [1]
                                     }, -- end of ["points"]
                                 }, -- end of ["route"]
-                                ["groupId"] = groupcounter,
+                                ["groupId"] = numCoalition[coalitionIndex],
                                 ["hidden"] = false,
                                 ["units"] =
                                 {
@@ -417,7 +402,7 @@ function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
                                         ["parking"] = _spawnairplaneparking,
 										["y"] = _spawnairplanepos.z,
 										["x"] = _spawnairplanepos.x,
-										["name"] =  Nameprefix .. groupcounter.."1",
+										["name"] =  NameP[coalitionIndex] .. numCoalition[coalitionIndex].."1",
 										["payload"] = _payload,
 										["speed"] = _speed,
 										["unitId"] =  math.random(9999,99999),
@@ -427,7 +412,7 @@ function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
 								}, -- end of ["units"]
 								["y"] = _spawnairplanepos.z,
 								["x"] = _spawnairplanepos.x,
-								["name"] =  Nameprefix .. groupcounter,
+								["name"] =  NameP[coalitionIndex] .. numCoalition[coalitionIndex],
 								["communication"] = true,
 								["start_time"] = 0,
 								["frequency"] = 124,
@@ -436,44 +421,44 @@ function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
 		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
 end
 
-function chooseAirport(AF)
-	airportChoice = math.random(1, #AF)
-return AF[airportChoice]
+function chooseAirbase(AF)
+	airbaseChoice = math.random(1, #AF)
+return AF[airbaseChoice]
 end
 
 function generateGroup()
 	local lowVal
 	local highVal
 	local coalitionSide
-	local airportChosen
+	local airbaseChosen
 	local i
 	local parkingType
 
 	-- choose which coalition side to possibly spawn new aircraft
-	if #redAF > 0 then
+	if (#redAF > 0) then
 		lowVal = 1
 	else
 		lowVal = 2
 	end
 
-	if #blueAF > 0 then
+	if (#blueAF > 0) then
 		highVal = 2
 	else
 		highVal = 1
 	end
 
-	if lowVal > highVal then  -- no coalition bases defined at all!
+	if (lowVal > highVal) then  -- no coalition bases defined at all!
 		return
 	end
 
 	coalitionSide = math.random(lowVal, highVal)  -- choose which side to spawn unit this time
 
-	if numCoalition[coalitionSide] < maxCoalition[coalitionSide] then  -- is ok to spawn a new unit?
+	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- is ok to spawn a new unit?
 
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
 
 		i = math.random(1, 3)
-		if i == 1 then
+		if (i == 1) then
 			parkingType = {"TakeOffParking", "From Parking Area"}
 		elseif (i == 2) then
 			parkingType = {"TakeOffParkingHot", "From Parking Area Hot"}
@@ -481,38 +466,30 @@ function generateGroup()
 			parkingType = {"TakeOff", "From Runway"}
 		end
 
-		if coalitionSide == 1 then
-			airportChosen = chooseAirport(redAF)
+		if (coalitionSide == 1) then
+			airbaseChosen = chooseAirbase(redAF)
 		else
-			airportChosen = chooseAirport(blueAF)
+			airbaseChosen = chooseAirbase(blueAF)
 		end
 
 		-- create new aircraft
-		generateAirplane(coalitionSide, airportChosen, parkingType, NamePrefix(coalitionSide))
+		generateAirplane(coalitionSide, airbaseChosen, parkingType, NamePrefix[coalitionSide])
 	end
 end
 
 
 --names of red bases
 redAF = getAFBases(1)
-if #redAF < 1 then
+if (#redAF < 1) then
 	env.warning("There are no red bases in this mission.", false)
 end
 
 --names of blue bases
 blueAF = getAFBases(2)
-if #blueAF < 1 then
+if (#blueAF < 1) then
 	env.warning("There are no blue bases in this mission.", false)
 end
 
---	closestairfieldname = AF[n].name
-	closestairfieldname = AF1
-	closestairfield = Airbase.getByName(closestairfieldname)
-	closestairfieldID = closestairfield:getID()
---end
-closestairfieldlocation = {}
-closestairfieldlocation = Object.getPoint(closestairfield)
-
-Spawntimer = mist.scheduleFunction(generateAirplane, {}, timer.getTime() + 2, intervall)
+Spawntimer = mist.scheduleFunction(generateGroup, {}, timer.getTime() + 2, intervall)
 
 end
