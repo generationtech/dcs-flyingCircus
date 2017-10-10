@@ -29,11 +29,11 @@ randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=eq
 spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
 spawnIntervalHigh = 40							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
-aircraftDistribution = {60, 70, 80, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
 maxCoalition = {5, 5}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {10000, 10000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
+waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
@@ -60,15 +60,15 @@ unitSkill = 									-- List of possible skill levels for AI units
 	}
 airplaneFormation =													-- Airplane formations
 	{																-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
-		[1] = {"Line Abreast - Open", 2, 5, 1, 65538},
-		[2] = {"Line Abreast - Close", 1, 5, 1, 65537},
-		[3] = {"Trail - Open", 2, 5, 2, 131074},
-		[4] = {"Trail - Close", 1, 5, 2, 131073},
-		[5] = {"Wedge - Open", 2, 5, 3, 196610},
-		[6] = {"Wedge - Close", 1, 5, 3, 196609},
-		[7] = {"Echelon Right - Open", 2, 5, 4, 262146},
-		[8] = {"Echelon Right - Close", 1, 5, 4, 262145},
-		[9] = {"Echelon Left - Open", 2, 5, 5, 327682},
+		[1]  = {"Line Abreast - Open", 2, 5, 1, 65538},
+		[2]  = {"Line Abreast - Close", 1, 5, 1, 65537},
+		[3]  = {"Trail - Open", 2, 5, 2, 131074},
+		[4]  = {"Trail - Close", 1, 5, 2, 131073},
+		[5]  = {"Wedge - Open", 2, 5, 3, 196610},
+		[6]  = {"Wedge - Close", 1, 5, 3, 196609},
+		[7]  = {"Echelon Right - Open", 2, 5, 4, 262146},
+		[8]  = {"Echelon Right - Close", 1, 5, 4, 262145},
+		[9]  = {"Echelon Left - Open", 2, 5, 5, 327682},
 		[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
 		[11] = {"Finger Four - Open", 2, 5, 6, 393218},
 		[12] = {"Finger Four - Close", 1, 5, 6, 393217},
@@ -77,15 +77,15 @@ airplaneFormation =													-- Airplane formations
 	}
 helicopterFormation =												-- Helicopter formations
 	{																-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
-		[1] = {"Wedge",	nil, nil, 5, 8, 8},
-		[2] = {"Right - interval 300", 1, 0, 5, 10, 655361},
-		[3] = {"Right - interval 600", 2, 0, 5, 10, 655362},
-		[4] = {"Left - interval 300", 1, 1, 5, 10, 655617},
-		[5] = {"Left - interval 600", 2, 1, 5, 10, 655618},
-		[6] = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
-		[7] = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
-		[8] = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
-		[9] = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
+		[1]  = {"Wedge",	nil, nil, 5, 8, 8},
+		[2]  = {"Right - interval 300", 1, 0, 5, 10, 655361},
+		[3]  = {"Right - interval 600", 2, 0, 5, 10, 655362},
+		[4]  = {"Left - interval 300", 1, 1, 5, 10, 655617},
+		[5]  = {"Left - interval 600", 2, 1, 5, 10, 655618},
+		[6]  = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
+		[7]  = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
+		[8]  = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
+		[9]  = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
 		[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
 		[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
 		[12] = {"Column", nil, nil, 5, 11, 720896}
@@ -8288,7 +8288,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	_groupname = nameP .. nameCoalition[coalitionIndex]
 
 	--
-	local fname = ''
+	local _formationName = ''
 	--
 
 	-- If later to create additional units for this group, set formation based on aircraft type
@@ -8309,7 +8309,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 					["value"] = airplaneFormation[_r][5]
 				}
 			--
-			fname = airplaneFormation[_r][1]
+			_formationName = airplaneFormation[_r][1]
 			--
 		else
 			if (flgRandomFormation) then
@@ -8326,7 +8326,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 					["value"] = helicopterFormation[_r][6]
 				}
 			--
-			fname = helicopterFormation[_r][1]
+			_formationName = helicopterFormation[_r][1]
 			--
 		end
 
@@ -8419,11 +8419,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		["frequency"] = 124,
 	}
 
+	_unitNames = {_groupname .. "-1"}
+	_unitCheckTime = {0}
+
+	_formationSize = 0
 	-- Create additional units for this group if applicable
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
+		_formationSize = math.random(0, maxGroupSize)
 		if (maxGroupSize > 4) then maxGroupSize = 4 end
-		for i=2, math.random(1, maxGroupSize) do
---		for i=2, math.random(maxGroupSize, maxGroupSize) do
+		for i=2, _formationSize do
 			_airplanedata.units[i] =
 			{
 				["alt"] = 0,
@@ -8442,6 +8446,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 				["alt_type"] = "RADIO",
 				["skill"] = _skill,
 			}
+
+			_unitNames[#_unitNames+1] = _groupname .. "-" .. i
+			_unitCheckTime[#_unitCheckTime+1] = 0
 
 			-- Build callsign for this unit based on group callsign
 			if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
@@ -8576,24 +8583,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. fname, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. _formationName, false) end
 	if (debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _groupname .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
 	{
 		groupname = _groupname,
-		unitname1 = _groupname.."1",
-		unitname2 = "none",
 		flightname = _fullname,
 		actype = _aircrafttype,
 		origin = spawnIndex.name,
 		destination = landIndex.name,
 		counter = groupcounter,
 		coalition = coalitionIndex,
-		--size = groupsize,
-		size = 1,
-		checktime = 0,
-		status = "taxiing"
+		unitNames = _unitNames,
+		unitCheckTime = _unitCheckTime,
+		groupCheckTime = 0,
 	}
 
 end
@@ -8608,6 +8612,23 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
+function removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
+	if (debugLog) then env.info('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage, false) end
+	if (debugScreen) then trigger.action.outText('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage, 20) end
+--	if (numCoalition[RATtable[indeX].coalition] > 0) then
+--		numCoalition[RATtable[indeX].coalition] = numCoalition[RATtable[indeX].coalition] - 1
+--	end
+	table.remove(RATtable[indexI].unitNames, indexJ)		-- Unit does not exist any longer for this script
+	table.remove(RATtable[indexI].unitCheckTime, indexJ)	-- Unit does not exist any longer for this script
+	if (destroyFlag) then aircraftUnit:destroy() end
+
+	if (#RATtable[indexI].unitNames == 0) then	-- There are no more units in this group, the group needs to be removed
+		return true
+	else
+		return false
+	end
+end
+
 -- Periodically check all dynamically spawned AI units for existence, movement, wandering, below ground, damage, and stuck/parked
 function checkStatus()
 	if (#RATtable > 0)
@@ -8618,53 +8639,65 @@ function checkStatus()
 		do
 			local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
 			if (currentaircraftgroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
-				if (RATtable[i].checktime > 0) then		-- Have we checked this group yet? (should have spawned by now)
+				if (RATtable[i].groupCheckTime > 0) then		-- Have we checked this group yet? (should have spawned by now)
 					removeGroup(i, "  removed by sim, not script", false, nil)
 					RATtableLimit = RATtableLimit - 1	-- Array shrinks
 				else
-					RATtable[i].checktime = RATtable[i].checktime + 1
+					RATtable[i].groupCheckTime = RATtable[i].groupCheckTime + 1
 					i = i + 1
 				end
-			else -- Valid group, make checks
-				local currentunitname1 = RATtable[i].unitname1
-				if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
-					local actualunit = Unit.getByName(currentunitname1)
-					local actualunitvel = actualunit:getVelocity()
-					local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
+			else -- Valid group, make unit checks
+env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames, false)
+				for j=1, #RATtable[i].unitNames do
+					local currentunitname = RATtable[i].unitNames[j]
+					if (Unit.getByName(currentunitname) ~= nil) then -- Valid, active unit
+						local actualunit = Unit.getByName(currentunitname)
+						local actualunitvel = actualunit:getVelocity()
+						local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
-				-- Check for movement
-					if absactualunitvel > 4 then
-						RATtable[i].checktime = 0 -- If it's moving, reset checktime
+					-- Check for movement
+						if absactualunitvel > 4 then
+							RATtable[i].unitCheckTime[j] = 0 -- If it's moving, reset checktime
+						else
+							RATtable[i].unitCheckTime[j] = RATtable[i].unitCheckTime[j] + 1
+						end
+
+						local actualunitpos = actualunit:getPosition().p
+						local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
+						local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
+					-- Check for wandering
+						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
+							removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+					-- Check for below ground level
+						elseif (actualunitheight < 0) then
+							removeGroup(i, "  removed due to being below ground level", true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+					-- check for damaged unit
+						elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
+							removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+					-- Check for stuck
+						elseif (RATtable[i].unitCheckTime[j] > waitTime) then
+							removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
+							RATtableLimit = RATtableLimit - 1
+							-- Lets exit the function for this cycle because an aircraft was removed.
+							--  Possible for another blocked aircraft to now move.
+							--  (instead that aircraft would be deleted during next run of the current loop)
+							i = RATtableLimit
+						end
 					else
-						RATtable[i].checktime = RATtable[i].checktime + 1
-					end
+					-- Unit removed by sim
+						if removeUnit(i, j, '  removed by sim, not script', false, currentunitname) then
+							removeGroup(i, '  removed, no more units', true, Unit.getGroup(actualunit))
+							RATtableLimit = RATtableLimit - 1
+							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+						end
+						-- need to handle reduction in units while inner loop is running by setting up structure like outer loop without for-loop statement
 
-					local actualunitpos = actualunit:getPosition().p
-					local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-					local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
-				-- Check for wandering
-					if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-						removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
-						RATtableLimit = RATtableLimit - 1
-						i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
-				-- Check for below ground level
-					elseif (actualunitheight < 0) then
-						removeGroup(i, "  removed due to being below ground level", true, Unit.getGroup(actualunit))
-						RATtableLimit = RATtableLimit - 1
-						i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
-				-- check for damaged unit
-					elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
-						removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
-						RATtableLimit = RATtableLimit - 1
-						i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
-				-- Check for stuck
-					elseif (RATtable[i].checktime > waitTime) then
-						removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
-						RATtableLimit = RATtableLimit - 1
-						-- Lets exit the function for this cycle because an aircraft was removed.
-						--  Possible for another blocked aircraft to now move.
-						--  (instead that aircraft would be deleted during next run of the current loop)
-						i = RATtableLimit
 					end
 				end
 				i = i + 1
@@ -8680,11 +8713,11 @@ function getAFBases (coalitionIndex)
 	AFids = coalition.getAirbases(coalitionIndex)
 	for i = 1, #AFids do
 		AF[i] =
-			{
+		{
 			name = AFids[i]:getName(),
 			id_ = AFids[i].id_,
 			id = AFids[i]:getID()
-			}
+		}
 	end
 return AF
 end
@@ -8770,11 +8803,6 @@ function generateGroup()
 		end
 	end
 
-	if (flgSpawn[1]) then f1 = 'true' else f1 = 'false' end
-	if (flgSpawn[2]) then f2 = 'true' else f2 = 'false' end
-
-	env.info('Spawn loop, red: ' .. f1 .. ' blue: ' .. f2, false)
-
 	-- If needed, spawn new group for each coalition
 	for i = 1, 2 do
 		if (flgSpawn[i] == true) then
@@ -8782,15 +8810,11 @@ function generateGroup()
 				airbase = makeAirBase(i)
 				env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
 				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
-			else
-				env.info('Spawn loop, not spawning for: ' .. i, false)
 			end
 		end
 	end
 
 	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
-
-	env.info('Spawn loop done, interval: ' .. spawnInterval, false)
 
 return timer.getTime() + spawnInterval
 end
