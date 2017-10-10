@@ -24,7 +24,7 @@ flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise jus
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
 flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
-flgRandomParkingType = true			-- Randomize type of parking spot for spawn location		--check
+flgRandomParkingType = false			-- Randomize type of parking spot for spawn location		--check
 flgRandomGroupSize = true			-- Randomize group size, if applicable		--check
 flgRandomFormation = true			-- Randomize formations in multiple unit groups, else use default formation value		--check
 
@@ -52,11 +52,11 @@ lowFuelPercent = 0.40							-- If randomizing fuel, the low end percent		--check
 highFuelPercent = 0.75							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
-		"TakeOffParking", "From Parking Area",
-		"TakeOffParkingHot", "From Parking Area Hot",
-		"TakeOff", "From Runway",
-		"Turning Point", "Turning Point",
-		"Turning Point", "Turning Point"		-- Favor in-air start
+		{"TakeOffParking", "From Parking Area"},
+		{"TakeOffParkingHot", "From Parking Area Hot"},
+		{"TakeOff", "From Runway"},
+		{"Turning Point", "Turning Point"},
+		{"Turning Point", "Turning Point"}		-- Favor in-air start
 	}
 spawnSpeedTurningPoint = 125					-- When spawning in the air as turning point, starting speed		--check
 defaultAirplaneFormation = 1					-- When not randomizing formations, the default airplane formation #
@@ -102,6 +102,30 @@ helicopterFormation =												-- Helicopter formations
 		[12] = {"Column", nil, nil, 5, 11, 720896}
 	}
 
+airbasePoints = 													-- These are the start and end x,z points for each airbase
+	{																-- Use for the fly over points when spawning aircraft airborne
+		[12] = {-6495.7142857133,242167.42857143,-4321.7142857133,244091.42857143},
+		[13] = {11751.428571429,369204.85714286,11620.000000001,366703.71428572},
+		[14] = {-41589.428571427,278650.57142857,-40248.857142856,279856.28571428},
+		[15] = {-5579.7142857133,295210.57142857,-7585.9999999991,293555.14285714},
+		[16] = {-25197.428571427,459052.57142857,-27686.57142857,457036.28571429},
+		[17] = {-51087.142857141,297810.85714286,-49706.57142857,298970.28571429},
+		[18] = {-163750.28571428,463622.57142857,-165212.85714286,460870},
+		[19] = {6652.2857142863,386738.57142858,8764.8571428577,389003.71428572},
+		[20] = {-221401.14285714,566015.71428571,-219751.42857143,562707.14285714},
+		[21] = {-197811.42857143,517063.14285714,-195622.28571428,515849.42857143},
+		[22] = {-355121.14285714,616421.14285715,-356549.42857143,618419.42857144},
+		[23] = {-281681.14285714,646054,-281882.28571429,648431.42857143},
+		[24] = {-318368,634520.57142858,-317545.42857143,636779.14285715},
+		[25] = {-285233.71428571,682650.57142857,-284543.14285714,685056.85714286},
+		[26] = {-52128.285714285,707572.28571429,-50388.857142856,703892.28571429},
+		[27] = {-125580.57142857,759479.14285715,-124274.85714286,761378.00000001},
+		[28] = {-83740.571428571,832212.57142857,-83294.857142857,835718.57142857},
+		[29] = {-316481.42857143,897668.85714286,-314624.28571428,895291.42857143},
+		[30] = {-316999.71428571,894496.57142857,-318664,896327.71428572},
+		[31] = {-318175.14285714,902274.28571429,-319966.57142857,904036.85714286},
+		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144}
+	}
 
 -- Should be no need to edit these below
 RATtable = {}
@@ -5699,14 +5723,12 @@ env.info("generate airplane loop plane selected", false)
 		_flightspeed = 180
 	end
 
---FIX-----
 	if (flgRandomParkingType) then
-		local i = math.random(1, #parkingSpotType / 2)
-		_parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
+		local i = math.random(1, #parkingSpotType)
+		_parkingType = {parkingSpotType[i][1], parkingSpotType[i][2]}
 	else
-		_parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
+		_parkingType = {parkingSpotType[defaultParkingSpotType][1], parkingSpotType[defaultParkingSpotType][2]}
 	end
---FIX-----
 
 	-- Build up sim callsign
 	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
@@ -5724,21 +5746,36 @@ env.info("generate airplane loop plane selected", false)
 	end
 
 	_spawnairdromeId = spawnIndex.id
-	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
 	_spawnairplanepos = {}
-	_spawnairplanepos.x = _spawnairbaseloc.x
-	_spawnairplanepos.z = _spawnairbaseloc.z
+
+	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
+--	_spawnairplanepos.x = _spawnairbaseloc.x
+--	_spawnairplanepos.z = _spawnairbaseloc.z
+--env.info("generate airplane loop spawnpos computed x: " .. _spawnairplanepos.x .. " y: " .. _spawnairplanepos.z, false)
+
+	if (_parkingType[1] == "Turning Point") then
+		_spawnairplanepos.x = airbasePoints[spawnIndex.id][1]
+		_spawnairplanepos.z = airbasePoints[spawnIndex.id][2]
+	else
+		_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
+		_spawnairplanepos.x = _spawnairbaseloc.x
+		_spawnairplanepos.z = _spawnairbaseloc.z
+	end
+
+env.info("generate airplane loop spawnpos computed x: " .. _spawnairplanepos.x .. " y: " .. _spawnairplanepos.z, false)
+env.info("generate airplane loop spawnpos computed", false)
+
 	_spawnairplaneparking = math.random(1,40)
 
 	_waypointtype = _parkingType[1]
 	_waypointaction = _parkingType[2]
 	if (_waypointtype == "Turning Point") then
 		_spawnSpeed = spawnSpeedTurningPoint
-		Pos3 = Object.getPosition({id_=spawnIndex.id_})
-		_spawnHeading = (Pos3.p.y / 360) * 6.28
+--		Pos3 = Object.getPosition({id_=spawnIndex.id_})
+--		_spawnHeading = (Pos3.p.y / 360) * 6.28
 	else
 		_spawnSpeed = 0
-		_spawnHeading = 0
+--		_spawnHeading = 0
 	end
 
 	_landairbaseID = landIndex.id
@@ -5762,6 +5799,9 @@ env.info("generate airplane loop plane selected", false)
 	end
 	_waypoint.x = _spawnairbaseloc.x + math.random(- _waypoint.distx, _waypoint.distx)
 	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
+
+env.info("generate airplane loop waypoint computed", false)
+
 
 	_groupname = nameP .. numCoalitionGroup[coalitionIndex]
 
@@ -5951,8 +5991,41 @@ env.info('start formation loop: ' .. i, false)
 		end
 	end
 
+	if (_parkingType[1] == "Turning Point") then
+		_airplanedata.route.points[#_airplanedata.route.points + 1] =
+		{
+			["alt"] = _flightalt,
+			["type"] = _parkingType[1],
+			["action"] = _parkingType[2],
+			["alt_type"] = "BARO",
+			["formation_template"] = "",
+			["properties"] =
+			{
+				["vnav"] = 1,
+				["scale"] = 0,
+				["angle"] = 0,
+				["vangle"] = 0,
+				["steer"] = 2,
+			},
+--					["ETA"] = 51.632064419993,
+			["y"] = airbasePoints[spawnIndex.id][4],
+			["x"] = airbasePoints[spawnIndex.id][3],
+			["speed"] = _flightspeed,
+			["ETA_locked"] = false,
+			["task"] =
+			{
+				["id"] = "ComboTask",
+				["params"] =
+				{
+					["tasks"] = _tasks,
+				},
+			},
+			["speed_locked"] = true,
+		}
+	end
+
 	if (flagRandomWaypoint) then
-		_airplanedata.route.points[2] =
+		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
 			["alt"] = _flightalt,
 			["type"] = "Turning Point",
@@ -5982,7 +6055,7 @@ env.info('start formation loop: ' .. i, false)
 			},
 			["speed_locked"] = true,
 		}
-		_airplanedata.route.points[3] =
+		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
 			["alt"] = _flightalt / 2,
 			["type"] = "Land",
@@ -6016,7 +6089,7 @@ env.info('start formation loop: ' .. i, false)
 			["speed_locked"] = true,
 		}
 	else
-		_airplanedata.route.points[2] =
+		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
 			["alt"] = _flightalt / 2,
 			["type"] = "Land",
@@ -6238,13 +6311,11 @@ function getAFBases (coalitionIndex)
 			id_ = AFids[i].id_,
 			id = AFids[i]:getID()
 		}
-
-	_l = Object.getPoint({id_=AFids[i].id_})
-	_lpos = {}
-	_lpos.x = _l.x
-	_lpos.z = _l.z
-
-env.info('name: ' .. AFids[i]:getName() .. ' id: ' .. AFids[i]:getID() .. ' positionx: ' .. _lpos.x .. ' positionz: ' .. _lpos.z, false)
+--	_l = Object.getPoint({id_=AFids[i].id_})
+--	_lpos = {}
+--	_lpos.x = _l.x
+--	_lpos.z = _l.z
+--env.info('id: ' .. AFids[i]:getID() .. ' name: ' .. AFids[i]:getName() .. ' id: ' .. AFids[i]:getID() .. ' positionx: ' .. _lpos.x .. ' positionz: ' .. _lpos.z, false)
 	end
 return AF
 end
@@ -6319,14 +6390,15 @@ function generateGroup()
 	if (randomCoalitionSpawn == 1) then	-- Spawn random coalition
 		flgSpawn[math.random(lowVal, highVal)] = true
 	else
-		if ((randomCoalitionSpawn == 3) and (not (numCoalitionAircraft[1] == numCoalitionAircraft[2])) and (maxCoalitionAircraft[1] == maxCoalitionAircraft[2])) then -- Unfair situation
+		if ((randomCoalitionSpawn == 3) and (not (numCoalitionAircraft[1] == numCoalitionAircraft[2])) and (maxCoalitionAircraft[1] == maxCoalitionAircraft[2]) and (lowVal < highVal)) then -- Unfair situation
 			if (numCoalitionAircraft[1] < numCoalitionAircraft[2]) then	-- spawn Red group
 				flgSpawn = {true, false}
 			else
 				flgSpawn = {false, true}
 			end
 		else
-			flgSpawn = {true, true}
+			if (lowVal == 1) then flgSpawn[1] = true end
+			if (highVal == 2) then flgSpawn[2] = true end
 		end
 	end
 
