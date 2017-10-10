@@ -8575,4 +8575,5 @@ end
 
 Spawntimer = mist.scheduleFunction(generateGroup, {}, timer.getTime() + 2, intervall)
 Spawntimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, intervall)
+
 end
