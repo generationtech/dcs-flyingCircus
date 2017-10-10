@@ -9,9 +9,5 @@
 <b>Mission Scripting Tools</b>
 <br>https://github.com/mrSkortch/MissionScriptingTools
 
-<<<<<<< HEAD
 <i>Loosely based on GCICAP</i>
-=======
-</i>Loosely based on GCICAP</i>
->>>>>>> 469b94fc36c0581a7742331d3772627239eebadd
 <br>https://forums.eagle.ru/showthread.php?t=120325
