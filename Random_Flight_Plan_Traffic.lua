@@ -24,7 +24,7 @@ flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise jus
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
 flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
-flgRandomParkingType = false			-- Randomize type of parking spot for spawn location		--check
+flgRandomParkingType = true			-- Randomize type of parking spot for spawn location		--check
 flgRandomGroupSize = true			-- Randomize group size, if applicable		--check
 flgRandomFormation = true			-- Randomize formations in multiple unit groups, else use default formation value		--check
 
@@ -34,13 +34,13 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( maxCoalitionAircraft{} must be equal for #3 to work)		--check
-spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
+spawnIntervalLow = 30							-- Random spawn low end repeat interval		--check
+spawnIntervalHigh = 60							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
 minGroupSize = 1								-- Minimum number of groups for those units supporting formations
-maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
+maxCoalitionAircraft = {15, 15}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -48,15 +48,16 @@ minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDa
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 5						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.20							-- If randomizing fuel, the low end percent		--check
+lowFuelPercent = 0.15							-- If randomizing fuel, the low end percent		--check
 highFuelPercent = 0.25							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 		{"TakeOffParking", "From Parking Area"},
 		{"TakeOffParkingHot", "From Parking Area Hot"},
 		{"TakeOff", "From Runway"},
-		{"Turning Point", "Turning Point"},
-		{"Turning Point", "Fly Over Point"}		-- Favor in-air start
+		{"Turning Point", "Fly Over Point"},		-- Favor in-air start
+		{"Turning Point", "Fly Over Point"},		-- Favor in-air start
+--		{"Turning Point", "Turning Point"},
 	}
 spawnSpeedTurningPoint = 125					-- When spawning in the air as turning point, starting speed		--check
 defaultAirplaneFormation = 1					-- When not randomizing formations, the default airplane formation #
