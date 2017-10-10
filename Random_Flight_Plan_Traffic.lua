@@ -27,7 +27,7 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(4,5) --random for airplane, heli or fighter
+	AircraftType = math.random(1,5) --random for airplane, heli or fighter
 
 	if ((AircraftType >= 1) and (AircraftType <= 3)) then
 		if (coalitionIndex == 1) then
@@ -628,15 +628,15 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				subtype1 = math.random(1,2)
 				if (subtype1 == 1) then
 					_skin = "335th Fighter SQN (SJ)"
-					callsign = "USA - 335th Fighter SQN (SJ)"
+					callsign = "USA F-15E - 335th Fighter SQN (SJ)"
 				else
 					_skin = "492d Fighter SQN (LN)"
-					callsign = "USA - 492d Fighter SQN (LN)"
+					callsign = "USA F-15E - 492d Fighter SQN (LN)"
 				end
 			else
 				_country = country.id.ISRAEL
 				_skin = "IDF No 69 Hammers Squadron"
-				callsign = "ISRAEL - IDF No 69 Hammers Squadron"
+				callsign = "ISRAEL F-15E - IDF No 69 Hammers Squadron"
 			end
 
 			_payload =
@@ -768,7 +768,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-24M"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE - Su-24M"
+			callsign = "UKRAINE Su-24M"
 			_payload =
 			{
 				["pylons"] =
@@ -806,22 +806,22 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,6)
 			if (subtype == 1) then
 				_skin = "bb of 14 squadron raf lossiemouth"
-				callsign = "UK - Tornado GR4 - bb of 14 squadron raf lossiemouth"
+				callsign = "UK Tornado GR4 - bb of 14 squadron raf lossiemouth"
 			elseif (subtype == 2) then
 				_skin = "no. 9 squadron raf marham ab (norfolk)"
-				callsign = "UK - Tornado GR4 - no. 9 squadron raf marham ab (norfolk)"
+				callsign = "UK Tornado GR4 - no. 9 squadron raf marham ab (norfolk)"
 			elseif (subtype == 3) then
 				_skin = "no. 12 squadron raf lossiemouth ab (morayshire)"
-				callsign = "UK - Tornado GR4 - no. 12 squadron raf lossiemouth ab (morayshire)"
+				callsign = "UK Tornado GR4 - no. 12 squadron raf lossiemouth ab (morayshire)"
 			elseif (subtype == 4) then
 				_skin = "no. 14 squadron raf lossiemouth ab (morayshire)"
-				callsign = "UK - Tornado GR4 - no. 14 squadron raf lossiemouth ab (morayshire)"
+				callsign = "UK Tornado GR4 - no. 14 squadron raf lossiemouth ab (morayshire)"
 			elseif (subtype == 5) then
 				_skin = "no. 617 squadron raf lossiemouth ab (morayshire)"
-				callsign = "UK - Tornado GR4 - no. 617 squadron raf lossiemouth ab (morayshire)"
+				callsign = "UK Tornado GR4 - no. 617 squadron raf lossiemouth ab (morayshire)"
 			else
 				_skin = "o of ii (ac) squadron raf marham"
-				callsign = "UK - Tornado GR4 - o of ii (ac) squadron raf marham"
+				callsign = "UK Tornado GR4 - o of ii (ac) squadron raf marham"
 			end
 
 			_payload =
@@ -953,7 +953,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-22M3"
 			_country = country.id.UKRAINE
 			_skin = "af standard"
-			callsign = "UKRAINE - Tu-22M3"
+			callsign = "UKRAINE Tu-22M3"
 			_payload =
 			{
 				["pylons"] =
@@ -980,7 +980,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-95MS"
 			_skin = "af standard"
 			_country = country.id.UKRAINE
-			callsign = "UKRAINE - Tu-95MS"
+			callsign = "UKRAINE Tu-95MS"
 			_payload =
 			{
 				["pylons"] =
@@ -999,7 +999,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Su-24M"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA - Su-24M"
+			callsign = "RUSSIA Su-24M"
 			_payload =
 			{
 				["pylons"] =
@@ -1034,7 +1034,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-142"
 			_skin = "af standard"
 			_country = country.id.RUSSIA
-			callsign = "RUSSIA - Tu-142"
+			callsign = "RUSSIA Tu-142"
 			_payload =
 			{
 				["pylons"] =
@@ -1053,7 +1053,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-160"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA - Tu-160"
+			callsign = "RUSSIA Tu-160"
 			_payload =
 			{
 				["pylons"] =
@@ -1076,7 +1076,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-22M3"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
-			callsign = "RUSSIA - Tu-22M3"
+			callsign = "RUSSIA Tu-22M3"
 			_payload =
 			{
 				["pylons"] =
@@ -1103,7 +1103,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "Tu-95MS"
 			_skin = "af standard"
 			_country = country.id.RUSSIA
-			callsign = "RUSSIA - Tu-95MS"
+			callsign = "RUSSIA Tu-95MS"
 			_payload =
 			{
 				["pylons"] =
