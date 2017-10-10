@@ -6235,37 +6235,37 @@ function f_generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 end
 
-function f_removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
-	if ((g_numCoalitionAircraft[g_RATtable[indeX].coalition] > 0) and (#g_RATtable[indeX].unitNames > 0)) then		-- If possible, increase the available aircraft for this coalition by the number of units remaining in the group
-		if ((g_numCoalitionAircraft[g_RATtable[indeX].coalition] - #g_RATtable[indeX].unitNames) > 0) then
-				g_numCoalitionAircraft[g_RATtable[indeX].coalition] = g_numCoalitionAircraft[g_RATtable[indeX].coalition] - #g_RATtable[indeX].unitNames
+function f_removeGroup (p_index, p_message, p_destroyFlag, p_aircraftGroup)
+	if ((g_numCoalitionAircraft[g_RATtable[p_index].coalition] > 0) and (#g_RATtable[p_index].unitNames > 0)) then		-- If possible, increase the available aircraft for this coalition by the number of units remaining in the group
+		if ((g_numCoalitionAircraft[g_RATtable[p_index].coalition] - #g_RATtable[p_index].unitNames) > 0) then
+				g_numCoalitionAircraft[g_RATtable[p_index].coalition] = g_numCoalitionAircraft[g_RATtable[p_index].coalition] - #g_RATtable[p_index].unitNames
 		else
-				g_numCoalitionAircraft[g_RATtable[indeX].coalition] = 0
+				g_numCoalitionAircraft[g_RATtable[p_index].coalition] = 0
 		end
 	end
 
-	if (g_debugLog) then env.info('group:' .. g_RATtable[indeX].groupname .. '  type:' .. g_RATtable[indeX].actype .. messagE .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
-	if (g_debugScreen) then trigger.action.outText('group:' .. g_RATtable[indeX].groupname .. '  type:' .. g_RATtable[indeX].actype .. messagE .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
+	if (g_debugLog) then env.info('group:' .. g_RATtable[p_index].groupname .. '  type:' .. g_RATtable[p_index].actype .. p_message .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
+	if (g_debugScreen) then trigger.action.outText('group:' .. g_RATtable[p_index].groupname .. '  type:' .. g_RATtable[p_index].actype .. p_message .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
 
-	table.remove(g_RATtable, indeX)	-- Group does not exist any longer for this script
+	table.remove(g_RATtable, p_index)	-- Group does not exist any longer for this script
 
-	if (destroyflaG) then aircraftgrouP:destroy() end
+	if (p_destroyFlag) then p_aircraftGroup:destroy() end
 end
 
-function f_removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
-	if (g_numCoalitionAircraft[g_RATtable[indexI].coalition] > 0) then		-- If possible, increase the number of available aircraft for this coalition by one
-		g_numCoalitionAircraft[g_RATtable[indexI].coalition] = g_numCoalitionAircraft[g_RATtable[indexI].coalition] - 1
+function f_removeUnit (p_index, p_jndex, p_removeMessage, p_destroyFlag, p_aircraftUnit)
+	if (g_numCoalitionAircraft[g_RATtable[p_index].coalition] > 0) then		-- If possible, increase the number of available aircraft for this coalition by one
+		g_numCoalitionAircraft[g_RATtable[p_index].coalition] = g_numCoalitionAircraft[g_RATtable[p_index].coalition] - 1
 	end
 
-	if (g_debugLog) then env.info('unit:' .. g_RATtable[indexI].unitNames[indexJ] .. '  type:' .. g_RATtable[indexI].actype .. removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
-	if (g_debugScreen) then trigger.action.outText('unit:' .. g_RATtable[indexI].unitNames[indexJ] .. '  type:' .. g_RATtable[indexI].actype .. removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
+	if (g_debugLog)    then env.info('unit:' .. g_RATtable[p_index].unitNames[p_jndex] .. '  type:' .. g_RATtable[p_index].actype .. p_removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
+	if (g_debugScreen) then trigger.action.outText('unit:' .. g_RATtable[p_index].unitNames[p_jndex] .. '  type:' .. g_RATtable[p_index].actype .. p_removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
 
-	table.remove(g_RATtable[indexI].unitNames, indexJ)		-- Unit does not exist any longer for this script
-	table.remove(g_RATtable[indexI].unitCheckTime, indexJ)	-- Unit does not exist any longer for this script
+	table.remove(g_RATtable[p_index].unitNames, p_jndex)		-- Unit does not exist any longer for this script
+	table.remove(g_RATtable[p_index].unitCheckTime, p_jndex)	-- Unit does not exist any longer for this script
 
-	if (destroyFlag) then aircraftUnit:destroy() end
+	if (p_destroyFlag) then p_aircraftUnit:destroy() end
 
-	if (#g_RATtable[indexI].unitNames == 0) then	-- There are no more units in this group, the group needs to be removed
+	if (#g_RATtable[p_index].unitNames == 0) then	-- There are no more units in this group, the group needs to be removed
 		return true
 	else
 		return false
@@ -6380,11 +6380,11 @@ function f_checkStatus()
 end
 
 -- Determine the bases based on a coalition parameter
-function f_getAFBases (coalitionIndex)
+function f_getAFBases (p_coalitionIndex)
 	local l_AFids = {}
 	local l_AF    = {}
 
-	l_AFids = coalition.getAirbases(coalitionIndex)
+	l_AFids = coalition.getAirbases(p_coalitionIndex)
 	for i = 1, #l_AFids do
 		l_AF[i] =
 		{
@@ -6403,10 +6403,10 @@ return AF[airbaseChoice]
 end
 
 -- Check if possible to spawn a new group for the coalition
-function f_checkMax(cs)
-	if ((g_numCoalitionAircraft[cs] < g_maxCoalitionAircraft[cs]) and ((g_maxCoalitionAircraft[cs] - g_numCoalitionAircraft[cs]) >= g_maxGroupSize))then  -- Is ok to spawn a new unit?
-		g_numCoalitionAircraft[cs] = g_numCoalitionAircraft[cs] + 1
-		g_numCoalitionGroup[cs] = g_numCoalitionGroup[cs] + 1
+function f_checkMax(p_cs)
+	if ((g_numCoalitionAircraft[p_cs] < g_maxCoalitionAircraft[p_cs]) and ((g_maxCoalitionAircraft[p_cs] - g_numCoalitionAircraft[p_cs]) >= g_maxGroupSize))then  -- Is ok to spawn a new unit?
+		g_numCoalitionAircraft[p_cs] = g_numCoalitionAircraft[p_cs] + 1
+		g_numCoalitionGroup[p_cs] = g_numCoalitionGroup[p_cs] + 1
 		return true
 	else
 		return false
@@ -6414,15 +6414,15 @@ function f_checkMax(cs)
 end
 
 -- Determine spawn and land airbases
-function f_makeAirBase(cs)
+function f_makeAirBase(p_cs)
 	local l_ab = {}
 
-	l_ab[1] = f_chooseAirbase(g_AB[cs])
-	l_ab[2] = f_chooseAirbase(g_AB[cs])
+	l_ab[1] = f_chooseAirbase(g_AB[p_cs])
+	l_ab[2] = f_chooseAirbase(g_AB[p_cs])
 
-	if ((g_flagNoSpawnLandingAirbase) and (#g_AB[cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
+	if ((g_flagNoSpawnLandingAirbase) and (#g_AB[p_cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
 		while (l_ab[1] == l_ab[2]) do
-			l_ab[2] = f_chooseAirbase(g_AB[cs])
+			l_ab[2] = f_chooseAirbase(g_AB[p_cs])
 		end
 	end
 return l_ab
