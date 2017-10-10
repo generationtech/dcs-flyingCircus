@@ -2802,10 +2802,17 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			else
 				_country = country.id.THE_NETHERLANDS
 
-				subtype1 = math.random(1,3)
+--				subtype1 = math.random(1,3)
+--				if (subtype1 == 1) then
+--					_skin = "CMD extended skins"
+--				elseif (subtype1 == 2) then
+--					_skin = "the netherlands (313th squadron `` twenthe ab)"
+--				else
+--					_skin = "the netherlands 313th `tigers` squadron"
+--				end
+
+				subtype1 = math.random(1,2)
 				if (subtype1 == 1) then
-					_skin = "CMD extended skins"
-				elseif (subtype1 == 2) then
 					_skin = "the netherlands (313th squadron `` twenthe ab)"
 				else
 					_skin = "the netherlands 313th `tigers` squadron"
