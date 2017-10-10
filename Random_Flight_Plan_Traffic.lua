@@ -7,6 +7,7 @@ intervall = math.random(30,60) 	--random repeat interval between (A and B) in se
 maxCoalition = {30, 30} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
+--env.setErrorMessageBoxEnabled(false)
 
 -- determine the bases based on a coalition parameter
 function getAFBases (coalitionIndex)
