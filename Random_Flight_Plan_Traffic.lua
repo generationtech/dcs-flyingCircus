@@ -29,7 +29,8 @@ NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 numCoalition = {0, 0}							-- Number of active Red, Blue dynamic spawned units		--check
 waypointRange = {3000, 3000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
 waitTime = 20									-- Amount to time to wait before considering aircraft to be parked or stuck
-minLife = 0.10									-- Minimum amount of life for aircraft under 20
+minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight
+minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife
 
 
 -- Should be no need to edit these below
@@ -6945,6 +6946,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 end
 
+function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
+	if (debugLog) then env.info('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, false) end
+	if (debugScreen) then trigger.action.outText('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, 20) end
+	if (numCoalition[RATtable[indeX].coalition] > 0) then
+		numCoalition[RATtable[indeX].coalition] = numCoalition[RATtable[indeX].coalition] - 1	-- make sure to account for groups that become missing from the sim outside of script control
+	end
+	table.remove(RATtable, indeX)			-- group does not exist any longer for this script
+	if (destroyflaG) then aircraftgrouP:destroy() end
+end
+
 -- Periodically check all dynamically spawned AI units for existence, damage, and stuck
 function checkStatus()
 	if (#RATtable > 0)
@@ -6957,46 +6968,28 @@ function checkStatus()
 				local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
 				if (currentaircraftgroup) == nil then		-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
 					if (RATtable[i].checktime > 0) then		-- have we checked this group yet? (should have spawned by now)
-						if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  removed by sim, not script', false) end
-						if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  removed by sim, not script', 20) end
-						if (numCoalition[RATtable[i].coalition] > 0) then
-							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- make sure to account for groups that become missing from the sim outside of script control
-						end
-						table.remove(RATtable, i)			-- group does not exist any longer for this script
+						removeGroup(i, "  removed by sim, not script", false, nil)
 						RATtableLimit = RATtableLimit - 1	-- array shrinks
 					else
 						i = i + 1
 					end
 				else -- we have an active valid group, check for damage or stopped
 					if (RATtable[i].checktime > waitTime) then -- this group hasn't moved in a very long time
-						if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to low speed', false) end
-						if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to low speed', 20) end
-						currentaircraftgroup:destroy()
-						if (numCoalition[RATtable[i].coalition] > 0) then
-							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1 -- remove this group from script count of active units
-						end
-						table.remove(RATtable, i) -- group does not exist any longer for this script
+						removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
 						RATtableLimit = RATtableLimit - 1
 					else -- valid, active group
 						local currentunitname1 = RATtable[i].unitname1
 						if (Unit.getByName(currentunitname1) ~= nil) then -- valid, active unit
 							local actualunit = Unit.getByName(currentunitname1)
-							local initunitstatus = actualunit:getLife0()
-							local lowerstatuslimit = 0.10 * initunitstatus -- was 0.95. changed to 0.10
+							local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- was 0.95. changed to 0.10
 							local actualunitpos = actualunit:getPosition().p
 							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-							if ((actualunitheight < 20) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
-								if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to damage', false) end
-								if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to damage', 20) end
-								local currentaircraftgroup = Unit.getGroup(actualunit)
-								currentaircraftgroup:destroy()
-								if (numCoalition[RATtable[i].coalition] > 0) then
-									numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
-								end
-								table.remove(RATtable, i)										-- unit does not exist any longer for this script
+							if ((actualunitpos.x > 80000) or (actualunitpos.x < -410000) or (actualunitpos.z > 950000) or (actualunitpos.z < 290000)) then
+								removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
 								RATtableLimit = RATtableLimit - 1
---							elseif () then -- check for wandering lost aircraft (usually means AI flying off the entire map)
-
+							elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
+								removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
+								RATtableLimit = RATtableLimit - 1
 							else -- valid unit, check for movement
 								local actualunitvel = actualunit:getVelocity()
 								local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
