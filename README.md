@@ -9,5 +9,8 @@
 <b>Mission Scripting Tools</b>
 <br>https://github.com/mrSkortch/MissionScriptingTools
 
-<i>Loosely based on GCICAP</i>
+<i>Loosely based on " Autonomous CAP and GCI AI fighter scrip" (GCICAP) by SNAFU</i>
 <br>https://forums.eagle.ru/showthread.php?t=120325
+
+<i>and "Random Airtraffic Script" also by SNAFU</i>
+<br>https://forums.eagle.ru/showthread.php?t=108476
