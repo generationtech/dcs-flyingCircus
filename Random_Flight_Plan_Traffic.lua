@@ -43,7 +43,7 @@ minGroupSize = 1								-- Minimum number of groups for those units supporting f
 maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {50000, 50000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
-waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
+waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
@@ -115,6 +115,1559 @@ numCoalitionAircraft = {0, 0}										-- Current number of active coalition uni
 numCoalitionGroup = {0, 0}											-- Cumulative highest coalition groups
 
 --env.setErrorMessageBoxEnabled(false)
+
+coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skins
+	{	-- Countries
+	[0] =							--RUSSIA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {14, 1, 2},		-- A-50
+				[2] = {1, 4, 5},		-- An-26B
+				[3] = {2, 2},			-- An-30M
+				[4] = {7, 3, 4, 5},		-- IL-76MD
+				[5] = {15, 3, 4, 5},	-- IL-78M
+				[6] = {9, 1},			-- MiG-25RBT
+				[7] = {11, 1},			-- Su-24MR
+				[8] = {12, 1},			-- TF-51D
+				[9] = {13, 3},			-- Yak-40
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[1] = 							--UKRAINE
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {1, 2},		-- An-26B
+				[2] = {2, 1},		-- An-30M
+				[3] = {7, 1, 2},	-- IL-76MD
+				[4] = {9, 1},		-- MiG-25RBT
+				[5] = {11, 1},		-- Su-24MR
+				[6] = {13, 2},		-- Yak-40
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[2] = 							--USA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 1},				-- C-130
+				[2] = {4, 1},				-- C-17A
+				[3] = {5, 1, 2},			-- E-2C
+				[4] = {6, 1, 2},			-- E-3A
+				[5] = {8, 1},				-- KC-135
+				[6] = {10, 1},				-- S-3B Tanker
+				[7] = {12, 2, 3, 4, 5},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[1] = {16, 1},		-- B-1B
+				[2] = {17, 1},		-- B-52H
+				[3] = {18, 1},		-- F-117A
+				[4] = {19, 1, 2},	-- F-15E
+				[5] = {20, 1},		-- S-3B
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[3] = 							--TURKEY
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 11},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[4] = 							--UK
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 10},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[5] = 							--FRANCE
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 5},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[6] = 							--GERMANY
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[8] = 							--CANADA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 3},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[9] = 							--SPAIN
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 8},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[10] = 							--THE_NETHERLANDS
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 9},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[11] = 							--BELGIUM
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 2},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[12] = 							--NORWAY
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 7},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[13] = 							--DENMARK
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 4},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[15] = 							--ISRAEL
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {3, 6},		-- C-130
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[1] = {19, 3},		-- F-15E
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[16] = 							--GEORGIA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {1, 1},		-- An-26B
+				[2] = {13, 1},		-- Yak-40
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[17] = 							--INSURGENTS			-- HANDLE INSURGENTS NO AIRCRAFT CONDITION --
+		{ -- No aircraft
+		},
+	[18] = 							--ABKHAZIA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins
+				[1] = {1, 5},		-- An-26B
+				[2] = {12, 1},		-- TF-51D
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[19] = 							--SOUTH_OSETIA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[20] = 							--ITALY
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	[21] = 							--AUSTRALIA
+		{ -- Aircraft types
+		[1] = -- Utility
+			{	-- Aircraft, skins			-- HANDLE THIS NO AC-TYPE CONDITION --
+			},
+		[2] = -- Bomber
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+				[0] = {0, 0},		--
+			},
+		[3] = -- Attack
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[4] = -- Fighter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		[5] = -- Helocopter
+			{	-- Aircraft, skins
+				[0] = {0, 0},		--
+			},
+		},
+	}
+
+aircraftTable =
+	{
+	[1] =							-- An-26B
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+				"RF Air Force",
+				"Aeroflot",
+				"Abkhazian AF",
+			}
+		},
+	[2] =							-- An-30M
+		{
+			_aircrafttype = "An-30M"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "8300",
+				["flare"] = 192,
+				["chaff"] = 192,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"15th Transport AB",
+				"RF Air Force",
+			}
+		},
+	[3] =							-- C-130
+		{
+			_aircrafttype = "C-130"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "20830",
+				["flare"] = 60,
+				["chaff"] = 120,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"US Air Force",
+				"Belgian Air Force",
+				"Canada's Air Force",
+				"Royal Danish Air Force",
+				"French Air Force",
+				"Israel Defence Force",
+				"Royal Norwegian Air Force",
+				"Spanish Air Force",
+				"Royal Netherlands Air Force",
+				"Royal Air Force",
+				"Turkish Air Force",
+			}
+		},
+	[4] =							-- C-17A
+		{
+			_aircrafttype = "C-17A"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "132405",
+				["flare"] = 60,
+				["chaff"] = 120,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"usaf standard",
+			}
+		},
+	[5] =							-- E-2C
+		{
+			_aircrafttype = "E-2C"
+			_singleInFlight = true
+
+			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"}
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "AWACS",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5624",
+				["flare"] = 60,
+				["chaff"] = 120,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"E-2D Demo",
+				"VAW-125 Tigertails",
+			}
+		},
+	[6] =							-- E-3A
+		{
+			_aircrafttype = "E-3A"
+			_singleInFlight = true
+
+			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"}
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "AWACS",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "65000",
+				["flare"] = 60,
+				["chaff"] = 120,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"nato",
+				"usaf standard",
+			}
+		},
+	[7] =							-- IL-76MD
+		{
+			_aircrafttype = "IL-76MD"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "80000",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Ukrainian AF",
+				"Ukrainian AF aeroflot",
+				"FSB aeroflot",
+				"MVD aeroflot",
+				"RF Air Force",
+			}
+		},
+	[8] =							-- KC-135
+		{
+			_aircrafttype = "KC-135"
+			_singleInFlight = true
+
+			nameCallname = {"Texaco", "Arco", "Shell"}
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "Tanker",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+				[2] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 2,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "ActivateBeacon",
+							["params"] =
+							{
+								["type"] = 4,
+								["frequency"] = 1088000000,
+								["callsign"] = "TKR",
+								["channel"] = 1,
+								["modeChannel"] = "X",
+								["bearing"] = true,
+								["system"] = 4,
+							},
+						},
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = 90700,
+				["flare"] = 60,
+				["chaff"] = 120,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Standard USAF",
+			}
+		},
+	[9] =							-- MiG-25RBT
+		{
+			_aircrafttype = "MiG-25RBT"
+			_singleInFlight = true
+
+
+			_task = "Reconnaissance"
+			_tasks =
+			{
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "15245",
+				["flare"] = 0,
+				["chaff"] = 0,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"af standard",
+			}
+		},
+	[10] =							-- S-3B Tanker
+		{
+			_aircrafttype = "S-3B Tanker"
+			_singleInFlight = true
+
+			nameCallname = {"Texaco", "Arco", "Shell"}
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "Tanker",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 30,
+				["chaff"] = 30,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"usaf standard",
+			}
+		},
+	[11] =							-- Su-24MR
+		{
+			_aircrafttype = "Su-24MR"
+			_singleInFlight = true
+
+			_task = "Reconnaissance"
+			_tasks =
+			{
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{B0DBC591-0F52-4F7D-AD7B-51E67725FB81}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{0519A262-0AB6-11d6-9193-00A0249B6F00}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{0519A261-0AB6-11d6-9193-00A0249B6F00}",
+					},
+				},
+				["fuel"] = "11700",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"af standard",
+			}
+		},
+	[12] =							-- TF-51D
+		{
+			_aircrafttype = "TF-51D"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "501",
+				["flare"] = 0,
+				["chaff"] = 0,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"",
+				"TF -51 Glamorous Glen III",
+				"TF-51 Gentleman Jim",
+				"TF-51 Gunfighter",
+				"TF-51 Miss Velma",
+			}
+		},
+	[13] =							-- Yak-40
+		{
+			_aircrafttype = "Yak-40"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "3080",
+				["flare"] = 0,
+				["chaff"] = 0,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian Airlines",
+				"Ukrainian",
+				"Aeroflot",
+			}
+		},
+	[14] =							-- A-50
+		{
+			_aircrafttype = "A-50"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "70000",
+				["flare"] = 192,
+				["chaff"] = 192,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"RF Air Force",
+				"RF Air Force new",
+			}
+		},
+	[15] =							-- IL-78M
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "90000",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"RF Air Force",
+				"RF Air Force aeroflot",
+				"RF Air Force new",
+			}
+		},
+	[16] =							-- B-1B
+		{
+			_aircrafttype = "B-1B"
+			_singleInFlight = true
+
+			_task = "Ground Attack"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 1,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "EPLRS",
+							["params"] =
+							{
+								["value"] = true,
+								["groupId"] = 2,
+							},
+						},
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "GBU-31*8",
+					},
+					[2] =
+					{
+						["CLSID"] = "GBU-31*8",
+					},
+					[3] =
+					{
+						["CLSID"] = "GBU-31*8",
+					},
+				},
+				["fuel"] = "88450",
+				["flare"] = 30,
+				["chaff"] = 60,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"usaf standard",
+			}
+		},
+	[17] =							-- B-52H
+		{
+			_aircrafttype = "B-52H"
+			_singleInFlight = true
+
+			_task = "Ground Attack"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 1,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "EPLRS",
+							["params"] =
+							{
+								["value"] = true,
+								["groupId"] = 2,
+							},
+						},
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{4CD2BB0F-5493-44EF-A927-9760350F7BA1}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{6C47D097-83FF-4FB2-9496-EAB36DDF0B05}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{4CD2BB0F-5493-44EF-A927-9760350F7BA1}",
+					},
+				},
+				["fuel"] = "141135",
+				["flare"] = 192,
+				["chaff"] = 1125,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"usaf standard",
+			}
+		},
+	[18] =							-- F-117A
+		{
+			_aircrafttype = "F-117A"
+			_singleInFlight = true
+
+			_task = "Pinpoint Strike"
+			_tasks =
+			{
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{EF0A9419-01D6-473B-99A3-BEBDB923B14D}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{EF0A9419-01D6-473B-99A3-BEBDB923B14D}",
+					},
+				},
+				["fuel"] = "3840",
+				["flare"] = 0,
+				["chaff"] = 0,
+				["gun"] = 0,
+			}
+
+			_skins =
+			{
+				"usaf standard",
+			}
+		},
+	[19] =							-- F-15E
+		{
+			_aircrafttype = "F-15E"
+			_singleInFlight = true
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{51F9AAE5-964F-4D21-83FB-502E3BFE5F8A}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[12] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[13] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[14] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[15] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[16] =
+					{
+						["CLSID"] = "{GBU-38}",
+					},
+					[17] =
+					{
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[18] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[19] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+				},
+				["fuel"] = "6103",
+				["flare"] = 60,
+				["chaff"] = 120,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"335th Fighter SQN (SJ)",
+				"492d Fighter SQN (LN)",
+				"IDF No 69 Hammers Squadron",
+			}
+		},
+	[20] =							-- S-3B
+		{
+			_aircrafttype = "S-3B"
+			_singleInFlight = true
+
+			_task = "Ground Attack"
+			_tasks =
+			{
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{AB8B8299-F1CC-4359-89B5-2172E0CF4A5A}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
+					},
+				},
+				["fuel"] = "5500",
+				["flare"] = 30,
+				["chaff"] = 30,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"NAVY Standard",
+			}
+		},
+	[21] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[22] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[23] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[24] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[25] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[26] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[27] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[28] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	[29] =
+		{
+			_aircrafttype = "An-26B"
+			_singleInFlight = true
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			}
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			}
+		},
+	}
 
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
@@ -8881,4 +10434,5 @@ env.info("Dynamic AI group spawn script loaded.", false)
 timer.scheduleFunction(generateGroup, nil, timer.getTime() + spawnInterval)
 Checktimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, checkInterval)
 env.info("Dynamic AI group spawn script running.", false)
+
 end
