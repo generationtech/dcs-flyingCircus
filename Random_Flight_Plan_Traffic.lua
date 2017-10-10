@@ -8,7 +8,7 @@ do
 
 --FLAGS
 flgRandomFuel = true				-- Random fuel loadout?		--check
-flagRandomWeapons = true			-- Add weapons to aircraft?		--check
+flagRandomWeapons = false			-- Add weapons to aircraft?		--check
 flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
 flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?		--check
 flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
@@ -25,11 +25,11 @@ debugScreen = true	-- write messages to screen		--check
 --RANGES
 randomCoalitionSpawn = 3						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
 spawnIntervalLow = 10							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 10							-- Random spawn high end repeat interval		--check
+spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 30, 40, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
+maxCoalition = {10, 10}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
