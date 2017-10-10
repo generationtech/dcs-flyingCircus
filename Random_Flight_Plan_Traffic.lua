@@ -5461,7 +5461,38 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	_singleInFlight = false	-- Default to allowing multi-aircraft formations
 	_category = "AIRPLANE" -- Default to airplane type
+
+	-- Pick a country from the given coalition
+	if (coalitionIndex == 1)
+		_acCountry = math.random(1, #env.mission.coalitions.red)
+	else
+		_acCountry = math.random(1, #env.mission.coalitions.blue)
+	end
+
+	-- Pick an aircraft type from the given country
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
+	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
+		_acTypeIndex = 1
+	elseif ((AircraftType >= aircraftDistribution[1]) and (AircraftType <= aircraftDistribution[2])) then  -- BOMBERS
+		_acTypeIndex = 2
+	elseif ((AircraftType >= aircraftDistribution[2]) and (AircraftType <= aircraftDistribution[3])) then  -- ATTACK AIRCRAFT
+		_acTypeIndex = 3
+	elseif ((AircraftType >= aircraftDistribution[3]) and (AircraftType <= aircraftDistribution[4])) then  -- FIGHTERS
+		_acTypeIndex = 4
+	elseif ((AircraftType >= aircraftDistribution[4]) or (AircraftType <= aircraftDistribution[5])) then -- HELICOPTERS
+		_acTypeIndex = 5
+	end
+
+	-- Pick an aircraft skin set from the given aircraft type
+	_acIndex = math.random(1, #coalitionTable[_acCountry][_acTypeIndex])
+
+	-- Pick an aircraft from the given country and type
+	_ac = coalitionTable[_acCountry][_acTypeIndex][_acIndex][1]
+
+	-- Pick a skin from the given aircraft
+	_acSkin = math.random(2, #coalitionTable[_acCountry][_acTypeIndex][_acIndex])
+
+
 
 
 	-- Randomize the fuel load
