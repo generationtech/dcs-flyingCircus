@@ -14,120 +14,110 @@ do
 --EDIT BELOW
 --
 
---FLAGS
-flgRandomFuel = true				-- Random fuel loadout?		--check
-flagRandomWeapons = true			-- Add weapons to aircraft?		--check
-flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
-flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?		--check
-flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
-flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
-flgRandomSkill = true				-- Randomize AI pilot skill level		--check
-flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
-flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
-flgRandomParkingType = true			-- Randomize type of parking spot for spawn location		--check
-flgRandomGroupSize = true			-- Randomize group size, if applicable		--check
-flgRandomFormation = true			-- Randomize formations in multiple unit groups, else use default formation value		--check
-
 --DEBUG
-debugLog = true		-- write entries to the log		--check
-debugScreen = true	-- write messages to screen		--check
+debugLog             = true		-- write entries to the log
+debugScreen          = true		-- write messages to screen
 
---RANGES
-randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( maxCoalitionAircraft{} must be equal for #3 to work)		--check
-spawnIntervalLow = 30							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 60							-- Random spawn high end repeat interval		--check
-checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
-aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
-maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
-minGroupSize = 1								-- Minimum number of groups for those units supporting formations
-maxCoalitionAircraft = {15, 15}					-- Maximum number of red, blue units
-NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
-waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
-minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
-minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
-unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
-defaultParkingSpotType = 5						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.15							-- If randomizing fuel, the low end percent		--check
-highFuelPercent = 0.25							-- If randomizing fuel, the high end percent		--check
-parkingSpotType =
-	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
-		{"TakeOffParking", "From Parking Area"},
-		{"TakeOffParkingHot", "From Parking Area Hot"},
-		{"TakeOff", "From Runway"},
-		{"Turning Point", "Fly Over Point"},		-- Favor in-air start
-		{"Turning Point", "Fly Over Point"},		-- Favor in-air start
---		{"Turning Point", "Turning Point"},
-	}
-spawnSpeedTurningPoint = 125					-- When spawning in the air as turning point, starting speed		--check
-defaultAirplaneFormation = 1					-- When not randomizing formations, the default airplane formation #
-defaultHelicopterFormation = 1					-- When not randomizing formations, the default helicopter formation #
-unitSkill = 									-- List of possible skill levels for AI units
-	{
-		"Average",
-		"Good",
-		"High",
-		"Excellent",
-		"Random"
-	}
-airplaneFormation =													-- Airplane formations
-	{																-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
-		[1]  = {"Line Abreast - Open", 2, 5, 1, 65538},
-		[2]  = {"Line Abreast - Close", 1, 5, 1, 65537},
-		[3]  = {"Trail - Open", 2, 5, 2, 131074},
-		[4]  = {"Trail - Close", 1, 5, 2, 131073},
-		[5]  = {"Wedge - Open", 2, 5, 3, 196610},
-		[6]  = {"Wedge - Close", 1, 5, 3, 196609},
-		[7]  = {"Echelon Right - Open", 2, 5, 4, 262146},
-		[8]  = {"Echelon Right - Close", 1, 5, 4, 262145},
-		[9]  = {"Echelon Left - Open", 2, 5, 5, 327682},
-		[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
-		[11] = {"Finger Four - Open", 2, 5, 6, 393218},
-		[12] = {"Finger Four - Close", 1, 5, 6, 393217},
-		[13] = {"Spread Four - Open", 2, 5, 7, 458754},
-		[14] = {"Spread Four - Close", 1, 5, 7, 458753}
-	}
-helicopterFormation =												-- Helicopter formations
-	{																-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
-		[1]  = {"Wedge",	nil, nil, 5, 8, 8},
-		[2]  = {"Right - interval 300", 1, 0, 5, 10, 655361},
-		[3]  = {"Right - interval 600", 2, 0, 5, 10, 655362},
-		[4]  = {"Left - interval 300", 1, 1, 5, 10, 655617},
-		[5]  = {"Left - interval 600", 2, 1, 5, 10, 655618},
-		[6]  = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
-		[7]  = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
-		[8]  = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
-		[9]  = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
-		[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
-		[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
-		[12] = {"Column", nil, nil, 5, 11, 720896}
-	}
+--GENERAL PARAMETERS
+spawnIntervalLow     = 30		-- Random spawn low end repeat interval
+spawnIntervalHigh    = 60		-- Random spawn high end repeat interval
+maxCoalitionAircraft = {15, 15}	-- Maximum number of red, blue units
+randomCoalitionSpawn = 3		-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( maxCoalitionAircraft{} must be equal for #3 to work)
+aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
+NamePrefix           = {"Red-", "Blue-"}		-- Prefix to use for naming groups
 
-airbasePoints = 													-- These are the start and end x,z points for each airbase
-	{																-- Use for the fly over points when spawning aircraft airborne
-																	-- {x1, z1, x2, z2, heading, psi}
-		[12] = {-6495.7142857133,242167.42857143,-4321.7142857133,244091.42857143,-0.724468306690539,0.724468306690539},	--check
-		[13] = {11751.428571429,369204.85714286,11620.000000001,366703.71428572,1.62329544850684,-1.62329544850684},	--check
-		[14] = {-41589.428571427,278650.57142857,-40248.857142856,279856.28571428,-0.732485302032408,0.732485302032408},	--check
-		[15] = {-5579.7142857133,295210.57142857,-7585.9999999991,293555.14285714,2.45172058746978,-2.45172058746978},	--check
-		[16] = {-25197.428571427,459052.57142857,-27686.57142857,457036.28571429,2.46076441819486,-2.46076441819486},	--check
-		[17] = {-51087.142857141,297810.85714286,-49706.57142857,298970.28571429,-0.698553037936999,0.698553037936999},	--check
-		[18] = {-163750.28571428,463622.57142857,-165212.85714286,460870,2.05920616746982,-2.05920616746982},
-		[19] = {6652.2857142863,386738.57142858,8764.8571428577,389003.71428572,-0.820235909742805,0.820235909742805},	--check
-		[20] = {-221401.14285714,566015.71428571,-219751.42857143,562707.14285714,1.10825468264437,-1.10825468264437},	--check
-		[21] = {-197811.42857143,517063.14285714,-195622.28571428,515849.42857143,0.506233740419563,-0.506233740419563},	--check
-		[22] = {-355121.14285714,616421.14285715,-356549.42857143,618419.42857144,4.09182848606838,-4.09182848606838},	--check
-		[23] = {-281681.14285714,646054,-281882.28571429,648431.42857143,4.62798477132166,-4.62798477132166},	--check
-		[24] = {-318368,634520.57142858,-317545.42857143,636779.14285715,-1.22234030943342,1.22234030943342},		--check
-		[25] = {-285233.71428571,682650.57142857,-284543.14285714,685056.85714286,-1.29132089859535,1.29132089859535},	--check
-		[26] = {-52128.285714285,707572.28571429,-50388.857142856,703892.28571429,1.12925011719757,-1.12925011719757},	--check
-		[27] = {-125580.57142857,759479.14285715,-124274.85714286,761378.00000001,-0.968419584342998,0.968419584342998},	--check
-		[28] = {-83740.571428571,832212.57142857,-83294.857142857,835718.57142857,-1.44434563501146,1.44434563501146},	--check
-		[29] = {-316481.42857143,897668.85714286,-314624.28571428,895291.42857143,0.90765164013325,-0.90765164013325},	--check
-		[30] = {-316999.71428571,894496.57142857,-318664,896327.71428572,3.97469042602364,-3.97469042602364},	--check
-		[31] = {-318175.14285714,902274.28571429,-319966.57142857,904036.85714286,3.91887137165303,-3.91887137165303},	--check
-		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144,4.65116431906051,-4.65116431906051}	--check
-	}
+--STUCK CONDITION CHECKING
+checkInterval        = 20		-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)
+waitTime             = 15		-- Amount to time to wait before considering aircraft to be parked or stuck
+minDamagedLife       = 0.10		-- Minimum % amount of life for aircraft under minDamagedHeight
+minDamagedHeight     = 20		-- Minimum height to start checking for minDamagedLife
+
+--AIRCRAFT CONFIGURATIONS
+flgRandomFuel        = true		-- Random fuel loadout?
+lowFuelPercent       = 0.15		-- If randomizing fuel, the low end percent
+highFuelPercent      = 0.25		-- If randomizing fuel, the high end percent
+
+flagRandomWeapons    = true		-- Add weapons to aircraft?
+
+flgRandomSkins       = true		-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
+
+flgRandomSkill       = true		-- Randomize AI pilot skill level
+unitSkillDefault     = 3		-- Default unit skill if not using randomize unitSkill[unitSkillDefault]
+unitSkill            = 			-- List of possible skill levels for AI units
+					{
+						"Average",
+						"Good",
+						"High",
+						"Excellent",
+						"Random"
+					}
+
+--AIRCRAFT FORMATIONS
+flgRandomGroupSize  = true		-- Randomize group size, if applicable
+maxGroupSize        = 4			-- Maximum number of groups for those units supporting formations
+minGroupSize        = 1			-- Minimum number of groups for those units supporting formations
+
+flgRandomFormation  = true		-- Randomize formations in multiple unit groups, else use default formation value
+defaultAirplaneFormation   = 1	-- When not randomizing formations, the default airplane formation #
+defaultHelicopterFormation = 1	-- When not randomizing formations, the default helicopter formation #
+airplaneFormation   =			-- Airplane formations
+					{			-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
+						[1]  = {"Line Abreast - Open", 2, 5, 1, 65538},
+						[2]  = {"Line Abreast - Close", 1, 5, 1, 65537},
+						[3]  = {"Trail - Open", 2, 5, 2, 131074},
+						[4]  = {"Trail - Close", 1, 5, 2, 131073},
+						[5]  = {"Wedge - Open", 2, 5, 3, 196610},
+						[6]  = {"Wedge - Close", 1, 5, 3, 196609},
+						[7]  = {"Echelon Right - Open", 2, 5, 4, 262146},
+						[8]  = {"Echelon Right - Close", 1, 5, 4, 262145},
+						[9]  = {"Echelon Left - Open", 2, 5, 5, 327682},
+						[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
+						[11] = {"Finger Four - Open", 2, 5, 6, 393218},
+						[12] = {"Finger Four - Close", 1, 5, 6, 393217},
+						[13] = {"Spread Four - Open", 2, 5, 7, 458754},
+						[14] = {"Spread Four - Close", 1, 5, 7, 458753}
+					}
+helicopterFormation =			-- Helicopter formations
+					{			-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
+						[1]  = {"Wedge",	nil, nil, 5, 8, 8},
+						[2]  = {"Right - interval 300", 1, 0, 5, 10, 655361},
+						[3]  = {"Right - interval 600", 2, 0, 5, 10, 655362},
+						[4]  = {"Left - interval 300", 1, 1, 5, 10, 655617},
+						[5]  = {"Left - interval 600", 2, 1, 5, 10, 655618},
+						[6]  = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
+						[7]  = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
+						[8]  = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
+						[9]  = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
+						[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
+						[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
+						[12] = {"Column", nil, nil, 5, 11, 720896}
+					}
+
+--AIRCRAFT FLIGHTPATH
+flgNoSpawnLandingAirbase = true	-- Don't allow spawning airbase and landing airbase to be the same?
+
+flgSetTasks              = true	-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)
+
+flgRandomAltitude        = true	-- Randomize altitude (otherwise use standard altitude per aircraft type)
+
+flgRandomSpeed           = true	-- Randomize altitude (otherwise use standard speed per aircraft type)
+spawnSpeedTurningPoint   = 125	-- When spawning in the air as turning point, starting speed
+
+flagRandomWaypoint       = true	-- Create intermediate waypoint?
+waypointRange            = {40000, 40000}	-- Maximum x,y of where to place intermediate waypoint between takeoff
+
+flgRandomParkingType     = true	-- Randomize type of parking spot for spawn location
+defaultParkingSpotType   = 5	-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]
+parkingSpotType          =
+						{		-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)
+							{"TakeOffParking", "From Parking Area"},
+							{"TakeOffParkingHot", "From Parking Area Hot"},
+							{"TakeOff", "From Runway"},
+							{"Turning Point", "Fly Over Point"},		-- Favor in-air start
+							{"Turning Point", "Fly Over Point"},		-- Favor in-air start
+					--		{"Turning Point", "Turning Point"},
+						}
+
 
 -- Should be no need to edit these below
 RATtable = {}
@@ -141,6 +131,32 @@ numCoalitionAircraft = {0, 0}										-- Current number of active coalition uni
 numCoalitionGroup = {0, 0}											-- Cumulative highest coalition groups
 
 --env.setErrorMessageBoxEnabled(false)
+
+airbasePoints = 													-- These are the start and end x,z points for each airbase
+	{																-- Use for the fly over points when spawning aircraft airborne
+																	-- {x1, z1, x2, z2, heading, psi}
+		[12] = {-6495.7142857133,242167.42857143,-4321.7142857133,244091.42857143,-0.724468306690539,0.724468306690539},
+		[13] = {11751.428571429,369204.85714286,11620.000000001,366703.71428572,1.62329544850684,-1.62329544850684},
+		[14] = {-41589.428571427,278650.57142857,-40248.857142856,279856.28571428,-0.732485302032408,0.732485302032408},
+		[15] = {-5579.7142857133,295210.57142857,-7585.9999999991,293555.14285714,2.45172058746978,-2.45172058746978},
+		[16] = {-25197.428571427,459052.57142857,-27686.57142857,457036.28571429,2.46076441819486,-2.46076441819486},
+		[17] = {-51087.142857141,297810.85714286,-49706.57142857,298970.28571429,-0.698553037936999,0.698553037936999},
+		[18] = {-163750.28571428,463622.57142857,-165212.85714286,460870,2.05920616746982,-2.05920616746982},
+		[19] = {6652.2857142863,386738.57142858,8764.8571428577,389003.71428572,-0.820235909742805,0.820235909742805},
+		[20] = {-221401.14285714,566015.71428571,-219751.42857143,562707.14285714,1.10825468264437,-1.10825468264437},
+		[21] = {-197811.42857143,517063.14285714,-195622.28571428,515849.42857143,0.506233740419563,-0.506233740419563},
+		[22] = {-355121.14285714,616421.14285715,-356549.42857143,618419.42857144,4.09182848606838,-4.09182848606838},
+		[23] = {-281681.14285714,646054,-281882.28571429,648431.42857143,4.62798477132166,-4.62798477132166},
+		[24] = {-318368,634520.57142858,-317545.42857143,636779.14285715,-1.22234030943342,1.22234030943342},
+		[25] = {-285233.71428571,682650.57142857,-284543.14285714,685056.85714286,-1.29132089859535,1.29132089859535},
+		[26] = {-52128.285714285,707572.28571429,-50388.857142856,703892.28571429,1.12925011719757,-1.12925011719757},
+		[27] = {-125580.57142857,759479.14285715,-124274.85714286,761378.00000001,-0.968419584342998,0.968419584342998},
+		[28] = {-83740.571428571,832212.57142857,-83294.857142857,835718.57142857,-1.44434563501146,1.44434563501146},
+		[29] = {-316481.42857143,897668.85714286,-314624.28571428,895291.42857143,0.90765164013325,-0.90765164013325},
+		[30] = {-316999.71428571,894496.57142857,-318664,896327.71428572,3.97469042602364,-3.97469042602364},
+		[31] = {-318175.14285714,902274.28571429,-319966.57142857,904036.85714286,3.91887137165303,-3.91887137165303},
+		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144,4.65116431906051,-4.65116431906051}
+	}
 
 coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skins
 	{	-- Countries
@@ -5687,8 +5703,6 @@ aircraftTable =
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
-env.info("generate airplane loop start", false)
-
 	_acExist = nil
 	while (_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
 		-- Pick a country from the given coalition
@@ -5699,8 +5713,6 @@ env.info("generate airplane loop start", false)
 			_acCountry = math.random(1, #env.mission.coalitions.blue)
 			_country = env.mission.coalitions.blue[_acCountry]
 		end
-
-env.info("generate airplane loop: _acCountry: " .. _acCountry .. " _country: " .. _country, false)
 
 		-- Pick an aircraft type from the given country
 		AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
@@ -5716,13 +5728,8 @@ env.info("generate airplane loop: _acCountry: " .. _acCountry .. " _country: " .
 			_acTypeIndex = 5
 		end
 
-env.info("generate airplane loop: _acTypeIndex: " .. _acTypeIndex, false)
-
-
 		-- Pick an aircraft and skin set from the given aircraft type
 		_acIndex = math.random(1, #coalitionTable[_country][_acTypeIndex])
-
-env.info("generate airplane loop: _acIndex: " .. _acIndex, false)
 
 		_acExist = coalitionTable[_country][_acTypeIndex][_acIndex]
 	end
@@ -5730,31 +5737,20 @@ env.info("generate airplane loop: _acIndex: " .. _acIndex, false)
 	-- Pick an aircraft from the given country and type
 	_ac = coalitionTable[_country][_acTypeIndex][_acIndex][1]
 
-env.info("generate airplane loop: _ac: " .. _ac, false)
-
 	-- Pick a skin from the given aircraft
 	_acSkin = math.random(2, #coalitionTable[_country][_acTypeIndex][_acIndex])
-
-env.info("generate airplane loop: _acSkin: " .. _acSkin, false)
 
 	-- The specific aircraft
 	_aircrafttype = aircraftTable[_ac]._aircrafttype
 
-
-env.info("generate airplane loop: _aircrafttype: " .. _aircrafttype, false)
-
 	-- Set category
 	_category = aircraftTable[_ac]._category
-
-env.info("generate airplane loop: _category: " .. _category, false)
 
 	-- Formation flying or not
 	if (aircraftTable[_ac]["_singleInFlight"] ~= nil) then
 		_singleInFlight = true
-env.info("generate airplane loop: _singleInFlight: true", false)
 	else
 		_singleInFlight = false
-env.info("generate airplane loop: _singleInFlight: false", false)
 	end
 
 	-- Set callsign name
@@ -5764,42 +5760,28 @@ env.info("generate airplane loop: _singleInFlight: false", false)
 		nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	end
 
---env.info("generate airplane loop: nameCallname: " .. nameCallname, false)
-
 	-- Set tasking
 	if (aircraftTable[_ac]._task ~= nil) then
 		_task = aircraftTable[_ac]._task
---env.info("generate airplane loop: _task: " .. _task, false)
 	else
 		_task = ""
---env.info("generate airplane loop: _task: no task", false)
 	end
 
 	-- Set tasks
 	if (aircraftTable[_ac]._tasks ~= nil) then
 		_tasks = aircraftTable[_ac]._tasks
---env.info("generate airplane loop: _tasks: " .. mist.utils.tableShow(_tasks), false)
 	else
 		_tasks = {}
---env.info("generate airplane loop: _tasks: no tasks", false)
 	end
 
 	-- Set payload
 	_payload = aircraftTable[_ac]._payload
 
-env.info("generate airplane loop: _payload: " .. mist.utils.tableShow(_payload), false)
-
 	-- Set skin
 	_skin = aircraftTable[_ac]._skins[coalitionTable[_country][_acTypeIndex][_acIndex][_acSkin]]
 
-env.info("generate airplane loop: _skin: " .. _skin, false)
-
 	-- Set full name used for messages
 	_fullname = coalitionTable[_country].name .. " " .. _aircrafttype .. " - " .. _skin
-
-env.info("generate airplane loop: _fullname: " .. _fullname, false)
-
-env.info("generate airplane loop plane selected", false)
 
 	-- Randomize the fuel load
 	if (flgRandomFuel) then
@@ -5864,12 +5846,7 @@ env.info("generate airplane loop plane selected", false)
 
 	_spawnairdromeId = spawnIndex.id
 	_spawnairplanepos = {}
-
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
---	_spawnairplanepos.x = _spawnairbaseloc.x
---	_spawnairplanepos.z = _spawnairbaseloc.z
---env.info("generate airplane loop spawnpos computed x: " .. _spawnairplanepos.x .. " y: " .. _spawnairplanepos.z, false)
-
 	if (_parkingType[1] == "Turning Point") then
 		_spawnairplanepos.x = airbasePoints[spawnIndex.id][1]
 		_spawnairplanepos.z = airbasePoints[spawnIndex.id][2]
@@ -5885,20 +5862,14 @@ env.info("generate airplane loop plane selected", false)
 		_spawnAlt = 0
 	end
 
-env.info("generate airplane loop spawnpos computed x: " .. _spawnairplanepos.x .. " y: " .. _spawnairplanepos.z, false)
-env.info("generate airplane loop spawnpos computed", false)
-
 	_spawnairplaneparking = math.random(1,40)
 
 	_waypointtype = _parkingType[1]
 	_waypointaction = _parkingType[2]
 	if (_waypointtype == "Turning Point") then
 		_spawnSpeed = spawnSpeedTurningPoint
---		Pos3 = Object.getPosition({id_=spawnIndex.id_})
---		_spawnHeading = (Pos3.p.y / 360) * 6.28
 	else
 		_spawnSpeed = 0
---		_spawnHeading = 0
 	end
 
 	_landairbaseID = landIndex.id
@@ -5923,14 +5894,9 @@ env.info("generate airplane loop spawnpos computed", false)
 	_waypoint.x = _spawnairbaseloc.x + math.random(- _waypoint.distx, _waypoint.distx)
 	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
 
-env.info("generate airplane loop waypoint computed", false)
-
 	_groupname = nameP .. numCoalitionGroup[coalitionIndex]
 
-	--
 	local _formationName = ''
-	--
-
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		local _params = {}
 		local _r
@@ -6060,9 +6026,7 @@ env.info("generate airplane loop waypoint computed", false)
 
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		_formationSize = math.random(minGroupSize, maxGroupSize)
-env.info('formation size: ' .. _formationSize, false)
 		for i=2, _formationSize do
-env.info('start formation loop: ' .. i, false)
 			_airplanedata.units[i] =
 			{
 				["alt"] = _spawnAlt,
@@ -6125,7 +6089,6 @@ env.info('start formation loop: ' .. i, false)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
---					["ETA"] = 51.632064419993,
 			["y"] = airbasePoints[spawnIndex.id][4],
 			["x"] = airbasePoints[spawnIndex.id][3],
 			["speed"] = _flightspeed,
@@ -6158,7 +6121,6 @@ env.info('start formation loop: ' .. i, false)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
---					["ETA"] = 51.632064419993,
 			["y"] = _waypoint.z,
 			["x"] = _waypoint.x,
 			["speed"] = _flightspeed,
@@ -6188,7 +6150,6 @@ env.info('start formation loop: ' .. i, false)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
---					["ETA"] = 0,
 			["airdromeId"] = _landairbaseID,
 			["y"] = _landairbaseloc.z,
 			["x"] = _landairbaseloc.x,
@@ -6222,7 +6183,6 @@ env.info('start formation loop: ' .. i, false)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
---					["ETA"] = 0,
 			["airdromeId"] = _landairbaseID,
 			["y"] = _landairbaseloc.z,
 			["x"] = _landairbaseloc.x,
@@ -6242,9 +6202,6 @@ env.info('start formation loop: ' .. i, false)
 		}
 	end
 
-env.info("generate airplane loop spawn", false)
-
-
 	if (_category == "HELICOPTER") then
 		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
 	else
@@ -6253,9 +6210,6 @@ env.info("generate airplane loop spawn", false)
 
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _groupname .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2] .. '  fullname:' .. _fullname, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
---	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
---	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
---	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. _formationName, false) end
 	if (debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _groupname .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
@@ -6331,8 +6285,6 @@ function checkStatus()
 					i = i + 1
 				end
 			else -- Valid group, make unit checks
-env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2], false)
---env.info('random 1-4: ' .. math.random(1,4), false)
 				local unitNamesLimit = #RATtable[i].unitNames
 				local j = 1
 				while ((j <= unitNamesLimit) and (unitNamesLimit > 0))
@@ -6429,11 +6381,6 @@ function getAFBases (coalitionIndex)
 			id_ = AFids[i].id_,
 			id = AFids[i]:getID()
 		}
---	_l = Object.getPoint({id_=AFids[i].id_})
---	_lpos = {}
---	_lpos.x = _l.x
---	_lpos.z = _l.z
---env.info('id: ' .. AFids[i]:getID() .. ' name: ' .. AFids[i]:getName() .. ' id: ' .. AFids[i]:getID() .. ' positionx: ' .. _lpos.x .. ' positionz: ' .. _lpos.z, false)
 	end
 return AF
 end
@@ -6525,7 +6472,6 @@ function generateGroup()
 		if (flgSpawn[i] == true) then
 			if checkMax(i) then
 				airbase = makeAirBase(i)
-env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
 				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
 			end
 		end
