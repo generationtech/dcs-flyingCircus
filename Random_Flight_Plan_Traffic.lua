@@ -27,13 +27,13 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(1,3) --random for airplane, heli or fighter
+	AircraftType = math.random(1,10) --random for airplane, heli or fighter
 
-	if (AircraftType == 1) then
+	if ((AircraftType >= 1) and (AircraftType <= 4)) then
 		if (coalitionIndex == 1) then
 			randomAirplane = math.random(10,18) -- random for airplane type; Russian AC 10-18
 		else
-			randomAirplane = math.random(1,9) -- random for airplane type; Russian AC 10-18
+			randomAirplane = math.random(1,9) -- random for airplane type; USA AC 1-9
 		end
 
 		if (randomAirplane == 1) then
@@ -323,7 +323,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF"
 		end
 
-	elseif (AircraftType == 2) then
+	elseif ((AircraftType == 5) or (AircraftType == 6)) then
 		if (coalitionIndex == 1) then
 			randomHeli = math.random(13,18) -- random for airplane type; Russian AC 13-18
 		else
@@ -741,7 +741,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF14"
 		end
 
-	elseif (AircraftType == 3) then
+	elseif ((AircraftType >= 7) and (AircraftType <= 10)) then
 		if (coalitionIndex == 1) then
 			randomFighter = math.random(18,36) -- random for airplane type; Russian AC 18-36
 		else
@@ -2492,9 +2492,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	end
 
-	env.warning('Group: ' .. _airplanedata.name .. '  Type: ' .. _aircrafttype .. '  Spawn: ' .. spawnIndex.name .. '  Land: ' .. landIndex.name .. '  Altitude: ' .. _landalt .. '  Speed: ' .. _landspeed, false)
+	env.warning('group: ' .. _airplanedata.name .. '  type: ' .. _aircrafttype .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], false)
 
-	trigger.action.outText('Group: ' .. _airplanedata.name .. '  Type: ' .. _aircrafttype .. '  Spawn: ' .. spawnIndex.name .. '  Land: ' .. landIndex.name .. '  Altitude: ' .. _landalt .. '  Speed: ' .. _landspeed, 10)
+	trigger.action.outText('group: ' .. _airplanedata.name .. '  type: ' .. _aircrafttype .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], 10)
 
 end
 
