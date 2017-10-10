@@ -34,13 +34,13 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( maxCoalitionAircraft{} must be equal for #3 to work)		--check
-spawnIntervalLow = 15							-- Random spawn low end repeat interval		--check
+spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
 spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
-maxGroupSize = 1								-- Maximum number of groups for those units supporting formations		--check
+maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
 minGroupSize = 1								-- Minimum number of groups for those units supporting formations
-maxCoalitionAircraft = {1, 1}					-- Maximum number of red, blue units
+maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -48,8 +48,8 @@ minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDa
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 5						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.40							-- If randomizing fuel, the low end percent		--check
-highFuelPercent = 0.75							-- If randomizing fuel, the high end percent		--check
+lowFuelPercent = 0.20							-- If randomizing fuel, the low end percent		--check
+highFuelPercent = 0.25							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 		{"TakeOffParking", "From Parking Area"},
@@ -104,27 +104,28 @@ helicopterFormation =												-- Helicopter formations
 
 airbasePoints = 													-- These are the start and end x,z points for each airbase
 	{																-- Use for the fly over points when spawning aircraft airborne
-		[12] = {-6495.7142857133,242167.42857143,-4321.7142857133,244091.42857143},
-		[13] = {11751.428571429,369204.85714286,11620.000000001,366703.71428572},
-		[14] = {-41589.428571427,278650.57142857,-40248.857142856,279856.28571428},
-		[15] = {-5579.7142857133,295210.57142857,-7585.9999999991,293555.14285714},
-		[16] = {-25197.428571427,459052.57142857,-27686.57142857,457036.28571429},
-		[17] = {-51087.142857141,297810.85714286,-49706.57142857,298970.28571429},
-		[18] = {-163750.28571428,463622.57142857,-165212.85714286,460870},
-		[19] = {6652.2857142863,386738.57142858,8764.8571428577,389003.71428572},
-		[20] = {-221401.14285714,566015.71428571,-219751.42857143,562707.14285714},
-		[21] = {-197811.42857143,517063.14285714,-195622.28571428,515849.42857143},
-		[22] = {-355121.14285714,616421.14285715,-356549.42857143,618419.42857144},
-		[23] = {-281681.14285714,646054,-281882.28571429,648431.42857143},
-		[24] = {-318368,634520.57142858,-317545.42857143,636779.14285715},
-		[25] = {-285233.71428571,682650.57142857,-284543.14285714,685056.85714286},
-		[26] = {-52128.285714285,707572.28571429,-50388.857142856,703892.28571429},
-		[27] = {-125580.57142857,759479.14285715,-124274.85714286,761378.00000001},
-		[28] = {-83740.571428571,832212.57142857,-83294.857142857,835718.57142857},
-		[29] = {-316481.42857143,897668.85714286,-314624.28571428,895291.42857143},
-		[30] = {-316999.71428571,894496.57142857,-318664,896327.71428572},
-		[31] = {-318175.14285714,902274.28571429,-319966.57142857,904036.85714286},
-		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144}
+																	-- {x1, z1, x2, z2, heading, psi}
+		[12] = {-6495.7142857133,242167.42857143,-4321.7142857133,244091.42857143,-0.724468306690539,0.724468306690539},	--check
+		[13] = {11751.428571429,369204.85714286,11620.000000001,366703.71428572,1.62329544850684,-1.62329544850684},	--check
+		[14] = {-41589.428571427,278650.57142857,-40248.857142856,279856.28571428,-0.732485302032408,0.732485302032408},	--check
+		[15] = {-5579.7142857133,295210.57142857,-7585.9999999991,293555.14285714,2.45172058746978,-2.45172058746978},	--check
+		[16] = {-25197.428571427,459052.57142857,-27686.57142857,457036.28571429,2.46076441819486,-2.46076441819486},	--check
+		[17] = {-51087.142857141,297810.85714286,-49706.57142857,298970.28571429,-0.698553037936999,0.698553037936999},	--check
+		[18] = {-163750.28571428,463622.57142857,-165212.85714286,460870,2.05920616746982,-2.05920616746982},
+		[19] = {6652.2857142863,386738.57142858,8764.8571428577,389003.71428572,-0.820235909742805,0.820235909742805},	--check
+		[20] = {-221401.14285714,566015.71428571,-219751.42857143,562707.14285714,1.10825468264437,-1.10825468264437},	--check
+		[21] = {-197811.42857143,517063.14285714,-195622.28571428,515849.42857143,0.506233740419563,-0.506233740419563},	--check
+		[22] = {-355121.14285714,616421.14285715,-356549.42857143,618419.42857144,4.09182848606838,-4.09182848606838},	--check
+		[23] = {-281681.14285714,646054,-281882.28571429,648431.42857143,4.62798477132166,-4.62798477132166},	--check
+		[24] = {-318368,634520.57142858,-317545.42857143,636779.14285715,-1.22234030943342,1.22234030943342},		--check
+		[25] = {-285233.71428571,682650.57142857,-284543.14285714,685056.85714286,-1.29132089859535,1.29132089859535},	--check
+		[26] = {-52128.285714285,707572.28571429,-50388.857142856,703892.28571429,1.12925011719757,-1.12925011719757},	--check
+		[27] = {-125580.57142857,759479.14285715,-124274.85714286,761378.00000001,-0.968419584342998,0.968419584342998},	--check
+		[28] = {-83740.571428571,832212.57142857,-83294.857142857,835718.57142857,-1.44434563501146,1.44434563501146},	--check
+		[29] = {-316481.42857143,897668.85714286,-314624.28571428,895291.42857143,0.90765164013325,-0.90765164013325},	--check
+		[30] = {-316999.71428571,894496.57142857,-318664,896327.71428572,3.97469042602364,-3.97469042602364},	--check
+		[31] = {-318175.14285714,902274.28571429,-319966.57142857,904036.85714286,3.91887137165303,-3.91887137165303},	--check
+		[32] = {-148494.57142857,842108,-148685.42857143,845221.42857144,4.65116431906051,-4.65116431906051}	--check
 	}
 
 -- Should be no need to edit these below
@@ -5756,10 +5757,16 @@ env.info("generate airplane loop plane selected", false)
 	if (_parkingType[1] == "Turning Point") then
 		_spawnairplanepos.x = airbasePoints[spawnIndex.id][1]
 		_spawnairplanepos.z = airbasePoints[spawnIndex.id][2]
+		_spawnPSI = airbasePoints[spawnIndex.id][5]
+		_spawnHeading = airbasePoints[spawnIndex.id][6]
+		_spawnAlt = 29.8704
 	else
 		_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
 		_spawnairplanepos.x = _spawnairbaseloc.x
 		_spawnairplanepos.z = _spawnairbaseloc.z
+		_spawnPSI = 0
+		_spawnHeading = 0
+		_spawnAlt = 0
 	end
 
 env.info("generate airplane loop spawnpos computed x: " .. _spawnairplanepos.x .. " y: " .. _spawnairplanepos.z, false)
@@ -5801,7 +5808,6 @@ env.info("generate airplane loop spawnpos computed", false)
 	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
 
 env.info("generate airplane loop waypoint computed", false)
-
 
 	_groupname = nameP .. numCoalitionGroup[coalitionIndex]
 
@@ -5872,18 +5878,16 @@ env.info("generate airplane loop waypoint computed", false)
 			},
 		["task"] = _task,
 		["uncontrolled"] = false,
-        ["heading"] = _spawnHeading,
 		["route"] =
 		{
 			["points"] =
 			{
 				[1] =
 				{
-					["alt"] = 0,
+					["alt"] = _spawnAlt,
+					["alt_type"] = "RADIO",
 					["type"] = _waypointtype,
 					["action"] = _waypointaction,
-					["parking"] = _spawnairplaneparking,
-					["alt_type"] = "RADIO",
 					["formation_template"] = "",
 					["ETA"] = 0,
 					["airdromeId"] = _spawnairdromeId,
@@ -5909,22 +5913,20 @@ env.info("generate airplane loop waypoint computed", false)
 		{
 			[1] =
 			{
-				["alt"] = 0,
-				["heading"] = 0,
+				["alt"] = _spawnAlt,
+				["alt_type"] = "RADIO",
 				["livery_id"] = _skin,
 				["type"] = _aircrafttype,
-				["psi"] = 0,
+				["psi"] = _spawnPSI,
+                ["heading"] = _spawnHeading,
 				["onboard_num"] = "10",
-				["parking"] = _spawnairplaneparking,
 				["y"] = _spawnairplanepos.z,
 				["x"] = _spawnairplanepos.x,
-                ["heading"] = _spawnHeading,
 				["name"] =  _groupname .. "-1",
 				["callsign"] = _callname,
 				["payload"] = _payload,
 				["speed"] = _spawnSpeed,
 				["unitId"] =  math.random(9999,99999),
-				["alt_type"] = "RADIO",
 				["skill"] = _skill,
 			},
 		},
@@ -5947,11 +5949,11 @@ env.info('formation size: ' .. _formationSize, false)
 env.info('start formation loop: ' .. i, false)
 			_airplanedata.units[i] =
 			{
-				["alt"] = 0,
-				["heading"] = 0,
+				["alt"] = _spawnAlt,
+				["psi"] = _spawnPSI,
+                ["heading"] = _spawnHeading,
 				["livery_id"] = _skin,
 				["type"] = _aircrafttype,
-				["psi"] = 0,
 				["onboard_num"] = "10",
 				["y"] = _spawnairplanepos.z,
 				["x"] = _spawnairplanepos.x,
@@ -5994,10 +5996,10 @@ env.info('start formation loop: ' .. i, false)
 	if (_parkingType[1] == "Turning Point") then
 		_airplanedata.route.points[#_airplanedata.route.points + 1] =
 		{
-			["alt"] = _flightalt,
+			["alt"] = _spawnAlt * 3,
+			["alt_type"] = "RADIO",
 			["type"] = _parkingType[1],
 			["action"] = _parkingType[2],
-			["alt_type"] = "BARO",
 			["formation_template"] = "",
 			["properties"] =
 			{
