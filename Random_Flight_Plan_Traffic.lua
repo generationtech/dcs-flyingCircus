@@ -4,7 +4,7 @@
 do
 --EDIT BELOW
 intervall = math.random(30,30) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {15, 15} 	-- maximum number of red, blue units
+maxCoalition = {25, 25} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 nameCoalition = {0, 0} -- highest coalition name used
@@ -6263,6 +6263,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		end
 	end
 
+	_payload.fuel = math.random(_payload.fuel * 0.1, _payload.fuel)
+
 	_spawnairdromeId = spawnIndex.id
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
 	_spawnairplanepos = {}
@@ -6431,6 +6433,9 @@ function checkStatus()
 		do
 			if Group.getByName(RATtable[i].groupname) ~= nil and RATtable[i].status ~= nil then
 
+				local u1 = RATtable[i].unitname1 -- checks if unit 1 of group is damaged and removes group if so
+				local au = Unit.getByName(u1)
+				env.info('group: ' .. RATtable[i].groupname .. '  life: ' .. au:getLife(), false)
 				--trigger.action.outText('group: ' .. RATtable[i].groupname .. '  checked', 5)
 
 				if (RATtable[i].checktime > 30) then
@@ -6455,7 +6460,7 @@ function checkStatus()
 					local lowerstatuslimit = 0.95* initunitstatus
 					local actualunitpos = actualunit:getPosition().p
 					local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-					if actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit
+					if (actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit) or (actualunit:getLife() <= 1)
 					then
 						local currentaircraftgroup = Unit.getGroup(actualunit)
 						env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', false)
