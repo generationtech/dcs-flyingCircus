@@ -39,6 +39,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			randomAirplane = math.random(1,13) -- random for airplane type; Blue AC 1-13
 		end
 
+		_task = ""
+		_tasks =
+		{
+		}
+
 		if (randomAirplane == 1) then
 			_aircrafttype = "An-26B"
 
@@ -153,6 +158,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "E-2C"
 			_country = country.id.USA
 
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "AWACS",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
+
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "E-2D Demo"
@@ -175,6 +194,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 6) then
 			_aircrafttype = "E-3A"
 			_country = country.id.USA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "AWACS",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -221,6 +254,45 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 8) then
 			_aircrafttype = "KC-135"
 			_country = country.id.USA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "Tanker",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+				[2] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 2,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "ActivateBeacon",
+							["params"] =
+							{
+								["type"] = 4,
+								["frequency"] = 1088000000,
+								["callsign"] = "TKR",
+								["channel"] = 1,
+								["modeChannel"] = "X",
+								["bearing"] = true,
+								["system"] = 4,
+							},
+						},
+					},
+				},
+			}
+
 			_skin = "Standard USAF"
 			callsign = "USA KC-135 - " .. _skin
 			_payload =
@@ -259,6 +331,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 10) then
 			_aircrafttype = "S-3B Tanker"
 			_country = country.id.USA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "Tanker",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
+
 			_skin = "usaf standard"
 			callsign = "USA S-3B Tanker - " .. _skin
 			_payload =
@@ -641,9 +728,38 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			randomBomber = math.random(1,10) -- random for airplane type; Blue AC 1-10
 		end
 
+		_task = ""
+		_tasks =
+		{
+		}
+
 		if (randomBomber == 1) then
 			_aircrafttype = "B-1B"
 			_country = country.id.USA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 1,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "EPLRS",
+							["params"] =
+							{
+								["value"] = true,
+								["groupId"] = 2,
+							},
+						},
+					},
+				},
+			}
+
 			_skin = "usaf standard"
 			callsign = "USA B-1B - " .. _skin
 			_payload =
@@ -829,6 +945,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomBomber == 5) then
 			_aircrafttype = "S-3B"
 			_country = country.id.USA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "AntiShip",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			_skin = "NAVY Standard"
 			callsign = "USA S-3B - " .. _skin
 			_payload =
@@ -1222,6 +1359,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			randomAttack = math.random(1,8) -- random for airplane type; Blue AC 1-8
 		end
 
+		_task = "CAS"
+		_tasks =
+		{
+			[1] =
+			{
+				["enabled"] = true,
+				["key"] = "CAS",
+				["id"] = "EngageTargets",
+				["number"] = 1,
+				["auto"] = true,
+				["params"] =
+				{
+					["targetTypes"] =
+					{
+						[1] = "Helicopters",
+						[2] = "Ground Units",
+						[3] = "Light armed ships",
+					},
+					["priority"] = 0,
+				},
+			},
+		}
+
 		if (randomAttack == 1) then
 			_aircrafttype = "A-10A"
 			_country = country.id.USA
@@ -1320,6 +1480,47 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 2)	then
 			_aircrafttype = "A-10C"
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+				[2] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 2,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "EPLRS",
+							["params"] =
+							{
+								["value"] = true,
+								["groupId"] = 1,
+							},
+						},
+					},
+				},
+			}
 
 			subtype = math.random(1,15)
 			if (subtype == 1) then
@@ -1939,6 +2140,47 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAttack == 9)	then
 			_aircrafttype = "A-10C"
 
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+				[2] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "WrappedAction",
+					["number"] = 2,
+					["params"] =
+					{
+						["action"] =
+						{
+							["id"] = "EPLRS",
+							["params"] =
+							{
+								["value"] = true,
+								["groupId"] = 1,
+							},
+						},
+					},
+				},
+			}
+
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
@@ -2418,6 +2660,27 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		else
 			randomFighter = math.random(1,21) -- random for airplane type; Blue AC 1-21
 		end
+
+		_task = "CAP"
+		_tasks =
+		{
+			[1] =
+			{
+				["number"] = 1,
+				["auto"] = true,
+				["id"] = "EngageTargets",
+				["enabled"] = true,
+				["key"] = "CAP",
+				["params"] =
+				{
+					["targetTypes"] =
+					{
+						[1] = "Air",
+					},
+					["priority"] = 0,
+				},
+			},
+		}
 
 		if (randomFighter == 1) then
 			_aircrafttype = "Bf-109K-4"
@@ -3701,6 +3964,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomFighter == 20) then
 			_aircrafttype = "P-51D"
 			_skin = ""
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,15)
 			if (subtype == 1) then
@@ -4991,8 +5276,36 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			randomHeli = math.random(1,14) -- random for airplane type; Blue AC 1-14
 		end
 
+		_task = ""
+		_tasks =
+		{
+		}
+
 		if (randomHeli == 1) then
 			_aircrafttype = "AH-1W"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -5035,6 +5348,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 2) then
 			_aircrafttype = "AH-64A"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -5091,6 +5427,29 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 3) then
 			_aircrafttype = "AH-64D"
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -5206,6 +5565,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 7) then
 			_aircrafttype = "Ka-50"
 			_country = country.id.USA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,15)
 			if (subtype == 1) then
@@ -5639,6 +6020,20 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomHeli == 11) then
 			_aircrafttype = "OH-58D"
 			_country = country.id.USA
+			_task = "AFAC"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "FAC",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			}
 			_skin = ""
 			callsign = "USA OH-58D"
 			_payload =
@@ -5874,6 +6269,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "AH-1W"
 			_country = country.id.TURKEY
 
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "Turkey 1"
@@ -5918,7 +6335,28 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomHeli == 17) then
 			_aircrafttype = "Ka-50"
-			_country = country.id.RUSSIA
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			subtype = math.random(1,4)
 			if (subtype == 1) then
@@ -6288,8 +6726,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
         ["modulation"] = 0,
                               ["tasks"] =
                                 {
-                                }, -- end of ["tasks"]
-                                ["task"] = "CAS",
+                                },
+                                ["task"] = _task,
                                 ["uncontrolled"] = false,
                                 ["route"] =
                                 {
@@ -6314,10 +6752,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                                 ["id"] = "ComboTask",
                                                 ["params"] =
                                                 {
-                                                    ["tasks"] =
-                                                    {
-
-                                                    },
+                                                    ["tasks"] = _tasks,
                                                 },
                                             },
                                             ["speed_locked"] = true,
