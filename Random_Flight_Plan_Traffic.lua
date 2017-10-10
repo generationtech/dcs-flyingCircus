@@ -1,61 +1,34 @@
 do
 --EDIT BELOW
-intervall = math.random(90,180) 	--random repeate interval between (A and B) in seconds
+intervall = math.random(90,180) 	--random repeat interval between (A and B) in seconds
+maxCoalition = {20, 20} 	-- maximum number of red, blue units
+NamePrefix = {"Red-", "Blue-"}
+
 Nameprefix = "A-" 				--Unit and Group name should not be used in ME by other units, this prefix can be altered if used by other scripts
 AF1 = 'Kutaisi'
 
 groupcounter = 0 --counts number of spawned and provides group and unit name
 
+numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 
---names of red bases
-local redAFids = {}											--XX8
-local redAF = {}
-redAFids = coalition.getAirbases(1) 						--XX8 get list of red airbases
-for i = 1, #redAFids do
-	redAF[i] = {name=redAFids[i]:getName()}							--XX8 build name list
+-- determine the bases based on a coalition parameter
+function getAFBases (coalitionIndex)
+	local AFids = {}
+	local AF = {}
+	AFids = coalition.getAirbases(coalitionIndex)
+	for i = 1, #AFids do
+		AF[i] =
+			{
+			name = AFids[i]:getName(),
+			id_ = AFids[i].id_,
+			id = AFids[i]:getID()
+			}
+	end
+return AF
 end
 
-if #redAF < 1 then 											--XX8 check that at least one red base has been selected in editor
-	env.warning("There are no red bases chosen, aborting.", false)
-end
-
---names of blue bases
-local blueAFids = {}										--XX8
-local blueAF = {}
-blueAFids = coalition.getAirbases(2) 							--XX8 get list of blue airbases
-for i = 1, #blueAFids do
-	blueAF[i] = {name=blueAFids[i]:getName()}							--XX8 build name list
-end
-
-if #blueAF < 1 then 											--XX8 check that at least one blue base has been selected in editor
-	env.warning("There are no blue bases chosen, aborting.", false)
-end
-
-AF = {}
---XX8 load airfield table from blue airfields >>
-for i = 1, #blueAF do
-	AF[i] = {name=blueAF[i].name}
-end
-
-AF = {}
---XX8 load airfield table from red airfields >>
-for i = 1, #redAF do
-	AF[i] = {name=redAF[i].name}
-end
-
---for n = 1, #AF --XX8
---do
---	closestairfieldname = AF[n].name
-	closestairfieldname = AF1
-	closestairfield = Airbase.getByName(closestairfieldname)
-	closestairfieldID = closestairfield:getID()
---end
-closestairfieldlocation = {}
-closestairfieldlocation = Object.getPoint(closestairfield)
-
-
-
-function generateAirplane()
+-- create a new aircraft based on coalition, airbase, parking type, and name prefix
+function generateAirplane(coalitionIndex, airbaseIndex, parkingType, namePrefix)
 
 	groupcounter = groupcounter + 1
 
@@ -460,13 +433,86 @@ function generateAirplane()
 								["frequency"] = 124,
 
 								}
-
-
 		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
-
 end
 
-Spawntimer = mist.scheduleFunction(generateAirplane, {}, timer.getTime() + 2, intervall)
+function chooseAirport(AF)
+	airportChoice = math.random(1, #AF)
+return AF[airportChoice]
+end
 
+function generateGroup()
+	local lowVal
+	local highVal
+	local coalitionSide
+	local airportChosen
+	local i
+	local parkingType
+
+	-- choose which coalition side to possibly spawn new aircraft
+	if #redAF > 0 then
+		lowVal = 1
+	else
+		lowVal = 2
+	end
+
+	if #blueAF > 0 then
+		highVal = 2
+	else
+		highVal = 1
+	end
+
+	if lowVal > highVal then  -- no coalition bases defined at all!
+		return
+	end
+
+	coalitionSide = math.random(lowVal, highVal)  -- choose which side to spawn unit this time
+
+	if numCoalition[coalitionSide] < maxCoalition[coalitionSide] then  -- is ok to spawn a new unit?
+
+		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
+
+		i = math.random(1, 3)
+		if i == 1 then
+			parkingType = {"TakeOffParking", "From Parking Area"}
+		elseif (i == 2) then
+			parkingType = {"TakeOffParkingHot", "From Parking Area Hot"}
+		else
+			parkingType = {"TakeOff", "From Runway"}
+		end
+
+		if coalitionSide == 1 then
+			airportChosen = chooseAirport(redAF)
+		else
+			airportChosen = chooseAirport(blueAF)
+		end
+
+		-- create new aircraft
+		generateAirplane(coalitionSide, airportChosen, parkingType, NamePrefix(coalitionSide))
+	end
+end
+
+
+--names of red bases
+redAF = getAFBases(1)
+if #redAF < 1 then
+	env.warning("There are no red bases in this mission.", false)
+end
+
+--names of blue bases
+blueAF = getAFBases(2)
+if #blueAF < 1 then
+	env.warning("There are no blue bases in this mission.", false)
+end
+
+--	closestairfieldname = AF[n].name
+	closestairfieldname = AF1
+	closestairfield = Airbase.getByName(closestairfieldname)
+	closestairfieldID = closestairfield:getID()
+--end
+closestairfieldlocation = {}
+closestairfieldlocation = Object.getPoint(closestairfield)
+
+Spawntimer = mist.scheduleFunction(generateAirplane, {}, timer.getTime() + 2, intervall)
 
 end
