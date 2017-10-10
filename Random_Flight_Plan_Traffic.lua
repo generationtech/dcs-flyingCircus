@@ -16,18 +16,20 @@ flgRandomAltitude = 1			-- Randomize altitude (otherwise use standard altitude p
 flgRandomSpeed = 1				-- Randomize altitude (otherwise use standard speed per aircraft type)
 
 --DEBUG
-debugLog = 1	-- write entries to the log
-debugScreen = 1	-- write messages to screen
+debugLog = 1	-- write entries to the log		--check
+debugScreen = 1	-- write messages to screen		--check
 
 --RANGES
-intervall = math.random(30,30)				--Random spawn repeat interval
-aircraftDistribution = {10, 10, 20, 40, 20} -- % aircraft of type Utility, Bomber, Attack, Fighter, Helicopter
-aircraftCallSign = {2, 3, 4, 5, 6}			-- mapping of callsign to aircraft of type Utility, Bomber, Attack, Fighter, Helicopter
-maxGroupSize = 4							-- Maximum number of groups for those units supporting formations
-maxCoalition = {25, 25}						-- Maximum number of red, blue units
-NamePrefix = {"Red-", "Blue-"}				-- Prefix to use for naming groups
-numCoalition = {0, 0}						-- Number of active Red, Blue dynamic spawned units
-waypointRange = {3000, 3000}				-- Maximum x,y of where to place intermediate waypoint between takeoff and landing
+intervall = math.random(30,30)					-- Random spawn repeat interval
+aircraftDistribution = {30, 45, 70, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftCallSign = {2, 3, 4, 5, 6}				-- mapping of callsign to aircraft of type Utility, Bomber, Attack, Fighter, Helicopter		--unsed
+maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
+maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
+NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
+numCoalition = {0, 0}							-- Number of active Red, Blue dynamic spawned units		--check
+waypointRange = {3000, 3000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
+waitTime = 20									-- Amount to time to wait before considering aircraft to be parked or stuck
+minLife = 0.10									-- Minimum amount of life for aircraft under 20
 
 
 -- Should be no need to edit these below
@@ -56,9 +58,9 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(1,19) --random for utility airplane, bomber, attack, fighter, or helicopter
+	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
 
-	if ((AircraftType >= 1) and (AircraftType <= 2)) then  -- UTILITY AIRCRAFT
+	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
 		if (coalitionIndex == 1) then
 			randomAirplane = math.random(14,23) -- random for airplane type; Red AC 14-23
 		else
@@ -747,7 +749,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 3) and (AircraftType <= 4)) then  -- BOMBERS
+	elseif ((AircraftType >= aircraftDistribution[1]) and (AircraftType <= aircraftDistribution[2])) then  -- BOMBERS
 		if (coalitionIndex == 1) then
 			randomBomber = math.random(11,15) -- random for airplane type; Red AC 11-15
 		else
@@ -759,7 +761,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		{
 		}
 
-		if (randomBomber == 1) then
+		if ((randomBomber == 1) or (randomBomber == 2)) then -- B-52 removed for now. Behaves badly on taxiway and takeoff
 			_aircrafttype = "B-1B"
 			_country = country.id.USA
 
@@ -810,33 +812,33 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 60,
 				["gun"] = 100,
 			}
-		elseif (randomBomber == 2) then
-			_aircrafttype = "B-52H"
-			_country = country.id.USA
-			_skin = "usaf standard"
-			_fullname = "USA B-52H - " .. _skin
-			_payload =
-			{
-				["pylons"] =
-				{
-					[1] =
-					{
-						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
-					},
-					[2] =
-					{
-						["CLSID"] = "{8DCAF3A3-7FCF-41B8-BB88-58DEDA878EDE}",
-					},
-					[3] =
-					{
-						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
-					},
-				},
-				["fuel"] = "141135",
-				["flare"] = 192,
-				["chaff"] = 1125,
-				["gun"] = 100,
-			}
+--		elseif (randomBomber == 2) then
+--			_aircrafttype = "B-52H"
+--			_country = country.id.USA
+--			_skin = "usaf standard"
+--			_fullname = "USA B-52H - " .. _skin
+--			_payload =
+--			{
+--				["pylons"] =
+--				{
+--					[1] =
+--					{
+--						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
+--					},
+--					[2] =
+--					{
+--						["CLSID"] = "{8DCAF3A3-7FCF-41B8-BB88-58DEDA878EDE}",
+--					},
+--					[3] =
+--					{
+--						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
+--					},
+--				},
+--				["fuel"] = "141135",
+--				["flare"] = 192,
+--				["chaff"] = 1125,
+--				["gun"] = 100,
+--			}
 		elseif (randomBomber == 3) then
 			_aircrafttype = "F-117A"
 			_country = country.id.USA
@@ -1378,7 +1380,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 5) and (AircraftType <= 8)) then  -- ATTACK AIRCRAFT
+	elseif ((AircraftType >= aircraftDistribution[2]) and (AircraftType <= aircraftDistribution[3])) then  -- ATTACK AIRCRAFT
 		if (coalitionIndex == 1) then
 			randomAttack = math.random(9,16) -- random for airplane type; Red AC 9-16
 		else
@@ -2680,7 +2682,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 9) and (AircraftType <= 14)) then  -- FIGHTERS
+	elseif ((AircraftType >= aircraftDistribution[3]) and (AircraftType <= aircraftDistribution[4])) then  -- FIGHTERS
 		if (coalitionIndex == 1) then
 			randomFighter = math.random(22,36) -- random for airplane type; Red AC 22-36
 		else
@@ -5295,7 +5297,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 		end
 
-	elseif ((AircraftType >= 15) or (AircraftType <= 17)) then -- HELICOPTERS
+	elseif ((AircraftType >= aircraftDistribution[4]) or (AircraftType <= aircraftDistribution[5])) then -- HELICOPTERS
 		if (coalitionIndex == 1) then
 			randomHeli = math.random(15,23) -- random for airplane type; Red AC 15-23
 		else
@@ -6746,13 +6748,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_landairplanepos.x = _landairbaseloc.x
 	_landairplanepos.z = _landairbaseloc.z
 
-	_waypoint = {}
+	-- Compute single intermediate waypoint based on used-defined minimum deviation x/z range
+	local _waypoint = {}
 	_waypoint.dist = math.sqrt((_spawnairbaseloc.x - _landairbaseloc.x) * (_spawnairbaseloc.x - _landairbaseloc.x) + (_spawnairbaseloc.z - _landairbaseloc.z) * (_spawnairbaseloc.z - _landairbaseloc.z))
-	if (_waypoint.dist / 2) < 1000 then
-		_waypoint.dist = 1000
+	if ((_waypoint.dist / 2) < waypointRange[1]) then
+		_waypoint.distx = waypointRange[1]
+	else
+		_waypoint.distx = _waypoint.dist / 2
 	end
-	_waypoint.x = _spawnairbaseloc.x + math.random(-1, 1) * math.random(1000, _waypoint.dist / 2)
-	_waypoint.z = _spawnairbaseloc.z + math.random(-1, 1) * math.random(1000, _waypoint.dist / 2)
+	if ((_waypoint.dist / 2) < waypointRange[2]) then
+		_waypoint.distz = waypointRange[2]
+	else
+		_waypoint.distz = _waypoint.dist / 2
+	end
+	_waypoint.x = _spawnairbaseloc.x + math.random(- _waypoint.distx, _waypoint.distx)
+	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
 
 	_flightalt = math.random(0,25000)
 	_flightspeed = math.random(175,2000)
@@ -6958,7 +6968,7 @@ function checkStatus()
 						i = i + 1
 					end
 				else -- we have an active valid group, check for damage or stopped
-					if (RATtable[i].checktime > 30) then -- this group hasn't moved in a very long time
+					if (RATtable[i].checktime > waitTime) then -- this group hasn't moved in a very long time
 						if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to low speed', false) end
 						if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to low speed', 20) end
 						currentaircraftgroup:destroy()
@@ -6985,6 +6995,8 @@ function checkStatus()
 								end
 								table.remove(RATtable, i)										-- unit does not exist any longer for this script
 								RATtableLimit = RATtableLimit - 1
+--							elseif () then -- check for wandering lost aircraft (usually means AI flying off the entire map)
+
 							else -- valid unit, check for movement
 								local actualunitvel = actualunit:getVelocity()
 								local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
