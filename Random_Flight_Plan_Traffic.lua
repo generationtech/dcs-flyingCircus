@@ -6238,6 +6238,13 @@ function getAFBases (coalitionIndex)
 			id_ = AFids[i].id_,
 			id = AFids[i]:getID()
 		}
+
+	_l = Object.getPoint({id_=AFids[i].id_})
+	_lpos = {}
+	_lpos.x = _l.x
+	_lpos.z = _l.z
+
+env.info('name: ' .. AFids[i]:getName() .. ' id: ' .. AFids[i]:getID() .. ' positionx: ' .. _lpos.x .. ' positionz: ' .. _lpos.z, false)
 	end
 return AF
 end
