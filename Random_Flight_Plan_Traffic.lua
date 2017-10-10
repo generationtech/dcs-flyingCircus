@@ -22,7 +22,6 @@ debugScreen = 1	-- write messages to screen		--check
 --RANGES
 intervall = math.random(30,30)					-- Random spawn repeat interval
 aircraftDistribution = {30, 45, 70, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
-aircraftCallSign = {2, 3, 4, 5, 6}				-- mapping of callsign to aircraft of type Utility, Bomber, Attack, Fighter, Helicopter		--unsed
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
 maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
@@ -35,7 +34,7 @@ minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLi
 
 -- Should be no need to edit these below
 RATtable = {}
-numCoalition = {0, 0} -- highest coalition name used
+nameCoalition = {0, 0} -- highest coalition name used
 nameCallname = {}
 
 --env.setErrorMessageBoxEnabled(false)
@@ -8137,10 +8136,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_flightalt = math.random(0,25000)
 	_flightspeed = math.random(175,2000)
 
-	_groupname = nameP .. numCoalition[coalitionIndex]
+	_groupname = nameP .. nameCoalition[coalitionIndex]
 
 	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
-		_callsign = numCoalition[coalitionIndex] .. "1"
+		_callsign = nameCoalition[coalitionIndex] .. "1"
 	else
 		local a = math.random(1,#nameCallname)
 		local b = math.random(1,9)
@@ -8254,7 +8253,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 										},
                                     },
                                 },
-                                ["groupId"] = numCoalition[coalitionIndex],
+                                ["groupId"] = nameCoalition[coalitionIndex],
                                 ["hidden"] = false,
                                 ["units"] =
                                 {
@@ -8358,7 +8357,7 @@ function checkStatus()
 							local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
 							local actualunitpos = actualunit:getPosition().p
 							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-							if ((actualunitpos.x > 80000) or (actualunitpos.x < -410000) or (actualunitpos.z > 950000) or (actualunitpos.z < 290000)) then
+							if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
 								removeGroup(i, "  removed due to wandering", true, Unit.getGroup(actualunit))
 								RATtableLimit = RATtableLimit - 1
 							elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
@@ -8418,7 +8417,7 @@ function generateGroup()
 	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- Is ok to spawn a new unit?
 
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
-		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
+		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
 
 		i = math.random(1, 3)
 		if (i == 1) then
