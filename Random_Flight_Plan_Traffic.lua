@@ -3,8 +3,8 @@
 
 do
 --EDIT BELOW
-intervall = math.random(20,60) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {25, 25} 	-- maximum number of red, blue units
+intervall = math.random(10,30) 	--random repeat interval between (A and B) in seconds
+maxCoalition = {40, 40} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 
@@ -27,9 +27,9 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(7,9) --random for utility airplane, bomber, attack, fighter, or helicopter
+	AircraftType = math.random(1,14) --random for utility airplane, bomber, attack, fighter, or helicopter
 
-	if ((AircraftType >= 1) and (AircraftType <= 3)) then  -- UTILITY AIRCRAFT
+	if ((AircraftType >= 1) and (AircraftType <= 2)) then  -- UTILITY AIRCRAFT
 		if (coalitionIndex == 1) then
 			randomAirplane = math.random(14,23) -- random for airplane type; Red AC 14-23
 		else
@@ -631,7 +631,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType == 4) or (AircraftType == 4)) then  -- BOMBERS
+	elseif ((AircraftType >= 3) and (AircraftType <= 4)) then  -- BOMBERS
 		if (coalitionIndex == 1) then
 			randomBomber = math.random(11,15) -- random for airplane type; Red AC 11-15
 		else
@@ -1212,7 +1212,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 5) and (AircraftType <= 6)) then  -- ATTACK AIRCRAFT
+	elseif ((AircraftType >= 5) and (AircraftType <= 8)) then  -- ATTACK AIRCRAFT
 		if (coalitionIndex == 1) then
 			randomAttack = math.random(9,16) -- random for airplane type; Red AC 9-16
 		else
@@ -2410,7 +2410,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 7) and (AircraftType <= 9)) then  -- FIGHTERS
+	elseif ((AircraftType >= 9) and (AircraftType <= 12)) then  -- FIGHTERS
 		if (coalitionIndex == 1) then
 			randomFighter = math.random(22,25) -- random for airplane type; Red AC 22-25
 		else
@@ -4291,7 +4291,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 		end
 
-	elseif ((AircraftType >= 10) or (AircraftType <= 10)) then -- HELICOPTERS
+	elseif ((AircraftType >= 13) or (AircraftType <= 14)) then -- HELICOPTERS
 		if (coalitionIndex == 1) then
 			randomHeli = math.random(13,18) -- random for airplane type; Red AC 13-18
 		else
