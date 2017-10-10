@@ -853,11 +853,11 @@ g_aircraftTable =
 	{
 	[1] =								-- An-26B
 		{
-			_aircraftModel = "An-26B",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "An-26B",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -868,7 +868,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Georgian AF",
 				"Ukraine AF",
@@ -879,11 +879,11 @@ g_aircraftTable =
 		},
 	[2] =								-- An-30M
 		{
-			_aircraftModel = "An-30M",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "An-30M",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -894,7 +894,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"15th Transport AB",
 				"RF Air Force",
@@ -902,11 +902,11 @@ g_aircraftTable =
 		},
 	[3] =								-- C-130
 		{
-			_aircraftModel = "C-130",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "C-130",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -917,7 +917,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"US Air Force",
 				"Belgian Air Force",
@@ -934,11 +934,11 @@ g_aircraftTable =
 		},
 	[4] =								-- C-17A
 		{
-			_aircraftModel = "C-17A",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "C-17A",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -949,20 +949,20 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"usaf standard",
 			},
 		},
 	[5] =								-- E-2C
 		{
-			_aircraftModel = "E-2C",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "E-2C",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
+			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
 
-			_tasks =
+			tasks =
 			{
 				[1] =
 				{
@@ -976,7 +976,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -987,7 +987,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"E-2D Demo",
 				"VAW-125 Tigertails",
@@ -995,13 +995,13 @@ g_aircraftTable =
 		},
 	[6] =								-- E-3A
 		{
-			_aircraftModel = "E-3A",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "E-3A",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
+			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"},
 
-			_tasks =
+			tasks =
 			{
 				[1] =
 				{
@@ -1015,7 +1015,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1026,7 +1026,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"nato",
 				"usaf standard",
@@ -1034,11 +1034,11 @@ g_aircraftTable =
 		},
 	[7] =								-- IL-76MD
 		{
-			_aircraftModel = "IL-76MD",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "IL-76MD",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1049,7 +1049,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Ukrainian AF",
 				"Ukrainian AF aeroflot",
@@ -1060,13 +1060,13 @@ g_aircraftTable =
 		},
 	[8] =								-- KC-135
 		{
-			_aircraftModel = "KC-135",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "KC-135",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_nameCallname = {"Texaco", "Arco", "Shell"},
+			nameCallname = {"Texaco", "Arco", "Shell"},
 
-			_tasks =
+			tasks =
 			{
 				[1] =
 				{
@@ -1104,7 +1104,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1115,22 +1115,22 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Standard USAF",
 			},
 		},
 	[9] =								-- MiG-25RBT
 		{
-			_aircraftModel = "MiG-25RBT",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-25RBT",
+			category = "AIRPLANE",
 
-			_task = "Reconnaissance",
-			_tasks =
+			task = "Reconnaissance",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1149,20 +1149,20 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[10] =								-- S-3B Tanker
 		{
-			_aircraftModel = "S-3B Tanker",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "S-3B Tanker",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_nameCallname = {"Texaco", "Arco", "Shell"},
+			nameCallname = {"Texaco", "Arco", "Shell"},
 
-			_tasks =
+			tasks =
 			{
 				[1] =
 				{
@@ -1176,7 +1176,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1187,22 +1187,22 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"usaf standard",
 			},
 		},
 	[11] =								-- Su-24MR
 		{
-			_aircraftModel = "Su-24MR",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-24MR",
+			category = "AIRPLANE",
 
-			_task = "Reconnaissance",
-			_tasks =
+			task = "Reconnaissance",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1233,17 +1233,17 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[12] =								-- TF-51D
 		{
-			_aircraftModel = "TF-51D",
-			_category = "AIRPLANE",
+			aircraftModel = "TF-51D",
+			category = "AIRPLANE",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1254,7 +1254,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 				"TF -51 Glamorous Glen III",
@@ -1265,11 +1265,11 @@ g_aircraftTable =
 		},
 	[13] =								-- Yak-40
 		{
-			_aircraftModel = "Yak-40",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "Yak-40",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1280,7 +1280,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Georgian Airlines",
 				"Ukrainian",
@@ -1289,11 +1289,11 @@ g_aircraftTable =
 		},
 	[14] =								-- A-50
 		{
-			_aircraftModel = "A-50",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "A-50",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1304,7 +1304,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"RF Air Force",
 				"RF Air Force new",
@@ -1312,11 +1312,11 @@ g_aircraftTable =
 		},
 	[15] =								-- IL-78M
 		{
-			_aircraftModel = "IL-78M",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "IL-78M",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_tasks =
+			tasks =
 			{
 				[1] =
 				{
@@ -1330,7 +1330,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1341,7 +1341,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"RF Air Force",
 				"RF Air Force aeroflot",
@@ -1350,12 +1350,12 @@ g_aircraftTable =
 		},
 	[16] =								-- B-1B
 		{
-			_aircraftModel = "B-1B",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "B-1B",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Ground Attack",
-			_tasks =
+			task = "Ground Attack",
+			tasks =
 			{
 				[1] =
 				{
@@ -1378,7 +1378,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1401,19 +1401,19 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"usaf standard",
 			},
 		},
 	[17] =								-- B-52H
 		{
-			_aircraftModel = "B-52H",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "B-52H",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Ground Attack",
-			_tasks =
+			task = "Ground Attack",
+			tasks =
 			{
 				[1] =
 				{
@@ -1436,7 +1436,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1459,22 +1459,22 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"usaf standard",
 			},
 		},
 	[18] =								-- F-117A
 		{
-			_aircraftModel = "F-117A",
-			_category = "AIRPLANE",
+			aircraftModel = "F-117A",
+			category = "AIRPLANE",
 
-			_task = "Pinpoint Strike",
-			_tasks =
+			task = "Pinpoint Strike",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1493,18 +1493,18 @@ g_aircraftTable =
 				["gun"] = 0,
 			},
 
-			_skins =
+			skins =
 			{
 				"usaf standard",
 			},
 		},
 	[19] =								-- F-15E
 		{
-			_aircraftModel = "F-15E",
-			_category = "AIRPLANE",
+			aircraftModel = "F-15E",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -1526,7 +1526,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1613,7 +1613,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"335th Fighter SQN (SJ)",
 				"492d Fighter SQN (LN)",
@@ -1622,16 +1622,16 @@ g_aircraftTable =
 		},
 	[20] =								-- S-3B
 		{
-			_aircraftModel = "S-3B",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "S-3B",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Ground Attack",
-			_tasks =
+			task = "Ground Attack",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1666,18 +1666,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"NAVY Standard",
 			},
 		},
 	[21] =								-- Su-24M
 		{
-			_aircraftModel = "Su-24M",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-24M",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -1699,7 +1699,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1742,17 +1742,17 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[22] =								-- Tornado GR4
 		{
-			_aircraftModel = "Tornado GR4",
-			_category = "AIRPLANE",
+			aircraftModel = "Tornado GR4",
+			category = "AIRPLANE",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1795,7 +1795,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"bb of 14 squadron raf lossiemouth",
 				"no. 9 squadron raf marham ab (norfolk)",
@@ -1807,10 +1807,10 @@ g_aircraftTable =
 		},
 	[23] =								-- Tornado IDS
 		{
-			_aircraftModel = "Tornado IDS",
-			_category = "AIRPLANE",
+			aircraftModel = "Tornado IDS",
+			category = "AIRPLANE",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1853,7 +1853,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"aufklarungsgeschwader 51 `immelmann` jagel ab luftwaffe",
 				"jagdbombergeschwader 31 `boelcke` norvenich ab luftwaffe",
@@ -1868,16 +1868,16 @@ g_aircraftTable =
 		},
 	[24] =								-- Tu-22M3
 		{
-			_aircraftModel = "Tu-22M3",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "Tu-22M3",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Ground Attack",
-			_tasks =
+			task = "Ground Attack",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1900,23 +1900,23 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[25] =								-- Tu-95MS
 		{
-			_aircraftModel = "Tu-95MS",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "Tu-95MS",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Pinpoint Strike",
-			_tasks =
+			task = "Pinpoint Strike",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1931,19 +1931,19 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[26] =								-- Tu-142
 		{
-			_aircraftModel = "Tu-142",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "Tu-142",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Antiship Strike",
-			_tasks =
+			task = "Antiship Strike",
+			tasks =
 			{
 				[1] =
 				{
@@ -1963,7 +1963,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -1978,23 +1978,23 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[27] =								-- Tu-160
 		{
-			_aircraftModel = "Tu-160",
-			_category = "AIRPLANE",
-			_singleInFlight = true,
+			aircraftModel = "Tu-160",
+			category = "AIRPLANE",
+			singleInFlight = true,
 
-			_task = "Pinpoint Strike",
-			_tasks =
+			task = "Pinpoint Strike",
+			tasks =
 			{
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2013,20 +2013,20 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[28] =								-- A-10A
 		{
-			_aircraftModel = "A-10A",
-			_category = "AIRPLANE",
+			aircraftModel = "A-10A",
+			category = "AIRPLANE",
 
-			_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
+			nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2048,7 +2048,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2104,7 +2104,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"104th FS Maryland ANG, Baltimore (MD)",
 				"118th FS Bradley ANGB, Connecticut (CT)",
@@ -2128,13 +2128,13 @@ g_aircraftTable =
 		},
 	[29] =								-- A-10C
 		{
-			_aircraftModel = "A-10C",
-			_category = "AIRPLANE",
+			aircraftModel = "A-10C",
+			category = "AIRPLANE",
 
-			_nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
+			nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"},
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2175,7 +2175,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2223,7 +2223,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"A-10 Grey",									--1
 				"104th FS Maryland ANG, Baltimore (MD)",
@@ -2266,11 +2266,11 @@ g_aircraftTable =
 		},
 	[30] =								-- Hawk
 		{
-			_aircraftModel = "Hawk",
-			_category = "AIRPLANE",
+			aircraftModel = "Hawk",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -2290,7 +2290,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2321,7 +2321,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 				"100sqn XX189",
@@ -2345,11 +2345,11 @@ g_aircraftTable =
 		},
 	[31] =
 		{								-- L-39ZA
-			_aircraftModel = "L-39ZA",
-			_category = "AIRPLANE",
+			aircraftModel = "L-39ZA",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2371,7 +2371,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2398,7 +2398,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Georgian Air Force",
 				"Ukraine Air Force 1",
@@ -2410,11 +2410,11 @@ g_aircraftTable =
 		},
 	[32] =								-- MiG-27K
 		{
-			_aircraftModel = "MiG-27K",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-27K",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2436,7 +2436,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2475,18 +2475,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[33] =								-- Su-17M4
 		{
-			_aircraftModel = "Su-17M4",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-17M4",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2508,7 +2508,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2551,7 +2551,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 				"af standard (worn-out)",
@@ -2560,11 +2560,11 @@ g_aircraftTable =
 		},
 	[34] =								-- Su-25
 		{
-			_aircraftModel = "Su-25",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-25",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2586,7 +2586,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2637,7 +2637,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"scorpion` demo scheme (native)",
 				"field camo scheme #1 (native)",
@@ -2653,11 +2653,11 @@ g_aircraftTable =
 		},
 	[35] =								-- Su-25T
 		{
-			_aircraftModel = "Su-25T",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-25T",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2679,7 +2679,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2730,7 +2730,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 				"af standard 1",
@@ -2739,11 +2739,11 @@ g_aircraftTable =
 		},
 	[36] =								-- Su-25TM
 		{
-			_aircraftModel = "Su-25TM",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-25TM",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -2765,7 +2765,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2816,18 +2816,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Flight Research Institute  VVS",
 			},
 		},
 	[37] =								-- Bf-109K-4
 		{
-			_aircraftModel = "Bf-109K-4",
-			_category = "AIRPLANE",
+			aircraftModel = "Bf-109K-4",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -2847,7 +2847,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2862,7 +2862,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Bf-109 K4 1.NJG  11",
 				"Bf-109 K4 330xxx batch",
@@ -2875,11 +2875,11 @@ g_aircraftTable =
 		},
 	[38] =								-- F-14A
 		{
-			_aircraftModel = "F-14A",
-			_category = "AIRPLANE",
+			aircraftModel = "F-14A",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -2899,7 +2899,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -2958,7 +2958,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"black demo scheme",
 				"vf-1 `wolfpack`",
@@ -2974,11 +2974,11 @@ g_aircraftTable =
 		},
 	[39] =								-- F-15C
 		{
-			_aircraftModel = "F-15C",
-			_category = "AIRPLANE",
+			aircraftModel = "F-15C",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -2998,7 +2998,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3053,7 +3053,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"19th Fighter SQN (AK)",
 				"58th Fighter SQN (EG)",
@@ -3068,11 +3068,11 @@ g_aircraftTable =
 		},
 	[40] =								-- F-16A
 		{
-			_aircraftModel = "F-16A",
-			_category = "AIRPLANE",
+			aircraftModel = "F-16A",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3092,7 +3092,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3139,18 +3139,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"usaf f16 standard-1",
 			},
 		},
 	[41] =								-- F-16C bl.52d
 		{
-			_aircraftModel = "F-16C bl.52d",
-			_category = "AIRPLANE",
+			aircraftModel = "F-16C bl.52d",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3170,7 +3170,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3217,7 +3217,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"pacaf 14th fs (mj) misawa afb",
 				"pacaf 35th fw (ww) misawa afb",
@@ -3232,10 +3232,10 @@ g_aircraftTable =
 		},
 	[42] =								-- F-16A MLU
 		{
-			_aircraftModel = "F-16A MLU",
-			_category = "AIRPLANE",
+			aircraftModel = "F-16A MLU",
+			category = "AIRPLANE",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3282,7 +3282,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"2nd squadron `comet` florennes ab",
 				"rdaf f16 standard-1",
@@ -3295,11 +3295,11 @@ g_aircraftTable =
 		},
 	[43] =								-- F-4E
 		{
-			_aircraftModel = "F-4E",
-			_category = "AIRPLANE",
+			aircraftModel = "F-4E",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3319,7 +3319,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3362,7 +3362,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 				"af standard",
@@ -3370,11 +3370,11 @@ g_aircraftTable =
 		},
 	[44] =								-- F-5E
 		{
-			_aircraftModel = "F-5E",
-			_category = "AIRPLANE",
+			aircraftModel = "F-5E",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3394,7 +3394,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3433,7 +3433,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"`green` paint scheme",
 				"aggressor `desert` scheme",
@@ -3449,11 +3449,11 @@ g_aircraftTable =
 		},
 	[45] =								-- F-86F Sabre
 		{
-			_aircraftModel = "F-86F Sabre",
-			_category = "AIRPLANE",
+			aircraftModel = "F-86F Sabre",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3473,7 +3473,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3516,18 +3516,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 			},
 		},
 	[46] =								-- F/A-18C
 		{
-			_aircraftModel = "F/A-18C",
-			_category = "AIRPLANE",
+			aircraftModel = "F/A-18C",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3547,7 +3547,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3594,7 +3594,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 				"NSAWC_25",
@@ -3606,11 +3606,11 @@ g_aircraftTable =
 		},
 	[47] =								-- FW-190D9
 		{
-			_aircraftModel = "FW-190D9",
-			_category = "AIRPLANE",
+			aircraftModel = "FW-190D9",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3630,7 +3630,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3645,7 +3645,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"FW-190D9_USA",
 				"FW-190D9_13.JG 51_Heinz Marquardt",
@@ -3660,10 +3660,10 @@ g_aircraftTable =
 		},
 	[48] =								-- MiG-15bis
 		{
-			_aircraftModel = "MiG-15bis",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-15bis",
+			category = "AIRPLANE",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3682,18 +3682,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 			},
 		},
 	[49] =								-- MiG-21Bis
 		{
-			_aircraftModel = "MiG-21Bis",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-21Bis",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3713,7 +3713,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3744,7 +3744,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"32nd FG - Northeria",
 				"101FS - Serbia",
@@ -3756,11 +3756,11 @@ g_aircraftTable =
 		},
 	[50] =								-- MiG-23MLD
 		{
-			_aircraftModel = "MiG-23MLD",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-23MLD",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3780,7 +3780,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3811,7 +3811,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 				"af standard-1",
@@ -3821,11 +3821,11 @@ g_aircraftTable =
 		},
 	[51] =								-- MiG-25PD
 		{
-			_aircraftModel = "MiG-25PD",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-25PD",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3845,7 +3845,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3872,18 +3872,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 			},
 		},
 	[52] =								-- MiG-29A
 		{
-			_aircraftModel = "MiG-29A",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-29A",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3903,7 +3903,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -3944,7 +3944,7 @@ g_aircraftTable =
 
 
 
-			_skins =
+			skins =
 			{
 				"af standard-1",
 				"af standard-2",
@@ -3958,11 +3958,11 @@ g_aircraftTable =
 		},
 	[53] = 								-- MiG-29G
 		{
-			_aircraftModel = "MiG-29G",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-29G",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -3982,7 +3982,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4021,7 +4021,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"luftwaffe 29+20 demo",
 				"luftwaffe gray early",
@@ -4033,11 +4033,11 @@ g_aircraftTable =
 		},
 	[54] =								-- MiG-29S
 		{
-			_aircraftModel = "MiG-29S",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-29S",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4057,7 +4057,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4096,7 +4096,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"14th army, vinnitsa ab",
 				"9th fw belbek ab",
@@ -4105,11 +4105,11 @@ g_aircraftTable =
 		},
 	[55] =								-- Mirage 2000-5
 		{
-			_aircraftModel = "Mirage 2000-5",
-			_category = "AIRPLANE",
+			aircraftModel = "Mirage 2000-5",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4129,7 +4129,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4176,7 +4176,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"ec1_2  spa103 `cigogne de fonck`",
 				"ec1_2  spa12 `cigogne a ailes ouvertes`",
@@ -4188,10 +4188,10 @@ g_aircraftTable =
 		},
 	[56] =								-- P-51D
 		{
-			_aircraftModel = "P-51D",
-			_category = "AIRPLANE",
+			aircraftModel = "P-51D",
+			category = "AIRPLANE",
 
-			_tasks =
+			tasks =
 			{
 				[1] =
 				{
@@ -4213,7 +4213,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4248,7 +4248,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Bare Metal",
 				"Dogfight Blue",
@@ -4290,11 +4290,11 @@ g_aircraftTable =
 		},
 	[57] =								-- Su-27
 		{
-			_aircraftModel = "Su-27",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-27",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4314,7 +4314,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4365,7 +4365,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Air Force Ukraine Standard",
 				"Air Force Ukraine Standard Early",
@@ -4390,11 +4390,11 @@ g_aircraftTable =
 		},
 	[58] =								-- F-16C bl.50
 		{
-			_aircraftModel = "F-16C bl.50",
-			_category = "AIRPLANE",
+			aircraftModel = "F-16C bl.50",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4414,7 +4414,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4453,18 +4453,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af f16 standard",
 			},
 		},
 	[59] =								-- MiG-29S
 		{
-			_aircraftModel = "MiG-29S",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-29S",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4484,7 +4484,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4523,7 +4523,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"1038th guards ctc, mary ab",
 				"115th guards regiment, termez ab",
@@ -4536,11 +4536,11 @@ g_aircraftTable =
 		},
 	[60] =								-- MiG-31
 		{
-			_aircraftModel = "MiG-31",
-			_category = "AIRPLANE",
+			aircraftModel = "MiG-31",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4560,7 +4560,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4595,7 +4595,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 				"174 GvIAP_Boris Safonov",
@@ -4604,11 +4604,11 @@ g_aircraftTable =
 		},
 	[61] =								-- Su-30
 		{
-			_aircraftModel = "Su-30",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-30",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4628,7 +4628,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4679,7 +4679,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"`desert` test paint scheme",
 				"`russian knights` team #25",
@@ -4695,11 +4695,11 @@ g_aircraftTable =
 		},
 	[62] =								-- Su-33
 		{
-			_aircraftModel = "Su-33",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-33",
+			category = "AIRPLANE",
 
-			_task = "CAP",
-			_tasks =
+			task = "CAP",
+			tasks =
 			{
 				[1] =
 				{
@@ -4719,7 +4719,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4778,7 +4778,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"279th kiap 1st squad navy",
 				"279th kiap 2nd squad navy",
@@ -4792,11 +4792,11 @@ g_aircraftTable =
 		},
 	[63] =								-- Su-34
 		{
-			_aircraftModel = "Su-34",
-			_category = "AIRPLANE",
+			aircraftModel = "Su-34",
+			category = "AIRPLANE",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -4818,7 +4818,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4877,7 +4877,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"af standard",
 				"af standard 2",
@@ -4885,11 +4885,11 @@ g_aircraftTable =
 		},
 	[64] =								-- AH-1W
 		{
-			_aircraftModel = "AH-1W",
-			_category = "HELICOPTER",
+			aircraftModel = "AH-1W",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -4911,7 +4911,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -4938,7 +4938,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 				"USA X Black",
@@ -4949,11 +4949,11 @@ g_aircraftTable =
 		},
 	[65] =								-- AH-64A
 		{
-			_aircraftModel = "AH-64A",
-			_category = "HELICOPTER",
+			aircraftModel = "AH-64A",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -4975,7 +4975,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5002,7 +5002,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 				"standard dirty",
@@ -5013,11 +5013,11 @@ g_aircraftTable =
 		},
 	[66] =								-- AH-64D
 		{
-			_aircraftModel = "AH-64D",
-			_category = "HELICOPTER",
+			aircraftModel = "AH-64D",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -5039,7 +5039,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5066,7 +5066,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 				"ah-64_d_isr",
@@ -5076,10 +5076,10 @@ g_aircraftTable =
 		},
 	[67] =								-- CH-47D
 		{
-			_aircraftModel = "CH-47D",
-			_category = "HELICOPTER",
+			aircraftModel = "CH-47D",
+			category = "HELICOPTER",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5090,7 +5090,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 				"Australia RAAF",
@@ -5101,10 +5101,10 @@ g_aircraftTable =
 		},
 	[68] =								-- CH-53E
 		{
-			_aircraftModel = "CH-53E",
-			_category = "HELICOPTER",
+			aircraftModel = "CH-53E",
+			category = "HELICOPTER",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5115,17 +5115,17 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 			},
 		},
 	[69] =								-- Ka-27
 		{
-			_aircraftModel = "Ka-27",
-			_category = "HELICOPTER",
+			aircraftModel = "Ka-27",
+			category = "HELICOPTER",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5136,7 +5136,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"ukraine camo 1",
 				"standard",
@@ -5144,11 +5144,11 @@ g_aircraftTable =
 		},
 	[70] =								-- Ka-50
 		{
-			_aircraftModel = "Ka-50",
-			_category = "HELICOPTER",
+			aircraftModel = "Ka-50",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -5170,7 +5170,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5197,7 +5197,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"us army",
 				"us marines 1",
@@ -5253,11 +5253,11 @@ g_aircraftTable =
 		},
 	[71] =								-- Mi-24V
 		{
-			_aircraftModel = "Mi-24V",
-			_category = "HELICOPTER",
+			aircraftModel = "Mi-24V",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -5279,7 +5279,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5314,7 +5314,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 				"Ukraine UN",
@@ -5329,10 +5329,10 @@ g_aircraftTable =
 		},
 	[72] =								-- Mi-26
 		{
-			_aircraftModel = "Mi-26",
-			_category = "HELICOPTER",
+			aircraftModel = "Mi-26",
+			category = "HELICOPTER",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5343,7 +5343,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"7th Separate Brigade of AA (Kalinov)",
 				"United Nations",
@@ -5355,11 +5355,11 @@ g_aircraftTable =
 		},
 	[73] =								-- Mi-8MT
 		{
-			_aircraftModel = "Mi-8MT",
-			_category = "HELICOPTER",
+			aircraftModel = "Mi-8MT",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -5381,7 +5381,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5408,7 +5408,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Standard",
 				"Standart",
@@ -5447,11 +5447,11 @@ g_aircraftTable =
 		},
 	[74] =								-- OH-58D
 		{
-			_aircraftModel = "OH-58D",
-			_category = "HELICOPTER",
+			aircraftModel = "OH-58D",
+			category = "HELICOPTER",
 
-			_task = "AFAC",
-			_tasks =
+			task = "AFAC",
+			tasks =
 			{
 				[1] =
 				{
@@ -5465,7 +5465,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5484,18 +5484,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"",
 			},
 		},
 	[75] =								-- SH-60B
 		{
-			_aircraftModel = "SH-60B",
-			_category = "HELICOPTER",
+			aircraftModel = "SH-60B",
+			category = "HELICOPTER",
 
-			_task = "Antiship Strike",
-			_tasks =
+			task = "Antiship Strike",
+			tasks =
 			{
 				[1] =
 				{
@@ -5515,7 +5515,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5530,18 +5530,18 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 			},
 		},
 	[76] =								-- UH-1H
 		{
-			_aircraftModel = "UH-1H",
-			_category = "HELICOPTER",
+			aircraftModel = "UH-1H",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -5563,7 +5563,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5590,7 +5590,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"Army Standard",
 				"US ARMY 1972",
@@ -5627,11 +5627,11 @@ g_aircraftTable =
 		},
 	[77] =									-- Mi-28N
 		{
-			_aircraftModel = "Mi-28N",
-			_category = "HELICOPTER",
+			aircraftModel = "Mi-28N",
+			category = "HELICOPTER",
 
-			_task = "CAS",
-			_tasks =
+			task = "CAS",
+			tasks =
 			{
 				[1] =
 				{
@@ -5653,7 +5653,7 @@ g_aircraftTable =
 				},
 			},
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5680,7 +5680,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"night",
 				"standard",
@@ -5688,10 +5688,10 @@ g_aircraftTable =
 		},
 	[78] =								-- UH-60A
 		{
-			_aircraftModel = "UH-60A",
-			_category = "HELICOPTER",
+			aircraftModel = "UH-60A",
+			category = "HELICOPTER",
 
-			_payload =
+			payload =
 			{
 				["pylons"] =
 				{
@@ -5702,7 +5702,7 @@ g_aircraftTable =
 				["gun"] = 100,
 			},
 
-			_skins =
+			skins =
 			{
 				"standard",
 			},
@@ -5785,19 +5785,19 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 
 	-- Pick a skin from the given aircraft
 	if (g_flagRandomSkins) then
-		l_acSkin = g_aircraftTable[l_acChosen]._skins[g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][math.random(2, #g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex])]]
+		l_acSkin = g_aircraftTable[l_acChosen].skins[g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][math.random(2, #g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex])]]
 	else
-		l_acSkin = g_aircraftTable[l_acChosen]._skins[g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][2]]
+		l_acSkin = g_aircraftTable[l_acChosen].skins[g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][2]]
 	end
 
 	-- The specific aircraft
-	l_acModel = g_aircraftTable[l_acChosen]._aircraftModel
+	l_acModel = g_aircraftTable[l_acChosen].aircraftModel
 
 	-- Set category
-	l_acCategory = g_aircraftTable[l_acChosen]._category
+	l_acCategory = g_aircraftTable[l_acChosen].category
 
 	-- Formation flying or not
-	if (g_aircraftTable[l_acChosen]["_singleInFlight"] ~= nil) then
+	if (g_aircraftTable[l_acChosen]["singleInFlight"] ~= nil) then
 		l_acSingle = true
 		l_acNumGroup = 1
 	else
@@ -5810,28 +5810,28 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	end
 
 	-- Set callsign name
-	if (g_aircraftTable[l_acChosen]._nameCallname ~= nil) then
-		l_acCallname = g_aircraftTable[l_acChosen]._nameCallname
+	if (g_aircraftTable[l_acChosen].nameCallname ~= nil) then
+		l_acCallname = g_aircraftTable[l_acChosen].nameCallname
 	else
 		l_acCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	end
 
 	-- Set tasking
-	if (g_aircraftTable[l_acChosen]._task ~= nil) then
-		l_acTask = g_aircraftTable[l_acChosen]._task
+	if (g_aircraftTable[l_acChosen].task ~= nil) then
+		l_acTask = g_aircraftTable[l_acChosen].task
 	else
 		l_acTask = ""
 	end
 
 	-- Set tasks
-	if (g_aircraftTable[l_acChosen]._tasks ~= nil) then
-		l_acTasks = g_aircraftTable[l_acChosen]._tasks
+	if (g_aircraftTable[l_acChosen].tasks ~= nil) then
+		l_acTasks = g_aircraftTable[l_acChosen].tasks
 	else
 		l_acTasks = {}
 	end
 
 	-- Set payload
-	l_acPayload = g_aircraftTable[l_acChosen]._payload
+	l_acPayload = g_aircraftTable[l_acChosen].payload
 
 	-- Set full name used for messages
 	l_acFullTextName = g_coalitionTable[l_acCountry].name .. " " .. l_acModel .. " - " .. l_acSkin
