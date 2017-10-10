@@ -8,7 +8,7 @@ do
 
 --FLAGS
 flgRandomFuel = true				-- Random fuel loadout?		--check
-flagRandomWeapons = false			-- Add weapons to aircraft?		--check
+flagRandomWeapons = true			-- Add weapons to aircraft?		--check
 flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
 flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?		--check
 flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
@@ -17,19 +17,20 @@ flgRandomSkill = true				-- Randomize AI pilot skill level		--check
 flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
 flgRandomParkingType = true			-- Randomize type of parking spot for spawn location		--check
+flgRandomGroupSize = true			-- Randomize group size, if applicable
 
 --DEBUG
 debugLog = true		-- write entries to the log		--check
 debugScreen = true	-- write messages to screen		--check
 
 --RANGES
-randomCoalitionSpawn = 3						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
+randomCoalitionSpawn = 3						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)		--check
 spawnIntervalLow = 10							-- Random spawn low end repeat interval		--check
 spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 30, 40, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {10, 10}							-- Maximum number of red, blue units		--check
+maxCoalition = {2, 2}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -61,6 +62,7 @@ AB = {}																-- Coalition AirBase table
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
+	_singleInFlight = false	-- Default to allowing multi-aircraft formations
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
 
 	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
@@ -77,6 +79,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 		if (randomAirplane == 1) then
 			_aircrafttype = "An-26B"
+			_singleInFlight = true
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -101,6 +104,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 2) then
 			_aircrafttype = "An-30M"
+			_singleInFlight = true
 			_country = country.id.UKRAINE
 			_skin = "15th Transport AB"
 			_fullname = "UKRAINE An-30M - " .. _skin
@@ -172,6 +176,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 4) then
 			_aircrafttype = "C-17A"
+			_singleInFlight = true
 			_country = country.id.USA
 			_skin = "usaf standard"
 			_fullname = "USA C-17A - " .. _skin
@@ -187,6 +192,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 5) then
 			_aircrafttype = "E-2C"
+			_singleInFlight = true
 			_country = country.id.USA
 
 			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"}
@@ -226,6 +232,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 6) then
 			_aircrafttype = "E-3A"
+			_singleInFlight = true
 			_country = country.id.USA
 
 			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"}
@@ -265,6 +272,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 7) then
 			_aircrafttype = "IL-76MD"
+			_singleInFlight = true
 			_country = country.id.UKRAINE
 
 			subtype = math.random(1,2)
@@ -288,6 +296,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 8) then
 			_aircrafttype = "KC-135"
+			_singleInFlight = true
 			_country = country.id.USA
 
 			nameCallname = {"Texaco", "Arco", "Shell"}
@@ -373,6 +382,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 10) then
 			_aircrafttype = "S-3B Tanker"
+			_singleInFlight = true
 			_country = country.id.USA
 
 			nameCallname = {"Texaco", "Arco", "Shell"}
@@ -506,6 +516,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 13) then
 			_aircrafttype = "Yak-40"
+			_singleInFlight = true
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -530,6 +541,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 14) then
 			_aircrafttype = "A-50"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 
 			subtype = math.random(1,2)
@@ -553,6 +565,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 15) then
 			_aircrafttype = "An-26B"
+			_singleInFlight = true
 
 			subtype = math.random(1,2)
 			if (subtype == 1) then
@@ -585,6 +598,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 16) then
 			_aircrafttype = "An-30M"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 			_skin = "RF Air Force"
 			_fullname = "RUSSIA An-30M - " .. _skin
@@ -600,6 +614,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 17) then
 			_aircrafttype = "C-130"
+			_singleInFlight = true
 			_country = country.id.TURKEY
 			_skin = "Turkish Air Force"
 			_fullname = "TURKEY C-130 - " .. _skin
@@ -615,6 +630,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 18) then
 			_aircrafttype = "IL-76MD"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 
 			subtype = math.random(1,3)
@@ -640,6 +656,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 19) then
 			_aircrafttype = "IL-78M"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 
 			subtype = math.random(1,3)
@@ -761,6 +778,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomAirplane == 23) then
 			_aircrafttype = "Yak-40"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 			_skin = "Aeroflot"
 			_fullname = "RUSSIA Yak-40 - " .. _skin
@@ -791,6 +809,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 --		if (randomBomber == 1) then -- B-52 removed for now. Behaves badly on taxiway and takeoff
 		if ((randomBomber == 1) or (randomBomber == 2)) then -- B-52 removed for now. Behaves badly on taxiway and takeoff
 			_aircrafttype = "B-1B"
+			_singleInFlight = true
 			_country = country.id.USA
 
 			_task = "Ground Attack"
@@ -843,6 +862,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 --		elseif (randomBomber == 2) then
 --			_aircrafttype = "B-52H"
+--			_singleInFlight = true
 --			_country = country.id.USA
 --			_task = "Ground Attack"
 --			_tasks =
@@ -1053,6 +1073,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 5) then
 			_aircrafttype = "S-3B"
+			_singleInFlight = true
 			_country = country.id.USA
 
 			_task = "Ground Attack"
@@ -1311,6 +1332,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 9) then
 			_aircrafttype = "Tu-22M3"
+			_singleInFlight = true
 			_country = country.id.UKRAINE
 			_task = "Ground Attack"
 			_tasks =
@@ -1342,6 +1364,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 10) then
 			_aircrafttype = "Tu-95MS"
+			_singleInFlight = true
 			_country = country.id.UKRAINE
 			_task = "Pinpoint Strike"
 			_tasks =
@@ -1434,6 +1457,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 12) then
 			_aircrafttype = "Tu-142"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 			_task = "Antiship Strike"
 			_tasks =
@@ -1473,6 +1497,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 13) then
 			_aircrafttype = "Tu-160"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 			_task = "Pinpoint Strike"
 			_tasks =
@@ -1500,6 +1525,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 14) then
 			_aircrafttype = "Tu-22M3"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 			_task = "Ground Attack"
 			_tasks =
@@ -1531,6 +1557,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			}
 		elseif (randomBomber == 15) then
 			_aircrafttype = "Tu-95MS"
+			_singleInFlight = true
 			_country = country.id.RUSSIA
 			_task = "Pinpoint Strike"
 			_tasks =
@@ -8206,6 +8233,33 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 	_groupname = nameP .. nameCoalition[coalitionIndex]
 
+	-- If later to create additional units for this group, set formation
+	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
+		if (#_tasks) then
+			_tasks[#_tasks+1] =
+			{
+				["number"] = #_tasks+1,
+				["auto"] = false,
+				["id"] = "WrappedAction",
+				["enabled"] = true,
+				["params"] =
+				{
+					["action"] =
+					{
+						["id"] = "Option",
+						["params"] =
+						{
+							["variantIndex"] = 2,
+							["name"] = 5,
+							["formationIndex"] = 1,
+							["value"] = 65538,
+						},
+					},
+				},
+			}
+		end
+	end
+
 	_airplanedata =
 	{
         ["modulation"] = 0,
@@ -8277,6 +8331,21 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		["start_time"] = 0,
 		["frequency"] = 124,
 	}
+
+	-- Create additional units for this group if applicable
+	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
+		if (maxGroupSize > 4) then maxGroupSize = 4 end
+		for i = 2, math.random(1, maxGroupSize) do
+			_airplanedata.units[i] = _airplanedata.units[1]
+
+			-- Randomize unit skill if flag is set
+			if (flgRandomSkill) then
+				_airplanedata.units[i].skill = unitSkill[math.random(1,#unitSkill)]
+			else
+				_airplanedata.units[i].skill = unitSkill[unitSkillDefault]
+			end
+		end
+	end
 
 	if (flagRandomWaypoint) then
 		_airplanedata.route.points[2] =
@@ -8593,6 +8662,7 @@ function generateGroup()
 	end
 
 	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
+
 return timer.getTime() + spawnInterval
 end
 
