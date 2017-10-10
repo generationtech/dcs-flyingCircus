@@ -153,16 +153,29 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1]  = {45, 1},							-- F-86F Sabre
+				[2]  = {47, 9},							-- FW-190D9
+				[3]  = {49, 1, 2, 3, 4, 5, 6},			-- MiG-21Bis
+				[4]  = {50, 1, 2, 3, 4},				-- MiG-23MLD
+				[5]  = {51, 1},							-- MiG-25PD
+				[6]  = {52, 3, 4, 5, 6, 7},				-- MiG-29A
+				[7]  = {59, 1, 2, 3, 4, 5, 6, 7},		-- MiG-29S
+				[8]  = {60, 1, 2, 3},					-- MiG-31
+				[9]  = {56, 1, 2, 3, 27, 31, 32, 33, 34, 35, 36},					-- P-51D
+				[10] = {57, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19},	-- Su-27
+				[11] = {61, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},							-- Su-30
+				[12] = {62, 1, 2, 3, 4, 5, 6, 7, 8},	-- Su-33
+				[13] = {63, 1, 2},						-- Su-34
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -197,13 +210,20 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[1] = {45, 1},					-- F-86F Sabre
 				[2] = {48, 1},					-- MiG-15bis
 				[3] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[4] = {50, 1},					-- MiG-23MLD
+				[5] = {51, 1},					-- MiG-25PD
+				[6] = {52, 1, 2, 3},			-- MiG-29A
+				[7] = {54, 1, 2, 3},			-- MiG-29S
+				[8] = {56, 1, 2, 3, 29, 30},	-- P-51D
+				[9] = {57, 1, 2, 3, 4, 50},		-- Su-27
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -245,16 +265,15 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[8]  = {47, 1},								-- FW-190D9
 				[9]  = {48, 1},								-- MiG-15bis
 				[10] = {49, 1, 2, 3, 4, 5, 6},				-- MiG-21Bis
-				[0] = {0, 0},								--
-				[0] = {0, 0},								--
-				[0] = {0, 0},								--
-				[0] = {0, 0},								--
-				[0] = {0, 0},								--
-				[0] = {0, 0},								--
-				[0] = {0, 0},								--
+				[11] = {56, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22},	-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -275,14 +294,20 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {58, 1},					-- F-16C bl.50
+				[2] = {43, 1},					-- F-4E
+				[3] = {44, 10},					-- F-5E
+				[4] = {45, 1},					-- F-86F Sabre
+				[5] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[6] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -308,13 +333,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {47, 8},					-- FW-190D9
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -338,14 +364,16 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[1] = {45, 1},					-- F-86F Sabre
 				[2] = {48, 1},					-- MiG-15bis
 				[3] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[4] = {55, 1, 2, 3, 4, 5, 6},	-- Mirage 2000-5
+				[5] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -371,14 +399,16 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[4] = {47, 2, 3, 4, 5, 6, 7},		-- FW-190D9
 				[5] = {48, 1},						-- MiG-15bis
 				[6] = {49, 1, 2, 3, 4, 5, 6},		-- MiG-21Bis
-				[0] = {0, 0},						--
-				[0] = {0, 0},						--
-				[0] = {0, 0},						--
-				[0] = {0, 0},						--
-				[0] = {0, 0},						--
+				[7] = {53, 1, 2, 3, 4, 5, 6},		-- MiG-29G
+				[8] = {56, 1, 2, 3, 24},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -403,14 +433,15 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {46, 1},					-- F/A-18C
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3, 23},		-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -435,14 +466,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {46, 1},					-- F/A-18C
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3, 27},		-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -467,14 +498,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {45, 1},					-- F-86F Sabre
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -499,14 +530,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {45, 1},					-- F-86F Sabre
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -531,14 +562,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {45, 1},					-- F-86F Sabre
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -563,14 +594,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {45, 1},					-- F-86F Sabre
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -598,15 +629,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[4] = {45, 1},					-- F-86F Sabre
 				[5] = {48, 1},					-- MiG-15bis
 				[6] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[7] = {56, 1, 2, 3, 25},		-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -633,14 +663,15 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[1] = {45, 1},					-- F-86F Sabre
 				[2] = {48, 1},					-- MiG-15bis
 				[3] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[4] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -665,15 +696,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[3] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -691,14 +724,16 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -722,14 +757,14 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {45, 1},					-- F-86F Sabre
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3, 26},		-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -752,14 +787,15 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[2] = {46, 6},					-- F/A-18C
 				[3] = {48, 1},					-- MiG-15bis
 				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
-				[0] = {0, 0},					--
+				[5] = {56, 1, 2, 3},			-- P-51D
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
+				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
 		},
@@ -3276,11 +3312,12 @@ aircraftTable =
 				"aggressor `desert` scheme",
 				"aggressor `frog` scheme2",
 				"aggressor `new blue ` scheme",
-				"aggressor `new ghost ` scheme1",
+				"aggressor `new ghost ` scheme1",	--5
 				"aggressor `new ghost ` scheme2",
 				"aggressor `old blue ` scheme",
 				"aggressor `sand` scheme",
-				"aggressor `snake` scheme"
+				"aggressor `snake` scheme",
+				"`af standard",						--10
 			},
 		},
 	[45] =								-- F-86F Sabre
@@ -3484,10 +3521,11 @@ aircraftTable =
 				"FW-190D9_13.JG 51_Heinz Marquardt",
 				"FW-190D9_IV.JG 26_Hans Dortenmann",
 				"FW-190D9_Black 4 of Stab IIJG 6",
-				"FW-190D9_JG54",
+				"FW-190D9_JG54",					--5
 				"FW-190D9_5JG301",
 				"FW-190D9_Red",
 				"FW-190D9_GB",
+				"FW-190D9_USSR",					--9
 			},
 		},
 	[48] =								-- MiG-15bis
@@ -3584,7 +3622,1053 @@ aircraftTable =
 				"VVS Grey",
 			},
 		},
-	[50] =
+	[50] =								-- MiG-23MLD
+		{
+			_aircrafttype = "MiG-23MLD",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[2] =
+					{
+						["CLSID"] = "{CCF898C9-5BC7-49A4-9D1E-C3ED3D5166A1}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{B0DBC591-0F52-4F7D-AD7B-51E67725FB81}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{A5BAEAB7-6FAF-4236-AF72-0FD900F493F9}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{275A2855-4A79-4B2D-B082-91EA2ADF4691}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{CCF898C9-5BC7-49A4-9D1E-C3ED3D5166A1}",
+					},
+				},
+				["fuel"] = "3800",
+				["flare"] = 60,
+				["chaff"] = 60,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"af standard",
+				"af standard-1",
+				"af standard-2",
+				"af standard-3 (worn-out)",
+			},
+		},
+	[51] =								-- MiG-25PD
+		{
+			_aircrafttype = "MiG-25PD",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{4EDBA993-2E34-444C-95FB-549300BF7CAF}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{4EDBA993-2E34-444C-95FB-549300BF7CAF}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "15245",
+				["flare"] = 64,
+				["chaff"] = 64,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"af standard",
+			},
+		},
+	[52] =								-- MiG-29A
+		{
+			_aircrafttype = "MiG-29A",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+					[1] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{2BEC576B-CDF5-4B7F-961F-B0FA4312B841}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+				},
+				["fuel"] = "3380",
+				["flare"] = 30,
+				["chaff"] = 30,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"af standard-1",
+				"af standard-2",
+				"40th fw `maestro` vasilkov ab",
+				"120 gviap #45 domna ab",				--3
+				"33th iap wittstock ab (germany)",
+				"968th iap altenburg ab (germany)",
+				"`swifts` team #44 kubinka ab",
+				"demo paint scheme #999 mapo",
+			},
+		},
+	[53] =								-- MiG-29G
+		{
+			_aircrafttype = "MiG-29G",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{2BEC576B-CDF5-4B7F-961F-B0FA4312B841}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{682A481F-0CB5-4693-A382-D00DD4A156D7}",
+					},
+				},
+				["fuel"] = "3380",
+				["flare"] = 30,
+				["chaff"] = 30,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"luftwaffe 29+20 demo",
+				"luftwaffe gray early",
+				"luftwaffe gray-1",
+				"luftwaffe gray-2(worn-out)",
+				"luftwaffe gray-3",
+				"luftwaffe gray-4",
+			},
+		},
+	[54] =								-- MiG-29S
+		{
+			_aircrafttype = "MiG-29S",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{2BEC576B-CDF5-4B7F-961F-B0FA4312B841}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+				},
+				["fuel"] = "3500",
+				["flare"] = 30,
+				["chaff"] = 30,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"14th army, vinnitsa ab",
+				"9th fw belbek ab",
+				"`ukrainian falcons` paint scheme",
+			},
+		},
+	[55] =								-- Mirage 2000-5
+		{
+			_aircrafttype = "Mirage 2000-5",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{FC23864E-3B80-48E3-9C03-4DA8B1D7497B}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{414DA830-B61A-4F9E-B71B-C2F6832E1D7A}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{6D778860-7BB8-4ACB-9E95-BA772C6BBC2C}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{0DA03783-61E4-40B2-8FAE-6AEE0A5C5AAE}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{414DA830-B61A-4F9E-B71B-C2F6832E1D7A}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{0DA03783-61E4-40B2-8FAE-6AEE0A5C5AAE}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{6D778860-7BB8-4ACB-9E95-BA772C6BBC2C}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{414DA830-B61A-4F9E-B71B-C2F6832E1D7A}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{FC23864E-3B80-48E3-9C03-4DA8B1D7497B}",
+					},
+				},
+				["fuel"] = "3160",
+				["flare"] = 16,
+				["chaff"] = 112,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"ec1_2  spa103 `cigogne de fonck`",
+				"ec1_2  spa12 `cigogne a ailes ouvertes`",
+				"ec1_2 spa3 `cigogne de guynemer`",
+				"ec2_2 `cote d'or` spa57 `mouette`",
+				"ec2_2 `cote d'or` spa65 `chimere`",
+				"ec2_2 spa94 `lamort qui fauche`",
+			},
+		},
+	[56] =								-- P-51D
+		{
+			_aircrafttype = "P-51D",
+
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+					[1] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{HVAR}",
+					},
+				},
+				["fuel"] = "732",
+				["flare"] = 0,
+				["chaff"] = 0,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Bare Metal",
+				"Dogfight Blue",
+				"Dogfight Red",
+				"USAF 363rd FS, 357th FG DESERT RAT",	--4
+				"USAF 364th FS, HURRY HOME HONEY",
+				"USAF 344rd FS,  IRON ASS",
+				"USAF 485rd FS,  MOONBEAM McSWINE",
+				"USAF 302rd FS, RED TAILS",
+				"USAF 363rd FS",
+				"USAF 364th FS",
+				"USAF 375 rd FS,",
+				"USAF 485rd FS",
+				"USAF 84 rd FS,",
+				"Bare Metal",
+				"USAF Big Beautiful Doll",
+				"USAF DEE",
+				"Dogfight Blue",
+				"Dogfight Red",
+				"USAF Ferocius Frankie",
+				"USAF Gentleman Jim",
+				"USAF Miss Velma",
+				"USAF Voodoo AirRace",		--22
+				"Canada RAF 442 Sqdn",
+				"Germany Training Staffel",
+				"Israeli Air Force",		--25
+				"Italia Air Force",
+				"SPAIN Roberto",
+				"RAF 112 Sqdn",
+				"Ukraine Modern",
+				"Ukraine Old",
+				"Russia Blueback",			-- 31
+				"Russia DOSAAF",
+				"Russia Green Black",
+				"Russia SRI VVS USSR 1942",
+				"USSR Modern",
+				"USSR Old",
+			},
+		},
+	[57] =								-- Su-27
+		{
+			_aircrafttype = "Su-27",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{B79C379A-9E87-4E50-A1EE-7F7E29C2E87A}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{B79C379A-9E87-4E50-A1EE-7F7E29C2E87A}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82A}",
+					},
+				},
+				["fuel"] = "9400",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Air Force Ukraine Standard",
+				"Air Force Ukraine Standard Early",
+				"Mirgorod AFB (831th brigade)",
+				"Mirgorod AFB (Digital camo)",
+				"Ozerne AFB (9th brigade)",
+				"Air Force Standard",					--6
+				"Air Force Standard Early",
+				"Air Force Standard old",
+				"Besovets AFB",
+				"Besovets AFB 2 squadron",
+				"Chkalovsk AFB (689 GvIAP)",
+				"Hotilovo AFB",
+				"Kazakhstan Air Defense Forces",
+				"Kilpyavr AFB (Maresyev)",
+				"Kubinka AFB (Russian Knights)",
+				"Lodeynoye pole AFB (177 IAP)",
+				"Lypetsk AFB (Falcons of Russia)",
+				"Lypetsk AFB (Shark)",
+				"M Gromov FRI",							--19
+			},
+		},
+	[58] =								-- F-16C bl.50
+		{
+			_aircrafttype = "F-16C bl.50",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+				},
+				["fuel"] = "3104",
+				["flare"] = 45,
+				["chaff"] = 90,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"af f16 standard",
+			},
+		},
+	[59] =								-- MiG-29S
+		{
+			_aircrafttype = "MiG-29S",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{2BEC576B-CDF5-4B7F-961F-B0FA4312B841}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+				},
+				["fuel"] = "3500",
+				["flare"] = 30,
+				["chaff"] = 30,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"1038th guards ctc, mary ab",
+				"115th guards regiment, termez ab",
+				"120th guards regiment, domna ab",
+				"2nd fs `swifts` team, kubinka ab",
+				"4th ctc lypetsk ab",							--5
+				"733th guards regiment, damgarten ab (gdr)",
+				"73th guards regiment, merzeburg ab (gdr)",
+			},
+		},
+	[60] =								-- MiG-31
+		{
+			_aircrafttype = "MiG-31",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{B0DBC591-0F52-4F7D-AD7B-51E67725FB81}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{F1243568-8EF0-49D4-9CB5-4DA90D92BC1D}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{F1243568-8EF0-49D4-9CB5-4DA90D92BC1D}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{F1243568-8EF0-49D4-9CB5-4DA90D92BC1D}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{F1243568-8EF0-49D4-9CB5-4DA90D92BC1D}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{275A2855-4A79-4B2D-B082-91EA2ADF4691}",
+					},
+				},
+				["fuel"] = "15500",
+				["flare"] = 0,
+				["chaff"] = 0,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"af standard",
+				"174 GvIAP_Boris Safonov",
+				"903_White",
+			},
+		},
+	[61] =								-- Su-30
+		{
+			_aircrafttype = "Su-30",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{88DAC840-9F75-4531-8689-B46E64E42E53}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{B79C379A-9E87-4E50-A1EE-7F7E29C2E87A}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{B79C379A-9E87-4E50-A1EE-7F7E29C2E87A}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{88DAC840-9F75-4531-8689-B46E64E42E53}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+				},
+				["fuel"] = "9400",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"`desert` test paint scheme",
+				"`russian knights` team #25",
+				"`snow` test paint scheme",
+				"`test-pilots` team #597",
+				"adf 148th ctc savasleyka ab",
+				"af standard",
+				"af standard early",
+				"af standard early (worn-out)",
+				"af standard last",
+				"af standard last (worn-out)",		--10
+			},
+		},
+	[62] =								-- Su-33
+		{
+			_aircrafttype = "Su-33,
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82F}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[3] =
+					{
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
+					},
+					[4] =
+					{
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
+					},
+					[5] =
+					{
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{E8069896-8435-4B90-95C0-01A03AE6E400}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{9B25D316-0434-4954-868F-D51DB1A38DF0}",
+					},
+					[9] =
+					{
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
+					},
+					[10] =
+					{
+						["CLSID"] = "B-8M1 - 20 S-8OFP2",
+					},
+					[11] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[12] =
+					{
+						["CLSID"] = "{44EE8698-89F9-48EE-AF36-5FD31896A82A}",
+					},
+				},
+				["fuel"] = "9400",
+				["flare"] = 48,
+				["chaff"] = 48,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"279th kiap 1st squad navy",
+				"279th kiap 2nd squad navy",
+				"standard-1 navy",
+				"standard-2 navy",
+				"t-10k-1 test paint scheme",
+				"t-10k-2 test paint scheme",
+				"t-10k-5 test paint scheme",
+				"t-10k-9 test paint scheme",	--8
+			},
+		},
+	[63] =								-- Su-34
+		{
+			_aircrafttype = "Su-34",
+
+			_task = "CAS"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["key"] = "CAS",
+					["id"] = "EngageTargets",
+					["number"] = 1,
+					["auto"] = true,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Helicopters",
+							[2] = "Ground Units",
+							[3] = "Light armed ships",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{35B698AC-9FEF-4EC4-AD29-484A0085F62B}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{F72F47E5-C83A-4B85-96ED-D3E46671EE9A}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{B4C01D60-A8A3-4237-BD72-CA7655BC0FE9}",
+					},
+					[12] =
+					{
+						["CLSID"] = "{FBC29BFE-3D24-4C64-B81D-941239D12249}",
+					},
+				},
+				["fuel"] = "9800",
+				["flare"] = 64,
+				["chaff"] = 64,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"af standard",
+				"af standard 2",
+			},
+		},
+	[64] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3605,7 +4689,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[51] =
+	[65] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3626,7 +4710,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[52] =
+	[66] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3647,7 +4731,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[53] =
+	[67] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3668,7 +4752,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[54] =
+	[68] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3689,7 +4773,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[55] =
+	[69] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3710,7 +4794,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[56] =
+	[70] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3731,7 +4815,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[57] =
+	[71] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3752,7 +4836,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[58] =
+	[72] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3773,7 +4857,7 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[59] =
+	[73] =
 		{
 			_aircrafttype = "An-26B",
 
@@ -3794,7 +4878,133 @@ aircraftTable =
 				"Ukraine AF",
 			},
 		},
-	[60] =
+	[74] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[75] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[76] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[77] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[78] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[79] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[80] =
 		{
 			_aircrafttype = "An-26B",
 
