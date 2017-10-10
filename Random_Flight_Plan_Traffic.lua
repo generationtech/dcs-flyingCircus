@@ -23,13 +23,13 @@ debugLog = true		-- write entries to the log		--check
 debugScreen = true	-- write messages to screen		--check
 
 --RANGES
-randomCoalitionSpawn = 1						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
-spawnIntervalLow = 10							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 10							-- Random spawn high end repeat interval		--check
+randomCoalitionSpawn = 2						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
+spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
+spawnIntervalHigh = 20							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 30, 50, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {20, 20}							-- Maximum number of red, blue units		--check
+maxCoalition = {15, 15}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -8521,11 +8521,11 @@ end
 -- Determine spawn and land airbases
 function makeAirBase(cs)
 	local ab = {}
-	ab[1] = chooseAirbase(AF[cs])
-	ab[2] = chooseAirbase(AF[cs])
-	if ((flgNoSpawnLandingAirbase) and (#AF[cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
+	ab[1] = chooseAirbase(AB[cs])
+	ab[2] = chooseAirbase(AB[cs])
+	if ((flgNoSpawnLandingAirbase) and (#AB[cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
 		while (ab[1] == ab[2]) do
-			ab[2] = chooseAirbase(AF[cs])
+			ab[2] = chooseAirbase(AB[cs])
 		end
 	end
 return ab
@@ -8535,29 +8535,29 @@ end
 function generateGroup()
 	local lowVal						-- lowest available coalition side
 	local highVal						-- highest available coalition side
-	local airbase = {}					-- table of available coalition airbases
+	local airbase = {}					-- table of spawn and landing airbases
 	local flgSpawn = {false, false}		-- flags to determine which coalitions get new groups
 
 	-- Names of red bases
-	AF[1] = getAFBases(1)
-	if (#AF[1] < 1) then
+	AB[1] = getAFBases(1)
+	if (#AB[1] < 1) then
 		env.warning("There are no red bases in this mission.", false)
 	end
 
 	-- Names of blue bases
-	AF[2] = getAFBases(2)
-	if (#AF[2] < 1) then
+	AB[2] = getAFBases(2)
+	if (#AB[2] < 1) then
 		env.warning("There are no blue bases in this mission.", false)
 	end
 
 	-- Choose which coalition side to possibly spawn new aircraft
-	if (#AF[1] > 0) then
+	if (#AB[1] > 0) then
 		lowVal = 1
 	else
 		lowVal = 2
 	end
 
-	if (#AF[2] > 0) then
+	if (#AB[2] > 0) then
 		highVal = 2
 	else
 		highVal = 1
@@ -8571,7 +8571,7 @@ function generateGroup()
 	if (randomCoalitionSpawn == 1) then	-- Spawn random coalition
 		flgSpawn[math.random(lowVal, highVal)] = true
 	else
-		if (randomCoalitionSpawn == 3) and (numCoalition[1] != numCoalition[2])) then -- Unfair situation
+		if ((randomCoalitionSpawn == 3) and (not (numCoalition[1] == numCoalition[2]))) then -- Unfair situation
 			if (numCoalition[1] < numCoalition[2]) then	-- spawn Red group
 				flgSpawn = {true, false}
 			else
@@ -8588,19 +8588,20 @@ function generateGroup()
 			if checkMax(i) then
 				airbase = makeAirBase(i)
 				generateAirplane(i, airbase[i], airbase[i], NamePrefix[i])
-			else
+			end
 		end
 	end
 
 	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
-	return timer.getTime() + spawnInterval
+return timer.getTime() + spawnInterval
 end
 
 --
 -- MAIN PROGRAM
 --
-
+env.info("Dynamic AI group spawn script loaded.", false)
 timer.scheduleFunction(generateGroup, nil, timer.getTime() + spawnInterval)
 Checktimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, checkInterval)
+env.info("Dynamic AI group spawn script running.", false)
 
 end
