@@ -1,13 +1,13 @@
--- Randomly spawn a different kind of aircraft at different coalition airbase up to a limit of total spawned aircraft.
--- In the ME, just designate each coalition airbase assignment on the ME airbase object.
+-- CREATE RANDOM AIR TRAFFIC
 
+-- Spawns a random aircraft for each non-neutral country
+-- Randomizes aircraft type and model
+-- Randomizes aircraft skin appropriate for randomly selected country
+-- In ME, assign coalition country to control airbase to enable random spawn there
+-- To disable a country from random spawn, assign it to the neutral coalition
+-- Also flies to a random waypoint between take-off and landing airbase
 
--- Possible way to remove wrecks:
---If another group has the same name new group has, that group will be destroyed and new group will take its mission ID.
---If another units has the same name an unit of new group has, that unit will be destroyed and the unit of new group will take its mission ID.
---If new group contains player's aircraft current unit that is under player's control will be destroyed.
---http://wiki.hoggit.us/view/Part_1
-
+-- Many other random settings: fuel, weapons, take-off waypoint, pilot skill
 
 do
 
@@ -16,15 +16,15 @@ do
 ----------------------
 
 --DEBUG
-g_debugLog             = 2			-- 0: no log file messages, 2: informational, 3: verbose
+g_debugLog             = 1			-- 0: no log file messages, 1: informational, 2: verbose
 g_debugScreen          = true		-- write messages to screen
 
 --GENERAL PARAMETERS
-g_spawnIntervalLow     = 30			-- Random spawn low end repeat interval
-g_spawnIntervalHigh    = 60			-- Random spawn high end repeat interval
-g_maxCoalitionAircraft = {20, 20}	-- Maximum number of red, blue units
+g_spawnIntervalLow     = 45			-- Random spawn low end repeat interval
+g_spawnIntervalHigh    = 90			-- Random spawn high end repeat interval
+g_maxCoalitionAircraft = {40, 40}	-- Maximum number of red, blue units
 g_randomCoalitionSpawn = 3			-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( g_maxCoalitionAircraft{} must be equal for #3 to work)
-g_aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
+g_aircraftDistribution = {0, 0, 0, 0, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
 g_namePrefix           = {"Red-", "Blue-"}		-- Prefix to use for naming groups
 
 --STUCK CONDITION CHECKING
@@ -1884,11 +1884,19 @@ g_aircraftTable =
 					{
 						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
 					},
-					[4] =
+					[2] =
+					{
+						["CLSID"] = "{E1AAE713-5FC3-4CAA-9FF5-3FDCFB899E33}",
+					},
+					[3] =
 					{
 						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
 					},
-					[7] =
+					[4] =
+					{
+						["CLSID"] = "{E1AAE713-5FC3-4CAA-9FF5-3FDCFB899E33}",
+					},
+					[5] =
 					{
 						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
 					},
@@ -6596,3 +6604,11 @@ mist.scheduleFunction(f_checkStatus, {}, timer.getTime() + 4, g_checkInterval)
 env.info("Dynamic AI group spawn script running.", false)
 
 end
+
+
+
+-- Possible way to remove wrecks:
+--If another group has the same name new group has, that group will be destroyed and new group will take its mission ID.
+--If another units has the same name an unit of new group has, that unit will be destroyed and the unit of new group will take its mission ID.
+--If new group contains player's aircraft current unit that is under player's control will be destroyed.
+--http://wiki.hoggit.us/view/Part_1
