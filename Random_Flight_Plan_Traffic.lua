@@ -541,9 +541,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	elseif ((AircraftType >= 4) or (AircraftType <= 5)) then
 		if (coalitionIndex == 1) then
-			randomBomber = math.random(13,18) -- random for airplane type; Red AC 13-18
+			randomBomber = math.random(11,18) -- random for airplane type; Red AC 11-18
 		else
-			randomBomber = math.random(1,12) -- random for airplane type; Blue AC 1-12
+			randomBomber = math.random(1,10) -- random for airplane type; Blue AC 1-10
 		end
 
 		if (randomBomber == 1) then
@@ -765,25 +765,146 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		elseif (randomBomber == 6) then
-			_aircrafttype = "Tornado IDS"
-			_country = country.id.GERMANY
+			_aircrafttype = "Su-24M"
+			_country = country.id.UKRAINE
+			_skin = "af standard"
+			callsign = "UKRAINE - Su-24M"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{16602053-4A12-40A2-B214-AB60D481B20E}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
+					},
+				},
+				["fuel"] = "11700",
+				["flare"] = 96,
+				["chaff"] = 96,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 7) then
+			_aircrafttype = "Tornado GR4"
+			_country = country.id.UK
 
-			subtype = math.random(1,5)
+			subtype = math.random(1,6)
 			if (subtype == 1) then
-				_skin = "aufklarungsgeschwader 51 `immelmann` jagel ab luftwaffe"
-				callsign = "GERMANY Tornado IDS - aufklarungsgeschwader 51 `immelmann` jagel ab luftwaffe"
+				_skin = "bb of 14 squadron raf lossiemouth"
+				callsign = "UK - Tornado GR4 - bb of 14 squadron raf lossiemouth"
 			elseif (subtype == 2) then
-				_skin = "jagdbombergeschwader 31 `boelcke` norvenich ab luftwaffe"
-				callsign = "GERMANY Tornado IDS - jagdbombergeschwader 31 `boelcke` norvenich ab luftwaffe"
+				_skin = "no. 9 squadron raf marham ab (norfolk)"
+				callsign = "UK - Tornado GR4 - no. 9 squadron raf marham ab (norfolk)"
 			elseif (subtype == 3) then
-				_skin = "jagdbombergeschwader 32 lechfeld ab luftwaffe"
-				callsign = "GERMANY Tornado IDS - jagdbombergeschwader 32 lechfeld ab luftwaffe"
+				_skin = "no. 12 squadron raf lossiemouth ab (morayshire)"
+				callsign = "UK - Tornado GR4 - no. 12 squadron raf lossiemouth ab (morayshire)"
 			elseif (subtype == 4) then
-				_skin = "jagdbombergeschwader 33 buchel ab no. 43+19 experimental scheme"
-				callsign = "GERMANY Tornado IDS - jagdbombergeschwader 33 buchel ab no. 43+19 experimental scheme"
+				_skin = "no. 14 squadron raf lossiemouth ab (morayshire)"
+				callsign = "UK - Tornado GR4 - no. 14 squadron raf lossiemouth ab (morayshire)"
+			elseif (subtype == 5) then
+				_skin = "no. 617 squadron raf lossiemouth ab (morayshire)"
+				callsign = "UK - Tornado GR4 - no. 617 squadron raf lossiemouth ab (morayshire)"
 			else
-				_skin = "marinefliegergeschwader 2 eggebek ab marineflieger"
-				callsign = "GERMANY Tornado IDS - marinefliegergeschwader 2 eggebek ab marineflieger"
+				_skin = "o of ii (ac) squadron raf marham"
+				callsign = "UK - Tornado GR4 - o of ii (ac) squadron raf marham"
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{8C3F26A2-FA0F-11d5-9190-00A0249B6F00}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
+					},
+					[12] =
+					{
+						["CLSID"] = "{8C3F26A1-FA0F-11d5-9190-00A0249B6F00}",
+					},
+				},
+				["fuel"] = "4663",
+				["flare"] = 45,
+				["chaff"] = 90,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 8) then
+			_aircrafttype = "Tornado IDS"
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_country = country.id.GERMANY
+				subtype1 = math.random(1,5)
+				if (subtype1 == 1) then
+					_skin = "aufklarungsgeschwader 51 `immelmann` jagel ab luftwaffe"
+					callsign = "GERMANY Tornado IDS - aufklarungsgeschwader 51 `immelmann` jagel ab luftwaffe"
+				elseif (subtype1 == 2) then
+					_skin = "jagdbombergeschwader 31 `boelcke` norvenich ab luftwaffe"
+					callsign = "GERMANY Tornado IDS - jagdbombergeschwader 31 `boelcke` norvenich ab luftwaffe"
+				elseif (subtype1 == 3) then
+					_skin = "jagdbombergeschwader 32 lechfeld ab luftwaffe"
+					callsign = "GERMANY Tornado IDS - jagdbombergeschwader 32 lechfeld ab luftwaffe"
+				elseif (subtype1 == 4) then
+					_skin = "jagdbombergeschwader 33 buchel ab no. 43+19 experimental scheme"
+					callsign = "GERMANY Tornado IDS - jagdbombergeschwader 33 buchel ab no. 43+19 experimental scheme"
+				else
+					_skin = "marinefliegergeschwader 2 eggebek ab marineflieger"
+					callsign = "GERMANY Tornado IDS - marinefliegergeschwader 2 eggebek ab marineflieger"
+				end
+			else
+				_country = country.id.ITALY
+				subtype1 = math.random(1,4)
+				if (subtype1 == 1) then
+					_skin = "ITA Tornado (Sesto Stormo Diavoli Rossi)"
+					callsign = "ITALY Tornado IDS - ITA Tornado (Sesto Stormo Diavoli Rossi)"
+				elseif (subtype1 == 2) then
+					_skin = "ITA Tornado Black"
+					callsign = "ITALY Tornado IDS - ITA Tornado Black"
+				elseif (subtype1 == 3) then
+					_skin = "ITA Tornado MM7042"
+					callsign = "ITALY Tornado IDS - ITA Tornado MM7042"
+				else
+					_skin = "ITA Tornado MM55004"
+					callsign = "ITALY Tornado IDS - ITA Tornado MM55004"
+				end
 			end
 
 			_payload =
@@ -806,7 +927,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
 					},
-					[11] =
+					[9] =
 					{
 						["CLSID"] = "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
 					},
@@ -814,13 +935,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 					{
 						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
 					},
+					[11] =
+					{
+						["CLSID"] = "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
+					},
 					[12] =
 					{
 						["CLSID"] = "{8C3F26A2-FA0F-11d5-9190-00A0249B6F00}",
-					},
-					[9] =
-					{
-						["CLSID"] = "{B06DD79A-F21E-4EB9-BD9D-AB3844618C93}",
 					},
 				},
 				["fuel"] = "4663",
@@ -828,8 +949,57 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 90,
 				["gun"] = 100,
 			}
+		elseif (randomBomber == 9) then
+			_aircrafttype = "Tu-22M3"
+			_country = country.id.UKRAINE
+			_skin = "af standard"
+			callsign = "UKRAINE - Tu-22M3"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
+					},
+				},
+				["fuel"] = "50000",
+				["flare"] = 48,
+				["chaff"] = 48,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 10) then
+			_aircrafttype = "Tu-95MS"
+			_skin = "af standard"
+			_country = country.id.UKRAINE
+			callsign = "UKRAINE - Tu-95MS"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
+					},
+				},
+				["fuel"] = "87000",
+				["flare"] = 48,
+				["chaff"] = 48,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 11) then
 
-		elseif (randomBomber == 7) then
+
+
+		elseif (randomBomber == 12) then
 
 
 
@@ -1677,51 +1847,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "HOBO"
 
 		elseif (randomFighter == 11) then
-			_aircrafttype = "Tornado GR4"
-			_country = country.id.UK
-			_skin = "no. 9 squadron raf marham ab (norfolk)"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{8C3F26A2-FA0F-11d5-9190-00A0249B6F00}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
-			}, -- end of [3]
-			[4] =
-			{
-			["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
-			}, -- end of [4]
-			[11] =
-			{
-			["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
-			}, -- end of [11]
-			[10] =
-			{
-			["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
-			}, -- end of [10]
-			[12] =
-			{
-			["CLSID"] = "{8C3F26A1-FA0F-11d5-9190-00A0249B6F00}",
-			}, -- end of [12]
-			[9] =
-			{
-			["CLSID"] = "{E6747967-B1F0-4C77-977B-AB2E6EB0C102}",
-			}, -- end of [9]
-			}, -- end of ["pylons"]
-			["fuel"] = "4663",
-			["flare"] = 45,
-			["chaff"] = 90,
-			["gun"] = 100,
-			}
-			callsign = "ROYAL"
 
 		elseif (randomFighter == 12) then
 
@@ -1932,23 +2057,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF"
 
 		elseif (randomFighter == 18) then
-			_aircrafttype = "Tu-95MS"
-			_skin = "af standard"
-			_payload =  {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{0290F5DE-014A-4BB1-9843-D717749B1DED}",
-			}, -- end of [1]
-			}, -- end of ["pylons"]
-			["fuel"] = "87000",
-			["flare"] = 48,
-			["chaff"] = 48,
-			["gun"] = 100,
-			}
-			_country = country.id.RUSSIA
-			callsign = "RFF"
 
 
 			_aircrafttype = "L-39ZA"
@@ -2263,39 +2371,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF904"
 
 		elseif (randomFighter == 27) then
-			_aircrafttype = "Su-24M"
-			_country = country.id.RUSSIA
-			_skin = "af standard"
-			_payload ={
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
-			}, -- end of [2]
-			[5] =
-			{
-			["CLSID"] = "{16602053-4A12-40A2-B214-AB60D481B20E}",
-			}, -- end of [5]
-			[7] =
-			{
-			["CLSID"] = "{7D7EC917-05F6-49D4-8045-61FC587DD019}",
-			}, -- end of [7]
-			[8] =
-			{
-			["CLSID"] = "{A0648264-4BC0-4EE8-A543-D119F6BA4257}",
-			}, -- end of [8]
-			}, -- end of ["pylons"]
-			["fuel"] = "11700",
-			["flare"] = 96,
-			["chaff"] = 96,
-			["gun"] = 100,
-			}
-			callsign = "RFF234"
 
 		elseif (randomFighter == 29) then
 			_aircrafttype = "Su-25"
@@ -2667,31 +2742,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "RFF666"
 
 		elseif (randomFighter == 36) then
-			_aircrafttype = "Tu-22M3"
-			_country = country.id.RUSSIA
-			_skin = "af standard"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
-			}, -- end of [1]
-			[4] =
-			{
-			["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
-			}, -- end of [4]
-			[7] =
-			{
-			["CLSID"] = "{12429ECF-03F0-4DF6-BCBD-5D38B6343DE1}",
-			}, -- end of [7]
-			}, -- end of ["pylons"]
-			["fuel"] = "50000",
-			["flare"] = 48,
-			["chaff"] = 48,
-			["gun"] = 100,
-			}
-			callsign = "RFF204"
+
+
 		end
 	end
 
