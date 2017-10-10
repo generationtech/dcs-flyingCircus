@@ -42,14 +42,14 @@ maxGroupSize = 4								-- Maximum number of groups for those units supporting f
 minGroupSize = 1								-- Minimum number of groups for those units supporting formations
 maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
+waypointRange = {80000, 80000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.25							-- If randomizing fuel, the low end percent		--check
-highFuelPercent = 0.50							-- If randomizing fuel, the high end percent		--check
+lowFuelPercent = 0.40							-- If randomizing fuel, the low end percent		--check
+highFuelPercent = 0.75							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 		"TakeOffParking", "From Parking Area",
@@ -6086,9 +6086,6 @@ env.info("generate airplane loop spawn", false)
 end
 
 function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
-	if (debugLog) then env.info('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, false) end
-	if (debugScreen) then trigger.action.outText('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, 20) end
-
 	if ((numCoalitionAircraft[RATtable[indeX].coalition] > 0) and (#RATtable[indeX].unitNames > 0)) then		-- If possible, increase the available aircraft for this coalition by the number of units remaining in the group
 		if ((numCoalitionAircraft[RATtable[indeX].coalition] - #RATtable[indeX].unitNames) > 0) then
 				numCoalitionAircraft[RATtable[indeX].coalition] = numCoalitionAircraft[RATtable[indeX].coalition] - #RATtable[indeX].unitNames
@@ -6097,21 +6094,24 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 		end
 	end
 
+	if (debugLog) then env.info('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2], false) end
+	if (debugScreen) then trigger.action.outText('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2], 20) end
+
 	table.remove(RATtable, indeX)	-- Group does not exist any longer for this script
 
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
 function removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
-	if (debugLog) then env.info('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage, false) end
-	if (debugScreen) then trigger.action.outText('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage, 20) end
-
-	table.remove(RATtable[indexI].unitNames, indexJ)		-- Unit does not exist any longer for this script
-	table.remove(RATtable[indexI].unitCheckTime, indexJ)	-- Unit does not exist any longer for this script
-
 	if (numCoalitionAircraft[RATtable[indexI].coalition] > 0) then		-- If possible, increase the number of available aircraft for this coalition by one
 		numCoalitionAircraft[RATtable[indexI].coalition] = numCoalitionAircraft[RATtable[indexI].coalition] - 1
 	end
+
+	if (debugLog) then env.info('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2], false) end
+	if (debugScreen) then trigger.action.outText('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2], 20) end
+
+	table.remove(RATtable[indexI].unitNames, indexJ)		-- Unit does not exist any longer for this script
+	table.remove(RATtable[indexI].unitCheckTime, indexJ)	-- Unit does not exist any longer for this script
 
 	if (destroyFlag) then aircraftUnit:destroy() end
 
@@ -6140,7 +6140,7 @@ function checkStatus()
 					i = i + 1
 				end
 			else -- Valid group, make unit checks
-env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames, false)
+env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].unitNames .. '  #red:' .. numCoalitionAircraft[1] .. '  #blue:' .. numCoalitionAircraft[2], false)
 --env.info('random 1-4: ' .. math.random(1,4), false)
 				local unitNamesLimit = #RATtable[i].unitNames
 				local j = 1
@@ -6153,7 +6153,7 @@ env.info('group: ' .. RATtable[i].groupname .. ' #unitnames: ' .. #RATtable[i].u
 						local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
 					-- Check for unit movement
-						if absactualunitvel > 4 then
+						if absactualunitvel > 2 then
 							RATtable[i].unitCheckTime[j] = 0 -- If it's moving, reset checktime
 						else
 							RATtable[i].unitCheckTime[j] = RATtable[i].unitCheckTime[j] + 1
