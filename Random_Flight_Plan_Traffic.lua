@@ -23,13 +23,13 @@ debugLog = true		-- write entries to the log		--check
 debugScreen = true	-- write messages to screen		--check
 
 --RANGES
-randomCoalitionSpawn = 2						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
-spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 20							-- Random spawn high end repeat interval		--check
+randomCoalitionSpawn = 3						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
+spawnIntervalLow = 10							-- Random spawn low end repeat interval		--check
+spawnIntervalHigh = 10							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
-aircraftDistribution = {20, 30, 50, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftDistribution = {20, 30, 40, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {15, 15}							-- Maximum number of red, blue units		--check
+maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -44,7 +44,7 @@ parkingSpotType = {								-- List of waypoint styles used for spawn point (2 en
 	"Turning Point", "Turning Point",
 	"Turning Point", "Turning Point"			-- Favor in-air start
 }
-spawnSpeedTurningPoint = 110					-- When spawning in the air as turning point, starting speed		--check
+spawnSpeedTurningPoint = 120					-- When spawning in the air as turning point, starting speed		--check
 
 -- Should be no need to edit these below
 RATtable = {}
