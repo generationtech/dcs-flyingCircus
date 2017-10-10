@@ -4,7 +4,7 @@
 do
 --EDIT BELOW
 --FLAGS
-flgRandomCoalitionSpawn = true		-- Random sequence of Red/Blue coalition spawning?
+flgRandomCoalitionSpawn = true		-- Random sequence of Red/Blue coalition spawning or always spawn 1 each Red/Blue side?
 flgRandomFuel = true				-- Random fuel loadout?		--check
 flagRandomWeapons = true			-- Add weapons to aircraft?		--check
 flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
@@ -14,7 +14,7 @@ flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise jus
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
 flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
-flgRandomParkingType = false			-- Randomize type of parking spot for spawn location
+flgRandomParkingType = true			-- Randomize type of parking spot for spawn location
 
 --DEBUG
 debugLog = true		-- write entries to the log		--check
@@ -24,7 +24,7 @@ debugScreen = true	-- write messages to screen		--check
 intervall = math.random(30,30)					-- Random spawn repeat interval
 aircraftDistribution = {30, 45, 70, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {30, 30}							-- Maximum number of red, blue units		--check
+maxCoalition = {20, 20}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -38,13 +38,13 @@ parkingSpotType = {								-- List of waypoint styles used for spawn point (2 en
 	"TakeOff", "From Runway",
 	"Turning Point", "Turning Point"
 }
-spawnSpeedTurningPoint = 100					-- When spawning in the air as turning point, starting speed
+spawnSpeedTurningPoint = 120					-- When spawning in the air as turning point, starting speed
 
 -- Should be no need to edit these below
 RATtable = {}
 numCoalition = {0, 0}							-- Current number of active Red, Blue dynamic spawned units
 nameCoalition = {0, 0}							-- Highest coalition name used
-nameCallname = {}
+nameCallname = {}								-- List of radio callnames possible for that particular aircraft type
 unitSkill = {Average, Good, High, Excellent, Random}
 
 --env.setErrorMessageBoxEnabled(false)
@@ -8413,7 +8413,7 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (debugLog) then env.info('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, false) end
 	if (debugScreen) then trigger.action.outText('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, 20) end
 	if (numCoalition[RATtable[indeX].coalition] > 0) then
-		numCoalition[RATtable[indeX].coalition] = numCoalition[RATtable[indeX].coalition] - 1	-- Make sure to account for groups that become missing from the sim outside of script control
+		numCoalition[RATtable[indeX].coalition] = numCoalition[RATtable[indeX].coalition] - 1
 	end
 	table.remove(RATtable, indeX)	-- Group does not exist any longer for this script
 	if (destroyflaG) then aircraftgrouP:destroy() end
@@ -8552,6 +8552,9 @@ function generateGroup()
 	end
 end
 
+--
+-- MAIN PROGRAM
+--
 
 -- Names of red bases
 redAF = getAFBases(1)
