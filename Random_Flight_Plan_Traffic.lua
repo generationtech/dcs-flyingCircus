@@ -3,7 +3,7 @@
 
 do
 --EDIT BELOW
-intervall = math.random(30,120) 	--random repeat interval between (A and B) in seconds
+intervall = math.random(60,300) 	--random repeat interval between (A and B) in seconds
 maxCoalition = {20, 20} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
@@ -2366,12 +2366,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_waypointtype = parkingT[1]
 	_waypointaction = parkingT[2]
 
-	_landairdromeId = landIndex.id
-	_landairbaseloc = Object.getPoint({id_=landIndex.id_})
-	_landairplanepos = {}
-	_landairplanepos.x = _landairbaseloc.x
-	_landairplanepos.z = _landairbaseloc.z
-
 
 	_airplanedata = {
         ["modulation"] = 0,
@@ -2411,32 +2405,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                             },
                                             ["speed_locked"] = true,
                                         },
-										[2] =
-                                        {
-											["alt"] = 9,
-											["type"] = "LAND",
-											["action"] = "Landing",
-											["alt_type"] = "RADIO",
-											["formation_template"] = "",
-											["ETA"] = 0,
-											["airdromeId"] = _landairdromeId,
-											["y"] = _landairplanepos.z,
-											["x"] = _landairplanepos.x,
-											["speed"] = 250,
-											["ETA_locked"] = false,
-											["task"] =
-												{
-												["id"] = "ComboTask",
-													["params"] =
-														{
-														["tasks"] =
-															{
-
-															},
-														},
-												},
-											["speed_locked"] = true,
-										},
                                     },
                                 },
                                 ["groupId"] = numCoalition[coalitionIndex],
@@ -2477,6 +2445,86 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
 
 	end
+
+	env.warning("Adding group: " .. nameP .. numCoalition[coalitionIndex] .. " At airbase: " .. spawnIndex.name, false)
+
+
+	_landwaypoints = {}
+	_landairdromeId = landIndex.id
+	_landairbaseloc = Object.getPoint({id_=landIndex.id_})
+	_landairplanepos = {}
+	_landairplanepos.x = _landairbaseloc.x
+	_landairplanepos.z = _landairbaseloc.z
+
+	_turningpoint =
+								{
+								["alt"] = 2000,
+                                ["type"] = "Turning Point",
+								["action"] = "Turning Point",
+								["alt_type"] = "RADIO",
+                                ["formation_template"] = "",
+                                ["ETA"] = 0,
+                                ["y"] = _spawnairbaseloc.z+500,
+                                ["x"] = _spawnairbaseloc.x+1000,
+								["speed"] = 300,
+                                ["ETA_locked"] = false,
+                                ["task"] =
+                                    {
+                                    ["id"] = "ComboTask",
+                                        ["params"] =
+                                            {
+                                            ["tasks"] =
+                                                {
+
+                                                },
+                                            },
+                                    },
+                                ["speed_locked"] = true,
+								}
+
+	_landingpoint =
+                    {
+						["alt"] = 600,
+						["type"] = "LAND",
+						["action"] = "Landing",
+						["alt_type"] = "RADIO",
+						["formation_template"] = "",
+						["ETA"] = 0,
+						["y"] = _landairplanepos.z,
+						["x"] = _landairplanepos.x,
+						["speed"] = 250,
+						["ETA_locked"] = false,
+						["task"] =
+							{
+								["id"] = "ComboTask",
+								["params"] =
+									{
+										["tasks"] =
+											{
+
+											},
+									},
+							},
+						["speed_locked"] = true,
+					}
+
+
+	env.warning("Adding route for group: " .. nameP .. numCoalition[coalitionIndex] .. " Land airbase: " .. landIndex.name, false)
+
+
+	if (AircraftType == 2) then
+		env.warning("Build Heli route", false)
+		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_turningpoint, "Turning Point", 80, 800, "RADIO")
+		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_landingpoint, "LAND", 80, 600, "RADIO")
+	else
+		env.warning("Build Plane route", false)
+		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_turningpoint, "Turning Point", 200, 11500, "RADIO")
+		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_landingpoint, "LAND", 200, 8000, "RADIO")
+	end
+
+
+
+	mist.goRoute(Group.getByName(nameP .. numCoalition[coalitionIndex]), _landwaypoints)
 end
 
 function chooseAirbase(AF)
