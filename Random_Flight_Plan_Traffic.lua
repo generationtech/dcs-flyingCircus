@@ -6072,24 +6072,24 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		for l_index=2, l_acNumGroup do
 			l_aircraftData.units[l_index] =
 			{
-				["alt"] = l_acSpawnAlt,
-				["psi"] = l_acSpawnPSI,
-                ["heading"] = l_acSpawnHeading,
-				["livery_id"] = l_acSkin,
-				["type"] = l_acModel,
+				["alt"]         = l_acSpawnAlt,
+				["psi"]         = l_acSpawnPSI,
+                ["heading"]     = l_acSpawnHeading,
+				["livery_id"]   = l_acSkin,
+				["type"]        = l_acModel,
 				["onboard_num"] = "10",
-				["y"] = l_acSpawnPos.z,
-				["x"] = l_acSpawnPos.x,
-				["name"] =  l_acGroupName .. "-" .. l_index,
-				["callsign"] = l_acCallSign,
-				["payload"] = l_acPayload,
-				["speed"] = l_acSpawnSpeed,
-				["unitId"] =  math.random(9999,99999),
-				["alt_type"] = "RADIO",
-				["skill"] = l_acSkill,
+				["y"]           = l_acSpawnPos.z,
+				["x"]           = l_acSpawnPos.x,
+				["name"]        = l_acGroupName .. "-" .. l_index,
+				["callsign"]    = l_acCallSign,
+				["payload"]     = l_acPayload,
+				["speed"]       = l_acSpawnSpeed,
+				["unitId"]      =  math.random(9999,99999),
+				["alt_type"]    = "RADIO",
+				["skill"]       = l_acSkill,
 			}
 
-			l_acUnitNames[#l_acUnitNames+1] = l_acGroupName .. "-" .. l_index
+			l_acUnitNames[#l_acUnitNames+1]         = l_acGroupName .. "-" .. l_index
 			l_acUnitCheckTime[#l_acUnitCheckTime+1] = 0
 
 			-- Build callsign for this unit based on group callsign
@@ -6098,9 +6098,9 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			else
 				l_aircraftData.units[l_index].callsign =
 					{
-						[1] = l_aircraftData.units[1].callsign[1],
-						[2] = l_aircraftData.units[1].callsign[2],
-						[3] = l_index,
+						[1]      = l_aircraftData.units[1].callsign[1],
+						[2]      = l_aircraftData.units[1].callsign[2],
+						[3]      = l_index,
 						["name"] = l_acCallname[l_aircraftData.units[1].callsign[1]] .. l_aircraftData.units[1].callsign[2] .. l_index,
 					}
 			end
@@ -6119,10 +6119,10 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	if (l_acSpawnType[1] == "Turning Point") then
 		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
-			["alt"] = l_acSpawnAlt * 3,
-			["alt_type"] = "RADIO",
-			["type"] = l_acSpawnType[1],
-			["action"] = l_acSpawnType[2],
+			["alt"]                = l_acSpawnAlt * 3,
+			["alt_type"]           = "RADIO",
+			["type"]               = l_acSpawnType[1],
+			["action"]             = l_acSpawnType[2],
 			["formation_template"] = "",
 			["properties"] =
 			{
@@ -6132,10 +6132,10 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["y"] = g_airbasePoints[p_spawnIndex.id][4],
-			["x"] = g_airbasePoints[p_spawnIndex.id][3],
-			["speed"] = l_acFlightSpeed,
-			["ETA_locked"] = false,
+			["y"]                  = g_airbasePoints[p_spawnIndex.id][4],
+			["x"]                  = g_airbasePoints[p_spawnIndex.id][3],
+			["speed"]              = l_acFlightSpeed,
+			["ETA_locked"]         = false,
 			["task"] =
 			{
 				["id"] = "ComboTask",
@@ -6144,17 +6144,17 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 					["tasks"] = l_acTasks,
 				},
 			},
-			["speed_locked"] = true,
+			["speed_locked"]       = true,
 		}
 	end
 
 	if (g_flagRandomWaypoint ) then
 		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
-			["alt"] = l_acFlightAlt,
-			["type"] = "Turning Point",
-			["action"] = "Turning Point",
-			["alt_type"] = "BARO",
+			["alt"]                = l_acFlightAlt,
+			["type"]               = "Turning Point",
+			["action"]             = "Turning Point",
+			["alt_type"]           = "BARO",
 			["formation_template"] = "",
 			["properties"] =
 			{
@@ -6164,10 +6164,10 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["y"] = l_acWaypoint.z,
-			["x"] = l_acWaypoint.x,
-			["speed"] = l_acFlightSpeed,
-			["ETA_locked"] = false,
+			["y"]                  = l_acWaypoint.z,
+			["x"]                  = l_acWaypoint.x,
+			["speed"]              = l_acFlightSpeed,
+			["ETA_locked"]         = false,
 			["task"] =
 			{
 				["id"] = "ComboTask",
@@ -6176,14 +6176,14 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 					["tasks"] = l_acTasks,
 				},
 			},
-			["speed_locked"] = true,
+			["speed_locked"]       = true,
 		}
 		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
-			["alt"] = l_acFlightAlt / 2,
-			["type"] = "Land",
-			["action"] = "Landing",
-			["alt_type"] = "BARO",
+			["alt"]                = l_acFlightAlt / 2,
+			["type"]               = "Land",
+			["action"]             = "Landing",
+			["alt_type"]           = "BARO",
 			["formation_template"] = "",
 			["properties"] =
 			{
@@ -6193,11 +6193,11 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["airdromeId"] = l_acLandAirdromeID,
-			["y"] = l_acLandAirdromePos.z,
-			["x"] = l_acLandAirdromePos.x,
-			["speed"] = l_acFlightSpeed,
-			["ETA_locked"] = false,
+			["airdromeId"]         = l_acLandAirdromeID,
+			["y"]                  = l_acLandAirdromePos.z,
+			["x"]                  = l_acLandAirdromePos.x,
+			["speed"]              = l_acFlightSpeed,
+			["ETA_locked"]         = false,
 			["task"] =
 			{
 				["id"] = "ComboTask",
@@ -6208,15 +6208,15 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 					},
 				},
 			},
-			["speed_locked"] = true,
+			["speed_locked"]       = true,
 		}
 	else
 		l_aircraftData.route.points[#l_aircraftData.route.points + 1] =
 		{
-			["alt"] = l_acFlightAlt / 2,
-			["type"] = "Land",
-			["action"] = "Landing",
-			["alt_type"] = "BARO",
+			["alt"]                = l_acFlightAlt / 2,
+			["type"]               = "Land",
+			["action"]             = "Landing",
+			["alt_type"]           = "BARO",
 			["formation_template"] = "",
 			["properties"] =
 			{
@@ -6226,11 +6226,11 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["airdromeId"] = l_acLandAirdromeID,
-			["y"] = l_acLandAirdromePos.z,
-			["x"] = l_acLandAirdromePos.x,
-			["speed"] = l_acFlightSpeed,
-			["ETA_locked"] = false,
+			["airdromeId"]         = l_acLandAirdromeID,
+			["y"]                  = l_acLandAirdromePos.z,
+			["x"]                  = l_acLandAirdromePos.x,
+			["speed"]              = l_acFlightSpeed,
+			["ETA_locked"]         = false,
 			["task"] =
 			{
 				["id"] = "ComboTask",
@@ -6241,7 +6241,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 					},
 				},
 			},
-			["speed_locked"] = true,
+			["speed_locked"]       = true,
 		}
 	end
 
@@ -6251,19 +6251,18 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		coalition.addGroup(l_acCountry, Group.Category.AIRPLANE, l_aircraftData)
 	end
 
-	if (g_debugLog) then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  callsign:' .. l_acGroupName .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName, false) end
-	if (g_debugLog) then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, false) end
-	if (g_debugLog) then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  formation:' .. l_acFormation, false) end
+	if (g_debugLog)    then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  callsign:' .. l_acGroupName .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName, false) end
+	if (g_debugLog)    then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, false) end
+	if (g_debugLog)    then env.info('group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  formation:' .. l_acFormation, false) end
 	if (g_debugScreen) then trigger.action.outText(' group:' .. l_aircraftData.name .. '  type:' .. l_acModel .. '  callsign:' .. l_acGroupName .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2] .. '  fullname:' .. l_acFullTextName .. '  spawn:' .. p_spawnIndex.name .. '  land:' .. p_landIndex.name .. '  altitude:' .. l_acFlightAlt .. '  speed:' .. l_acFlightSpeed, 10) end
 
 	g_RATtable[#g_RATtable+1] =
 		{
-			groupname      = l_acGroupName,
-			flightname     = l_acFullTextName,
-			actype         = l_acModel,
-			origin         = p_spawnIndex.name,
-			destination    = p_landIndex.name,
-			counter        = groupcounter,
+			groupName      = l_acGroupName,
+			flightName     = l_acFullTextName,
+			acModel        = l_acModel,
+			spawn          = p_spawnIndex.name,
+			land           = p_landIndex.name,
 			coalition      = p_coalitionIndex,
 			unitNames      = l_acUnitNames,
 			unitCheckTime  = l_acUnitCheckTime,
@@ -6285,8 +6284,8 @@ function f_removeGroup (p_index, p_message, p_destroyFlag, p_aircraftGroup)
 		end
 	end
 
-	if (g_debugLog) then env.info('group:' .. g_RATtable[p_index].groupname .. '  type:' .. g_RATtable[p_index].actype .. p_message .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
-	if (g_debugScreen) then trigger.action.outText('group:' .. g_RATtable[p_index].groupname .. '  type:' .. g_RATtable[p_index].actype .. p_message .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
+	if (g_debugLog) then env.info('group:' .. g_RATtable[p_index].groupName .. '  type:' .. g_RATtable[p_index].acModel .. p_message .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
+	if (g_debugScreen) then trigger.action.outText('group:' .. g_RATtable[p_index].groupName .. '  type:' .. g_RATtable[p_index].acModel .. p_message .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
 
 	table.remove(g_RATtable, p_index)	-- Group does not exist any longer for this script
 
@@ -6302,8 +6301,8 @@ function f_removeUnit (p_index, p_jndex, p_removeMessage, p_destroyFlag, p_aircr
 		g_numCoalitionAircraft[g_RATtable[p_index].coalition] = g_numCoalitionAircraft[g_RATtable[p_index].coalition] - 1
 	end
 
-	if (g_debugLog)    then env.info('unit:' .. g_RATtable[p_index].unitNames[p_jndex] .. '  type:' .. g_RATtable[p_index].actype .. p_removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
-	if (g_debugScreen) then trigger.action.outText('unit:' .. g_RATtable[p_index].unitNames[p_jndex] .. '  type:' .. g_RATtable[p_index].actype .. p_removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
+	if (g_debugLog)    then env.info('unit:' .. g_RATtable[p_index].unitNames[p_jndex] .. '  type:' .. g_RATtable[p_index].acModel .. p_removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], false) end
+	if (g_debugScreen) then trigger.action.outText('unit:' .. g_RATtable[p_index].unitNames[p_jndex] .. '  type:' .. g_RATtable[p_index].acModel .. p_removeMessage .. '  #red:' .. g_numCoalitionAircraft[1] .. '  #blue:' .. g_numCoalitionAircraft[2], 20) end
 
 	table.remove(g_RATtable[p_index].unitNames, p_jndex)		-- Unit does not exist any longer for this script
 	table.remove(g_RATtable[p_index].unitCheckTime, p_jndex)	-- Unit does not exist any longer for this script
@@ -6329,7 +6328,7 @@ function f_checkStatus()
 
 		while ((l_index <= l_RATtableLimit) and (l_RATtableLimit > 0))
 		do
-			local l_currentAircraftGroup = Group.getByName(g_RATtable[l_index].groupname)
+			local l_currentAircraftGroup = Group.getByName(g_RATtable[l_index].groupName)
 
 			if (l_currentAircraftGroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
 				if (g_RATtable[l_index].groupCheckTime > 0) then		-- Have we checked this group yet? (should have spawned by now)
