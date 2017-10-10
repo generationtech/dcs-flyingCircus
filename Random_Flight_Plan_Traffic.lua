@@ -34,15 +34,15 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( maxCoalitionAircraft{} must be equal for #3 to work)		--check
-spawnIntervalLow = 15							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
+spawnIntervalLow = 30							-- Random spawn low end repeat interval		--check
+spawnIntervalHigh = 60							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
 minGroupSize = 1								-- Minimum number of groups for those units supporting formations
 maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {80000, 80000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
+waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
@@ -216,7 +216,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[6] = {52, 1, 2, 3},			-- MiG-29A
 				[7] = {54, 1, 2, 3},			-- MiG-29S
 				[8] = {56, 1, 2, 3, 29, 30},	-- P-51D
-				[9] = {57, 1, 2, 3, 4, 50},		-- Su-27
+				[9] = {57, 1, 2, 3, 4, 5},		-- Su-27
 			},
 		[5] = -- Helicopter
 			{	-- Aircraft, skins
