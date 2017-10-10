@@ -40,16 +40,16 @@ checkInterval = 20								-- How frequently to check dynamic AI groups status (e
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
 minGroupSize = 1								-- Minimum number of groups for those units supporting formations
-maxCoalitionAircraft = {8, 8}					-- Maximum number of red, blue units
+maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {50000, 50000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
+waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 15									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-lowFuelPercent = 0.10							-- If randomizing fuel, the low end percent		--check
-highFuelPercent = 0.25							-- If randomizing fuel, the high end percent		--check
+lowFuelPercent = 0.25							-- If randomizing fuel, the low end percent		--check
+highFuelPercent = 0.50							-- If randomizing fuel, the high end percent		--check
 parkingSpotType =
 	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 		"TakeOffParking", "From Parking Area",
