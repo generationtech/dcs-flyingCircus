@@ -35,15 +35,15 @@ g_minDamagedHeight     = 20			-- Minimum height to start checking for g_minDamag
 
 --AIRCRAFT CONFIGURATIONS
 g_flagRandomFuel       = true		-- Random fuel loadout?
-g_lowFuelPercent       = 0.25		-- If randomizing fuel, the low end percent
-g_highFuelPercent      = 0.40		-- If randomizing fuel, the high end percent
+g_lowFuelPercent       = 0.50		-- If randomizing fuel, the low end percent
+g_highFuelPercent      = 1.00		-- If randomizing fuel, the high end percent
 
 g_flagRandomWeapons    = true		-- Add weapons to aircraft?
 
 g_flagRandomSkins      = true		-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
 
-g_flagRandomSkill      = true		-- Randomize AI pilot skill level
-g_unitSkillDefault     = 3			-- Default unit skill if not using randomize unitSkill[g_unitSkillDefault]
+g_flagRandomSkill      = false		-- Randomize AI pilot skill level
+g_unitSkillDefault     = 4			-- Default unit skill if not using randomize unitSkill[g_unitSkillDefault]
 g_unitSkill            = 			-- List of possible skill levels for AI units
 						{
 							"Average",
@@ -115,9 +115,8 @@ g_spawnType           =
 								{"TakeOffParking", "From Parking Area"},
 								{"TakeOffParkingHot", "From Parking Area Hot"},
 								{"TakeOff", "From Runway"},
-								{"Turning Point", "Fly Over Point"},	-- Favor in-air start
-								{"Turning Point", "Fly Over Point"},	-- Favor in-air start
-						--		{"Turning Point", "Turning Point"},
+								{"Turning Point", "Fly Over Point"},
+								{"Turning Point", "Turning Point"},
 							}
 
 
@@ -6595,4 +6594,5 @@ env.info("Dynamic AI group spawn script loaded.", false)
 timer.scheduleFunction(f_generateGroup, nil, timer.getTime() + g_spawnInterval)
 mist.scheduleFunction(f_checkStatus, {}, timer.getTime() + 4, g_checkInterval)
 env.info("Dynamic AI group spawn script running.", false)
+
 end
