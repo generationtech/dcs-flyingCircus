@@ -6147,4 +6147,5 @@ env.info("Dynamic AI group spawn script loaded.", false)
 timer.scheduleFunction(generateGroup, nil, timer.getTime() + spawnInterval)
 Checktimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, checkInterval)
 env.info("Dynamic AI group spawn script running.", false)
+
 end
