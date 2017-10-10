@@ -27,7 +27,7 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(1,6) --random for utility airplane, bomber, attack, fighter, or helicopter
+	AircraftType = math.random(5,6) --random for utility airplane, bomber, attack, fighter, or helicopter
 
 	if ((AircraftType >= 1) and (AircraftType <= 3)) then  -- UTILITY AIRCRAFT
 		if (coalitionIndex == 1) then
