@@ -161,7 +161,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -194,13 +194,15 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {48, 1},					-- MiG-15bis
+				[3] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -233,14 +235,25 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1]  = {38, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},	-- F-14A
+				[2]  = {39, 1, 2, 3, 4, 5, 6, 7, 8},		-- F-15C
+				[3]  = {40, 1},								-- F-16A
+				[4]  = {41, 1, 2, 3, 4, 5, 6, 7, 8},		-- F-16C bl.52d
+				[5]  = {44, 1, 2, 3, 4, 5, 6, 7, 8, 9},		-- F-5E
+				[6]  = {45, 1},								-- F-86F Sabre
+				[7]  = {46, 2, 3, 4, 5},					-- F/A-18C
+				[8]  = {47, 1},								-- FW-190D9
+				[9]  = {48, 1},								-- MiG-15bis
+				[10] = {49, 1, 2, 3, 4, 5, 6},				-- MiG-21Bis
+				[0] = {0, 0},								--
+				[0] = {0, 0},								--
+				[0] = {0, 0},								--
+				[0] = {0, 0},								--
+				[0] = {0, 0},								--
+				[0] = {0, 0},								--
+				[0] = {0, 0},								--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -268,7 +281,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -291,13 +304,16 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {47, 8},					-- FW-190D9
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -319,13 +335,16 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {48, 1},					-- MiG-15bis
+				[3] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -346,14 +365,19 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {37, 1, 2, 3, 4, 5, 6, 7},	-- Bf-109K-4
+				[2] = {43, 2},						-- F-4E
+				[3] = {45, 1},						-- F-86F Sabre
+				[4] = {47, 2, 3, 4, 5, 6, 7},		-- FW-190D9
+				[5] = {48, 1},						-- MiG-15bis
+				[6] = {49, 1, 2, 3, 4, 5, 6},		-- MiG-21Bis
+				[0] = {0, 0},						--
+				[0] = {0, 0},						--
+				[0] = {0, 0},						--
+				[0] = {0, 0},						--
+				[0] = {0, 0},						--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -375,13 +399,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {46, 1},					-- F/A-18C
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -403,13 +431,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {46, 1},					-- F/A-18C
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -431,14 +463,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {42, 5, 6},				-- F-16A MLU
+				[2] = {45, 1},					-- F-86F Sabre
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -460,13 +495,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {42, 1},					-- F-16A MLU
+				[2] = {45, 1},					-- F-86F Sabre
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -488,13 +527,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {42, 3, 4},				-- F-16A MLU
+				[2] = {45, 1},					-- F-86F Sabre
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -516,13 +559,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {42, 2},					-- F-16A MLU
+				[2] = {45, 1},					-- F-86F Sabre
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -545,14 +592,20 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {39, 9},					-- F-15C
+				[2] = {41, 9},					-- F-16C bl.52d
+				[3] = {43, 1},					-- F-4E
+				[4] = {45, 1},					-- F-86F Sabre
+				[5] = {48, 1},					-- MiG-15bis
+				[6] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -577,13 +630,16 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {48, 1},					-- MiG-15bis
+				[3] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -616,7 +672,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -641,7 +697,7 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 				[0] = {0, 0},			--
 				[0] = {0, 0},			--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -662,13 +718,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {42, 2},					-- F-16A MLU
+				[2] = {45, 1},					-- F-86F Sabre
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -688,14 +748,17 @@ coalitionTable = 	-- Big matrix mapping all countries to their aircraft and skin
 			},
 		[4] = -- Fighter
 			{	-- Aircraft, skins
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
-				[0] = {0, 0},			--
+				[1] = {45, 1},					-- F-86F Sabre
+				[2] = {46, 6},					-- F/A-18C
+				[3] = {48, 1},					-- MiG-15bis
+				[4] = {49, 1, 2, 3, 4, 5, 6},	-- MiG-21Bis
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
+				[0] = {0, 0},					--
 			},
-		[5] = -- Helocopter
+		[5] = -- Helicopter
 			{	-- Aircraft, skins
 				[0] = {0, 0},			--
 			},
@@ -2641,280 +2704,1097 @@ aircraftTable =
 				"Flight Research Institute  VVS",
 			},
 		},
-	[37] =
+	[37] =								-- Bf-109K-4
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "Bf-109K-4",
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "SC_501_SC500",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "296",
+				["flare"] = 0,
+				["chaff"] = 0,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"Bf-109 K4 1.NJG  11",
+				"Bf-109 K4 330xxx batch",
+				"Bf-109 K4 334xxx batch",
+				"Bf-109 K4 335xxx batch",
+				"Bf-109 K4 9.JG27 (W10+I)",
+				"Germany_standard",
+				"Bf-109 K4 Jagdgeschwader 53",
 			},
 		},
-	[38] =
+	[38] =								-- F-14A
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-14A",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{82364E69-5564-4043-A866-E13032926C3E}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{7575BA0B-7294-4844-857B-031A144B2595}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{82364E69-5564-4043-A866-E13032926C3E}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[12] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "7348",
+				["flare"] = 15,
+				["chaff"] = 30,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"black demo scheme",
+				"vf-1 `wolfpack`",
+				"vf-33 `starfighters`",
+				"vf-41 `black aces`",
+				"vf-84 `jolly rogers`",		--5
+				"vf-111 `sundowners`- 1",
+				"vf-111 `sundowners`- 2",
+				"vf-142 `ghost riders`",
+				"vf-143 `pukin's dogs`",
+				"vf-xxx `aardvarks`",		--10
 			},
 		},
-	[39] =
+	[39] =								-- F-15C
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-15C",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{6FBCDCD7-F984-4202-84A7-15173E02CC5B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{446E122B-8E9D-457e-AE8E-7AE88E3E566B}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{DA8F810A-EA40-4091-8127-CC2E026041E7}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{9701DB51-AECB-42c6-A4F6-D5D8793E4D81}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{E1F29B21-F291-4589-9FD8-3272EEC69506}",
+					},
+					[11] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "6103",
+				["flare"] = 60,
+				["chaff"] = 120,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"19th Fighter SQN (AK)",
+				"58th Fighter SQN (EG)",
+				"65th Agressor SQN (WA) Flanker",
+				"65th Agressor SQN (WA) MiG",
+				"65th Agressor SQN (WA) SUPER_Flanker",		--5
+				"390th Fighter SQN",
+				"493rd Fighter SQN (LN)",
+				"Ferris Scheme",
+				"106th SQN (8th Airbase)",					--9
 			},
 		},
-	[40] =
+	[40] =								-- F-16A
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-16A",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{8A0BE8AE-58D4-4572-9263-3144C0D06364}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "3104",
+				["flare"] = 30,
+				["chaff"] = 60,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"usaf f16 standard-1",
 			},
 		},
-	[41] =
+	[41] =								-- F-16C bl.52d
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-16C bl.52d",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{8A0BE8AE-58D4-4572-9263-3144C0D06364}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{444BA8AE-82A7-4345-842E-76154EFCCA46}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "3104",
+				["flare"] = 45,
+				["chaff"] = 90,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"pacaf 14th fs (mj) misawa afb",
+				"pacaf 35th fw (ww) misawa afb",
+				"usaf 77th fs (sw) shaw afb",
+				"usaf 147th fig (ef) ellington afb",
+				"usaf 412th tw (ed) edwards afb",
+				"usaf 414th cts (wa) nellis afb",
+				"usafe 22nd fs (sp) spangdahlem afb",
+				"usafe 555th fs (av) aviano afb",
+				"idf_af f16c standard",
 			},
 		},
-	[42] =
+	[42] =								-- F-16A MLU
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-16A MLU",
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{CAAC1CFD-6745-416B-AFA4-CB57414856D0}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "3104",
+				["flare"] = 30,
+				["chaff"] = 60,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"2nd squadron `comet` florennes ab",
+				"rdaf f16 standard-1",
+				"norway 338 skvadron",
+				"norway skv338",
+				"the netherlands (313th squadron `` twenthe ab)",
+				"the netherlands 313th `tigers` squadron",
+--				"CMD extended skins",
 			},
 		},
-	[43] =
+	[43] =								-- F-4E
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-4E",
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{7B4B122D-C12C-4DB4-834E-4D8BB4D863A8}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{9DDF5297-94B9-42FC-A45E-6E316121CD85}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{9DDF5297-94B9-42FC-A45E-6E316121CD85}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{7B4B122D-C12C-4DB4-834E-4D8BB4D863A8}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "4864",
+				["flare"] = 30,
+				["chaff"] = 60,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"",
+				"af standard",
 			},
 		},
-	[44] =
+	[44] =								-- F-5E
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-5E",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{A021F29D-18AB-4d3e-985C-FC9C60E35E9E}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{BCE4E030-38E9-423E-98ED-24BE3DA87C32}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "2000",
+				["flare"] = 15,
+				["chaff"] = 30,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"`green` paint scheme",
+				"aggressor `desert` scheme",
+				"aggressor `frog` scheme2",
+				"aggressor `new blue ` scheme",
+				"aggressor `new ghost ` scheme1",
+				"aggressor `new ghost ` scheme2",
+				"aggressor `old blue ` scheme",
+				"aggressor `sand` scheme",
+				"aggressor `snake` scheme"
 			},
 		},
-	[45] =
+	[45] =								-- F-86F Sabre
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F-86F Sabre",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{HVARx2}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{HVARx2}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{PTB_120_F86F35}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{GAR-8}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{GAR-8}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{PTB_120_F86F35}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{HVARx2}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{HVARx2}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "1282",
+				["flare"] = 0,
+				["chaff"] = 0,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"",
 			},
 		},
-	[46] =
+	[46] =								-- F/A-18C
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "F/A-18C",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
+					[2] =
+					{
+						["CLSID"] = "LAU_117_AGM_65G",
+					},
+					[3] =
+					{
+						["CLSID"] = "{60CC734F-0AFA-4E2E-82B8-93B941AB11CF}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{EFEC8201-B922-11d7-9897-000476191836}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{40EF17B7-F508-45de-8566-6FFECC0C1AB8}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{BRU-42_3*Mk-82AIR}",
+					},
+					[8] =
+					{
+						["CLSID"] = "LAU_117_AGM_65G",
+					},
+					[9] =
+					{
+						["CLSID"] = "{9BFD8C90-F7AE-4e90-833B-BFD0CED0E536}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "6531",
+				["flare"] = 15,
+				["chaff"] = 30,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"",
+				"NSAWC_25",
+				"NSAWC_44",
+				"VFA-94",
+				"VFC-12",
+				"Australia 75 Sqn RAAF",
 			},
 		},
-	[47] =
+	[47] =								-- FW-190D9
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "FW-190D9",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "ER_4_SC50",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "388",
+				["flare"] = 0,
+				["chaff"] = 0,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"FW-190D9_USA",
+				"FW-190D9_13.JG 51_Heinz Marquardt",
+				"FW-190D9_IV.JG 26_Hans Dortenmann",
+				"FW-190D9_Black 4 of Stab IIJG 6",
+				"FW-190D9_JG54",
+				"FW-190D9_5JG301",
+				"FW-190D9_Red",
+				"FW-190D9_GB",
 			},
 		},
-	[48] =
+	[48] =								-- MiG-15bis
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "MiG-15bis",
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[1] =
+					{
+						["CLSID"] = "FAB_100M",
+					},
+					[2] =
+					{
+						["CLSID"] = "FAB_100M",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "1172",
+				["flare"] = 0,
+				["chaff"] = 0,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"",
 			},
 		},
-	[49] =
+	[49] =								-- MiG-21Bis
 		{
-			_aircrafttype = "An-26B",
+			_aircrafttype = "MiG-21Bis",
+
+			_task = "CAP"
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			}
 
 			_payload =
 			{
 				["pylons"] =
 				{
+					[2] =
+					{
+						["CLSID"] = "{R-3R}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{SPS-141-100}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{R-3R}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{R-60M 2R}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{SPRD}",
+					},
 				},
-				["fuel"] = "5500",
-				["flare"] = 384,
-				["chaff"] = 384,
+				["fuel"] = "2280",
+				["flare"] = 32,
+				["chaff"] = 32,
 				["gun"] = 100,
 			},
 
 			_skins =
 			{
-				"Georgian AF",
-				"Ukraine AF",
+				"32nd FG - Northeria",
+				"101FS - Serbia",
+				"Factory Test",
+				"HavLLv 31 - Finland",
+				"VVS Camo",
+				"VVS Grey",
 			},
 		},
 	[50] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[51] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[52] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[53] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[54] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[55] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[56] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[57] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[58] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[59] =
+		{
+			_aircrafttype = "An-26B",
+
+			_payload =
+			{
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
+			},
+
+			_skins =
+			{
+				"Georgian AF",
+				"Ukraine AF",
+			},
+		},
+	[60] =
 		{
 			_aircrafttype = "An-26B",
 
