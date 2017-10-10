@@ -6297,25 +6297,27 @@ function f_checkStatus()
 
 				while ((l_jndex <= l_unitNamesLimit) and (l_unitNamesLimit > 0))
 				do
-					local currentunitname = g_RATtable[l_index].unitNames[l_jndex]
-					if (Unit.getByName(currentunitname) ~= nil) then -- Valid, active unit
-						local actualunit = Unit.getByName(currentunitname)
-						local actualunitvel = actualunit:getVelocity()
-						local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
+					local l_currentUnitName = g_RATtable[l_index].unitNames[l_jndex]
+
+					if (Unit.getByName(l_currentUnitName) ~= nil) then -- Valid, active unit
+						local l_actualUnit = Unit.getByName(l_currentUnitName)
+						local l_actualUnitVel = l_actualUnit:getVelocity()
+						local l_absactualUnitVel = math.abs(l_actualUnitVel.x) + math.abs(l_actualUnitVel.y) + math.abs(l_actualUnitVel.z)
 
 					-- Check for unit movement
-						if absactualunitvel > 2 then
+						if l_absactualUnitVel > 2 then
 							g_RATtable[l_index].unitCheckTime[l_jndex] = 0 -- If it's moving, reset checktime
 						else
 							g_RATtable[l_index].unitCheckTime[l_jndex] = g_RATtable[l_index].unitCheckTime[l_jndex] + 1
 						end
 
-						local actualunitpos = actualunit:getPosition().p
-						local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-						local lowerstatuslimit = g_minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
+						local l_actualUnitPos = l_actualUnit:getPosition().p
+						local l_actualUnitHeight = l_actualUnitPos.y - land.getHeight({x = l_actualUnitPos.x, y = l_actualUnitPos.z})
+						local l_lowerStatusLimit = g_minDamagedLife * l_actualUnit:getLife0() -- Was 0.95. changed to 0.10
+
 					-- Check for wandering
-						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-							if f_removeUnit(l_index, l_jndex, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
+						if ((l_actualUnitPos.x > 100000) or (l_actualUnitPos.x < -500000) or (l_actualUnitPos.z > 1100000) or (l_actualUnitPos.z < 200000)) then
+							if f_removeUnit(l_index, l_jndex, '  removed due to wandering', true, l_actualUnit) then -- If true, then there are no more units in this group
 								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 								l_RATtableLimit = l_RATtableLimit - 1
 								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
@@ -6325,8 +6327,8 @@ function f_checkStatus()
 							l_unitNamesLimit = l_unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- Check for below ground level
-						elseif (actualunitheight < 0) then
-							if f_removeUnit(l_index, l_jndex, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
+						elseif (l_actualUnitHeight < 0) then
+							if f_removeUnit(l_index, l_jndex, '  removed due to being below ground level', true, l_actualUnit) then -- If true, then there are no more units in this group
 								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 								l_RATtableLimit = l_RATtableLimit - 1
 								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
@@ -6336,8 +6338,8 @@ function f_checkStatus()
 								l_unitNamesLimit = l_unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- check for damaged unit
-						elseif ((actualunitheight < g_minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
-							if f_removeUnit(l_index, l_jndex, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
+						elseif ((l_actualUnitHeight < g_minDamagedHeight) and (l_actualUnit:getLife() <= l_lowerStatusLimit)) then
+							if f_removeUnit(l_index, l_jndex, '  removed due to damage', true, l_actualUnit) then -- If true, then there are no more units in this group
 								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 								l_RATtableLimit = l_RATtableLimit - 1
 								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
@@ -6348,7 +6350,7 @@ function f_checkStatus()
 							end
 					-- Check for stuck
 						elseif (g_RATtable[l_index].unitCheckTime[l_jndex] > g_waitTime) then
-							if f_removeUnit(l_index, l_jndex, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
+							if f_removeUnit(l_index, l_jndex, '  removed due to low speed', true, l_actualUnit) then -- If true, then there are no more units in this group
 								f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 							end
 							-- Lets exit the function for this cycle because an aircraft was removed.
@@ -6359,7 +6361,7 @@ function f_checkStatus()
 						end
 					else
 					-- Unit removed by sim
-						if f_removeUnit(l_index, l_jndex, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
+						if f_removeUnit(l_index, l_jndex, '  removed by sim, not script', false, l_actualUnit) then -- If true, then there are no more units in this group
 							f_removeGroup(l_index, '  removed, no more units', true, l_currentAircraftGroup)
 							l_RATtableLimit = l_RATtableLimit - 1
 							l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
