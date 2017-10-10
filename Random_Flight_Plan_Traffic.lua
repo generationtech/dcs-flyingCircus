@@ -9,7 +9,7 @@ do
 --FLAGS
 flgRandomFuel = true				-- Random fuel loadout?		--check
 flagRandomWeapons = true			-- Add weapons to aircraft?		--check
-flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
+flagRandomWaypoint = false			-- Create intermediate waypoint?		--check
 flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?		--check
 flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
 flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
@@ -18,6 +18,7 @@ flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitud
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
 flgRandomParkingType = true			-- Randomize type of parking spot for spawn location		--check
 flgRandomGroupSize = true			-- Randomize group size, if applicable
+flgRandomFormation = true			-- Randomize formations in multiple unit groups, else use default formation value
 
 --DEBUG
 debugLog = true		-- write entries to the log		--check
@@ -25,12 +26,12 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 randomCoalitionSpawn = 3						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)		--check
-spawnIntervalLow = 10							-- Random spawn low end repeat interval		--check
+spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
 spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
-aircraftDistribution = {20, 30, 40, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftDistribution = {1, 2, 3, 49, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
-maxCoalition = {2, 2}							-- Maximum number of red, blue units		--check
+maxCoalition = {2, 0}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
@@ -38,130 +39,94 @@ minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDa
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
 defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
-parkingSpotType = {								-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
-	"TakeOffParking", "From Parking Area",
-	"TakeOffParkingHot", "From Parking Area Hot",
-	"TakeOff", "From Runway",
-	"Turning Point", "Turning Point",
-	"Turning Point", "Turning Point"			-- Favor in-air start
-}
+parkingSpotType =
+	{											-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
+		"TakeOffParking", "From Parking Area",
+		"TakeOffParkingHot", "From Parking Area Hot",
+		"TakeOff", "From Runway",
+		"Turning Point", "Turning Point",
+		"Turning Point", "Turning Point"		-- Favor in-air start
+	}
 spawnSpeedTurningPoint = 120					-- When spawning in the air as turning point, starting speed		--check
+defaultAirplaneFormation = 1					-- When not randomizing formations, the default airplane formation #
+defaultHelicopterFormation = 1					-- When not randomizing formations, the default helicopter formation #
+unitSkill = 									-- List of possible skill levels for AI units
+	{
+		"Average",
+		"Good",
+		"High",
+		"Excellent",
+		"Random"
+	}
+airplaneFormation =													-- Airplane formations
+	{																-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
+		[1] = {"Line Abreast - Open", 2, 5, 1, 65538},
+		[2] = {"Line Abreast - Close", 1, 5, 1, 65537},
+		[3] = {"Trail - Open", 2, 5, 2, 131074},
+		[4] = {"Trail - Close", 1, 5, 2, 131073},
+		[5] = {"Wedge - Open", 2, 5, 3, 196610},
+		[6] = {"Wedge - Close", 1, 5, 3, 196609},
+		[7] = {"Echelon Right - Open", 2, 5, 4, 262146},
+		[8] = {"Echelon Right - Close", 1, 5, 4, 262145},
+		[9] = {"Echelon Left - Open", 2, 5, 5, 327682},
+		[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
+		[11] = {"Finger Four - Open", 2, 5, 6, 393218},
+		[12] = {"Finger Four - Close", 1, 5, 6, 393217},
+		[13] = {"Spread Four - Open", 2, 5, 7, 458754},
+		[14] = {"Spread Four - Close", 1, 5, 7, 458753}
+	}
+helicopterFormation =												-- Helicopter formations
+	{																-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
+		[1] = {"Wedge",	nil, nil, 5, 8, 8},
+		[2] = {"Right - interval 300", 1, 0, 5, 10, 655361},
+		[3] = {"Right - interval 600", 2, 0, 5, 10, 655362},
+		[4] = {"Left - interval 300", 1, 1, 5, 10, 655617},
+		[5] = {"Left - interval 600", 2, 1, 5, 10, 655618},
+		[6] = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
+		[7] = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
+		[8] = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
+		[9] = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
+		[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
+		[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
+		[12] = {"Column", nil, nil, 5, 11, 720896}
+	}
+
 
 -- Should be no need to edit these below
 RATtable = {}
 numCoalition = {0, 0}												-- Current number of active Red, Blue dynamic spawned units
 nameCoalition = {0, 0}												-- Highest coalition name used
 nameCallname = {}													-- List of radio callnames possible for that particular aircraft type
-unitSkill = {Average, Good, High, Excellent, Random}				-- List of possible skill levels for AI units
 generateID = 0														-- Function ID of scheduled function to create new AI units
 spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh)	-- Initial random spawn repeat interval
 AB = {}																-- Coalition AirBase table
 
-airplaneFormation =
-	{
-
-
-	}
-
-"TEST1 - Line Abreast - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 1,
-	["value"] = 65538,
-
-"TEST2 - Line Abreast - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 1,
-	["value"] = 65537,
-
-"TEST3 - Trail - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 2,
-	["value"] = 131074,
-
-"TEST4 - Trail - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 2,
-	["value"] = 131073,
-
-"TEST5 - Wedge - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 3,
-	["value"] = 196610,
-
-"TEST6 - Wedge - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 3,
-	["value"] = 196609,
-
-"TEST7 - Echelon Right - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 4,
-	["value"] = 262146,
-
-"TEST8 - Echelon Right - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 4,
-	["value"] = 262145,
-
-"TEST9 - Echelon Left - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 5,
-	["value"] = 327682,
-
-"TEST10 - Echelon Left - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 5,
-	["value"] = 327681,
-
-"TEST11 - Finger Four - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 6,
-	["value"] = 393218,
-
-"TEST12 - Finger Four - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 6,
-	["value"] = 393217,
-
-"TEST13 - Spread Four - Open"
-	["variantIndex"] = 2,
-	["name"] = 5,
-	["formationIndex"] = 7,
-	["value"] = 458754,
-
-"TEST14 - Spread Four - Close"
-	["variantIndex"] = 1,
-	["name"] = 5,
-	["formationIndex"] = 7,
-	["value"] = 458753,
-
-
-helicopterFormation =
-	{
-
-
-	}
-
-
 --env.setErrorMessageBoxEnabled(false)
+
+-- Build up sim callsign
+function makeCallSign(p_country, p_coalition, p_unit, p_nameCallName)
+	local f_callname
+	if ((p_country == country.id.RUSSIA) or (p_country == country.id.ABKHAZIA) or (p_country == country.id.SOUTH_OSETIA) or (p_country == country.id.UKRAINE)) then
+		f_callname = nameCoalition[p_coalition] .. p_unit
+	else
+		local a = math.random(1,#p_nameCallName)
+		local b = math.random(1,9)
+		f_callname =
+			{
+				[1] = a,
+				[2] = b,
+				[3] = 1,
+				["name"] = p_nameCallName[a] .. b .. p_unit,
+			}
+	end
+return f_callname
+end
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	_singleInFlight = false	-- Default to allowing multi-aircraft formations
-	_category = AIRPLANE -- Default to airplane type
+	_category = "AIRPLANE" -- Default to airplane type
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
 
 	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
@@ -171,7 +136,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			randomAirplane = math.random(1,13) -- random for airplane type; Blue AC 1-13
 		end
 
-		_category = AIRPLANE
+		_category = "AIRPLANE"
 
 		_task = ""
 		_tasks =
@@ -902,7 +867,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			randomBomber = math.random(1,10) -- random for airplane type; Blue AC 1-10
 		end
 
-		_category = AIRPLANE
+		_category = "AIRPLANE"
 
 		_task = ""
 		_tasks =
@@ -1691,7 +1656,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			randomAttack = math.random(1,8) -- random for airplane type; Blue AC 1-8
 		end
 
-		_category = AIRPLANE
+		_category = "AIRPLANE"
 
 		_task = "CAS"
 		_tasks =
@@ -3320,7 +3285,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			randomFighter = math.random(1,21) -- random for airplane type; Blue AC 1-21
 		end
 
-		_category = AIRPLANE
+		_category = "AIRPLANE"
 
 		_task = "CAP"
 		_tasks =
@@ -6557,7 +6522,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			randomHeli = math.random(1,14) -- random for airplane type; Blue AC 1-14
 		end
 
-		_category = HELICOPTER
+		_category = "HELICOPTER"
 
 		_task = ""
 		_tasks =
@@ -8277,28 +8242,14 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		_flightspeed = 180
 	end
 
-	-- Build up sim callsign
-	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
-		_callsign = nameCoalition[coalitionIndex] .. "1"
-	else
-		local a = math.random(1,#nameCallname)
-		local b = math.random(1,9)
-		_callsign = nameCallname[a] .. b .. "1"
-		_callname =
-			{
-				[1] = a,
-				[2] = b,
-				[3] = 1,
-				["name"] = _callsign,
-			}
-	end
-
 	if (flgRandomParkingType) then
 		local i = math.random(1, #parkingSpotType / 2)
 		_parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
 	else
 		_parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
 	end
+
+	_callname = makeCallSign(_country, coalitionIndex, 1, nameCallname)
 
 	_spawnairdromeId = spawnIndex.id
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
@@ -8342,34 +8293,64 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 
 	_groupname = nameP .. nameCoalition[coalitionIndex]
 
-	-- If later to create additional units for this group, set formation
+	--
+	local fname
+	--
+
+	-- If later to create additional units for this group, set formation based on aircraft type
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
-		if (#_tasks) then
-			_tasks[#_tasks+1] =
-			{
-				["number"] = #_tasks+1,
-				["auto"] = false,
-				["id"] = "WrappedAction",
-				["enabled"] = true,
-				["params"] =
+		local _params = {}
+		local _r
+		if (_category == "AIRPLANE") then
+			if (flgRandomFormation) then
+				_r = math.random(1, #airplaneFormation)
+			else
+				_r = defaultAirplaneFormation
+			end
+			_params =
 				{
-					["action"] =
-					{
-						["id"] = "Option",
-						["params"] =
-						{
-						-- 1 or 2
-							["variantIndex"] = 2,
-							["name"] = 5,
-						-- based on formation type and ac type
-							["formationIndex"] = 1,
-						-- try to just leave this out for now
-							["value"] = 65538,
-						},
-					},
-				},
-			}
+					["variantIndex"] = airplaneFormation[_r][2],
+					["name"] = airplaneFormation[_r][3],
+					["formationIndex"] = airplaneFormation[_r][4],
+					["value"] = airplaneFormation[_r][5]
+				}
+			--
+			fname = airplaneFormation[_r][1]
+			--
+		else
+			if (flgRandomFormation) then
+				_r = math.random(1, #helicopterFormation)
+			else
+				_r = defaultHelicopterFormation
+			end
+			_params =
+				{
+					["variantIndex"] = helicopterFormation[_r][2],
+					["zInverse"] = helicopterFormation[_r][3],
+					["name"] = helicopterFormation[_r][4],
+					["formationIndex"] = helicopterFormation[_r][5],
+					["value"] = helicopterFormation[_r][6]
+				}
+			--
+			fname = helicopterFormation[_r][1]
+			--
 		end
+
+		_tasks[#_tasks+1] =
+		{
+			["number"] = #_tasks+1,
+			["auto"] = false,
+			["id"] = "WrappedAction",
+			["enabled"] = true,
+			["params"] =
+			{
+				["action"] =
+				{
+					["id"] = "Option",
+					["params"] = _params,
+				},
+			},
+		}
 	end
 
 	_airplanedata =
@@ -8427,7 +8408,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 				["y"] = _spawnairplanepos.z,
 				["x"] = _spawnairplanepos.x,
                 ["heading"] = _spawnHeading,
-				["name"] =  _groupname.."1",
+				["name"] =  _groupname .. "-1",
 				["callsign"] = _callname,
 				["payload"] = _payload,
 				["speed"] = _spawnSpeed,
@@ -8438,7 +8419,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		},
 		["y"] = _spawnairplanepos.z,
 		["x"] = _spawnairplanepos.x,
-		["name"] =  _groupname,
+		["name"] = _groupname,
 		["communication"] = true,
 		["start_time"] = 0,
 		["frequency"] = 124,
@@ -8447,7 +8428,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	-- Create additional units for this group if applicable
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		if (maxGroupSize > 4) then maxGroupSize = 4 end
-		for i = 2, math.random(1, maxGroupSize) do
+--		for i = 2, math.random(1, maxGroupSize) do
+		for i = 2, math.random(maxGroupSize, maxGroupSize) do
 			_airplanedata.units[i] = _airplanedata.units[1]
 
 			-- Randomize unit skill if flag is set
@@ -8456,6 +8438,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			else
 				_airplanedata.units[i].skill = unitSkill[unitSkillDefault]
 			end
+
+			-- Make callsign specific to this unit
+			_airplanedata.units[i].callsign = makeCallSign(_country, coalitionIndex, i, nameCallname)
+
+			-- Unit specific name
+			_airplanedata.units[i].name = _groupname .. "-" .. i
 		end
 	end
 
@@ -8559,18 +8547,19 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		}
 	end
 
-	if (_category == HELICOPTER) then
+	if (_category == "HELICOPTER") then
 		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
 	else
 		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
 	end
 
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callname.name .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
-	if (debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. fname, false) end
+	if (debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callname.name .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
 	{
@@ -8768,7 +8757,7 @@ function generateGroup()
 		if (flgSpawn[i] == true) then
 			if checkMax(i) then
 				airbase = makeAirBase(i)
-				generateAirplane(i, airbase[i], airbase[i], NamePrefix[i])
+				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
 			end
 		end
 	end
