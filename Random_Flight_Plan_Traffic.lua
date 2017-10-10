@@ -20,11 +20,11 @@ g_debugLog             = 1			-- 0: no log file messages, 1: informational, 2: ve
 g_debugScreen          = true		-- write messages to screen
 
 --GENERAL PARAMETERS
-g_spawnIntervalLow     = 45			-- Random spawn low end repeat interval
-g_spawnIntervalHigh    = 90			-- Random spawn high end repeat interval
-g_maxCoalitionAircraft = {40, 40}	-- Maximum number of red, blue units
+g_spawnIntervalLow     = 30			-- Random spawn low end repeat interval
+g_spawnIntervalHigh    = 60			-- Random spawn high end repeat interval
+g_maxCoalitionAircraft = {20, 20}	-- Maximum number of red, blue units
 g_randomCoalitionSpawn = 3			-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( g_maxCoalitionAircraft{} must be equal for #3 to work)
-g_aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
+g_aircraftDistribution = {10, 5, 20, 100, 20}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
 g_namePrefix           = {"Red-", "Blue-"}		-- Prefix to use for naming groups
 
 --STUCK CONDITION CHECKING
@@ -42,7 +42,7 @@ g_flagRandomWeapons    = true		-- Add weapons to aircraft?
 
 g_flagRandomSkins      = true		-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
 
-g_flagRandomSkill      = false		-- Randomize AI pilot skill level
+g_flagRandomSkill      = true		-- Randomize AI pilot skill level
 g_unitSkillDefault     = 4			-- Default unit skill if not using randomize unitSkill[g_unitSkillDefault]
 g_unitSkill            = 			-- List of possible skill levels for AI units
 						{
