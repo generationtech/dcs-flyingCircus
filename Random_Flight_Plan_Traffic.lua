@@ -2,9 +2,11 @@
 -- In the ME, just designate each coalition airbase assignment on the ME airbase object, not with target zones
 
 do
+--
 --EDIT BELOW
+--
+
 --FLAGS
-flgRandomCoalitionSpawn = true		-- Random sequence of Red/Blue coalition spawning or always spawn 1 each Red/Blue side?
 flgRandomFuel = true				-- Random fuel loadout?		--check
 flagRandomWeapons = true			-- Add weapons to aircraft?		--check
 flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
@@ -14,42 +16,43 @@ flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise jus
 flgRandomSkill = true				-- Randomize AI pilot skill level		--check
 flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
 flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
-flgRandomParkingType = true			-- Randomize type of parking spot for spawn location
+flgRandomParkingType = true			-- Randomize type of parking spot for spawn location		--check
 
 --DEBUG
 debugLog = true		-- write entries to the log		--check
 debugScreen = true	-- write messages to screen		--check
 
 --RANGES
-spawnIntervalLow = 10							-- Random spawn low end repeat interval
-spawnIntervalHigh = 60							-- Random spawn high end repeat interval
-checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)
-aircraftDistribution = {20, 40, 60, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+randomCoalitionSpawn = 1						-- Coalition spawn style (1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition)
+spawnIntervalLow = 10							-- Random spawn low end repeat interval		--check
+spawnIntervalHigh = 10							-- Random spawn high end repeat interval		--check
+checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
+aircraftDistribution = {20, 30, 50, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
 maxCoalition = {20, 20}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
+waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
 unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]		--check
-defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]
-parkingSpotType = {								-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)
+defaultParkingSpotType = 4						-- If not randomizing spawn parking spot, which one should be used as default parkingSpotType[?/2+1]		--check
+parkingSpotType = {								-- List of waypoint styles used for spawn point (2 entries for each, one type and one for action)		--check
 	"TakeOffParking", "From Parking Area",
 	"TakeOffParkingHot", "From Parking Area Hot",
 	"TakeOff", "From Runway",
 	"Turning Point", "Turning Point",
 	"Turning Point", "Turning Point"			-- Favor in-air start
 }
-spawnSpeedTurningPoint = 120					-- When spawning in the air as turning point, starting speed
+spawnSpeedTurningPoint = 110					-- When spawning in the air as turning point, starting speed		--check
 
 -- Should be no need to edit these below
 RATtable = {}
-numCoalition = {0, 0}							-- Current number of active Red, Blue dynamic spawned units
-nameCoalition = {0, 0}							-- Highest coalition name used
-nameCallname = {}								-- List of radio callnames possible for that particular aircraft type
-unitSkill = {Average, Good, High, Excellent, Random}	-- List of possible skill levels for AI units
-generateID = 0										-- Function ID of scheduled function to create new AI units
+numCoalition = {0, 0}												-- Current number of active Red, Blue dynamic spawned units
+nameCoalition = {0, 0}												-- Highest coalition name used
+nameCallname = {}													-- List of radio callnames possible for that particular aircraft type
+unitSkill = {Average, Good, High, Excellent, Random}				-- List of possible skill levels for AI units
+generateID = 0														-- Function ID of scheduled function to create new AI units
 spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh)	-- Initial random spawn repeat interval
 
 --env.setErrorMessageBoxEnabled(false)
@@ -8520,19 +8523,19 @@ function generateGroup()
 		return
 	end
 
-	coalitionSide = math.random(lowVal, highVal)  -- Choose which side to spawn unit this time
+	if (randomCoalitionSpawn == 1) then
+		coalitionSide = math.random(lowVal, highVal)  -- Choose which side to spawn unit this time
+	else
+		if (numCoalition[1] != numCoalition[2]) then
+
+		end
+
+	end
 
 	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- Is ok to spawn a new unit?
 
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
 		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
-
-		if (flgRandomParkingType) then
-			local i = math.random(1, #parkingSpotType / 2)
-			parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
-		else
-			parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
-		end
 
 		if (coalitionSide == 1) then
 			airbaseSpawn = chooseAirbase(redAF)
@@ -8552,6 +8555,13 @@ function generateGroup()
 					airbaseLand = chooseAirbase(blueAF)
 				end
 			end
+		end
+
+		if (flgRandomParkingType) then
+			local i = math.random(1, #parkingSpotType / 2)
+			parkingType = {parkingSpotType[i*2-1], parkingSpotType[i*2]}
+		else
+			parkingType = {parkingSpotType[defaultParkingSpotType*2-1], parkingSpotType[defaultParkingSpotType*2]}
 		end
 
 		-- Create new aircraft
