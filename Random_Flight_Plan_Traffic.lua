@@ -4,20 +4,20 @@
 do
 --EDIT BELOW
 --FLAGS
-flgRandomCoalitionSpawn = 1		-- Random sequence of Red/Blue coalition spawning?
-flgRandomFuel = 1				-- Random fuel loadout?
-flagRandomWeapons = 1			-- Add weapons to aircraft?
-flagRandomWaypoint = 1			-- Create intermediate waypoint?
-flgAllowSpawnLandingAirbase = 1	-- Allow spawning airbase and landing airbase to be the same?
-flgSetTasks = 1					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)
-flgRandomSkins = 1				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
-flgRansomSkill = 1				-- Randomize AI pilot skill level
-flgRandomAltitude = 1			-- Randomize altitude (otherwise use standard altitude per aircraft type)
-flgRandomSpeed = 1				-- Randomize altitude (otherwise use standard speed per aircraft type)
+flgRandomCoalitionSpawn = true		-- Random sequence of Red/Blue coalition spawning?
+flgRandomFuel = true				-- Random fuel loadout?		--check
+flagRandomWeapons = true			-- Add weapons to aircraft?		--check
+flagRandomWaypoint = true			-- Create intermediate waypoint?
+flgAllowSpawnLandingAirbase = true	-- Allow spawning airbase and landing airbase to be the same?
+flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
+flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
+flgRandomSkill = true				-- Randomize AI pilot skill level		--check
+flgRandomAltitude = true			-- Randomize altitude (otherwise use standard altitude per aircraft type)		--check
+flgRandomSpeed = true				-- Randomize altitude (otherwise use standard speed per aircraft type)		--check
 
 --DEBUG
-debugLog = 1	-- write entries to the log		--check
-debugScreen = 1	-- write messages to screen		--check
+debugLog = true		-- write entries to the log		--check
+debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 intervall = math.random(30,30)					-- Random spawn repeat interval
@@ -26,16 +26,17 @@ maxGroupSize = 4								-- Maximum number of groups for those units supporting f
 maxCoalition = {25, 25}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
 numCoalition = {0, 0}							-- Number of active Red, Blue dynamic spawned units		--check
-waypointRange = {3000, 3000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
-waitTime = 20									-- Amount to time to wait before considering aircraft to be parked or stuck
-minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight
-minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife
-
+waypointRange = {10000, 10000}					-- Maximum x,y of where to place intermediate waypoint between takeoff and landing		--check
+waitTime = 20									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
+minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
+minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
+unitSkillDefault = 3							-- Default unit skill if not using randomize unitSkill[unitSkillDefault]
 
 -- Should be no need to edit these below
 RATtable = {}
 nameCoalition = {0, 0} -- highest coalition name used
 nameCallname = {}
+unitSkill = {Average, Good, High, Excellent, Random}
 
 --env.setErrorMessageBoxEnabled(false)
 
@@ -8098,7 +8099,61 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		end
 	end
 
-	_payload.fuel = math.random(_payload.fuel * 0.1, _payload.fuel)
+	-- Randomize the fuel load
+	if (flgRandomFuel) then
+		_payload.fuel = math.random(_payload.fuel * 0.1, _payload.fuel)
+	end
+
+	-- Ignore tasks is flag not set
+	if (not flgSetTasks) then
+		_task = ""
+		_tasks =
+		{
+		}
+	end
+
+	-- Ignore weapons is flag not set
+	if (not flagRandomWeapons) then
+		_payload.pylons = {}
+	end
+
+	-- Randomize unit skill if flag is set
+	if (flgRandomSkill) then
+		_skill = unitSkill[math.random(1,#unitSkill)]
+	else
+		_skill = unitSkill[unitSkillDefault]
+	end
+
+	-- Randomize altitude is flag is set
+	if (flgRandomAltitude) then
+		_flightalt = math.random(0,10000)
+	else
+		_flightalt = 2500
+	end
+
+	-- Randomize speed is flag is set
+	if (flgRandomSpeed) then
+		_flightspeed = math.random(100,1000)
+	else
+		_flightspeed = 180
+	end
+
+	-- Build up sim callsign
+	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
+		_callsign = nameCoalition[coalitionIndex] .. "1"
+	else
+		local a = math.random(1,#nameCallname)
+		local b = math.random(1,9)
+		_callsign = nameCallname[a] .. b .. "1"
+		_callname =
+			{
+				[1] = a,
+				[2] = b,
+				[3] = 1,
+				["name"] = _callsign,
+			}
+	end
+
 
 	_spawnairdromeId = spawnIndex.id
 	_spawnairbaseloc = Object.getPoint({id_=spawnIndex.id_})
@@ -8106,8 +8161,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_spawnairplanepos.x = _spawnairbaseloc.x
 	_spawnairplanepos.z = _spawnairbaseloc.z
 	_spawnairplaneparking = math.random(1,40)
-	_alt = 0
-	_speed = 0
+
 	_waypointtype = parkingT[1]
 	_waypointaction = parkingT[2]
 
@@ -8133,164 +8187,145 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_waypoint.x = _spawnairbaseloc.x + math.random(- _waypoint.distx, _waypoint.distx)
 	_waypoint.z = _spawnairbaseloc.z + math.random(- _waypoint.distz, _waypoint.distz)
 
-	_flightalt = math.random(0,25000)
-	_flightspeed = math.random(175,2000)
-
 	_groupname = nameP .. nameCoalition[coalitionIndex]
 
-	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
-		_callsign = nameCoalition[coalitionIndex] .. "1"
-	else
-		local a = math.random(1,#nameCallname)
-		local b = math.random(1,9)
-		_callsign = nameCallname[a] .. b .. "1"
-		_callname =
-			{
-				[1] = a,
-				[2] = b,
-				[3] = 1,
-				["name"] = _callsign,
-			}
-	end
-
-	_airplanedata = {
+	_airplanedata =
+	{
         ["modulation"] = 0,
-                              ["tasks"] =
-                                {
-                                },
-                                ["task"] = _task,
-                                ["uncontrolled"] = false,
-                                ["route"] =
-                                {
-                                    ["points"] =
-                                    {
-                                        [1] =
-                                        {
-                                            ["alt"] = _alt,
-                                            ["type"] = _waypointtype,
-                                            ["action"] = _waypointaction,
-                                            ["parking"] = _spawnairplaneparking,
-                                            ["alt_type"] = "RADIO",
-                                            ["formation_template"] = "",
-                                            ["ETA"] = 0,
-											["airdromeId"] = _spawnairdromeId,
-                                            ["y"] = _spawnairplanepos.z,
-                                            ["x"] = _spawnairplanepos.x,
-                                            ["speed"] = _speed,
-                                            ["ETA_locked"] = true,
-                                            ["task"] =
-                                            {
-                                                ["id"] = "ComboTask",
-                                                ["params"] =
-                                                {
-                                                    ["tasks"] = _tasks,
-                                                },
-                                            },
-                                            ["speed_locked"] = true,
-                                        },
-                                        [2] =
-                                        {
-                                            ["alt"] = _flightalt,
-                                            ["type"] = "Turning Point",
-                                            ["action"] = "Turning Point",
-                                            ["alt_type"] = "BARO",
-                                            ["formation_template"] = "",
-                                            ["properties"] =
-                                            {
-                                                ["vnav"] = 1,
-                                                ["scale"] = 0,
-                                                ["angle"] = 0,
-                                                ["vangle"] = 0,
-                                                ["steer"] = 2,
-                                            },
-                                            ["ETA"] = 51.632064419993,
-                                            ["y"] = _waypoint.z,
-                                            ["x"] = _waypoint.x,
-                                            ["speed"] = _flightspeed,
-                                            ["ETA_locked"] = false,
-                                            ["task"] =
-                                            {
-                                                ["id"] = "ComboTask",
-                                                ["params"] =
-                                                {
-                                                    ["tasks"] = _tasks,
-                                                },
-                                            },
-                                            ["speed_locked"] = false,
-                                        },
-										[3] =
-										{
-											["alt"] = _flightalt / 2,
-											["type"] = "Land",
-											["action"] = "Landing",
-											["alt_type"] = "BARO",
-											["formation_template"] = "",
-											["properties"] =
-											{
-												["vnav"] = 1,
-												["scale"] = 0,
-												["angle"] = 0,
-												["vangle"] = 0,
-												["steer"] = 2,
-											},
-											["ETA"] = 0,
-											["airdromeId"] = _landairbaseID,
-											["y"] = _landairbaseloc.z,
-											["x"] = _landairbaseloc.x,
-											["speed"] = _flightspeed,
-											["ETA_locked"] = false,
-											["task"] =
-											{
-												["id"] = "ComboTask",
-												["params"] =
-												{
-													["tasks"] =
-													{
-													},
-												},
-											},
-											["speed_locked"] = false,
-										},
-                                    },
-                                },
-                                ["groupId"] = nameCoalition[coalitionIndex],
-                                ["hidden"] = false,
-                                ["units"] =
-                                {
-                                    [1] =
-                                    {
-                                        ["alt"] = _alt,
-										["heading"] = 0,
-										["livery_id"] = _skin,
-										["type"] = _aircrafttype,
-										["psi"] = 0,
-										["onboard_num"] = "10",
-                                        ["parking"] = _spawnairplaneparking,
-										["y"] = _spawnairplanepos.z,
-										["x"] = _spawnairplanepos.x,
-										["name"] =  _groupname.."1",
-										["callsign"] = _callname,
-										["payload"] = _payload,
-										["speed"] = _speed,
-										["unitId"] =  math.random(9999,99999),
-										["alt_type"] = "RADIO",
-										["skill"] = "High",
-									},
-								},
-								["y"] = _spawnairplanepos.z,
-								["x"] = _spawnairplanepos.x,
-								["name"] =  _groupname,
-								["communication"] = true,
-								["start_time"] = 0,
-								["frequency"] = 124,
-
-								}
+		["tasks"] =
+			{
+			},
+		["task"] = _task,
+		["uncontrolled"] = false,
+		["route"] =
+		{
+			["points"] =
+			{
+				[1] =
+				{
+					["alt"] = 0,
+					["type"] = _waypointtype,
+					["action"] = _waypointaction,
+					["parking"] = _spawnairplaneparking,
+					["alt_type"] = "RADIO",
+					["formation_template"] = "",
+					["ETA"] = 0,
+					["airdromeId"] = _spawnairdromeId,
+					["y"] = _spawnairplanepos.z,
+					["x"] = _spawnairplanepos.x,
+					["speed"] = 0,
+					["ETA_locked"] = true,
+					["task"] =
+					{
+						["id"] = "ComboTask",
+						["params"] =
+						{
+							["tasks"] = _tasks,
+						},
+					},
+					["speed_locked"] = true,
+				},
+				[2] =
+				{
+					["alt"] = _flightalt,
+					["type"] = "Turning Point",
+					["action"] = "Turning Point",
+					["alt_type"] = "BARO",
+					["formation_template"] = "",
+					["properties"] =
+					{
+						["vnav"] = 1,
+						["scale"] = 0,
+						["angle"] = 0,
+						["vangle"] = 0,
+						["steer"] = 2,
+					},
+--					["ETA"] = 51.632064419993,
+					["y"] = _waypoint.z,
+					["x"] = _waypoint.x,
+					["speed"] = _flightspeed,
+					["ETA_locked"] = false,
+					["task"] =
+					{
+						["id"] = "ComboTask",
+						["params"] =
+						{
+							["tasks"] = _tasks,
+						},
+					},
+					["speed_locked"] = true,
+				},
+				[3] =
+				{
+					["alt"] = _flightalt / 2,
+					["type"] = "Land",
+					["action"] = "Landing",
+					["alt_type"] = "BARO",
+					["formation_template"] = "",
+					["properties"] =
+					{
+						["vnav"] = 1,
+						["scale"] = 0,
+						["angle"] = 0,
+						["vangle"] = 0,
+						["steer"] = 2,
+					},
+--					["ETA"] = 0,
+					["airdromeId"] = _landairbaseID,
+					["y"] = _landairbaseloc.z,
+					["x"] = _landairbaseloc.x,
+					["speed"] = _flightspeed,
+					["ETA_locked"] = false,
+					["task"] =
+					{
+						["id"] = "ComboTask",
+						["params"] =
+						{
+							["tasks"] =
+							{
+							},
+						},
+					},
+					["speed_locked"] = true,
+				},
+			},
+		},
+		["groupId"] = nameCoalition[coalitionIndex],
+		["hidden"] = false,
+		["units"] =
+		{
+			[1] =
+			{
+				["alt"] = 0,
+				["heading"] = 0,
+				["livery_id"] = _skin,
+				["type"] = _aircrafttype,
+				["psi"] = 0,
+				["onboard_num"] = "10",
+				["parking"] = _spawnairplaneparking,
+				["y"] = _spawnairplanepos.z,
+				["x"] = _spawnairplanepos.x,
+				["name"] =  _groupname.."1",
+				["callsign"] = _callname,
+				["payload"] = _payload,
+				["speed"] = 0,
+				["unitId"] =  math.random(9999,99999),
+				["alt_type"] = "RADIO",
+				["skill"] = _skill,
+			},
+		},
+		["y"] = _spawnairplanepos.z,
+		["x"] = _spawnairplanepos.x,
+		["name"] =  _groupname,
+		["communication"] = true,
+		["start_time"] = 0,
+		["frequency"] = 124,
+	}
 
 	if (AircraftType == 1 or AircraftType == 3) then
 		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
 	else
 		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
-
 	end
 
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
@@ -8315,8 +8350,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		checktime = 0,
 		status = "taxiing"
 	}
-
-
 end
 
 function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
