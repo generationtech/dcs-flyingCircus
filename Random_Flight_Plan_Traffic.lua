@@ -40,7 +40,7 @@ nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy
 
 --env.setErrorMessageBoxEnabled(false)
 
--- determine the bases based on a coalition parameter
+-- Determine the bases based on a coalition parameter
 function getAFBases (coalitionIndex)
 	local AFids = {}
 	local AF = {}
@@ -56,7 +56,7 @@ function getAFBases (coalitionIndex)
 return AF
 end
 
--- create a new aircraft based on coalition, airbase, parking type, and name prefix
+-- Create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
