@@ -16,7 +16,7 @@ do
 ----------------------
 
 --DEBUG
-g_debugLog             = true		-- write entries to the log
+g_debugLog             = 2			-- 0: no log file messages, 2: informational, 3: verbose
 g_debugScreen          = true		-- write messages to screen
 
 --GENERAL PARAMETERS
@@ -5751,7 +5751,13 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	local l_acUnitNames
 	local l_acUnitCheckTime
 
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: starting', false) end
+
 	while (l_acExist == nil) do	-- make sure there is actually a viable aircraft selected for the country (some countries don't have aircraft for each possible ac type)
+		local l_typeDiv = {}
+		local l_val = 0
+		local l_jndex = 1
+
 		-- Pick a country from the given coalition
 		if (p_coalitionIndex == 1) then
 			l_acCountry = env.mission.coalitions.red[math.random(1, #env.mission.coalitions.red)]
@@ -5759,19 +5765,29 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			l_acCountry = env.mission.coalitions.blue[math.random(1, #env.mission.coalitions.blue)]
 		end
 
-		-- Pick an aircraft type from the given country
-		local l_aircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
+		-- build table of current aircraft distribution values for users chosen aircraft types in g_aircraftDistribution
+		for l_index=1, 5 do
+			if (g_aircraftDistribution[l_index] > 0) then
+				l_typeDiv[l_jndex] = {l_index, l_val + 1, g_aircraftDistribution[l_index] + l_val}
+				l_val = g_aircraftDistribution[l_index] + l_val
+				l_jndex = l_jndex + 1
+			end
+		end
 
-		if ((l_aircraftType >= 1) and (l_aircraftType <= g_aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
-			l_acTypeIndex = 1
-		elseif ((l_aircraftType >= g_aircraftDistribution[1]) and (l_aircraftType <= g_aircraftDistribution[2])) then -- BOMBERS
-			l_acTypeIndex = 2
-		elseif ((l_aircraftType >= g_aircraftDistribution[2]) and (l_aircraftType <= g_aircraftDistribution[3])) then -- ATTACK AIRCRAFT
-			l_acTypeIndex = 3
-		elseif ((l_aircraftType >= g_aircraftDistribution[3]) and (l_aircraftType <= g_aircraftDistribution[4])) then -- FIGHTERS
-			l_acTypeIndex = 4
-		elseif ((l_aircraftType >= g_aircraftDistribution[4]) or  (l_aircraftType <= g_aircraftDistribution[5])) then -- HELICOPTERS
-			l_acTypeIndex = 5
+		if (l_jndex == 1) then
+			env.info('f_generateAirplane: error no values in g_aircraftDistribution', false)
+			return
+		end
+
+		-- Random value from total range of possible types
+		local l_aircraftType = math.random(1, l_typeDiv[#l_typeDiv][3])
+
+		 --Find result chosing aircraft type of utility airplane, bomber, attack, fighter, or helicopter
+		for l_index=1, #l_typeDiv do
+			if ((l_aircraftType >=  l_typeDiv[l_index][2]) and (l_aircraftType <= l_typeDiv[l_index][3])) then
+				l_acTypeIndex = l_typeDiv[l_index][1]
+				l_index = #l_typeDiv + 1
+			end
 		end
 
 		-- Pick an aircraft and skin set from the given aircraft type
@@ -5779,6 +5795,8 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 
 		l_acExist = g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex]
 	end
+
+	if (g_debugLog > 1) then env.info('f_generateAirplane: l_acCountry: ' .. l_acCountry .. ' l_acTypeIndex: ' .. l_acTypeIndex .. ' l_acIndex: ' .. l_acIndex, false) end
 
 	-- Pick an aircraft from the given country and type
 	l_acChosen = g_coalitionTable[l_acCountry][l_acTypeIndex][l_acIndex][1]
@@ -5798,7 +5816,7 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 
 	-- Formation flying or not
 	if (g_aircraftTable[l_acChosen]["singleInFlight"] ~= nil) then
-		l_acSingle = true
+		l_acSingle   = true
 		l_acNumGroup = 1
 	else
 		l_acSingle = false
@@ -5901,12 +5919,14 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 
 	l_acSpawnAirdromeID = p_spawnIndex.id
 	l_acSpawnPos = {}
-	l_acSpawnAirdromePos = Object.getPoint({id_=p_spawnIndex.id_})
+
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: general aircraft parameters completed', false) end
+
 	if (l_acSpawnType[1] == "Turning Point") then
-		l_acSpawnPos.x   = g_airbasePoints[p_spawnIndex.id][1]
-		l_acSpawnPos.z   = g_airbasePoints[p_spawnIndex.id][2]
-		l_acSpawnPSI     = g_airbasePoints[p_spawnIndex.id][5]
-		l_acSpawnHeading = g_airbasePoints[p_spawnIndex.id][6]
+		l_acSpawnPos.x   = g_airbasePoints[l_acSpawnAirdromeID][1]
+		l_acSpawnPos.z   = g_airbasePoints[l_acSpawnAirdromeID][2]
+		l_acSpawnPSI     = g_airbasePoints[l_acSpawnAirdromeID][5]
+		l_acSpawnHeading = g_airbasePoints[l_acSpawnAirdromeID][6]
 		l_acSpawnAlt     = 29.8704
 	else
 		l_acSpawnAirdromePos = Object.getPoint({id_=p_spawnIndex.id_})
@@ -5917,11 +5937,15 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 		l_acSpawnAlt     = 0
 	end
 
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: flightpath spawn pos completed', false) end
+
 	if (l_acSpawnType[1] == "Turning Point") then
 		l_acSpawnSpeed = g_spawnSpeedTurningPoint
 	else
 		l_acSpawnSpeed = 0
 	end
+
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: flightpath spawn completed', false) end
 
 	l_acLandAirdromeID = p_landIndex.id
 	l_acLandAirdromePos = Object.getPoint({id_=p_landIndex.id_})
@@ -5929,20 +5953,24 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 	l_acLandPos.x = l_acLandAirdromePos.x
 	l_acLandPos.z = l_acLandAirdromePos.z
 
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: flightpath land completed', false) end
+
 	-- Compute single intermediate waypoint based on used-defined minimum deviation x/z range
-	l_acWaypoint.dist = math.sqrt((l_acSpawnAirdromePos.x - l_acLandAirdromePos.x) * (l_acSpawnAirdromePos.x - l_acLandAirdromePos.x) + (l_acSpawnAirdromePos.z - l_acLandAirdromePos.z) * (l_acSpawnAirdromePos.z - l_acLandAirdromePos.z))
-	if (((l_acWaypoint.dist / 2) < g_waypointRange[1]) or (p_spawnIndex.id == p_landIndex.id)) then
+	l_acWaypoint.dist = math.sqrt((l_acSpawnPos.x - l_acLandAirdromePos.x) * (l_acSpawnPos.x - l_acLandAirdromePos.x) + (l_acSpawnPos.z - l_acLandAirdromePos.z) * (l_acSpawnPos.z - l_acLandAirdromePos.z))
+	if (((l_acWaypoint.dist / 2) < g_waypointRange[1]) or (l_acSpawnAirdromeID == l_acLandAirdromeID)) then
 		l_acWaypoint.distx = g_waypointRange[1]
 	else
 		l_acWaypoint.distx = l_acWaypoint.dist / 2
 	end
-	if (((l_acWaypoint.dist / 2) < g_waypointRange[2]) or (p_spawnIndex.id == p_landIndex.id)) then
+	if (((l_acWaypoint.dist / 2) < g_waypointRange[2]) or (l_acSpawnAirdromeID == l_acLandAirdromeID)) then
 		l_acWaypoint.distz = g_waypointRange[2]
 	else
 		l_acWaypoint.distz = l_acWaypoint.dist / 2
 	end
-	l_acWaypoint.x = l_acSpawnAirdromePos.x + math.random(- l_acWaypoint.distx, l_acWaypoint.distx)
-	l_acWaypoint.z = l_acSpawnAirdromePos.z + math.random(- l_acWaypoint.distz, l_acWaypoint.distz)
+	l_acWaypoint.x = l_acSpawnPos.x + math.random(- l_acWaypoint.distx, l_acWaypoint.distx)
+	l_acWaypoint.z = l_acSpawnPos.z + math.random(- l_acWaypoint.distz, l_acWaypoint.distz)
+
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: flightpath waypoint completed', false) end
 
 	l_acGroupName = p_name .. g_numCoalitionGroup[p_coalitionIndex]
 
@@ -5996,6 +6024,8 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			},
 		}
 	end
+
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: flight group formation parameters completed', false) end
 
 	l_aircraftData =
 	{
@@ -6132,8 +6162,8 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 				["vangle"] = 0,
 				["steer"] = 2,
 			},
-			["y"]                  = g_airbasePoints[p_spawnIndex.id][4],
-			["x"]                  = g_airbasePoints[p_spawnIndex.id][3],
+			["y"]                  = g_airbasePoints[l_acSpawnAirdromeID][4],
+			["x"]                  = g_airbasePoints[l_acSpawnAirdromeID][3],
 			["speed"]              = l_acFlightSpeed,
 			["ETA_locked"]         = false,
 			["task"] =
@@ -6269,6 +6299,8 @@ function f_generateAirplane(p_coalitionIndex, p_spawnIndex, p_landIndex, p_name)
 			groupCheckTime = 0,
 			formationSize  = l_acNumGroup,	-- Store the original number of aircraft in this group
 		}
+
+	if (g_debugLog > 1)    then env.info('f_generateAirplane: ending', false) end
 end
 
 
@@ -6430,7 +6462,7 @@ end
 --------------------------------------------------------
 -- Determine the bases based on a coalition parameter --
 --------------------------------------------------------
-function f_getAFBases (p_coalitionIndex)
+function f_getAFBases(p_coalitionIndex)
 	local l_AFids = {}
 	local l_AF    = {}
 
@@ -6450,9 +6482,9 @@ end
 -----------------------------
 -- Choose a random airbase --
 -----------------------------
-function f_chooseAirbase(AF)
-	local l_airbaseChoice = math.random(1, #AF)
-return AF[airbaseChoice]
+function f_chooseAirbase(p_AF)
+	local l_airbaseChoice = math.random(1, #p_AF)
+return p_AF[l_airbaseChoice]
 end
 
 -- Check if possible to spawn a new group for the coalition
