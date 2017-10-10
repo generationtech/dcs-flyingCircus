@@ -6950,38 +6950,38 @@ function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (debugLog) then env.info('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, false) end
 	if (debugScreen) then trigger.action.outText('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, 20) end
 	if (numCoalition[RATtable[indeX].coalition] > 0) then
-		numCoalition[RATtable[indeX].coalition] = numCoalition[RATtable[indeX].coalition] - 1	-- make sure to account for groups that become missing from the sim outside of script control
+		numCoalition[RATtable[indeX].coalition] = numCoalition[RATtable[indeX].coalition] - 1	-- Make sure to account for groups that become missing from the sim outside of script control
 	end
-	table.remove(RATtable, indeX)			-- group does not exist any longer for this script
+	table.remove(RATtable, indeX)	-- Group does not exist any longer for this script
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
--- Periodically check all dynamically spawned AI units for existence, damage, and stuck
+-- Periodically check all dynamically spawned AI units for existence, wandering, damage, and stuck/parked
 function checkStatus()
 	if (#RATtable > 0)
 	then
-		local RATtableLimit = #RATtable -- array size may change while loop is running due to removing group
+		local RATtableLimit = #RATtable	 -- Array size may change while loop is running due to removing group
 		local i = 1
 		while (i <= RATtableLimit)
 		do
 			if (i <= RATtableLimit) then
 				local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
-				if (currentaircraftgroup) == nil then		-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
-					if (RATtable[i].checktime > 0) then		-- have we checked this group yet? (should have spawned by now)
+				if (currentaircraftgroup) == nil then		-- This group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
+					if (RATtable[i].checktime > 0) then		-- Have we checked this group yet? (should have spawned by now)
 						removeGroup(i, "  removed by sim, not script", false, nil)
-						RATtableLimit = RATtableLimit - 1	-- array shrinks
+						RATtableLimit = RATtableLimit - 1	-- Array shrinks
 					else
 						i = i + 1
 					end
-				else -- we have an active valid group, check for damage or stopped
-					if (RATtable[i].checktime > waitTime) then -- this group hasn't moved in a very long time
+				else -- Valid group, make checks
+					if (RATtable[i].checktime > waitTime) then -- This group hasn't moved in a very long time
 						removeGroup(i, "  removed due to low speed", true, currentaircraftgroup)
 						RATtableLimit = RATtableLimit - 1
-					else -- valid, active group
+					else -- Active group
 						local currentunitname1 = RATtable[i].unitname1
-						if (Unit.getByName(currentunitname1) ~= nil) then -- valid, active unit
+						if (Unit.getByName(currentunitname1) ~= nil) then -- Valid, active unit
 							local actualunit = Unit.getByName(currentunitname1)
-							local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- was 0.95. changed to 0.10
+							local lowerstatuslimit = minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
 							local actualunitpos = actualunit:getPosition().p
 							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
 							if ((actualunitpos.x > 80000) or (actualunitpos.x < -410000) or (actualunitpos.z > 950000) or (actualunitpos.z < 290000)) then
@@ -6990,12 +6990,12 @@ function checkStatus()
 							elseif ((actualunitheight < minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
 								removeGroup(i, "  removed due to damage", true, Unit.getGroup(actualunit))
 								RATtableLimit = RATtableLimit - 1
-							else -- valid unit, check for movement
+							else -- Valid unit, check for movement
 								local actualunitvel = actualunit:getVelocity()
 								local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
 								if absactualunitvel > 4 then
-									RATtable[i].checktime = 0 -- if it's moving, reset checktime
+									RATtable[i].checktime = 0 -- If it's moving, reset checktime
 								end
 								RATtable[i].checktime = RATtable[i].checktime + 1
 								i = i + 1
@@ -7007,7 +7007,6 @@ function checkStatus()
 		end
 	end
 end
-
 
 function chooseAirbase(AF)
 	airbaseChoice = math.random(1, #AF)
@@ -7023,7 +7022,7 @@ function generateGroup()
 	local i
 	local parkingType
 
-	-- choose which coalition side to possibly spawn new aircraft
+	-- Choose which coalition side to possibly spawn new aircraft
 	if (#redAF > 0) then
 		lowVal = 1
 	else
@@ -7036,13 +7035,13 @@ function generateGroup()
 		highVal = 1
 	end
 
-	if (lowVal > highVal) then  -- no coalition bases defined at all!
+	if (lowVal > highVal) then  -- No coalition bases defined at all!
 		return
 	end
 
-	coalitionSide = math.random(lowVal, highVal)  -- choose which side to spawn unit this time
+	coalitionSide = math.random(lowVal, highVal)  -- Choose which side to spawn unit this time
 
-	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- is ok to spawn a new unit?
+	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- Is ok to spawn a new unit?
 
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
 		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
@@ -7064,26 +7063,25 @@ function generateGroup()
 			airbaseLand = chooseAirbase(blueAF)
 		end
 
-		-- create new aircraft
+		-- Create new aircraft
 		generateAirplane(coalitionSide, airbaseSpawn, airbaseLand, parkingType, NamePrefix[coalitionSide])
 	end
 end
 
 
---names of red bases
+-- Names of red bases
 redAF = getAFBases(1)
 if (#redAF < 1) then
 	env.warning("There are no red bases in this mission.", false)
 end
 
---names of blue bases
+-- Names of blue bases
 blueAF = getAFBases(2)
 if (#blueAF < 1) then
 	env.warning("There are no blue bases in this mission.", false)
 end
 
 Spawntimer = mist.scheduleFunction(generateGroup, {}, timer.getTime() + 2, intervall)
---timer.scheduleFunction(checkStatus, nil, timer.getTime() + 4)
 Spawntimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, intervall)
 
 end
