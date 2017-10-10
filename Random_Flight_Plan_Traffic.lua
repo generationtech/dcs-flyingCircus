@@ -6431,8 +6431,14 @@ function checkStatus()
 	then
 		for i = 1, #RATtable
 		do
-			if Group.getByName(RATtable[i].groupname) ~= nil and RATtable[i].status ~= nil then
-
+			if Group.getByName(RATtable[i].groupname) == nil then
+				if (RATtable[i].checktime > 0) and (RATtable[i].status ~= nil) then
+					RATtable[i].status = nil
+					if (numCoalition[RATtable[i].coalition] > 0) then
+						numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
+					end
+				end
+			else
 				local u1 = RATtable[i].unitname1 -- checks if unit 1 of group is damaged and removes group if so
 				local au = Unit.getByName(u1)
 				env.info('group: ' .. RATtable[i].groupname .. '  life: ' .. au:getLife(), false)
@@ -6460,7 +6466,8 @@ function checkStatus()
 					local lowerstatuslimit = 0.95* initunitstatus
 					local actualunitpos = actualunit:getPosition().p
 					local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-					if (actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit) or (actualunit:getLife() <= 1)
+					if (actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit)
+--					or (actualunit:getLife() <= 1)
 					then
 						local currentaircraftgroup = Unit.getGroup(actualunit)
 						env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', false)
