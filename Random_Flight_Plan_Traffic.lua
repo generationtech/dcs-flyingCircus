@@ -1924,7 +1924,7 @@ aircraftTable =
 --				nameCallname[c + k] = v
 --			end
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -1945,7 +1945,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2035,7 +2035,7 @@ aircraftTable =
 --				nameCallname[c + k] = v
 --			end
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2075,7 +2075,7 @@ aircraftTable =
 						},
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2170,7 +2170,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Hawk",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -2189,7 +2189,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2248,7 +2248,7 @@ aircraftTable =
 		{								-- L-39ZA
 			_aircrafttype = "L-39ZA",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2269,7 +2269,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2312,7 +2312,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-27K",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2333,7 +2333,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2383,7 +2383,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-17M4",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2404,7 +2404,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2460,7 +2460,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-25",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2481,7 +2481,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2552,7 +2552,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-25T",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2573,7 +2573,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2637,7 +2637,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-25TM",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -2658,7 +2658,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2750,7 +2750,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F-14A",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -2769,7 +2769,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2848,7 +2848,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F-15C",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -2867,7 +2867,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -2941,7 +2941,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F-16A",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -2960,7 +2960,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3018,7 +3018,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F-16C bl.52d",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3037,7 +3037,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3222,7 +3222,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F-5E",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3241,7 +3241,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3300,7 +3300,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F-86F Sabre",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3319,7 +3319,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3373,7 +3373,7 @@ aircraftTable =
 		{
 			_aircrafttype = "F/A-18C",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3392,7 +3392,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3455,7 +3455,7 @@ aircraftTable =
 		{
 			_aircrafttype = "FW-190D9",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3474,7 +3474,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3536,7 +3536,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-21Bis",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3555,7 +3555,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3602,7 +3602,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-23MLD",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3621,7 +3621,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3666,7 +3666,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-25PD",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3685,7 +3685,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3723,7 +3723,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-29A",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3742,7 +3742,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -3792,8 +3792,8 @@ aircraftTable =
 				"`swifts` team #44 kubinka ab",
 				"demo paint scheme #999 mapo",
 			},
-		},
-	[53] =								-- MiG-29G
+		}
+	[53] = 								-- MiG-29G
 		{
 			_aircrafttype = "MiG-29G",
 
@@ -3850,7 +3850,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-29S",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -3869,7 +3869,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4002,7 +4002,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4081,7 +4081,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-27",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -4100,7 +4100,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4228,7 +4228,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-29S",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -4247,7 +4247,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4303,7 +4303,7 @@ aircraftTable =
 		{
 			_aircrafttype = "MiG-31",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -4322,7 +4322,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4370,7 +4370,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-30",
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -4389,7 +4389,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4460,7 +4460,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-33,
 
-			_task = "CAP"
+			_task = "CAP",
 			_tasks =
 			{
 				[1] =
@@ -4479,7 +4479,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4556,7 +4556,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Su-34",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -4577,7 +4577,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4648,7 +4648,7 @@ aircraftTable =
 		{
 			_aircrafttype = "AH-1W",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -4669,7 +4669,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4711,7 +4711,7 @@ aircraftTable =
 		{
 			_aircrafttype = "AH-64A",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -4732,7 +4732,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4774,7 +4774,7 @@ aircraftTable =
 		{
 			_aircrafttype = "AH-64D",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -4795,7 +4795,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -4901,7 +4901,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Ka-50",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -4922,7 +4922,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -5009,7 +5009,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Mi-24V",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -5030,7 +5030,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -5109,7 +5109,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Mi-8MT",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -5130,7 +5130,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -5200,7 +5200,7 @@ aircraftTable =
 		{
 			_aircrafttype = "OH-58D",
 
-			_task = "AFAC"
+			_task = "AFAC",
 			_tasks =
 			{
 				[1] =
@@ -5213,7 +5213,7 @@ aircraftTable =
 					{
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -5243,7 +5243,7 @@ aircraftTable =
 		{
 			_aircrafttype = "SH-60B",
 
-			_task = "Antiship Strike"
+			_task = "Antiship Strike",
 			_tasks =
 			{
 				[1] =
@@ -5262,7 +5262,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -5288,7 +5288,7 @@ aircraftTable =
 		{
 			_aircrafttype = "UH-1H",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -5309,7 +5309,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
@@ -5377,7 +5377,7 @@ aircraftTable =
 		{
 			_aircrafttype = "Mi-28N",
 
-			_task = "CAS"
+			_task = "CAS",
 			_tasks =
 			{
 				[1] =
@@ -5398,7 +5398,7 @@ aircraftTable =
 						["priority"] = 0,
 					},
 				},
-			}
+			},
 
 			_payload =
 			{
