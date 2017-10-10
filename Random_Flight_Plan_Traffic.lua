@@ -3,7 +3,7 @@
 
 do
 --EDIT BELOW
-intervall = math.random(20,120) 	--random repeat interval between (A and B) in seconds
+intervall = math.random(20,60) 	--random repeat interval between (A and B) in seconds
 maxCoalition = {25, 25} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
@@ -27,9 +27,9 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(1,10) --random for airplane, heli or fighter
+	AircraftType = math.random(4,5) --random for airplane, heli or fighter
 
-	if ((AircraftType >= 1) and (AircraftType <= 4)) then
+	if ((AircraftType >= 1) and (AircraftType <= 3)) then
 		if (coalitionIndex == 1) then
 			randomAirplane = math.random(13,21) -- random for airplane type; Red AC 13-21
 		else
@@ -152,12 +152,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "E-2D Demo"
+				callsign = "USA E-2C - E-2D Demo"
 			else
 				_skin = "VAW-125 Tigertails"
+				callsign = "USA E-2C - VAW-125 Tigertails"
 			end
 
 			_country = country.id.USA
-			callsign = "USA E-2C"
 			_payload =
 			{
 				["pylons"] =
@@ -174,12 +175,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "nato"
+				callsign = "USA E-3A - nato"
 			else
 				_skin = "usaf standard"
+				callsign = "USA E-3A - usaf standard"
 			end
 
 			_country = country.id.USA
-			callsign = "USA E-3A"
 			_payload =
 			{
 				["pylons"] =
@@ -196,12 +198,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "Ukrainian AF"
+				callsign = "UKRAINE IL-76MD - Ukrainian AF"
 			else
 				_skin = "Ukrainian AF aeroflot"
+				callsign = "UKRAINE IL-76MD - Ukrainian AF aeroflot"
 			end
 
 			_country = country.id.UKRAINE
-			callsign = "UKRAINE IL-76MD"
 			_payload =
 			{
 				["pylons"] =
@@ -330,12 +333,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,2)
 			if (subtype == 1) then
 				_skin = "RF Air Force"
+				callsign = "RUSSIA A-50 - RF Air Force"
 			else
 				_skin = "RF Air Force new"
+				callsign = "RUSSIA A-50 - RF Air Force new"
 			end
 
 			_country = country.id.RUSSIA
-			callsign = "RUSSIA A-50"
 			_payload =
 			{
 				["pylons"] =
@@ -355,12 +359,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				subtype1 = math.random(1,2)
 				if (subtype1 == 1) then
 					_skin = "RF Air Force"
+					callsign = "RUSSIA An-26B - RF Air Force"
 				else
 					_skin = "Aeroflot"
+					callsign = "RUSSIA An-26B - Aeroflot"
 				end
 
 				_country = country.id.RUSSIA
-				callsign = "RUSSIA An-26B"
 			else
 				_skin = "Abkhazian AF"
 				_country = country.id.ABKHAZIA
@@ -413,14 +418,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_skin = "FSB aeroflot"
+				callsign = "RUSSIA IL-76MD - FSB aeroflot"
 			elseif (subtype == 2) then
 				_skin = "MVD aeroflot"
+				callsign = "RUSSIA IL-76MD - MVD aeroflot"
 			else
 				_skin = "RF Air Force"
+				callsign = "RUSSIA IL-76MD - RF Air Force"
 			end
 
 			_country = country.id.RUSSIA
-			callsign = "RUSSIA IL-76MD"
 			_payload =
 			{
 				["pylons"] =
@@ -437,14 +444,16 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_skin = "RF Air Force"
+				callsign = "RUSSIA IL-78M - RF Air Force"
 			elseif (subtype == 2) then
 				_skin = "RF Air Force aeroflot"
+				callsign = "RUSSIA IL-78M - RF Air Force aeroflot"
 			else
 				_skin = "RF Air Force new"
+				callsign = "RUSSIA IL-78M - RF Air Force new"
 			end
 
 			_country = country.id.RUSSIA
-			callsign = "RUSSIA IL-78M"
 			_payload =
 			{
 				["pylons"] =
@@ -529,6 +538,85 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		end
+
+	elseif ((AircraftType >= 4) or (AircraftType <= 5)) then
+		if (coalitionIndex == 1) then
+			randomBomber = math.random(13,18) -- random for airplane type; Red AC 13-18
+		else
+			randomBomber = math.random(1,12) -- random for airplane type; Blue AC 1-12
+		end
+
+		if (randomBomber == 1) then
+			_aircrafttype = "B-1B"
+			_country = country.id.USA
+			_skin = "usaf standard"
+			callsign = "USA B-1B"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "MK_82*28",
+					},
+					[2] =
+					{
+						["CLSID"] = "MK_82*28",
+					},
+					[3] =
+					{
+						["CLSID"] = "MK_82*28",
+					},
+				},
+				["fuel"] = "88450",
+				["flare"] = 30,
+				["chaff"] = 60,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 2) then
+			_aircrafttype = "B-52H"
+			_skin = "usaf standard"
+			_country = country.id.USA
+			callsign = "USA B-52H"
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
+					},
+				},
+				["fuel"] = "141135",
+				["flare"] = 192,
+				["chaff"] = 1125,
+				["gun"] = 100,
+			}
+		elseif (randomBomber == 3) then
+
+
+			_aircrafttype = "S-3B"
+			_skin = "usaf standard"
+			_payload = {
+			["pylons"] =
+			{
+			}, -- end of ["pylons"]
+			["fuel"] = "5500",
+			["flare"] = 30,
+			["chaff"] = 30,
+			["gun"] = 100,
+			}
+			_country = country.id.USA
+			callsign = "TOPCAT"
+
+
+
+
+
 
 	elseif ((AircraftType == 5) or (AircraftType == 6)) then
 		if (coalitionIndex == 1) then
@@ -957,42 +1045,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 		if (randomFighter == 1) then
 
-			_aircrafttype = "B-52H"
-			_skin = "usaf standard"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
-			}, -- end of [1]
-			[3] =
-			{
-			["CLSID"] = "{696CFFC4-0BDE-42A8-BE4B-0BE3D9DD723C}",
-			}, -- end of [3]
-			}, -- end of ["pylons"]
-			["fuel"] = "141135",
-			["flare"] = 192,
-			["chaff"] = 1125,
-			["gun"] = 100,
-			}
-			_country = country.id.USA
-			callsign = "DOOM"
-
-
-			_aircrafttype = "S-3B"
-			_skin = "usaf standard"
-			_payload = {
-			["pylons"] =
-			{
-			}, -- end of ["pylons"]
-			["fuel"] = "5500",
-			["flare"] = 30,
-			["chaff"] = 30,
-			["gun"] = 100,
-			}
-			_country = country.id.USA
-			callsign = "TOPCAT"
 
 
 
@@ -1109,31 +1161,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			callsign = "ENFIELD"
 
 		elseif (randomFighter == 3)	then
-			_aircrafttype = "B-1B"
-			_country = country.id.USA
-			_skin = "usaf standard"
-			_payload = {
-			["pylons"] =
-			{
-			[1] =
-			{
-			["CLSID"] = "MK_82*28",
-			}, -- end of [1]
-			[2] =
-			{
-			["CLSID"] = "MK_82*28",
-			}, -- end of [2]
-			[3] =
-			{
-			["CLSID"] = "MK_82*28",
-			}, -- end of [3]
-			}, -- end of ["pylons"]
-			["fuel"] = "88450",
-			["flare"] = 30,
-			["chaff"] = 60,
-			["gun"] = 100,
-			}
-			callsign = "BONE"
 
 		elseif (randomFighter == 4) then
 			_aircrafttype = "F-14A"
