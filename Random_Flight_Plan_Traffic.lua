@@ -3,13 +3,35 @@
 
 do
 --EDIT BELOW
-intervall = math.random(30,30) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {25, 25} 	-- maximum number of red, blue units
-NamePrefix = {"Red-", "Blue-"}
-numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
-nameCoalition = {0, 0} -- highest coalition name used
-waypointRange = {3000, 3000} -- x,y of where to place intermediate waypoint between takeoff and landing
+--FLAGS
+flgRandomCoalitionSpawn = 1		-- Random sequence of Red/Blue coalition spawning?
+flgRandomFuel = 1				-- Random fuel loadout?
+flagRandomWeapons = 1			-- Add weapons to aircraft?
+flagRandomWaypoint = 1			-- Create intermediate waypoint?
+flgAllowSpawnLandingAirbase = 1	-- Allow spawning airbase and landing airbase to be the same?
+flgSetTasks = 1					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)
+flgRandomSkins = 1				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
+flgRansomSkill = 1				-- Randomize AI pilot skill level
+flgRandomAltitude = 1			-- Randomize altitude (otherwise use standard altitude per aircraft type)
+flgRandomSpeed = 1				-- Randomize altitude (otherwise use standard speed per aircraft type)
+
+--DEBUG
+debugLog = 1	-- write entries to the log
+debugScreen = 1	-- write messages to screen
+
+--RANGES
+intervall = math.random(30,30)				--Random spawn repeat interval
+aircraftDistribution = {10, 10, 20, 40, 20} -- % aircraft of type Utility, Bomber, Attack, Fighter, Helicopter
+maxGroupSize = 4							-- Maximum number of groups for those units supporting formations
+maxCoalition = {25, 25}						-- Maximum number of red, blue units
+NamePrefix = {"Red-", "Blue-"}				-- Prefix to use for naming groups
+numCoalition = {0, 0}						-- Number of active Red, Blue dynamic spawned units
+waypointRange = {3000, 3000}				-- Maximum x,y of where to place intermediate waypoint between takeoff and landing
+
+
+-- Should be no need to edit these below
 RATtable = {}
+nameCoalition = {0, 0} -- highest coalition name used
 --env.setErrorMessageBoxEnabled(false)
 
 -- determine the bases based on a coalition parameter
@@ -6781,7 +6803,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                                 ["angle"] = 0,
                                                 ["vangle"] = 0,
                                                 ["steer"] = 2,
-                                            }, -- end of ["properties"]
+                                            },
                                             ["ETA"] = 51.632064419993,
                                             ["y"] = _waypoint.z,
                                             ["x"] = _waypoint.x,
@@ -6799,11 +6821,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                         },
 										[3] =
 										{
-											--["alt"] = 0,
 											["alt"] = _flightalt / 2,
 											["type"] = "Land",
 											["action"] = "Landing",
-											--["alt_type"] = "RADIO",
 											["alt_type"] = "BARO",
 											["formation_template"] = "",
 											["properties"] =
@@ -6813,15 +6833,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 												["angle"] = 0,
 												["vangle"] = 0,
 												["steer"] = 2,
-											}, -- end of ["properties"]
-											--["ETA"] = 263.67692213965,
+											},
 											["ETA"] = 0,
 											["airdromeId"] = _landairbaseID,
-											--["y"] = 683853.75717885,
-											--["x"] = -284889.06283057,
 											["y"] = _landairbaseloc.z,
 											["x"] = _landairbaseloc.x,
-											--["speed"] = 300,
 											["speed"] = _flightspeed,
 											["ETA_locked"] = false,
 											["task"] =
@@ -6831,11 +6847,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 												{
 													["tasks"] =
 													{
-													}, -- end of ["tasks"]
-												}, -- end of ["params"]
-											}, -- end of ["task"]
+													},
+												},
+											},
 											["speed_locked"] = false,
-										}, -- end of [2]
+										},
                                     },
                                 },
                                 ["groupId"] = nameCoalition[coalitionIndex],
@@ -6854,6 +6870,14 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 										["y"] = _spawnairplanepos.z,
 										["x"] = _spawnairplanepos.x,
 										["name"] =  nameP .. nameCoalition[coalitionIndex].."1",
+										["callsign"] =
+                                        {
+                                            [1] = 1,
+                                            [2] = 1,
+                                            [3] = 1,
+                                            ["name"] = "Ford" .. coalitionIndex .. nameCoalition[coalitionIndex],
+										},
+										--["callsign"] = coalitionIndex .. nameCoalition[coalitionIndex],
 										["payload"] = _payload,
 										["speed"] = _speed,
 										["unitId"] =  math.random(9999,99999),
@@ -6877,12 +6901,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	end
 
-	env.warning('#red: ' .. numCoalition[1] .. '  #blue: ' .. numCoalition[2] .. '  group: ' .. _airplanedata.name .. '  callsign: ' .. callsign, false)
-	env.warning('spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _flightalt .. '  speed: ' .. _flightspeed, false)
-	env.warning('spawnpos.x: ' .. _spawnairplanepos.x .. '  waypoint.x: ' .. _waypoint.x .. '  landpos.x ' .. _landairplanepos.x .. '  spawnpos.z: ' .. _spawnairplanepos.z .. '  waypoint.z: ' .. _waypoint.z .. '  landpos.z ' .. _landairplanepos.z, false)
-	env.warning('delta.x: ' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z: ' .. _spawnairplanepos.z - _waypoint.z, false)
-
-	trigger.action.outText('#red: ' .. numCoalition[1] .. '  #blue: ' .. numCoalition[2] .. '  group: ' .. _airplanedata.name .. '  callsign: ' .. callsign .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _flightalt .. '  speed: ' .. _flightspeed, 10)
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  callsign:' .. callsign, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
+	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  callsign:' .. callsign .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
 	{
@@ -6904,81 +6927,54 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 end
 
+-- Periodically check all dynamically spawned AI units for existence, damage, and stuck
 function checkStatus()
 	if (#RATtable > 0)
 	then
-
-env.info('#RATtable: ' .. #RATtable .. ' red: ' .. numCoalition[1] .. ' blue: ' .. numCoalition[2], false)
-
-local icount = {0, 0} -- verify how many units script think are active vs active count for each coalition
-
 		local RATtableLimit = #RATtable -- array size may change while loop is running due to removing group
 		local i = 1
 		while (i <= RATtableLimit)
 		do
-
---env.info('i: ' .. i .. ' RATtableLimit: ' .. RATtableLimit, false)
-
 			if (i <= RATtableLimit) then
 				local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
-
-				if (currentaircraftgroup) == nil then					-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
-					if ((RATtable[i].checktime > 0) and (RATtable[i].status ~= nil)) then	-- have we checked this group yet? (should have spawned by now) AND we've not already erased this group from the array
-
-env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  removed by sim, not script', false)
-
+				if (currentaircraftgroup) == nil then		-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
+					if (RATtable[i].checktime > 0) then		-- have we checked this group yet? (should have spawned by now)
+						if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  removed by sim, not script', false) end
+						if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  removed by sim, not script', 20) end
 						if (numCoalition[RATtable[i].coalition] > 0) then
 							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- make sure to account for groups that become missing from the sim outside of script control
 						end
-						table.remove(RATtable, i)										-- group does not exist any longer for this script
-						RATtableLimit = RATtableLimit - 1								-- array shrinks
+						table.remove(RATtable, i)			-- group does not exist any longer for this script
+						RATtableLimit = RATtableLimit - 1	-- array shrinks
 					else
 						i = i + 1
 					end
 				else -- we have an active valid group, check for damage or stopped
-
-local u1 = RATtable[i].unitname1
-local au = Unit.getByName(u1)
-icount[RATtable[i].coalition] = icount[RATtable[i].coalition] + 1
-env.info(numCoalition[RATtable[i].coalition] .. ':' .. icount[RATtable[i].coalition] .. ' - ' .. 'group: ' .. RATtable[i].groupname .. '  life: ' .. au:getLife(), false)
-
 					if (RATtable[i].checktime > 30) then -- this group hasn't moved in a very long time
-
-env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', false)
-trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', 20)
-
+						if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to low speed', false) end
+						if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to low speed', 20) end
 						currentaircraftgroup:destroy()
-
 						if (numCoalition[RATtable[i].coalition] > 0) then
-							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- remove this group from script count of active units
+							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1 -- remove this group from script count of active units
 						end
-
-icount[RATtable[i].coalition] = icount[RATtable[i].coalition] - 1
-
-						table.remove(RATtable, i)										-- group does not exist any longer for this script
+						table.remove(RATtable, i) -- group does not exist any longer for this script
 						RATtableLimit = RATtableLimit - 1
 					else -- valid, active group
 						local currentunitname1 = RATtable[i].unitname1
-						if ((Unit.getByName(currentunitname1) ~= nil) and (RATtable[i].status ~= nil)) then -- valid, active unit
+						if (Unit.getByName(currentunitname1) ~= nil) then -- valid, active unit
 							local actualunit = Unit.getByName(currentunitname1)
 							local initunitstatus = actualunit:getLife0()
 							local lowerstatuslimit = 0.10 * initunitstatus -- was 0.95. changed to 0.10
 							local actualunitpos = actualunit:getPosition().p
 							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
 							if ((actualunitheight < 20) and (actualunit:getLife() <= lowerstatuslimit)) then -- check for damaged unit
+								if (debugLog) then env.info('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to damage', false) end
+								if (debugScreen) then trigger.action.outText('group:' .. RATtable[i].groupname .. '  type:' .. RATtable[i].actype .. '  destroyed due to damage', 20) end
 								local currentaircraftgroup = Unit.getGroup(actualunit)
-
-env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', false)
-trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', 20)
-
 								currentaircraftgroup:destroy()
-
 								if (numCoalition[RATtable[i].coalition] > 0) then
 									numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
 								end
-
-icount[RATtable[i].coalition] = icount[RATtable[i].coalition] - 1
-
 								table.remove(RATtable, i)										-- unit does not exist any longer for this script
 								RATtableLimit = RATtableLimit - 1
 							else -- valid unit, check for movement
