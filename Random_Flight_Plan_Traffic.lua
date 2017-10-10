@@ -5458,15 +5458,15 @@ aircraftTable =
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
-	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
-	_singleInFlight = false	-- Default to allowing multi-aircraft formations
 	_category = "AIRPLANE" -- Default to airplane type
 
 	-- Pick a country from the given coalition
 	if (coalitionIndex == 1)
 		_acCountry = math.random(1, #env.mission.coalitions.red)
+		_country = env.mission.coalitions.red[_acCountry]
 	else
 		_acCountry = math.random(1, #env.mission.coalitions.blue)
+		_country = env.mission.coalitions.blue[_acCountry]
 	end
 
 	-- Pick an aircraft type from the given country
@@ -5484,15 +5484,53 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	end
 
 	-- Pick an aircraft skin set from the given aircraft type
-	_acIndex = math.random(1, #coalitionTable[_acCountry][_acTypeIndex])
+	_acIndex = math.random(1, #coalitionTable[_country][_acTypeIndex])
 
 	-- Pick an aircraft from the given country and type
-	_ac = coalitionTable[_acCountry][_acTypeIndex][_acIndex][1]
+	_ac = coalitionTable[_country][_acTypeIndex][_acIndex][1]
 
 	-- Pick a skin from the given aircraft
-	_acSkin = math.random(2, #coalitionTable[_acCountry][_acTypeIndex][_acIndex])
+	_acSkin = math.random(2, #coalitionTable[_country][_acTypeIndex][_acIndex])
 
+	-- The specific aircraft
+	_aircrafttype = aircraftTable[_ac]._aircrafttype
 
+	-- Formation flying or not
+	if (aircraftTable[_ac]._singleInFlight) then
+		_singleInFlight = true
+	else
+		_singleInFlight = true
+	end
+
+	-- Set callsign name
+	if (aircraftTable[_ac].nameCallname) then
+		nameCallname = aircraftTable[_ac].nameCallname
+	else
+		nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
+	end
+
+	-- Set tasking
+	if (aircraftTable[_ac]._task) then
+		_task = aircraftTable[_ac]._task
+	else
+		_task = ""
+	end
+
+	-- Set tasks
+	if (aircraftTable[_ac]._tasks) then
+		_tasks = aircraftTable[_ac]._tasks
+	else
+		_tasks = ""
+	end
+
+	-- Set payload
+	_payload = aircraftTable[_ac]._payload
+
+	-- Set skin
+	_skin = aircraftTable[_ac]._skins[_acSkin]
+
+	-- Set full name used for messages
+	_fullname = country.id[_country] .. _aircrafttype .. " - " .. _skin
 
 
 	-- Randomize the fuel load
