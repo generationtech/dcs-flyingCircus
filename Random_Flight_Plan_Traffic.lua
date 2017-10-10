@@ -2681,6 +2681,76 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 90,
 				["gun"] = 100,
 			}
+		elseif (randomFighter == 16) then
+			_aircrafttype = "F-16A MLU"
+
+			subtype = math.random(1,2)
+			if (subtype == 1) then
+				_country = country.id.BELGIUM
+
+				subtype1 = math.random(1,2)
+				if (subtype1 == 1) then
+					_skin = "2nd squadron `comet` florennes ab"
+				else
+					_skin = "CMD extended skins"
+				end
+
+				callsign = "BELGIUM F-16A MLU - " .. _skin
+
+			elseif (subtype == 2) then
+			else
+			end
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{CAAC1CFD-6745-416B-AFA4-CB57414856D0}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+				},
+				["fuel"] = "3104",
+				["flare"] = 30,
+				["chaff"] = 60,
+				["gun"] = 100,
+			}
 		elseif (randomFighter == 6) then
 			_aircrafttype = "F-5E"
 			_country = country.id.USA
@@ -2756,6 +2826,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				callsign = "AUSTRALIA F-86F Sabre"
+			elseif (subtype == 3) then
+				_country = country.id.BELGIUM
+				callsign = "BELGIUM F-86F Sabre"
+			elseif (subtype == 3) then
+				_country = country.id.CANADA
+				callsign = "CANADA F-86F Sabre"
 			else
 			end
 
@@ -2811,6 +2887,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomFighter == 8) then
 			_aircrafttype = "F/A-18C"
+			_skin = ""
 
 			subtype = math.random(1,9)
 			if (subtype == 1) then
@@ -2832,7 +2909,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
 				_skin = "Australia 75 Sqn RAAF"
-				callsign = "AUSTRALIA F/A-18C - Australia 75 Sqn RAAF
+				callsign = "AUSTRALIA F/A-18C - " .. _skin
+			elseif (subtype == 3) then
+				_country = country.id.CANADA
+				callsign = "CANADA F/A-18C - no skin"
 			else
 			end
 
@@ -3135,11 +3215,33 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 			elseif (subtype == 2) then
 				_country = country.id.AUSTRALIA
+
+				subtype1 = math.random(1,3)
+				if (subtype1 == 1) then
+					_skin = "Bare Metal"
+				elseif (subtype1 == 2) then
+					_skin = "Dogfight Blue"
+				else
+					_skin = "Dogfight Red"
+				end
+
 				callsign = "AUSTRALIA P-51D - " .. _skin
+
 			elseif (subtype == 3) then
 				_country = country.id.BELGIUM
+
+				subtype1 = math.random(1,3)
+				if (subtype1 == 1) then
+					_skin = "Bare Metal"
+				elseif (subtype1 == 2) then
+					_skin = "Dogfight Blue"
+				else
+					_skin = "Dogfight Red"
+				end
+
 				callsign = "BELGIUM P-51D - " .. _skin
-			elseif (subtype == 4) then
+
+				elseif (subtype == 4) then
 				_country = country.id.CANADA
 				callsign = "CANADA P-51D - " .. _skin
 			elseif (subtype == 5) then
@@ -3348,20 +3450,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 			callsign = "GAF24"
 
-		elseif (randomFighter == 16) then
-			_aircrafttype = "F-16A MLU"
-			_country = country.id.THE_NETHERLANDS
-			_skin = "CMD extended skins"
-			_payload = {
-			["pylons"] =
-			{
-			}, -- end of ["pylons"]
-			["fuel"] = "3104",
-			["flare"] = 30,
-			["chaff"] = 60,
-			["gun"] = 100,
-			}
-			callsign = "NAF38"
 
 		elseif (randomFighter == 17) then
 			_aircrafttype = "Mirage 2000-5"
