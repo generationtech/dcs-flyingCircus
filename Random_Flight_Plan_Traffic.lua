@@ -6276,25 +6276,26 @@ end
 function f_checkStatus()
 	if (#g_RATtable > 0)
 	then
-		local RATtableLimit = #g_RATtable	 -- Array size may change while loop is running due to removing group
-		local i = 1
-		while ((i <= RATtableLimit) and (RATtableLimit > 0))
+		local l_RATtableLimit = #g_RATtable	 -- Array size may change while loop is running due to removing group
+		local l_index = 1
+
+		while ((l_index <= l_RATtableLimit) and (l_RATtableLimit > 0))
 		do
-			local currentaircraftgroup = Group.getByName(g_RATtable[i].groupname)
+			local currentaircraftgroup = Group.getByName(g_RATtable[l_index].groupname)
 			if (currentaircraftgroup) == nil then		-- This group does not exist yet (just now spawning) OR removed by sim (crash or kill)
-				if (g_RATtable[i].groupCheckTime > 0) then		-- Have we checked this group yet? (should have spawned by now)
-					f_removeGroup(i, "  removed by sim, not script", false, nil)
-					RATtableLimit = RATtableLimit - 1	-- Array shrinks
+				if (g_RATtable[l_index].groupCheckTime > 0) then		-- Have we checked this group yet? (should have spawned by now)
+					f_removeGroup(l_index, "  removed by sim, not script", false, nil)
+					l_RATtableLimit = l_RATtableLimit - 1	-- Array shrinks
 				else
-					g_RATtable[i].groupCheckTime = g_RATtable[i].groupCheckTime + 1
-					i = i + 1
+					g_RATtable[l_index].groupCheckTime = g_RATtable[l_index].groupCheckTime + 1
+					l_index = l_index + 1
 				end
 			else -- Valid group, make unit checks
-				local unitNamesLimit = #g_RATtable[i].unitNames
+				local unitNamesLimit = #g_RATtable[l_index].unitNames
 				local j = 1
 				while ((j <= unitNamesLimit) and (unitNamesLimit > 0))
 				do
-					local currentunitname = g_RATtable[i].unitNames[j]
+					local currentunitname = g_RATtable[l_index].unitNames[j]
 					if (Unit.getByName(currentunitname) ~= nil) then -- Valid, active unit
 						local actualunit = Unit.getByName(currentunitname)
 						local actualunitvel = actualunit:getVelocity()
@@ -6302,9 +6303,9 @@ function f_checkStatus()
 
 					-- Check for unit movement
 						if absactualunitvel > 2 then
-							g_RATtable[i].unitCheckTime[j] = 0 -- If it's moving, reset checktime
+							g_RATtable[l_index].unitCheckTime[j] = 0 -- If it's moving, reset checktime
 						else
-							g_RATtable[i].unitCheckTime[j] = g_RATtable[i].unitCheckTime[j] + 1
+							g_RATtable[l_index].unitCheckTime[j] = g_RATtable[l_index].unitCheckTime[j] + 1
 						end
 
 						local actualunitpos = actualunit:getPosition().p
@@ -6312,10 +6313,10 @@ function f_checkStatus()
 						local lowerstatuslimit = g_minDamagedLife * actualunit:getLife0() -- Was 0.95. changed to 0.10
 					-- Check for wandering
 						if ((actualunitpos.x > 100000) or (actualunitpos.x < -500000) or (actualunitpos.z > 1100000) or (actualunitpos.z < 200000)) then
-							if f_removeUnit(i, j, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
-								RATtableLimit = RATtableLimit - 1
-								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							if f_removeUnit(l_index, j, '  removed due to wandering', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+								l_RATtableLimit = l_RATtableLimit - 1
+								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
 							else
 							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
@@ -6323,10 +6324,10 @@ function f_checkStatus()
 							end
 					-- Check for below ground level
 						elseif (actualunitheight < 0) then
-							if f_removeUnit(i, j, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
-								RATtableLimit = RATtableLimit - 1
-								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							if f_removeUnit(l_index, j, '  removed due to being below ground level', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+								l_RATtableLimit = l_RATtableLimit - 1
+								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
 							else
 								j = j - 1	-- -1 then +1, stay on current j because table has shrunk
@@ -6334,32 +6335,32 @@ function f_checkStatus()
 							end
 					-- check for damaged unit
 						elseif ((actualunitheight < g_minDamagedHeight) and (actualunit:getLife() <= lowerstatuslimit)) then
-							if f_removeUnit(i, j, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
-								RATtableLimit = RATtableLimit - 1
-								i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+							if f_removeUnit(l_index, j, '  removed due to damage', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+								l_RATtableLimit = l_RATtableLimit - 1
+								l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
 								j = unitNamesLimit	-- No need to iterate through anymore units in this group
 							else
 								j = j - 1	-- -1 then +1, stay on current j because table has shrunk
 								unitNamesLimit = unitNamesLimit - 1 -- total unit table size has shrunk
 							end
 					-- Check for stuck
-						elseif (g_RATtable[i].unitCheckTime[j] > g_waitTime) then
-							if f_removeUnit(i, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
-								f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
+						elseif (g_RATtable[l_index].unitCheckTime[j] > g_waitTime) then
+							if f_removeUnit(l_index, j, '  removed due to low speed', true, actualunit) then -- If true, then there are no more units in this group
+								f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
 							end
 							-- Lets exit the function for this cycle because an aircraft was removed.
 							--  Possible for another blocked aircraft to now move.
 							--  (instead that aircraft would be deleted during next run of the current loop)
-							RATtableLimit = 0
+							l_RATtableLimit = 0
 							unitNamesLimit = 0
 						end
 					else
 					-- Unit removed by sim
-						if f_removeUnit(i, j, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
-							f_removeGroup(i, '  removed, no more units', true, currentaircraftgroup)
-							RATtableLimit = RATtableLimit - 1
-							i = i - 1 -- Subtract one now, but later in loop add one, so next run we use the same i (because current i row has been removed)
+						if f_removeUnit(l_index, j, '  removed by sim, not script', false, actualunit) then -- If true, then there are no more units in this group
+							f_removeGroup(l_index, '  removed, no more units', true, currentaircraftgroup)
+							l_RATtableLimit = l_RATtableLimit - 1
+							l_index = l_index - 1 -- Subtract one now, but later in loop add one, so next run we use the same l_index (because current l_index row has been removed)
 							j = unitNamesLimit	-- No need to iterate through anymore units in this group
 						else
 							j = j - 1	-- -1 then +1, stay on current j because table has shrunk
@@ -6368,7 +6369,7 @@ function f_checkStatus()
 					end
 					j = j + 1
 				end
-				i = i + 1
+				l_index = l_index + 1
 			end
 		end
 	end
@@ -6376,23 +6377,24 @@ end
 
 -- Determine the bases based on a coalition parameter
 function f_getAFBases (coalitionIndex)
-	local AFids = {}
-	local AF    = {}
-	AFids = coalition.getAirbases(coalitionIndex)
-	for i = 1, #AFids do
-		AF[i] =
+	local l_AFids = {}
+	local l_AF    = {}
+
+	l_AFids = coalition.getAirbases(coalitionIndex)
+	for i = 1, #l_AFids do
+		l_AF[i] =
 		{
-			name = AFids[i]:getName(),
-			id_  = AFids[i].id_,
-			id   = AFids[i]:getID()
+			name = l_AFids[i]:getName(),
+			id_  = l_AFids[i].id_,
+			id   = l_AFids[i]:getID()
 		}
 	end
-return AF
+return l_AF
 end
 
 -- Choose a random airbase
 function f_chooseAirbase(AF)
-	airbaseChoice = math.random(1, #AF)
+	local l_airbaseChoice = math.random(1, #AF)
 return AF[airbaseChoice]
 end
 
@@ -6409,23 +6411,25 @@ end
 
 -- Determine spawn and land airbases
 function f_makeAirBase(cs)
-	local ab = {}
-	ab[1] = f_chooseAirbase(g_AB[cs])
-	ab[2] = f_chooseAirbase(g_AB[cs])
+	local l_ab = {}
+
+	l_ab[1] = f_chooseAirbase(g_AB[cs])
+	l_ab[2] = f_chooseAirbase(g_AB[cs])
+
 	if ((g_flagNoSpawnLandingAirbase) and (#g_AB[cs] > 1)) then -- If flag is set and more than 1 airbase, don't let spawn and land airbase be the same
-		while (ab[1] == ab[2]) do
-			ab[2] = f_chooseAirbase(g_AB[cs])
+		while (l_ab[1] == l_ab[2]) do
+			l_ab[2] = f_chooseAirbase(g_AB[cs])
 		end
 	end
-return ab
+return l_ab
 end
 
 -- Main scheduled function to create new coalition groups as needed
 function f_generateGroup()
-	local lowVal						-- lowest available coalition side
-	local highVal						-- highest available coalition side
-	local airbase = {}					-- table of spawn and landing airbases
-	local flgSpawn = {false, false}		-- flags to determine which coalitions get new groups
+	local l_lowVal						-- lowest available coalition side
+	local l_highVal						-- highest available coalition side
+	local l_airbase   = {}				-- table of spawn and landing airbases
+	local l_flagSpawn = {false, false}	-- flags to determine which coalitions get new groups
 
 	-- Names of red bases
 	g_AB[1] = f_getAFBases(1)
@@ -6441,43 +6445,43 @@ function f_generateGroup()
 
 	-- Choose which coalition side to possibly spawn new aircraft
 	if (#g_AB[1] > 0) then
-		lowVal = 1
+		l_lowVal = 1
 	else
-		lowVal = 2
+		l_lowVal = 2
 	end
 
 	if (#g_AB[2] > 0) then
-		highVal = 2
+		l_highVal = 2
 	else
-		highVal = 1
+		l_highVal = 1
 	end
 
-	if (lowVal > highVal) then  -- No coalition bases defined at all!
+	if (l_lowVal > l_highVal) then  -- No coalition bases defined at all!
 		env.warning("There are no coalition bases defined!!! exiting dynamic spawn function.", false)
 		return
 	end
 
 	if (g_randomCoalitionSpawn == 1) then	-- Spawn random coalition
-		flgSpawn[math.random(lowVal, highVal)] = true
+		l_flagSpawn[math.random(l_lowVal, l_highVal)] = true
 	else
-		if ((g_randomCoalitionSpawn == 3) and (not (g_numCoalitionAircraft[1] == g_numCoalitionAircraft[2])) and (g_maxCoalitionAircraft[1] == g_maxCoalitionAircraft[2]) and (lowVal < highVal)) then -- Unfair situation
+		if ((g_randomCoalitionSpawn == 3) and (not (g_numCoalitionAircraft[1] == g_numCoalitionAircraft[2])) and (g_maxCoalitionAircraft[1] == g_maxCoalitionAircraft[2]) and (l_lowVal < l_highVal)) then -- Unfair situation
 			if (g_numCoalitionAircraft[1] < g_numCoalitionAircraft[2]) then	-- spawn Red group
-				flgSpawn = {true, false}
+				l_flagSpawn = {true, false}
 			else
-				flgSpawn = {false, true}
+				l_flagSpawn = {false, true}
 			end
 		else
-			if (lowVal == 1) then flgSpawn[1] = true end
-			if (highVal == 2) then flgSpawn[2] = true end
+			if (l_lowVal == 1)  then l_flagSpawn[1] = true end
+			if (l_highVal == 2) then l_flagSpawn[2] = true end
 		end
 	end
 
 	-- If needed, spawn new group for each coalition
 	for i = 1, 2 do
-		if (flgSpawn[i] == true) then
+		if (l_flagSpawn[i] == true) then
 			if f_checkMax(i) then
-				airbase = f_makeAirBase(i)
-				f_generateAirplane(i, airbase[1], airbase[2], g_namePrefix[i])
+				l_airbase = f_makeAirBase(i)
+				f_generateAirplane(i, l_airbase[1], l_airbase[2], g_namePrefix[i])
 			end
 		end
 	end
