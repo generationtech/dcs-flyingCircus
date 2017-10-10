@@ -17,7 +17,7 @@ do
 --FLAGS
 flgRandomFuel = true				-- Random fuel loadout?		--check
 flagRandomWeapons = true			-- Add weapons to aircraft?		--check
-flagRandomWaypoint = false			-- Create intermediate waypoint?		--check
+flagRandomWaypoint = true			-- Create intermediate waypoint?		--check
 flgNoSpawnLandingAirbase = true		-- Don't allow spawning airbase and landing airbase to be the same?		--check
 flgSetTasks = true					-- Enable general tasks appropriate for each unit (CAP, CAS, REFUEL, etc)		--check
 flgRandomSkins = true				-- Randomize the skins for each aircraft (otherwise just choose 1st defined skin)
@@ -34,14 +34,15 @@ debugScreen = true	-- write messages to screen		--check
 
 --RANGES
 randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( maxCoalitionAircraft{} must be equal for #3 to work)		--check
-spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
-spawnIntervalHigh = 40							-- Random spawn high end repeat interval		--check
+spawnIntervalLow = 15							-- Random spawn low end repeat interval		--check
+spawnIntervalHigh = 30							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
 aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
-maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--chec
-maxCoalitionAircraft = {15, 15}							-- Maximum number of red, blue units
+maxGroupSize = 4								-- Maximum number of groups for those units supporting formations		--check
+minGroupSize = 1								-- Minimum number of groups for those units supporting formations
+maxCoalitionAircraft = {20, 20}					-- Maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {40000, 40000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
+waypointRange = {50000, 50000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
@@ -57,7 +58,7 @@ parkingSpotType =
 		"Turning Point", "Turning Point",
 		"Turning Point", "Turning Point"		-- Favor in-air start
 	}
-spawnSpeedTurningPoint = 120					-- When spawning in the air as turning point, starting speed		--check
+spawnSpeedTurningPoint = 125					-- When spawning in the air as turning point, starting speed		--check
 defaultAirplaneFormation = 1					-- When not randomizing formations, the default airplane formation #
 defaultHelicopterFormation = 1					-- When not randomizing formations, the default helicopter formation #
 unitSkill = 									-- List of possible skill levels for AI units
@@ -8306,16 +8307,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	local _formationName = ''
 	--
 
-	-- set max group size based on availability and limit
-	if ((maxCoalitionAircraft[coalitionIndex] - numCoalitionAircraft[coalitionIndex]) >= maxGroupSize) then
-		_maxGroupSize = maxGroupSize
-	else
-		_maxGroupSize = maxCoalitionAircraft[coalitionIndex] - numCoalitionAircraft[coalitionIndex]
-	end
-
-	-- If later to create additional units for this group, set formation based on aircraft type
-
-	if ((_singleInFlight == false) and (_maxGroupSize > 1)) then
+	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
 		local _params = {}
 		local _r
 		if (_category == "AIRPLANE") then
@@ -8446,12 +8438,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	_unitCheckTime = {0}
 	_formationSize = 1
 
-	-- Create additional units for this group if applicable
-	if ((_singleInFlight == false) and (_maxGroupSize > 1)) then
-		_formationSize = math.random(1, _maxGroupSize)
-env.info('formation size: ' .. _formationSize, false)
+	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
+		_formationSize = math.random(minGroupSize, maxGroupSize)
+--env.info('formation size: ' .. _formationSize, false)
 		for i=2, _formationSize do
-env.info('start formation loop: ' .. i, false)
+--env.info('start formation loop: ' .. i, false)
 			_airplanedata.units[i] =
 			{
 				["alt"] = 0,
@@ -8632,18 +8623,31 @@ end
 function removeGroup (indeX, messagE, destroyflaG, aircraftgrouP)
 	if (debugLog) then env.info('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, false) end
 	if (debugScreen) then trigger.action.outText('group:' .. RATtable[indeX].groupname .. '  type:' .. RATtable[indeX].actype .. messagE, 20) end
-	if (numCoalitionAircraft[RATtable[indeX].coalition] > 0) then		-- Decrease number of active aircraft by number of aircraft originally in this group
-		numCoalitionAircraft[RATtable[indeX].coalition] = numCoalitionAircraft[RATtable[indeX].coalition] - RATtable[indeX].formationSize
+
+	if ((numCoalitionAircraft[RATtable[indeX].coalition] > 0) and (#RATtable[indeX].unitNames > 0)) then		-- If possible, increase the available aircraft for this coalition by the number of units remaining in the group
+		if ((numCoalitionAircraft[RATtable[indeX].coalition] - #RATtable[indeX].unitNames) > 0) then
+				numCoalitionAircraft[RATtable[indeX].coalition] = numCoalitionAircraft[RATtable[indeX].coalition] - #RATtable[indeX].unitNames
+		else
+				numCoalitionAircraft[RATtable[indeX].coalition] = 0
+		end
 	end
+
 	table.remove(RATtable, indeX)	-- Group does not exist any longer for this script
+
 	if (destroyflaG) then aircraftgrouP:destroy() end
 end
 
 function removeUnit (indexI, indexJ, removeMessage, destroyFlag, aircraftUnit)
 	if (debugLog) then env.info('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage, false) end
 	if (debugScreen) then trigger.action.outText('unit:' .. RATtable[indexI].unitNames[indexJ] .. '  type:' .. RATtable[indexI].actype .. removeMessage, 20) end
+
 	table.remove(RATtable[indexI].unitNames, indexJ)		-- Unit does not exist any longer for this script
 	table.remove(RATtable[indexI].unitCheckTime, indexJ)	-- Unit does not exist any longer for this script
+
+	if (numCoalitionAircraft[RATtable[indexI].coalition] > 0) then		-- If possible, increase the number of available aircraft for this coalition by one
+		numCoalitionAircraft[RATtable[indexI].coalition] = numCoalitionAircraft[RATtable[indexI].coalition] - 1
+	end
+
 	if (destroyFlag) then aircraftUnit:destroy() end
 
 	if (#RATtable[indexI].unitNames == 0) then	-- There are no more units in this group, the group needs to be removed
@@ -8781,7 +8785,7 @@ end
 
 -- Check if possible to spawn a new group for the coalition
 function checkMax(cs)
-	if (numCoalitionAircraft[cs] < maxCoalitionAircraft[cs]) then  -- Is ok to spawn a new unit?
+	if ((numCoalitionAircraft[cs] < maxCoalitionAircraft[cs]) and ((maxCoalitionAircraft[cs] - numCoalitionAircraft[cs]) >= maxGroupSize))then  -- Is ok to spawn a new unit?
 		numCoalitionAircraft[cs] = numCoalitionAircraft[cs] + 1
 		numCoalitionGroup[cs] = numCoalitionGroup[cs] + 1
 		return true
@@ -8859,7 +8863,7 @@ function generateGroup()
 		if (flgSpawn[i] == true) then
 			if checkMax(i) then
 				airbase = makeAirBase(i)
-env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
+--env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
 				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
 			end
 		end
