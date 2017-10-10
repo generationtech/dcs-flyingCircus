@@ -35,8 +35,8 @@ minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLi
 
 -- Should be no need to edit these below
 RATtable = {}
-nameCoalition = {0, 0} -- highest coalition name used
-nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac", "Hawg", "Boar", "Pig", "Tusk"}
+numCoalition = {0, 0} -- highest coalition name used
+nameCallname = {}
 
 --env.setErrorMessageBoxEnabled(false)
 
@@ -58,7 +58,7 @@ end
 
 -- Create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
-
+	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
 
 	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
@@ -187,6 +187,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "E-2C"
 			_country = country.id.USA
 
+			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"}
+
 			_tasks =
 			{
 				[1] =
@@ -223,6 +225,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 6) then
 			_aircrafttype = "E-3A"
 			_country = country.id.USA
+
+			nameCallname = {"Overlord", "Magic", "Wizard", "Focus", "Darkstar"}
 
 			_tasks =
 			{
@@ -283,6 +287,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 8) then
 			_aircrafttype = "KC-135"
 			_country = country.id.USA
+
+			nameCallname = {"Texaco", "Arco", "Shell"}
 
 			_tasks =
 			{
@@ -366,6 +372,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		elseif (randomAirplane == 10) then
 			_aircrafttype = "S-3B Tanker"
 			_country = country.id.USA
+
+			nameCallname = {"Texaco", "Arco", "Shell"}
 
 			_tasks =
 			{
@@ -1577,6 +1585,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			_aircrafttype = "A-10A"
 			_country = country.id.USA
 
+			local addCallname = {"Hawg", "Boar", "Pig", "Tusk"}
+			local c = #nameCallname
+			for k,v in pairs(addCallname) do
+				nameCallname[c + k] = v
+			end
+
 			_task = "CAS"
 			_tasks =
 			{
@@ -1698,6 +1712,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 2)	then
 			_aircrafttype = "A-10C"
+
+			local addCallname = {"Hawg", "Boar", "Pig", "Tusk"}
+			local c = #nameCallname
+			for k,v in pairs(addCallname) do
+				nameCallname[c + k] = v
+			end
 
 			_task = "CAS"
 			_tasks =
@@ -2489,6 +2509,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		elseif (randomAttack == 9)	then
 			_aircrafttype = "A-10C"
+
+			local addCallname = {"Hawg", "Boar", "Pig", "Tusk"}
+			local c = #nameCallname
+			for k,v in pairs(addCallname) do
+				nameCallname[c + k] = v
+			end
 
 			_task = "CAS"
 			_tasks =
@@ -8111,17 +8137,22 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_flightalt = math.random(0,25000)
 	_flightspeed = math.random(175,2000)
 
-	-- simplified random callsign for now. Not all aircraft supported correctly, but it mostly works...
-	local a = math.random(1,#nameCallname)
-	local b = math.random(1,9)
-	_callsign = nameCallname[a] .. b .. 1
-	_callname =
-		{
-			[1] = a,
-			[2] = b,
-			[3] = 1,
-			["name"] = _callsign,
-		}
+	_groupname = nameP .. numCoalition[coalitionIndex]
+
+	if ((_country == country.id.RUSSIA) or (_country == country.id.ABKHAZIA) or (_country == country.id.SOUTH_OSETIA) or (_country == country.id.UKRAINE)) then
+		_callsign = numCoalition[coalitionIndex] .. "1"
+	else
+		local a = math.random(1,#nameCallname)
+		local b = math.random(1,9)
+		_callsign = nameCallname[a] .. b .. "1"
+		_callname =
+			{
+				[1] = a,
+				[2] = b,
+				[3] = 1,
+				["name"] = _callsign,
+			}
+	end
 
 	_airplanedata = {
         ["modulation"] = 0,
@@ -8223,7 +8254,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 										},
                                     },
                                 },
-                                ["groupId"] = nameCoalition[coalitionIndex],
+                                ["groupId"] = numCoalition[coalitionIndex],
                                 ["hidden"] = false,
                                 ["units"] =
                                 {
@@ -8238,7 +8269,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                         ["parking"] = _spawnairplaneparking,
 										["y"] = _spawnairplanepos.z,
 										["x"] = _spawnairplanepos.x,
-										["name"] =  nameP .. nameCoalition[coalitionIndex].."1",
+										["name"] =  _groupname.."1",
 										["callsign"] = _callname,
 										["payload"] = _payload,
 										["speed"] = _speed,
@@ -8249,7 +8280,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 								},
 								["y"] = _spawnairplanepos.z,
 								["x"] = _spawnairplanepos.x,
-								["name"] =  nameP .. nameCoalition[coalitionIndex],
+								["name"] =  _groupname,
 								["communication"] = true,
 								["start_time"] = 0,
 								["frequency"] = 124,
@@ -8271,8 +8302,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	RATtable[#RATtable+1] =
 	{
-		groupname = nameP .. nameCoalition[coalitionIndex],
-		unitname1 = nameP .. nameCoalition[coalitionIndex].."1",
+		groupname = _groupname,
+		unitname1 = _groupname.."1",
 		unitname2 = "none",
 		flightname = _fullname,
 		actype = _aircrafttype,
@@ -8387,7 +8418,7 @@ function generateGroup()
 	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- Is ok to spawn a new unit?
 
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
-		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
+		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
 
 		i = math.random(1, 3)
 		if (i == 1) then
