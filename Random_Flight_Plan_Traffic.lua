@@ -6908,66 +6908,82 @@ function checkStatus()
 	if #RATtable > 0
 	then
 		local icount = {0, 0} -- verify how many units script think are active vs active count for each coalition
+		env.info('#RATtable: ' .. #RATtable .. ' red: ' .. numCoalition[1] .. ' blue: ' .. numCoalition[2], false)
+		RATtableLimit = #RATtable
 		for i = 1, #RATtable
 		do
-			if Group.getByName(RATtable[i].groupname) == nil then					-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
-				if (RATtable[i].checktime > 0) and (RATtable[i].status ~= nil) then	-- have we checked this group yet? (should have spawned by now) AND we've not already erased this group from the array
-					env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  removed by sim, not script', false)
-					RATtable[i].status = nil										-- group does not exist any longer for this script
-					if (numCoalition[RATtable[i].coalition] > 0) then
-						numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- make sure to account for groups that become missing from the sim outside of script control
+			env.info('i: ' .. i .. ' RATtableLimit: ' .. RATtableLimit, false)
+			if (i <= RATtableLimit) then
+				if Group.getByName(RATtable[i].groupname) == nil then					-- this group does not exist, yet (just now spawning) OR removed by sim (crash or kill)
+					if (RATtable[i].checktime > 0) and (RATtable[i].status ~= nil) then	-- have we checked this group yet? (should have spawned by now) AND we've not already erased this group from the array
+						env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  removed by sim, not script', false)
+						--					RATtable[i].status = nil										-- group does not exist any longer for this script
+						if (numCoalition[RATtable[i].coalition] > 0) then
+							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- make sure to account for groups that become missing from the sim outside of script control
+						end
+						table.remove(RATtable, i)										-- group does not exist any longer for this script
+						i = i - 1
+						RATtableLimit = RATtableLimit - 1
 					end
-				end
-			else -- we have an active valid group, check for damage or stopped
-				icount[RATtable[i].coalition] = icount[RATtable[i].coalition] + 1
-				local u1 = RATtable[i].unitname1
-				local au = Unit.getByName(u1)
-				env.info(numCoalition[RATtable[i].coalition] .. ':' .. icount[RATtable[i].coalition] .. ' - ' .. 'group: ' .. RATtable[i].groupname .. '  life: ' .. au:getLife(), false)
+				else -- we have an active valid group, check for damage or stopped
+					icount[RATtable[i].coalition] = icount[RATtable[i].coalition] + 1
+					local u1 = RATtable[i].unitname1
+					local au = Unit.getByName(u1)
+					env.info(numCoalition[RATtable[i].coalition] .. ':' .. icount[RATtable[i].coalition] .. ' - ' .. 'group: ' .. RATtable[i].groupname .. '  life: ' .. au:getLife(), false)
 
-				if (RATtable[i].checktime > 30) then -- this group hasn't moved in a very long time
-					local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
-					env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', false)
-					trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', 20)
-					currentaircraftgroup:destroy()
+					if (RATtable[i].checktime > 30) then -- this group hasn't moved in a very long time
+						local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
+						env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', false)
+						trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', 20)
+						currentaircraftgroup:destroy()
 
-					RATtable[i].status = nil										-- group does not exist any longer for this script
-					if (numCoalition[RATtable[i].coalition] > 0) then
-						numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- remove this group from script count of active units
-					end
---					return timer.getTime() + 10 -- removed this line because we want to process the remaining groups in the array first!
-				else -- valid, active group
-					local currentunitname1 = RATtable[i].unitname1
-					if Unit.getByName(currentunitname1) ~= nil and RATtable[i].status ~= nil -- valid, active unit
-					then
-						local actualunit = Unit.getByName(currentunitname1)
-						local initunitstatus = actualunit:getLife0()
-						local lowerstatuslimit = 0.95* initunitstatus
-						local actualunitpos = actualunit:getPosition().p
-						local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
-						if (actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit) -- check for damaged unit
+	--					RATtable[i].status = nil										-- group does not exist any longer for this script
+						if (numCoalition[RATtable[i].coalition] > 0) then
+							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1	-- remove this group from script count of active units
+						end
+						table.remove(RATtable, i)										-- group does not exist any longer for this script
+						i = i - 1
+						RATtableLimit = RATtableLimit - 1
+						icount[RATtable[i].coalition] = icount[RATtable[i].coalition] - 1
+	--					return timer.getTime() + 10 -- removed this line because we want to process the remaining groups in the array first!
+					else -- valid, active group
+						local currentunitname1 = RATtable[i].unitname1
+						if Unit.getByName(currentunitname1) ~= nil and RATtable[i].status ~= nil -- valid, active unit
 						then
-							local currentaircraftgroup = Unit.getGroup(actualunit)
-							env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', false)
-							trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', 20)
-							currentaircraftgroup:destroy()
+							local actualunit = Unit.getByName(currentunitname1)
+							local initunitstatus = actualunit:getLife0()
+							local lowerstatuslimit = 0.95* initunitstatus
+							local actualunitpos = actualunit:getPosition().p
+							local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
+							if (actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit) -- check for damaged unit
+							then
+								local currentaircraftgroup = Unit.getGroup(actualunit)
+								env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', false)
+								trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', 20)
+								currentaircraftgroup:destroy()
 
-							RATtable[i].status = nil										-- unit does not exist any longer for this script
-							if (numCoalition[RATtable[i].coalition] > 0) then
-								numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
-							end
-						--return timer.getTime() + 10 -- removed this line because we want to process the remaining groups in the array first!
-						else -- valid unit, check for movement
-							local currentunitname = RATtable[i].unitname1
-							local actualunit = Unit.getByName(currentunitname)
-							local actualunitvel = actualunit:getVelocity()
-							local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
+	--							RATtable[i].status = nil										-- unit does not exist any longer for this script
+								if (numCoalition[RATtable[i].coalition] > 0) then
+									numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
+								end
+								table.remove(RATtable, i)										-- unit does not exist any longer for this script
+								i = i - 1
+								RATtableLimit = RATtableLimit - 1
+								icount[RATtable[i].coalition] = icount[RATtable[i].coalition] - 1
+							--return timer.getTime() + 10 -- removed this line because we want to process the remaining groups in the array first!
+							else -- valid unit, check for movement
+								local currentunitname = RATtable[i].unitname1
+								local actualunit = Unit.getByName(currentunitname)
+								local actualunitvel = actualunit:getVelocity()
+								local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
 
-							if absactualunitvel > 4 then
-								RATtable[i].checktime = 0 -- if it's moving, reset checktime
+								if absactualunitvel > 4 then
+									RATtable[i].checktime = 0 -- if it's moving, reset checktime
+								end
 							end
 						end
+						RATtable[i].checktime = RATtable[i].checktime + 1
 					end
-					RATtable[i].checktime = RATtable[i].checktime + 1
 				end
 			end
 		end
