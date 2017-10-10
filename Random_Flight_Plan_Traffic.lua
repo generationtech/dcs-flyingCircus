@@ -21,7 +21,9 @@ debugLog = true		-- write entries to the log		--check
 debugScreen = true	-- write messages to screen		--check
 
 --RANGES
-intervall = math.random(30,30)					-- Random spawn repeat interval
+spawnIntervalLow = 10							-- Random spawn low end repeat interval
+spawnIntervalHigh = 60							-- Random spawn high end repeat interval
+checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)
 aircraftDistribution = {20, 40, 60, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
 maxCoalition = {20, 20}							-- Maximum number of red, blue units		--check
@@ -46,7 +48,9 @@ RATtable = {}
 numCoalition = {0, 0}							-- Current number of active Red, Blue dynamic spawned units
 nameCoalition = {0, 0}							-- Highest coalition name used
 nameCallname = {}								-- List of radio callnames possible for that particular aircraft type
-unitSkill = {Average, Good, High, Excellent, Random}
+unitSkill = {Average, Good, High, Excellent, Random}	-- List of possible skill levels for AI units
+generateID = 0										-- Function ID of scheduled function to create new AI units
+spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh)	-- Initial random spawn repeat interval
 
 --env.setErrorMessageBoxEnabled(false)
 
@@ -8389,8 +8393,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
---	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
-	if (debugScreen) then trigger.action.outText('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
+	if (debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
 	{
@@ -8408,8 +8412,6 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 		checktime = 0,
 		status = "taxiing"
 	}
-
-	--if (debugLog) then env.info('#RATtable:' .. #RATtable .. " RATtable:" .. mist.utils.tableShow(RATtable), false) end
 
 end
 
@@ -8554,7 +8556,10 @@ function generateGroup()
 
 		-- Create new aircraft
 		generateAirplane(coalitionSide, airbaseSpawn, airbaseLand, parkingType, NamePrefix[coalitionSide])
+
 	end
+	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
+	return timer.getTime() + spawnInterval
 end
 
 --
@@ -8573,7 +8578,7 @@ if (#blueAF < 1) then
 	env.warning("There are no blue bases in this mission.", false)
 end
 
-Spawntimer = mist.scheduleFunction(generateGroup, {}, timer.getTime() + 2, intervall)
-Spawntimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, intervall)
+timer.scheduleFunction(generateGroup, nil, timer.getTime() + spawnInterval)
+Checktimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, checkInterval)
 
 end
