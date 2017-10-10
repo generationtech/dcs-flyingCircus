@@ -2512,17 +2512,37 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	env.warning("Adding route for group: " .. nameP .. numCoalition[coalitionIndex] .. " Land airbase: " .. landIndex.name, false)
 
 
-	if (AircraftType == 2) then
-		env.warning("Build Heli route", false)
-		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_turningpoint, "Turning Point", 80, 800, "RADIO")
-		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_landingpoint, "LAND", 80, 600, "RADIO")
-	else
-		env.warning("Build Plane route", false)
-		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_turningpoint, "Turning Point", 200, 11500, "RADIO")
-		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_landingpoint, "LAND", 200, 8000, "RADIO")
-	end
+--	if (AircraftType == 2) then
+--		env.warning("Build Heli route", false)
+--		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_turningpoint, "Turning Point", 80, 800, "RADIO")
+--		_landwaypoints[#_landwaypoints+1] =  mist.heli.buildWP(_landingpoint, "LAND", 80, 600, "RADIO")
+--	else
+--		env.warning("Build Plane route", false)
+--		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_turningpoint, "Turning Point", 200, 11500, "RADIO")
+--		_landwaypoints[#_landwaypoints+1] =  mist.fixedWing.buildWP(_landingpoint, "LAND", 200, 8000, "RADIO")
+--	end
 
 
+_landwaypoints[1] =
+{
+    ["action"] = "Turning Point",
+    ["alt"] = 600,
+    ["alt_type"] = "RADIO",
+    ["speed"] = 250,
+    ["type"] = "Turning Point",
+    ["x"] = -2321411.734375,
+    ["y"] = 545968.875
+}
+_landwaypoints[2] =
+{
+    ["action"] = "Landing",
+    ["alt"] = 9,
+    ["alt_type"] = "RADIO",
+    ["speed"] = 250,
+    ["type"] = "Land",
+    ["x"] = -221411.734375,
+    ["y"] = 565968.875
+}
 
 	mist.goRoute(Group.getByName(nameP .. numCoalition[coalitionIndex]), _landwaypoints)
 end
