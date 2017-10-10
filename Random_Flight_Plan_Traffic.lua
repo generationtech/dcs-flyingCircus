@@ -57,12 +57,111 @@ generateID = 0														-- Function ID of scheduled function to create new A
 spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh)	-- Initial random spawn repeat interval
 AB = {}																-- Coalition AirBase table
 
+airplaneFormation =
+	{
+
+
+	}
+
+"TEST1 - Line Abreast - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 1,
+	["value"] = 65538,
+
+"TEST2 - Line Abreast - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 1,
+	["value"] = 65537,
+
+"TEST3 - Trail - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 2,
+	["value"] = 131074,
+
+"TEST4 - Trail - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 2,
+	["value"] = 131073,
+
+"TEST5 - Wedge - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 3,
+	["value"] = 196610,
+
+"TEST6 - Wedge - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 3,
+	["value"] = 196609,
+
+"TEST7 - Echelon Right - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 4,
+	["value"] = 262146,
+
+"TEST8 - Echelon Right - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 4,
+	["value"] = 262145,
+
+"TEST9 - Echelon Left - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 5,
+	["value"] = 327682,
+
+"TEST10 - Echelon Left - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 5,
+	["value"] = 327681,
+
+"TEST11 - Finger Four - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 6,
+	["value"] = 393218,
+
+"TEST12 - Finger Four - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 6,
+	["value"] = 393217,
+
+"TEST13 - Spread Four - Open"
+	["variantIndex"] = 2,
+	["name"] = 5,
+	["formationIndex"] = 7,
+	["value"] = 458754,
+
+"TEST14 - Spread Four - Close"
+	["variantIndex"] = 1,
+	["name"] = 5,
+	["formationIndex"] = 7,
+	["value"] = 458753,
+
+
+helicopterFormation =
+	{
+
+
+	}
+
+
 --env.setErrorMessageBoxEnabled(false)
 
 -- Create a new aircraft based on coalition, airbase, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	nameCallname = {"Enfield", "Springfield", "Uzi", "Colt", "Dodge", "Ford", "Chevy", "Pontiac"}
 	_singleInFlight = false	-- Default to allowing multi-aircraft formations
+	_category = AIRPLANE -- Default to airplane type
 	AircraftType = math.random(1,100) --random for utility airplane, bomber, attack, fighter, or helicopter
 
 	if ((AircraftType >= 1) and (AircraftType <= aircraftDistribution[1])) then  -- UTILITY AIRCRAFT
@@ -71,6 +170,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		else
 			randomAirplane = math.random(1,13) -- random for airplane type; Blue AC 1-13
 		end
+
+		_category = AIRPLANE
 
 		_task = ""
 		_tasks =
@@ -800,6 +901,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		else
 			randomBomber = math.random(1,10) -- random for airplane type; Blue AC 1-10
 		end
+
+		_category = AIRPLANE
 
 		_task = ""
 		_tasks =
@@ -1587,6 +1690,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		else
 			randomAttack = math.random(1,8) -- random for airplane type; Blue AC 1-8
 		end
+
+		_category = AIRPLANE
 
 		_task = "CAS"
 		_tasks =
@@ -3214,6 +3319,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		else
 			randomFighter = math.random(1,21) -- random for airplane type; Blue AC 1-21
 		end
+
+		_category = AIRPLANE
 
 		_task = "CAP"
 		_tasks =
@@ -6450,6 +6557,8 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 			randomHeli = math.random(1,14) -- random for airplane type; Blue AC 1-14
 		end
 
+		_category = HELICOPTER
+
 		_task = ""
 		_tasks =
 		{
@@ -8249,9 +8358,12 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 						["id"] = "Option",
 						["params"] =
 						{
+						-- 1 or 2
 							["variantIndex"] = 2,
 							["name"] = 5,
+						-- based on formation type and ac type
 							["formationIndex"] = 1,
+						-- try to just leave this out for now
 							["value"] = 65538,
 						},
 					},
@@ -8447,10 +8559,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		}
 	end
 
-	if (AircraftType == 1 or AircraftType == 3) then
-		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
-	else
+	if (_category == HELICOPTER) then
 		coalition.addGroup(_country, Group.Category.HELICOPTER, _airplanedata)
+	else
+		coalition.addGroup(_country, Group.Category.AIRPLANE, _airplanedata)
 	end
 
 	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _callsign .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  fullname:' .. _fullname, false) end
