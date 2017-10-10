@@ -1289,6 +1289,20 @@ aircraftTable =
 			_category = "AIRPLANE",
 			_singleInFlight = true,
 
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = true,
+					["id"] = "Tanker",
+					["number"] = 1,
+					["params"] =
+					{
+					},
+				},
+			},
+
 			_payload =
 			{
 				["pylons"] =
@@ -2785,6 +2799,27 @@ aircraftTable =
 			_aircrafttype = "Bf-109K-4",
 			_category = "AIRPLANE",
 
+			_task = "CAP",
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			},
+
 			_payload =
 			{
 				["pylons"] =
@@ -3179,11 +3214,11 @@ aircraftTable =
 				{
 					[1] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
 					},
 					[2] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
 					},
 					[3] =
 					{
@@ -3192,10 +3227,6 @@ aircraftTable =
 					[4] =
 					{
 						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
-					},
-					[5] =
-					{
-						["CLSID"] = "{CAAC1CFD-6745-416B-AFA4-CB57414856D0}",
 					},
 					[6] =
 					{
@@ -3211,11 +3242,11 @@ aircraftTable =
 					},
 					[9] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
 					},
 					[10] =
 					{
-						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+						["CLSID"] = "{C8E06185-7CD6-4C90-959F-044679E90751}",
 					},
 				},
 				["fuel"] = "3104",
@@ -3239,6 +3270,27 @@ aircraftTable =
 		{
 			_aircrafttype = "F-4E",
 			_category = "AIRPLANE",
+
+			_task = "CAP",
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			},
 
 			_payload =
 			{
@@ -3882,6 +3934,27 @@ aircraftTable =
 			_aircrafttype = "MiG-29G",
 			_category = "AIRPLANE",
 
+			_task = "CAP",
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			},
+
 			_payload =
 			{
 				["pylons"] =
@@ -4007,6 +4080,27 @@ aircraftTable =
 		{
 			_aircrafttype = "Mirage 2000-5",
 			_category = "AIRPLANE",
+
+			_task = "CAP",
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			},
 
 			_payload =
 			{
@@ -4271,6 +4365,27 @@ aircraftTable =
 		{
 			_aircrafttype = "F-16C bl.50",
 			_category = "AIRPLANE",
+
+			_task = "CAP",
+			_tasks =
+			{
+				[1] =
+				{
+					["enabled"] = true,
+					["auto"] = false,
+					["id"] = "EngageTargets",
+					["key"] = "CAP",
+					["number"] = 1,
+					["params"] =
+					{
+						["targetTypes"] =
+						{
+							[1] = "Air",
+						},
+						["priority"] = 0,
+					},
+				},
+			},
 
 			_payload =
 			{
