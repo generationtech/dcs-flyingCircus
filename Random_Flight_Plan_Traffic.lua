@@ -38,48 +38,43 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 		if (randomAirplane == 1) then
 			_aircrafttype = "An-26B"
-			_skin = "Georgian AF"
-			_payload =	{
-			["pylons"] =
-			{
-			}, -- end of ["pylons"]
-			["fuel"] = "5500",
-			["flare"] = 384,
-			["chaff"] = 384,
-			["gun"] = 100,
-			}
-			_country = country.id.GEORGIA
-			callsign = "GAF"
 
-		if (randomAirplane == 1) then
-			_aircrafttype = "An-26B"
-			_skin = "Ukraine AF"
-			_payload =	{
-			["pylons"] =
+			subtype = math.random(1,2)
+			if (subtype == 1_ then
+				_skin = "Georgian AF"
+				_country = country.id.GEORGIA
+				callsign = "GEORGIA An-26B"
+			else
+				_skin = "Ukraine AF"
+				_country = country.id.UKRAINE
+				callsign = "UKRAINE  An-26B"
+			end
+
+			_payload =
 			{
-			}, -- end of ["pylons"]
-			["fuel"] = "5500",
-			["flare"] = 384,
-			["chaff"] = 384,
-			["gun"] = 100,
+				["pylons"] =
+				{
+				},
+				["fuel"] = "5500",
+				["flare"] = 384,
+				["chaff"] = 384,
+				["gun"] = 100,
 			}
-			_country = country.id.UKRAINE
-			callsign = "GAF"
 
 		elseif (randomAirplane == 2) then
 			_aircrafttype = "An-30M"
 			_skin = "15th Transport AB"
+			_country = country.id.UKRAINE
+			callsign = "UAF"
 			_payload =  {
 			["pylons"] =
 			{
-			}, -- end of ["pylons"]
+			},
 			["fuel"] = "8300",
 			["flare"] = 192,
 			["chaff"] = 192,
 			["gun"] = 100,
 			}
-			_country = country.id.UKRAINE
-			callsign = "UAF"
 
 		elseif (randomAirplane == 3) then
 			_aircrafttype = "C-130"
@@ -2788,9 +2783,9 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	end
 
-	env.warning('group: ' .. _airplanedata.name .. '  type: ' .. _aircrafttype .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], false)
+	env.warning('group: ' .. _airplanedata.name .. '  callsign: ' .. callsign .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], false)
 
-	trigger.action.outText('group: ' .. _airplanedata.name .. '  type: ' .. _aircrafttype .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], 10)
+	trigger.action.outText('group: ' .. _airplanedata.name .. '  callsign: ' .. callsign .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], 10)
 
 end
 
