@@ -3,8 +3,8 @@
 
 do
 --EDIT BELOW
-intervall = math.random(10,30) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {40, 40} 	-- maximum number of red, blue units
+intervall = math.random(15,30) 	--random repeat interval between (A and B) in seconds
+maxCoalition = {10, 30} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 
@@ -27,9 +27,9 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(1,14) --random for utility airplane, bomber, attack, fighter, or helicopter
+	AircraftType = math.random(1,19) --random for utility airplane, bomber, attack, fighter, or helicopter
 
-	if ((AircraftType >= 1) and (AircraftType <= 2)) then  -- UTILITY AIRCRAFT
+	if ((AircraftType >= 1) and (AircraftType <= 1)) then  -- UTILITY AIRCRAFT
 		if (coalitionIndex == 1) then
 			randomAirplane = math.random(14,23) -- random for airplane type; Red AC 14-23
 		else
@@ -631,7 +631,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 3) and (AircraftType <= 4)) then  -- BOMBERS
+	elseif ((AircraftType >= 2) and (AircraftType <= 2)) then  -- BOMBERS
 		if (coalitionIndex == 1) then
 			randomBomber = math.random(11,15) -- random for airplane type; Red AC 11-15
 		else
@@ -1212,7 +1212,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 5) and (AircraftType <= 8)) then  -- ATTACK AIRCRAFT
+	elseif ((AircraftType >= 3) and (AircraftType <= 7)) then  -- ATTACK AIRCRAFT
 		if (coalitionIndex == 1) then
 			randomAttack = math.random(9,16) -- random for airplane type; Red AC 9-16
 		else
@@ -2410,7 +2410,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			}
 		end
 
-	elseif ((AircraftType >= 9) and (AircraftType <= 12)) then  -- FIGHTERS
+	elseif ((AircraftType >= 8) and (AircraftType <= 16)) then  -- FIGHTERS
 		if (coalitionIndex == 1) then
 			randomFighter = math.random(22,25) -- random for airplane type; Red AC 22-25
 		else
@@ -2741,47 +2741,57 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 			subtype = math.random(1,5)
 			if (subtype == 1) then
 				_country = country.id.BELGIUM
+				_skin = "2nd squadron `comet` florennes ab"
 
-				subtype1 = math.random(1,2)
-				if (subtype1 == 1) then
-					_skin = "2nd squadron `comet` florennes ab"
-				else
-					_skin = "CMD extended skins"
-				end
+--				subtype1 = math.random(1,2)
+--				if (subtype1 == 1) then
+--					_skin = "2nd squadron `comet` florennes ab"
+--				else
+--					_skin = "CMD extended skins"
+--				end
 
 				callsign = "BELGIUM F-16A MLU - " .. _skin
 
 			elseif (subtype == 2) then
 				_country = country.id.DENMARK
+				_skin = "rdaf f16 standard-1"
 
-				subtype1 = math.random(1,2)
-				if (subtype1 == 1) then
-					_skin = "rdaf f16 standard-1"
-				else
-					_skin = "CMD extended skins"
-				end
+--				subtype1 = math.random(1,2)
+--				if (subtype1 == 1) then
+--					_skin = "rdaf f16 standard-1"
+--				else
+--					_skin = "CMD extended skins"
+--				end
 
 				callsign = "DENMARK F-16A MLU - " .. _skin
 
 			elseif (subtype == 3) then
 				_country = country.id.ITALY
+				_skin = "rdaf f16 standard-1"
 
-				subtype1 = math.random(1,2)
-				if (subtype1 == 1) then
-					_skin = "rdaf f16 standard-1"
-				else
-					_skin = "CMD extended skins"
-				end
+--				subtype1 = math.random(1,2)
+--				if (subtype1 == 1) then
+--					_skin = "rdaf f16 standard-1"
+--				else
+--					_skin = "CMD extended skins"
+--				end
 
 				callsign = "ITALY F-16A MLU - " .. _skin
 
 			elseif (subtype == 4) then
 				_country = country.id.NORWAY
 
-				subtype1 = math.random(1,3)
+--				subtype1 = math.random(1,3)
+--				if (subtype1 == 1) then
+--					_skin = "CMD extended skins"
+--				elseif (subtype1 == 2) then
+--					_skin = "norway 338 skvadron"
+--				else
+--					_skin = "norway skv338"
+--				end
+
+				subtype1 = math.random(1,2)
 				if (subtype1 == 1) then
-					_skin = "CMD extended skins"
-				elseif (subtype1 == 2) then
 					_skin = "norway 338 skvadron"
 				else
 					_skin = "norway skv338"
@@ -4291,7 +4301,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 		end
 
-	elseif ((AircraftType >= 13) or (AircraftType <= 14)) then -- HELICOPTERS
+	elseif ((AircraftType >= 17) or (AircraftType <= 19)) then -- HELICOPTERS
 		if (coalitionIndex == 1) then
 			randomHeli = math.random(13,18) -- random for airplane type; Red AC 13-18
 		else
