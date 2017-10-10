@@ -29,11 +29,11 @@ randomCoalitionSpawn = 3						-- Coalition spawn style: 1=random coalition, 2=eq
 spawnIntervalLow = 20							-- Random spawn low end repeat interval		--check
 spawnIntervalHigh = 40							-- Random spawn high end repeat interval		--check
 checkInterval = 20								-- How frequently to check dynamic AI groups status (effective rate to remove stuck aircraft is combined with waitTime in checkStatus() function)		--check
-aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
+aircraftDistribution = {60, 70, 80, 90, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)		--check
 maxGroupSize = 4								-- Maximum number of groups for those units supporting formations
 maxCoalition = {5, 5}							-- Maximum number of red, blue units		--check
 NamePrefix = {"Red-", "Blue-"}					-- Prefix to use for naming groups		--check
-waypointRange = {20000, 20000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
+waypointRange = {10000, 10000}					-- Maximum x,y of where to place intermediate waypoint between takeoff		--check
 waitTime = 10									-- Amount to time to wait before considering aircraft to be parked or stuck		--check
 minDamagedLife = 0.10							-- Minimum % amount of life for aircraft under minDamagedHeight		--check
 minDamagedHeight = 20							-- Minimum height to start checking for minDamagedLife		--check
@@ -60,15 +60,15 @@ unitSkill = 									-- List of possible skill levels for AI units
 	}
 airplaneFormation =													-- Airplane formations
 	{																-- {"Formation Name", "variantIndex", "name", "formationIndex", "value"}
-		[1]  = {"Line Abreast - Open", 2, 5, 1, 65538},
-		[2]  = {"Line Abreast - Close", 1, 5, 1, 65537},
-		[3]  = {"Trail - Open", 2, 5, 2, 131074},
-		[4]  = {"Trail - Close", 1, 5, 2, 131073},
-		[5]  = {"Wedge - Open", 2, 5, 3, 196610},
-		[6]  = {"Wedge - Close", 1, 5, 3, 196609},
-		[7]  = {"Echelon Right - Open", 2, 5, 4, 262146},
-		[8]  = {"Echelon Right - Close", 1, 5, 4, 262145},
-		[9]  = {"Echelon Left - Open", 2, 5, 5, 327682},
+		[1] = {"Line Abreast - Open", 2, 5, 1, 65538},
+		[2] = {"Line Abreast - Close", 1, 5, 1, 65537},
+		[3] = {"Trail - Open", 2, 5, 2, 131074},
+		[4] = {"Trail - Close", 1, 5, 2, 131073},
+		[5] = {"Wedge - Open", 2, 5, 3, 196610},
+		[6] = {"Wedge - Close", 1, 5, 3, 196609},
+		[7] = {"Echelon Right - Open", 2, 5, 4, 262146},
+		[8] = {"Echelon Right - Close", 1, 5, 4, 262145},
+		[9] = {"Echelon Left - Open", 2, 5, 5, 327682},
 		[10] = {"Echelon Left - Close", 1, 5, 5, 327681},
 		[11] = {"Finger Four - Open", 2, 5, 6, 393218},
 		[12] = {"Finger Four - Close", 1, 5, 6, 393217},
@@ -77,15 +77,15 @@ airplaneFormation =													-- Airplane formations
 	}
 helicopterFormation =												-- Helicopter formations
 	{																-- {"Formation Name", "variantIndex", "zInverse", "name", "formationIndex", "value"}
-		[1]  = {"Wedge",	nil, nil, 5, 8, 8},
-		[2]  = {"Right - interval 300", 1, 0, 5, 10, 655361},
-		[3]  = {"Right - interval 600", 2, 0, 5, 10, 655362},
-		[4]  = {"Left - interval 300", 1, 1, 5, 10, 655617},
-		[5]  = {"Left - interval 600", 2, 1, 5, 10, 655618},
-		[6]  = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
-		[7]  = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
-		[8]  = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
-		[9]  = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
+		[1] = {"Wedge",	nil, nil, 5, 8, 8},
+		[2] = {"Right - interval 300", 1, 0, 5, 10, 655361},
+		[3] = {"Right - interval 600", 2, 0, 5, 10, 655362},
+		[4] = {"Left - interval 300", 1, 1, 5, 10, 655617},
+		[5] = {"Left - interval 600", 2, 1, 5, 10, 655618},
+		[6] = {"Echelon - Right - 50x70", 1, 0, 5, 9, 589825},
+		[7] = {"Echelon - Right - 50x300", 2, 0, 5, 9, 589826},
+		[8] = {"Echelon - Right - 50x600", 3, 0, 5, 9, 589827},
+		[9] = {"Echelon - Left - 50x70", 1, 1, 5, 9, 590081},
 		[10] = {"Echelon - Left - 50x300", 2, 1, 5, 9, 590082},
 		[11] = {"Echelon - Left - 50x600", 3, 1, 5, 9, 590083},
 		[12] = {"Column", nil, nil, 5, 11, 720896}
@@ -8288,7 +8288,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 	_groupname = nameP .. nameCoalition[coalitionIndex]
 
 	--
-	local _formationName = ''
+	local fname = ''
 	--
 
 	-- If later to create additional units for this group, set formation based on aircraft type
@@ -8309,7 +8309,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 					["value"] = airplaneFormation[_r][5]
 				}
 			--
-			_formationName = airplaneFormation[_r][1]
+			fname = airplaneFormation[_r][1]
 			--
 		else
 			if (flgRandomFormation) then
@@ -8326,7 +8326,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 					["value"] = helicopterFormation[_r][6]
 				}
 			--
-			_formationName = helicopterFormation[_r][1]
+			fname = helicopterFormation[_r][1]
 			--
 		end
 
@@ -8419,12 +8419,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 		["frequency"] = 124,
 	}
 
-	_formationSize = 0
 	-- Create additional units for this group if applicable
 	if ((_singleInFlight == false) and (maxGroupSize > 1)) then
-		_formationSize = math.random(0, maxGroupSize)
 		if (maxGroupSize > 4) then maxGroupSize = 4 end
-		for i=2, _formationSize do
+		for i=2, math.random(1, maxGroupSize) do
+--		for i=2, math.random(maxGroupSize, maxGroupSize) do
 			_airplanedata.units[i] =
 			{
 				["alt"] = 0,
@@ -8577,13 +8576,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, nameP)
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  heading_degree:' .. Pos3.p.y .. '  heading_pi:' .. _spawnHeading, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  spawnpos.x:' .. _spawnairplanepos.x .. '  waypoint.x:' .. _waypoint.x .. '  landpos.x' .. _landairplanepos.x .. '  spawnpos.z:' .. _spawnairplanepos.z .. '  waypoint.z:' .. _waypoint.z .. '  landpos.z:' .. _landairplanepos.z, false) end
 --	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  delta.x:' .. _spawnairplanepos.x - _waypoint.x .. '  delta.z:' .. _spawnairplanepos.z - _waypoint.z, false) end
-	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. _formationName, false) end
+	if (debugLog) then env.info('group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  formation:' .. fname, false) end
 	if (debugScreen) then trigger.action.outText(' group:' .. _airplanedata.name .. '  type:' .. _aircrafttype .. '  callsign:' .. _groupname .. '  #red:' .. numCoalition[1] .. '  #blue:' .. numCoalition[2] .. '  _fullname:' .. _fullname .. '  spawn:' .. spawnIndex.name .. '  land:' .. landIndex.name .. '  altitude:' .. _flightalt .. '  speed:' .. _flightspeed, 10) end
 
 	RATtable[#RATtable+1] =
 	{
 		groupname = _groupname,
-		unitname1 = _groupname .. "-1",
+		unitname1 = _groupname.."1",
 		unitname2 = "none",
 		flightname = _fullname,
 		actype = _aircrafttype,
@@ -8667,7 +8666,6 @@ function checkStatus()
 						--  (instead that aircraft would be deleted during next run of the current loop)
 						i = RATtableLimit
 					end
-				else
 				end
 				i = i + 1
 			end
@@ -8682,11 +8680,11 @@ function getAFBases (coalitionIndex)
 	AFids = coalition.getAirbases(coalitionIndex)
 	for i = 1, #AFids do
 		AF[i] =
-		{
+			{
 			name = AFids[i]:getName(),
 			id_ = AFids[i].id_,
 			id = AFids[i]:getID()
-		}
+			}
 	end
 return AF
 end
@@ -8772,6 +8770,11 @@ function generateGroup()
 		end
 	end
 
+	if (flgSpawn[1]) then f1 = 'true' else f1 = 'false' end
+	if (flgSpawn[2]) then f2 = 'true' else f2 = 'false' end
+
+	env.info('Spawn loop, red: ' .. f1 .. ' blue: ' .. f2, false)
+
 	-- If needed, spawn new group for each coalition
 	for i = 1, 2 do
 		if (flgSpawn[i] == true) then
@@ -8779,11 +8782,15 @@ function generateGroup()
 				airbase = makeAirBase(i)
 				env.info('Spawn loop, spawning for: ' .. airbase[1].name, false)
 				generateAirplane(i, airbase[1], airbase[2], NamePrefix[i])
+			else
+				env.info('Spawn loop, not spawning for: ' .. i, false)
 			end
 		end
 	end
 
 	spawnInterval = math.random(spawnIntervalLow, spawnIntervalHigh) -- Choose new random spawn interval
+
+	env.info('Spawn loop done, interval: ' .. spawnInterval, false)
 
 return timer.getTime() + spawnInterval
 end
