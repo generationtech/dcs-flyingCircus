@@ -24,7 +24,7 @@ g_spawnIntervalLow     = 45			-- Random spawn low end repeat interval
 g_spawnIntervalHigh    = 90			-- Random spawn high end repeat interval
 g_maxCoalitionAircraft = {40, 40}	-- Maximum number of red, blue units
 g_randomCoalitionSpawn = 3			-- Coalition spawn style: 1=random coalition, 2=equal spawn per coalition each time, 3=fair spawn-try to keep total units equal for each coalition ( g_maxCoalitionAircraft{} must be equal for #3 to work)
-g_aircraftDistribution = {0, 0, 0, 0, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
+g_aircraftDistribution = {20, 40, 60, 80, 100}	-- Distribution of aircraft type Utility, Bomber, Attack, Fighter, Helicopter (must be 1-100 range array)
 g_namePrefix           = {"Red-", "Blue-"}		-- Prefix to use for naming groups
 
 --STUCK CONDITION CHECKING
