@@ -3,10 +3,12 @@
 
 do
 --EDIT BELOW
-intervall = math.random(30,60) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {30, 30} 	-- maximum number of red, blue units
+intervall = math.random(30,30) 	--random repeat interval between (A and B) in seconds
+maxCoalition = {15, 15} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
+nameCoalition = {0, 0} -- highest coalition name used
+RATtable = {}
 --env.setErrorMessageBoxEnabled(false)
 
 -- determine the bases based on a coalition parameter
@@ -6359,7 +6361,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 										}, -- end of [2]
                                     },
                                 },
-                                ["groupId"] = numCoalition[coalitionIndex],
+                                ["groupId"] = nameCoalition[coalitionIndex],
                                 ["hidden"] = false,
                                 ["units"] =
                                 {
@@ -6374,7 +6376,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                         ["parking"] = _spawnairplaneparking,
 										["y"] = _spawnairplanepos.z,
 										["x"] = _spawnairplanepos.x,
-										["name"] =  nameP .. numCoalition[coalitionIndex].."1",
+										["name"] =  nameP .. nameCoalition[coalitionIndex].."1",
 										["payload"] = _payload,
 										["speed"] = _speed,
 										["unitId"] =  math.random(9999,99999),
@@ -6384,7 +6386,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 								},
 								["y"] = _spawnairplanepos.z,
 								["x"] = _spawnairplanepos.x,
-								["name"] =  nameP .. numCoalition[coalitionIndex],
+								["name"] =  nameP .. nameCoalition[coalitionIndex],
 								["communication"] = true,
 								["start_time"] = 0,
 								["frequency"] = 124,
@@ -6402,7 +6404,95 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	trigger.action.outText('group: ' .. _airplanedata.name .. '  callsign: ' .. callsign .. '  spawn: ' .. spawnIndex.name .. '  land: ' .. landIndex.name .. '  altitude: ' .. _landalt .. '  speed: ' .. _landspeed .. '  #Red: ' .. numCoalition[1] .. '  #Blue: ' .. numCoalition[2], 10)
 
+	RATtable[#RATtable+1] =
+	{
+		groupname = nameP .. nameCoalition[coalitionIndex],
+		unitname1 = nameP .. nameCoalition[coalitionIndex].."1",
+		unitname2 = "none",
+		flightname = callsign,
+		actype = _aircrafttype,
+		origin = spawnIndex.name,
+		destination = landIndex.name,
+		counter = groupcounter,
+		coalition = coalitionIndex,
+		--size = groupsize,
+		size = 1,
+		checktime = 0,
+		status = "taxiing"
+	}
+
+
 end
+
+function checkStatus()
+	if #RATtable > 0
+	then
+		for i = 1, #RATtable
+		do
+			if Group.getByName(RATtable[i].groupname) ~= nil and RATtable[i].status ~= nil then
+
+				--trigger.action.outText('group: ' .. RATtable[i].groupname .. '  checked', 5)
+
+				if (RATtable[i].checktime > 30) then
+					local currentaircraftgroup = Group.getByName(RATtable[i].groupname)
+					env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', false)
+					trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to low speed', 20)
+					currentaircraftgroup:destroy()
+					RATtable[i].status = nil
+					if (numCoalition[RATtable[i].coalition] > 0) then
+						numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
+					end
+					return timer.getTime() + 10
+				end
+
+				local currentunitname1 = RATtable[i].unitname1 -- checks if unit 1 of group is damaged and removes group if so
+				if Unit.getByName(currentunitname1) ~= nil and RATtable[i].status ~= nil
+				then
+					--trigger.action.outText('group: ' .. RATtable[i].groupname .. '  damage checked', 5)
+
+					local actualunit = Unit.getByName(currentunitname1)
+					local initunitstatus = actualunit:getLife0()
+					local lowerstatuslimit = 0.95* initunitstatus
+					local actualunitpos = actualunit:getPosition().p
+					local actualunitheight = actualunitpos.y - land.getHeight({x = actualunitpos.x, y = actualunitpos.z})
+					if actualunitheight < 20 and actualunit:getLife() <= lowerstatuslimit
+					then
+						local currentaircraftgroup = Unit.getGroup(actualunit)
+						env.warning('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', false)
+						trigger.action.outText('group: ' .. RATtable[i].groupname .. '  callsign: ' .. RATtable[i].flightname .. '  type: ' .. RATtable[i].actype .. '  destroyed due to damage', 20)
+						currentaircraftgroup:destroy()
+						RATtable[i].status = nil
+						if (numCoalition[RATtable[i].coalition] > 0) then
+							numCoalition[RATtable[i].coalition] = numCoalition[RATtable[i].coalition] - 1
+						end
+						RATtable[i].status = nil
+					return timer.getTime() + 10
+					end
+				end
+
+				local currentunitname = RATtable[i].unitname1
+				if Unit.getByName(currentunitname) ~= nil and RATtable[i].status ~= nil
+				then
+
+					local actualunit = Unit.getByName(currentunitname)
+					local actualunitvel = actualunit:getVelocity()
+					local absactualunitvel = math.abs(actualunitvel.x) + math.abs(actualunitvel.y) + math.abs(actualunitvel.z)
+
+					--trigger.action.outText('unit: ' .. RATtable[i].unitname1 .. '  speed checked: ' .. absactualunitvel, 5)
+
+					if absactualunitvel > 4 then
+						RATtable[i].checktime = 0
+					end
+				end
+
+				RATtable[i].checktime = RATtable[i].checktime + 1
+			end
+		end
+	end
+return timer.getTime() + 10
+end
+
+timer.scheduleFunction(checkStatus, nil, timer.getTime() + 4)
 
 function chooseAirbase(AF)
 	airbaseChoice = math.random(1, #AF)
@@ -6440,6 +6530,7 @@ function generateGroup()
 	if (numCoalition[coalitionSide] < maxCoalition[coalitionSide]) then  -- is ok to spawn a new unit?
 
 		numCoalition[coalitionSide] = numCoalition[coalitionSide] + 1
+		nameCoalition[coalitionSide] = nameCoalition[coalitionSide] + 1
 
 		i = math.random(1, 3)
 		if (i == 1) then

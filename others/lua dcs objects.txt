@@ -1,0 +1,139 @@
+Object keys:
+
+00681.319 WARNING SCRIPTING: key: isExist
+00681.319 WARNING SCRIPTING: key: className_
+00681.319 WARNING SCRIPTING: key: parentClass_
+00681.319 WARNING SCRIPTING: key: getCategory
+00681.319 WARNING SCRIPTING: key: cancelChoosingCargo
+00681.319 WARNING SCRIPTING: key: database_
+00681.319 WARNING SCRIPTING: key: Category
+00681.319 WARNING SCRIPTING: key: hasAttribute
+00681.319 WARNING SCRIPTING: key: __index
+00681.319 WARNING SCRIPTING: key: destroy
+00681.319 WARNING SCRIPTING: key: tonumber
+00681.319 WARNING SCRIPTING: key: __le
+00681.319 WARNING SCRIPTING: key: getName
+00681.319 WARNING SCRIPTING: key: __tonumber
+00681.319 WARNING SCRIPTING: key: __lt
+00681.320 WARNING SCRIPTING: key: __eq
+00681.320 WARNING SCRIPTING: key: getPoint
+00681.320 WARNING SCRIPTING: key: __newindex
+00681.320 WARNING SCRIPTING: key: getPosition
+00681.320 WARNING SCRIPTING: key: getVelocity
+00681.320 WARNING SCRIPTING: key: inAir
+00681.320 WARNING SCRIPTING: key: getTypeName
+
+Group keys:
+
+00219.725 INFO    SCRIPTING: found member activate
+00219.725 INFO    SCRIPTING: found member isExist
+00219.725 INFO    SCRIPTING: found member className_
+00219.725 INFO    SCRIPTING: found member parentClass_
+00219.725 INFO    SCRIPTING: found member getCategory
+00219.725 INFO    SCRIPTING: found member Category
+00219.725 INFO    SCRIPTING: found member __index
+00219.725 INFO    SCRIPTING: found member getInitialSize
+00219.725 INFO    SCRIPTING: found member tonumber
+00219.725 INFO    SCRIPTING: found member __tonumber
+00219.725 INFO    SCRIPTING: found member __newindex
+00219.725 INFO    SCRIPTING: found member __le
+00219.725 INFO    SCRIPTING: found member __eq
+00219.725 INFO    SCRIPTING: found member getName
+00219.725 INFO    SCRIPTING: found member getController
+00219.725 INFO    SCRIPTING: found member __lt
+00219.725 INFO    SCRIPTING: found member getSize
+00219.725 INFO    SCRIPTING: found member getID
+00219.725 INFO    SCRIPTING: found member getCoalition
+00219.725 INFO    SCRIPTING: found member destroy
+00219.725 INFO    SCRIPTING: found member getUnits
+00219.725 INFO    SCRIPTING: found member getByName
+00219.725 INFO    SCRIPTING: found member getUnit
+
+Unit keys:
+
+00259.585 INFO    SCRIPTING: found member className_
+00259.585 INFO    SCRIPTING: found member parentClass_
+00259.585 INFO    SCRIPTING: found member getGroup
+00259.585 INFO    SCRIPTING: found member Category
+00259.585 INFO    SCRIPTING: found member getPlayerName
+00259.585 INFO    SCRIPTING: found member __newindex
+00259.585 INFO    SCRIPTING: found member RadarType
+00259.585 INFO    SCRIPTING: found member getLife
+00259.585 INFO    SCRIPTING: found member getLife0
+00259.585 INFO    SCRIPTING: found member getAirbase
+00259.585 INFO    SCRIPTING: found member isActive
+00259.585 INFO    SCRIPTING: found member __tonumber
+00259.585 INFO    SCRIPTING: found member __lt
+00259.585 INFO    SCRIPTING: found member hasSensors
+00259.585 INFO    SCRIPTING: found member getID
+00259.585 INFO    SCRIPTING: found member getCommunicator
+00259.585 INFO    SCRIPTING: found member OpticType
+00259.585 INFO    SCRIPTING: found member getDesc
+00259.585 INFO    SCRIPTING: found member getAmmo
+00259.585 INFO    SCRIPTING: found member getSensors
+00259.585 INFO    SCRIPTING: found member getNumber
+00259.585 INFO    SCRIPTING: found member __index
+00259.585 INFO    SCRIPTING: found member tonumber
+00259.585 INFO    SCRIPTING: found member __le
+00259.585 INFO    SCRIPTING: found member __eq
+00259.585 INFO    SCRIPTING: found member getObjectID
+00259.585 INFO    SCRIPTING: found member RefuelingSystem
+00259.585 INFO    SCRIPTING: found member getDescByName
+00259.585 INFO    SCRIPTING: found member getCoalition
+00259.585 INFO    SCRIPTING: found member SensorType
+00259.585 INFO    SCRIPTING: found member getRadar
+00259.585 INFO    SCRIPTING: found member getController
+00259.585 INFO    SCRIPTING: found member getByName
+00259.585 INFO    SCRIPTING: found member getCallsign
+00259.585 INFO    SCRIPTING: found member getTypeName
+00259.585 INFO    SCRIPTING: found member getFuel
+00259.585 INFO    SCRIPTING: found member getName
+00259.585 INFO    SCRIPTING: found member getCountry
+
+Airbase key:
+
+00317.211 INFO    SCRIPTING: found member getID
+00317.211 INFO    SCRIPTING: found member getCommunicator
+00317.211 INFO    SCRIPTING: found member __eq
+00317.211 INFO    SCRIPTING: found member getDesc
+00317.211 INFO    SCRIPTING: found member getCallsign
+00317.211 INFO    SCRIPTING: found member parentClass_
+00317.211 INFO    SCRIPTING: found member getByName
+00317.211 INFO    SCRIPTING: found member __index
+00317.211 INFO    SCRIPTING: found member tonumber
+00317.211 INFO    SCRIPTING: found member __le
+00317.211 INFO    SCRIPTING: found member __newindex
+00317.211 INFO    SCRIPTING: found member getCoalition
+00317.211 INFO    SCRIPTING: found member __tonumber
+00317.211 INFO    SCRIPTING: found member __lt
+00317.211 INFO    SCRIPTING: found member className_
+00317.211 INFO    SCRIPTING: found member getName
+00317.211 INFO    SCRIPTING: found member getDescByName
+00317.211 INFO    SCRIPTING: found member getTypeName
+00317.211 INFO    SCRIPTING: found member getCountry
+00317.211 INFO    SCRIPTING: found member Category
+00317.211 INFO    SCRIPTING: found member getUnit
+
+Weapon key:
+
+00697.911 INFO    SCRIPTING: found member __eq
+00697.911 INFO    SCRIPTING: found member getDesc
+00697.911 INFO    SCRIPTING: found member className_
+00697.911 INFO    SCRIPTING: found member parentClass_
+00697.911 INFO    SCRIPTING: found member getLauncher
+00697.911 INFO    SCRIPTING: found member __index
+00697.911 INFO    SCRIPTING: found member MissileCategory
+00697.911 INFO    SCRIPTING: found member tonumber
+00697.911 INFO    SCRIPTING: found member getCoalition
+00697.911 INFO    SCRIPTING: found member WarheadType
+00697.911 INFO    SCRIPTING: found member __tonumber
+00697.911 INFO    SCRIPTING: found member __lt
+00697.911 INFO    SCRIPTING: found member __le
+00697.911 INFO    SCRIPTING: found member flag
+00697.911 INFO    SCRIPTING: found member getTarget
+00697.911 INFO    SCRIPTING: found member __newindex
+00697.911 INFO    SCRIPTING: found member Category
+00697.911 INFO    SCRIPTING: found member getCountry
+00697.911 INFO    SCRIPTING: found member GuidanceType
+
+
