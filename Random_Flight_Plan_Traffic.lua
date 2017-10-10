@@ -6972,10 +6972,9 @@ function checkStatus()
 			end
 		end
 	end
-return timer.getTime() + 10
+--return timer.getTime() + 10
 end
 
-timer.scheduleFunction(checkStatus, nil, timer.getTime() + 4)
 
 function chooseAirbase(AF)
 	airbaseChoice = math.random(1, #AF)
@@ -7051,5 +7050,7 @@ if (#blueAF < 1) then
 end
 
 Spawntimer = mist.scheduleFunction(generateGroup, {}, timer.getTime() + 2, intervall)
+--timer.scheduleFunction(checkStatus, nil, timer.getTime() + 4)
+Spawntimer = mist.scheduleFunction(checkStatus, {}, timer.getTime() + 4, intervall)
 
 end
