@@ -27,7 +27,7 @@ end
 -- create a new aircraft based on coalition, airbase, parking type, and name prefix
 function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP)
 
-	AircraftType = math.random(1,19) --random for utility airplane, bomber, attack, fighter, or helicopter
+	AircraftType = math.random(8,16) --random for utility airplane, bomber, attack, fighter, or helicopter
 
 	if ((AircraftType >= 1) and (AircraftType <= 1)) then  -- UTILITY AIRCRAFT
 		if (coalitionIndex == 1) then
@@ -2412,7 +2412,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	elseif ((AircraftType >= 8) and (AircraftType <= 16)) then  -- FIGHTERS
 		if (coalitionIndex == 1) then
-			randomFighter = math.random(22,25) -- random for airplane type; Red AC 22-25
+			randomFighter = math.random(22,36) -- random for airplane type; Red AC 22-36
 		else
 			randomFighter = math.random(1,21) -- random for airplane type; Blue AC 1-21
 		end
@@ -4082,15 +4082,159 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["gun"] = 100,
 			}
 		elseif (randomFighter == 22) then
+			_aircrafttype = "F-16C bl.50"
+
+			_country = country.id.TURKEY
+
+			_skin = "af f16 standard"
+
+			callsign = "TURKEY F-16C bl.50 - " .. _skin
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{6D21ECEA-F85B-4E8D-9D51-31DC9B8AA4EF}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{F376DBEE-4CAE-41BA-ADD9-B2910AC95DEC}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[10] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+				},
+				["fuel"] = "3104",
+				["flare"] = 45,
+				["chaff"] = 90,
+				["gun"] = 100,
+			}
+		elseif (randomFighter == 23) then
+			_aircrafttype = "F-4E"
+			_skin = ""
+			_country = country.id.TURKEY
+
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{7B4B122D-C12C-4DB4-834E-4D8BB4D863A8}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{9DDF5297-94B9-42FC-A45E-6E316121CD85}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{8D399DDA-FF81-4F14-904D-099B34FE7918}",
+					},
+					[8] =
+					{
+						["CLSID"] = "{9DDF5297-94B9-42FC-A45E-6E316121CD85}",
+					},
+					[9] =
+					{
+						["CLSID"] = "{7B4B122D-C12C-4DB4-834E-4D8BB4D863A8}",
+					},
+				},
+				["fuel"] = "4864",
+				["flare"] = 30,
+				["chaff"] = 60,
+				["gun"] = 100,
+			}
+		elseif (randomFighter == 24) then
+			_aircrafttype = "F-5E"
+			_country = country.id.TURKEY
+			_skin = "`af standard"
+			callsign = "TURKEY F-5E - " .. _skin
+			_payload =
+			{
+				["pylons"] =
+				{
+					[1] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[2] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[3] =
+					{
+						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+					},
+					[4] =
+					{
+						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+					},
+					[5] =
+					{
+						["CLSID"] = "{0395076D-2F77-4420-9D33-087A4398130B}",
+					},
+					[6] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+					[7] =
+					{
+						["CLSID"] = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}",
+					},
+				},
+				["fuel"] = "2000",
+				["flare"] = 15,
+				["chaff"] = 30,
+				["gun"] = 100,
+			}
+		elseif (randomFighter == 25) then
 			_aircrafttype = "F-86F Sabre"
 			_skin = ""
 
-			subtype = math.random(1,15)
+			subtype = math.random(1,4)
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
 				callsign = "RUSSIA F-86F Sabre"
 			elseif (subtype == 2) then
+				_country = country.id.ABKHAZIA
+				callsign = "ABKHAZIA F-86F Sabre"
+			elseif (subtype == 3) then
+				_country = country.id.SOUTH_OSETIA
+				callsign = "SOUTH_OSETIA F-86F Sabre"
 			else
+				_country = country.id.TURKEY
+				callsign = "TURKEY F-86F Sabre"
 			end
 
 			_payload =
@@ -4143,7 +4287,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 0,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 23) then
+		elseif (randomFighter == 26) then
 			_aircrafttype = "FW-190D9"
 
 			subtype = math.random(1,3)
@@ -4170,7 +4314,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 0,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 24) then
+		elseif (randomFighter == 27) then
 			_aircrafttype = "MiG-23MLD"
 			_country = country.id.RUSSIA
 
@@ -4217,7 +4361,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 60,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 25) then
+		elseif (randomFighter == 28) then
 			_aircrafttype = "MiG-25PD"
 			_country = country.id.RUSSIA
 			_skin = "af standard"
@@ -4249,7 +4393,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 64,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 26) then
+		elseif (randomFighter == 29) then
 			_aircrafttype = "MiG-29A"
 			_country = country.id.RUSSIA
 
@@ -4306,7 +4450,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 30,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 27) then
+		elseif (randomFighter == 30) then
 			_aircrafttype = "MiG-29S"
 			_country = country.id.RUSSIA
 
@@ -4367,7 +4511,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 30,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 28) then
+		elseif (randomFighter == 31) then
 			_aircrafttype = "MiG-31"
 			_country = country.id.RUSSIA
 
@@ -4416,11 +4560,11 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 0,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 29) then
+		elseif (randomFighter == 32) then
 			_aircrafttype = "P-51D"
 			_skin = ""
 
-			subtype = math.random(1,15)
+			subtype = math.random(1,3)
 			if (subtype == 1) then
 				_country = country.id.RUSSIA
 
@@ -4450,7 +4594,33 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				callsign = "RUSSIA P-51D - " .. _skin
 
 			elseif (subtype == 2) then
+				_country = country.id.ABKHAZIA
+
+				subtype1 = math.random(1,3)
+				if (subtype1 == 1) then
+					_skin = "Bare Metal"
+				elseif (subtype1 == 2) then
+					_skin = "Dogfight Blue"
+				else
+					_skin = "Dogfight Red"
+				end
+
+				callsign = "ABKHAZIA P-51D - " .. _skin
+
 			else
+				_country = country.id.TURKEY
+
+				subtype1 = math.random(1,3)
+				if (subtype1 == 1) then
+					_skin = "Bare Metal"
+				elseif (subtype1 == 2) then
+					_skin = "Dogfight Blue"
+				else
+					_skin = "Dogfight Red"
+				end
+
+				callsign = "TURKEY P-51D - " .. _skin
+
 			end
 
 			_payload =
@@ -4503,7 +4673,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 0,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 30) then
+		elseif (randomFighter == 33) then
 			_aircrafttype = "Su-27"
 			_country = country.id.RUSSIA
 
@@ -4590,7 +4760,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 96,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 31) then
+		elseif (randomFighter == 34) then
 			_aircrafttype = "Su-30"
 			_country = country.id.RUSSIA
 
@@ -4669,7 +4839,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 96,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 32) then
+		elseif (randomFighter == 35) then
 			_aircrafttype = "Su-33"
 			_country = country.id.RUSSIA
 
@@ -4752,7 +4922,7 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 				["chaff"] = 48,
 				["gun"] = 100,
 			}
-		elseif (randomFighter == 33) then
+		elseif (randomFighter == 36) then
 			_aircrafttype = "Su-34"
 			_country = country.id.RUSSIA
 
