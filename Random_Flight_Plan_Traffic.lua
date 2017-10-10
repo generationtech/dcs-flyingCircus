@@ -3,8 +3,8 @@
 
 do
 --EDIT BELOW
-intervall = math.random(60,300) 	--random repeat interval between (A and B) in seconds
-maxCoalition = {4, 4} 	-- maximum number of red, blue units
+intervall = math.random(20,120) 	--random repeat interval between (A and B) in seconds
+maxCoalition = {25, 25} 	-- maximum number of red, blue units
 NamePrefix = {"Red-", "Blue-"}
 numCoalition = {0, 0} -- number of active Red, Blue dynamic spawned units
 
@@ -2366,6 +2366,13 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 	_waypointtype = parkingT[1]
 	_waypointaction = parkingT[2]
 
+	_landairbaseID = landIndex.id
+	_landairbaseloc = Object.getPoint({id_=landIndex.id_})
+	_landairplanepos = {}
+	_landairplanepos.x = _landairbaseloc.x
+	_landairplanepos.z = _landairbaseloc.z
+	_landalt = math.random(0,25000)
+	_landspeed = math.random(175,2000)
 
 	_airplanedata = {
         ["modulation"] = 0,
@@ -2405,6 +2412,45 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
                                             },
                                             ["speed_locked"] = true,
                                         },
+										[2] =
+										{
+											--["alt"] = 0,
+											["alt"] = _landalt,
+											["type"] = "Land",
+											["action"] = "Landing",
+											--["alt_type"] = "RADIO",
+											["alt_type"] = "BARO",
+											["formation_template"] = "",
+											["properties"] =
+											{
+												["vnav"] = 1,
+												["scale"] = 0,
+												["angle"] = 0,
+												["vangle"] = 0,
+												["steer"] = 2,
+											}, -- end of ["properties"]
+											--["ETA"] = 263.67692213965,
+											["ETA"] = 0,
+											["airdromeId"] = _landairbaseID,
+											--["y"] = 683853.75717885,
+											--["x"] = -284889.06283057,
+											["y"] = _landairbaseloc.z,
+											["x"] = _landairbaseloc.x,
+											--["speed"] = 300,
+											["speed"] = _landspeed,
+											["ETA_locked"] = false,
+											["task"] =
+											{
+												["id"] = "ComboTask",
+												["params"] =
+												{
+													["tasks"] =
+													{
+													}, -- end of ["tasks"]
+												}, -- end of ["params"]
+											}, -- end of ["task"]
+											["speed_locked"] = true,
+										}, -- end of [2]
                                     },
                                 },
                                 ["groupId"] = numCoalition[coalitionIndex],
@@ -2446,98 +2492,10 @@ function generateAirplane(coalitionIndex, spawnIndex, landIndex, parkingT, nameP
 
 	end
 
-	env.warning("Adding group: " .. nameP .. numCoalition[coalitionIndex] .. " At airbase: " .. spawnIndex.name, false)
+	env.warning('Group: ' .. _airplanedata.name .. '  Type: ' .. _aircrafttype .. '  Spawn: ' .. spawnIndex.name .. '  Land: ' .. landIndex.name .. '  Altitude: ' .. _landalt .. '  Speed: ' .. _landspeed, false)
 
+	trigger.action.outText('Group: ' .. _airplanedata.name .. '  Type: ' .. _aircrafttype .. '  Spawn: ' .. spawnIndex.name .. '  Land: ' .. landIndex.name .. '  Altitude: ' .. _landalt .. '  Speed: ' .. _landspeed, 10)
 
-	_landwaypoints = {}
-	_landairdromeId = landIndex.id
-	_landairbaseloc = Object.getPoint({id_=landIndex.id_})
-	_landairplanepos = {}
-	_landairplanepos.x = _landairbaseloc.x
-	_landairplanepos.z = _landairbaseloc.z
-
-	_turningpoint =
-								{
-								["alt"] = 2000,
-                                ["type"] = "Turning Point",
-								["action"] = "Turning Point",
-								["alt_type"] = "RADIO",
-                                ["formation_template"] = "",
-                                ["ETA"] = 0,
-                                ["y"] = _spawnairbaseloc.z+5000,
-                                ["x"] = _spawnairbaseloc.x+5000,
-								["speed"] = 300,
-                                ["ETA_locked"] = false,
-                                ["task"] =
-                                    {
-                                    ["id"] = "ComboTask",
-                                        ["params"] =
-                                            {
-                                            ["tasks"] =
-                                                {
-
-                                                },
-                                            },
-                                    },
-                                ["speed_locked"] = true,
-								}
-
-	_landingpoint =
-{
-								["alt"] = 0, -- set a quarter of the climb altitute
-								["type"] = "Land",
-								["action"] = "Landing",
-								["alt_type"] = "RADIO",
-								["formation_template"] = "Trail",
-								["properties"] =
-								{
-									["vnav"] = 1,
-									["scale"] = 0,
-									["angle"] = 0,
-									["vangle"] = 0,
-									["steer"] = 2,
-								}, -- end of ["properties"]
-								["ETA"] = 0,-- REVIEW
-								["airdromeId"] = _landairdromeId,
-								["y"] = _landairplanepos.z, -- AFBy,
-								["x"] = _landairplanepos.x, --AFBx,
-								["speed"] = 250, -- REVIEW
-								["ETA_locked"] = false,
-								["task"] =
-								{
-									["id"] = "ComboTask",
-									["params"] =
-									{
-										["tasks"] =
-										{
-										}, -- end of ["tasks"]
-									}, -- end of ["params"]
-								}, -- end of ["task"]
-								["speed_locked"] = true,
-							}
-
-
-
-
-
-
-
-
-
-
-	env.warning("Adding route for group: " .. nameP .. numCoalition[coalitionIndex] .. " Land airbase: " .. landIndex.name, false)
-
-	if (AircraftType == 2) then
-		env.warning("Build Heli route", false)
-		_landwaypoints[#_landwaypoints+1] =  _turningpoint
-		_landwaypoints[#_landwaypoints+1] =  _landingpoint
-	else
-		env.warning("Build Plane route", false)
-		_landwaypoints[#_landwaypoints+1] =  _turningpoint
-		_landwaypoints[#_landwaypoints+1] =  _landingpoint
-	end
-
-	mist.scheduleFunction(mist.goRoute, {Group.getByName(nameP .. numCoalition[coalitionIndex]), _landwaypoints}, timer.getTime() + 1)
 end
 
 function chooseAirbase(AF)
