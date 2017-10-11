@@ -20,3 +20,6 @@ https://forums.eagle.ru/showthread.php?t=141099
 
 <i>and "Random Airtraffic Script" also by SNAFU</i>
 <br>https://forums.eagle.ru/showthread.php?t=108476
+<br>
+<br>
+Many of these same ideas from around the 2014-2015 time period seem to have made their way into the newer [MOOSE](https://github.com/FlightControl-Master/MOOSE) scripting API, <i>especially in the [RAT class](http://flightcontrol-master.github.io/MOOSE/Documentation/Rat.html)</i>
